@@ -15,7 +15,7 @@ android {
     buildToolsVersion '25.0.2'
 
     lintOptions {
-	disable 'IconDensities', 'ClickableViewAccessibility'
+	disable 'IconDensities', 'ContentDescription'
 	// abortOnError false
     }
 }
