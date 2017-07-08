@@ -1,7 +1,7 @@
 # ![Logo](src/main/res/drawable-mdpi/ic_launcher.png) Editor
 Android text editor
 
-![Diary](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png)
+![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png)
 
 This is a very simple text editor which announces it's presence by
 declaring the ability to handle ant sort of text file. There is no
