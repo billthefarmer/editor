@@ -16,6 +16,7 @@
     <EditText
         android:id="@+id/text"
         android:inputType="text|textMultiLine"
+        android:typeface="monospace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top" />
