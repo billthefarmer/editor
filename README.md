@@ -4,7 +4,7 @@ Android text editor
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png)
 
 This is a very simple text editor which announces it's presence by
-declaring the ability to handle ant sort of text file. There is no
+declaring the ability to handle any sort of text file. There is no
 icon in the launcher. If you touch a text file in a file manager you
 will be offered the option of using this editor along with whatever
 other apps you have installed that can show a text file.
