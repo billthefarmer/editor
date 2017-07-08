@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="RtlHardcoded">
+
+  <ScrollView
+      android:id="@+id/scroll"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true">
+
+    <EditText
+        android:id="@+id/text"
+        android:inputType="text|textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top" />
+
+  </ScrollView>
+
+  <ImageButton
+      android:id="@+id/accept"
+      tools:ignore="UnusedAttribute"
+      android:src="@drawable/ic_action_accept"
+      android:background="@drawable/ic_button_background"
+      android:visibility="visible"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentRight="true"
+      android:layout_marginBottom="28dp"
+      android:layout_marginRight="28dp"
+      android:elevation="6dp" />
+
+</RelativeLayout>

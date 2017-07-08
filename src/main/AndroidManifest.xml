@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.billthefarmer.editor"
+    tools:ignore="GoogleAppIndexingWarning"
+    android:versionCode="1"
+    android:versionName="1.0"
+    android:installLocation="auto">
+
+  <uses-sdk
+      tools:ignore="OldTargetApi"
+      android:minSdkVersion="14"
+      android:targetSdkVersion="22" />
+
+  <uses-permission
+      android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+  <application
+      android:allowBackup="true"
+      android:icon="@drawable/ic_launcher"
+      android:label="@string/appName"
+      android:theme="@style/AppTheme">
+
+    <activity
+        android:name="Editor"
+        android:windowSoftInputMode="stateHidden|adjustResize">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <action android:name="android.intent.action.EDIT" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="text/*" />
+      </intent-filter>
+    </activity>
+
+  </application>
+
+</manifest>
