@@ -12,6 +12,10 @@ whatever other apps you have installed that can show or edit a text
 file.
 
 There is one button, which will save the file if it has been modified
-and return to the previous app, or else will just return. If you touch
+and exit to the previous app, or else will just exit. If you touch
 the back button, and the file has been modified, you will be prompted
-whether you want to exit, else the editor will just return.
+whether you want to exit, else the editor will just exit.
+
+You do not need this app if you have
+[Diary](https://github.com/billthefarmer/diary) installed. There is a
+similar editor built in.
