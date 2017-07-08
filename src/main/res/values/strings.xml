@@ -3,6 +3,10 @@
 
 <string name="appName">Editor</string>
 
+<string name="modified">
+  Text has been modified,\ndo you want to exit?
+</string>
+
 <string name="ok">OK</string>
 <string name="cancel">Cancel</string>
 

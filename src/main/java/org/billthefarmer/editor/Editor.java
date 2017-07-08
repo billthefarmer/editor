@@ -141,6 +141,7 @@ public class Editor extends Activity
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.appName);
+            builder.setMessage(R.string.modified);
 
             // Add the buttons
             builder.setPositiveButton(R.string.ok, new
