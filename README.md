@@ -1,5 +1,5 @@
 # ![Logo](src/main/res/drawable-mdpi/ic_launcher.png) Editor
-Android text editor
+Android simple text editor
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png)
 
