@@ -44,6 +44,7 @@ import java.io.FileWriter;
 public class Editor extends Activity
 {
     public final static String TAG = "Editor";
+    public final static String DIRTY = "dirty";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int GET_TEXT = 0;
@@ -115,6 +116,23 @@ public class Editor extends Activity
                                        int before,
                                        int count) {}
         });
+    }
+
+    // onRestoreInstanceState
+    @Override
+    public void onRestoreInstanceState (Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        dirty = savedInstanceState.getBoolean(DIRTY);
+        invalidateOptionsMenu();
+    }
+
+    // onSaveInstanceState
+    @Override
+    public void onSaveInstanceState (Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(DIRTY, dirty);
     }
 
     // onCreateOptionsMenu

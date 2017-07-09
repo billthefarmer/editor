@@ -1,7 +1,7 @@
 # ![Logo](src/main/res/drawable-mdpi/ic_launcher.png) Editor
 Android simple text editor
 
-![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png)
+![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-styles.png)
 
 This is a very simple text editor which may be used standalone or to
 show or edit any sort of text file from another app. If you select a
