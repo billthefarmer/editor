@@ -52,6 +52,7 @@ public class Editor extends Activity
     private EditText textView;
 
     private boolean dirty = false;
+    private boolean isapp = false;
 
     // onCreate
     @Override
@@ -64,9 +65,16 @@ public class Editor extends Activity
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
-        if (uri != null)
+
+        if (uri == null)
+            isapp = true;
+
+        else
         {
             getActionBar().setDisplayHomeAsUpEnabled(true);
+
+            if (uri.getScheme().equalsIgnoreCase("content"))
+                uri = resolveContent(uri);
 
             String title = uri.getLastPathSegment();
             setTitle(title);
@@ -91,6 +99,7 @@ public class Editor extends Activity
             public void afterTextChanged (Editable s)
             {
                 dirty = true;
+                invalidateOptionsMenu();
             }
 
             // beforeTextChanged
@@ -121,7 +130,7 @@ public class Editor extends Activity
     @Override
     public boolean onPrepareOptionsMenu (Menu menu)
     {
-        menu.findItem(R.id.open).setVisible (file == null);
+        menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
 
         return true;
@@ -215,12 +224,33 @@ public class Editor extends Activity
     // readFile
     private void readFile(Uri uri)
     {
+        if (uri.getScheme().equalsIgnoreCase("content"))
+            uri = resolveContent(uri);
+
         String title = uri.getLastPathSegment();
         setTitle(title);
 
         file = new File(uri.getPath());
         String text = read(file);
         textView.setText(text);
+
+        dirty = false;
+        invalidateOptionsMenu();
+    }
+
+    // resolveContent
+    private Uri resolveContent(Uri uri)
+    {
+        String path = FileUtils.getPath(this, uri);
+
+        if (path != null)
+        {
+            File file = new File(path);
+            if (file.canRead())
+                uri = Uri.fromFile(file);
+        }
+
+        return uri;
     }
 
     // saveFile
