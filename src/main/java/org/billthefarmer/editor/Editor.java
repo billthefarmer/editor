@@ -30,6 +30,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -44,8 +46,9 @@ public class Editor extends Activity
     public final static String TAG = "Editor";
 
     private final static int BUFFER_SIZE = 1024;
+    private final static int GET_TEXT = 0;
 
-    private File file;
+    private File file = null;
     private EditText textView;
 
     private boolean dirty = false;
@@ -57,19 +60,21 @@ public class Editor extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editor);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         textView = (EditText) findViewById(R.id.text);
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
+        if (uri != null)
+        {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String title = uri.getLastPathSegment();
-        setTitle(title);
+            String title = uri.getLastPathSegment();
+            setTitle(title);
 
-        file = new File(uri.getPath());
-        String text = read(file);
-        textView.setText(text);
+            file = new File(uri.getPath());
+            String text = read(file);
+            textView.setText(text);
+        }
 
         setListeners();
     }
@@ -101,20 +106,25 @@ public class Editor extends Activity
                                        int before,
                                        int count) {}
         });
+    }
 
-        ImageButton accept = (ImageButton) findViewById(R.id.accept);
-        accept.setOnClickListener(new View.OnClickListener()
-        {
-            // On click
-            @Override
-            public void onClick(View v)
-            {
-                String text = textView.getText().toString();
-                if (dirty)
-                    write(text, file);
-                finish();
-            }
-            });
+    // onCreateOptionsMenu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    // onPrepareOptionsMenu
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu)
+    {
+        menu.findItem(R.id.open).setVisible (file == null);
+        menu.findItem(R.id.save).setVisible (dirty);
+
+        return true;
     }
 
     // onOptionsItemSelected
@@ -125,6 +135,12 @@ public class Editor extends Activity
         {
         case android.R.id.home:
             onBackPressed();
+            break;
+        case R.id.open:
+            openFile();
+            break;
+        case R.id.save:
+            saveFile();
             break;
         default:
             return super.onOptionsItemSelected(item);
@@ -168,6 +184,50 @@ public class Editor extends Activity
 
         else
             finish();
+    }
+
+    // onActivityResult
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data)
+    {
+        // Do nothing if cancelled
+        if (resultCode != RESULT_OK)
+            return;
+
+        switch (requestCode)
+        {
+        case GET_TEXT:
+            Uri uri = data.getData();
+            readFile(uri);
+            break;
+        }
+    }
+
+    // openFile
+    private void openFile()
+    {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("text/*");
+        startActivityForResult(Intent.createChooser(intent, null), GET_TEXT);
+    }
+
+    // readFile
+    private void readFile(Uri uri)
+    {
+        String title = uri.getLastPathSegment();
+        setTitle(title);
+
+        file = new File(uri.getPath());
+        String text = read(file);
+        textView.setText(text);
+    }
+
+    // saveFile
+    private void saveFile()
+    {
+        String text = textView.getText().toString();
+        write(text, file);
     }
 
     // read
