@@ -44,12 +44,15 @@ import java.io.FileWriter;
 public class Editor extends Activity
 {
     public final static String TAG = "Editor";
+    public final static String PATH = "path";
     public final static String DIRTY = "dirty";
+    public final static String CONTENT = "content";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int GET_TEXT = 0;
 
-    private File file = null;
+    private File file;
+    private String path;
     private EditText textView;
 
     private boolean dirty = false;
@@ -71,18 +74,34 @@ public class Editor extends Activity
             isapp = true;
 
         else
-        {
             getActionBar().setDisplayHomeAsUpEnabled(true);
 
-            if (uri.getScheme().equalsIgnoreCase("content"))
-                uri = resolveContent(uri);
+        if (savedInstanceState == null)
+        {
+            if (uri != null)
+            {
+                if (uri.getScheme().equalsIgnoreCase(CONTENT))
+                    uri = resolveContent(uri);
+
+                String title = uri.getLastPathSegment();
+                setTitle(title);
+
+                path = uri.getPath();
+                file = new File(path);
+                String text = read(file);
+                textView.setText(text);
+            }
+        }
+
+        else
+        {
+            dirty = savedInstanceState.getBoolean(DIRTY);
+            path = savedInstanceState.getString(PATH);
+            file = new File(path);
+            uri = Uri.fromFile(file);
 
             String title = uri.getLastPathSegment();
             setTitle(title);
-
-            file = new File(uri.getPath());
-            String text = read(file);
-            textView.setText(text);
         }
 
         setListeners();
@@ -118,21 +137,13 @@ public class Editor extends Activity
         });
     }
 
-    // onRestoreInstanceState
-    @Override
-    public void onRestoreInstanceState (Bundle savedInstanceState)
-    {
-        super.onRestoreInstanceState(savedInstanceState);
-        dirty = savedInstanceState.getBoolean(DIRTY);
-        invalidateOptionsMenu();
-    }
-
     // onSaveInstanceState
     @Override
     public void onSaveInstanceState (Bundle outState)
     {
         super.onSaveInstanceState(outState);
         outState.putBoolean(DIRTY, dirty);
+        outState.putString(PATH, path);
     }
 
     // onCreateOptionsMenu
@@ -248,7 +259,8 @@ public class Editor extends Activity
         String title = uri.getLastPathSegment();
         setTitle(title);
 
-        file = new File(uri.getPath());
+        path = uri.getPath();
+        file = new File(path);
         String text = read(file);
         textView.setText(text);
 
@@ -276,6 +288,8 @@ public class Editor extends Activity
     {
         String text = textView.getText().toString();
         write(text, file);
+        dirty = false;
+        invalidateOptionsMenu();
     }
 
     // read
