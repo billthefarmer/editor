@@ -249,6 +249,8 @@ public class Editor extends Activity
         String title = uri.getLastPathSegment();
         setTitle(title);
 
+        textView.setText(R.string.loading);
+
         path = uri.getPath();
         file = new File(path);
         ReadTask read = new ReadTask();
@@ -292,6 +294,7 @@ public class Editor extends Activity
             fileWriter.write(text);
             fileWriter.close();
         }
+
         catch (Exception e) {}
     }
 
@@ -331,6 +334,8 @@ public class Editor extends Activity
         protected void onPostExecute(String result)
         {
             textView.setText(result);
+            dirty = false;
+            invalidateOptionsMenu();
         }
     }
 }
