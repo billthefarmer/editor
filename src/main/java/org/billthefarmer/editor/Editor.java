@@ -26,6 +26,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -79,18 +80,7 @@ public class Editor extends Activity
         if (savedInstanceState == null)
         {
             if (uri != null)
-            {
-                if (uri.getScheme().equalsIgnoreCase(CONTENT))
-                    uri = resolveContent(uri);
-
-                String title = uri.getLastPathSegment();
-                setTitle(title);
-
-                path = uri.getPath();
-                file = new File(path);
-                String text = read(file);
-                textView.setText(text);
-            }
+                readFile(uri);
         }
 
         else
@@ -253,7 +243,7 @@ public class Editor extends Activity
     // readFile
     private void readFile(Uri uri)
     {
-        if (uri.getScheme().equalsIgnoreCase("content"))
+        if (uri.getScheme().equalsIgnoreCase(CONTENT))
             uri = resolveContent(uri);
 
         String title = uri.getLastPathSegment();
@@ -261,8 +251,8 @@ public class Editor extends Activity
 
         path = uri.getPath();
         file = new File(path);
-        String text = read(file);
-        textView.setText(text);
+        ReadTask read = new ReadTask();
+        read.execute(file);
 
         dirty = false;
         invalidateOptionsMenu();
@@ -292,25 +282,6 @@ public class Editor extends Activity
         invalidateOptionsMenu();
     }
 
-    // read
-    private static String read(File file)
-    {
-        StringBuilder text = new StringBuilder();
-        try
-        {
-            FileReader fileReader = new FileReader(file);
-            char buffer[] = new char[BUFFER_SIZE];
-            int n;
-            while ((n = fileReader.read(buffer)) != -1)
-                text.append(String.valueOf(buffer, 0, n));
-            fileReader.close();
-        }
-
-        catch (Exception e) {}
-
-        return text.toString();
-    }
-
     // write
     private void write(String text, File file)
     {
@@ -322,5 +293,44 @@ public class Editor extends Activity
             fileWriter.close();
         }
         catch (Exception e) {}
+    }
+
+    // ReadTask
+    private class ReadTask
+        extends AsyncTask<File, Integer, String>
+    {
+        // doInBackground
+        @Override
+        protected String doInBackground(File... params)
+        {
+            StringBuilder text = new StringBuilder();
+            try
+            {
+                FileReader fileReader = new FileReader(params[0]);
+                char buffer[] = new char[BUFFER_SIZE];
+                int n;
+                while ((n = fileReader.read(buffer)) != -1)
+                    text.append(String.valueOf(buffer, 0, n));
+                fileReader.close();
+            }
+
+            catch (Exception e) {}
+
+            return text.toString();
+        }
+
+        // onProgressUpdate
+        @Override
+        protected void onProgressUpdate(Integer... progress)
+        {
+            // no-op
+        }
+
+        // onPostExecute
+        @Override
+        protected void onPostExecute(String result)
+        {
+            textView.setText(result);
+        }
     }
 }
