@@ -182,33 +182,18 @@ public class Editor extends Activity
     public void onBackPressed()
     {
         if (dirty)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.appName);
-            builder.setMessage(R.string.modified);
-
-            // Add the buttons
-            builder.setPositiveButton(R.string.ok, new
-                                      DialogInterface.OnClickListener()
+            alertDialog(R.string.appName, R.string.modified, new
+                        DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        finish();
+                        switch (id)
+                        {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            finish();
+                        }
                     }
                 });
-            builder.setNegativeButton(R.string.cancel, new
-                                      DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        // User cancelled the dialog
-                    }
-                });
-
-            // Create the AlertDialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
 
         else
             finish();
@@ -232,8 +217,46 @@ public class Editor extends Activity
         }
     }
 
+    // alertDialog
+    private void alertDialog(int title, int message,
+                             DialogInterface.OnClickListener listener)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.ok, listener);
+        builder.setNegativeButton(R.string.cancel, listener);
+
+        // Create the AlertDialog
+        builder.show();
+    }
+
     // openFile
     private void openFile()
+    {
+        if (dirty)
+            alertDialog(R.string.appName, R.string.modified, new
+                        DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        switch (id)
+                        {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            getContent();
+                            break;
+                        }
+                    }
+                });
+
+        else
+            getContent();
+    }
+
+    // getContent
+    private void getContent()
     {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("text/*");

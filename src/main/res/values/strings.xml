@@ -8,7 +8,7 @@
   <string name="loading">Loading…</string>
 
   <string name="modified">
-    Text has been modified,\ndo you want to exit?
+    Text has been modified,\ndo you want to discard it?
   </string>
 
   <string name="ok">OK</string>
