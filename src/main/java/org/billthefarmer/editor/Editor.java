@@ -83,17 +83,6 @@ public class Editor extends Activity
                 readFile(uri);
         }
 
-        else
-        {
-            dirty = savedInstanceState.getBoolean(DIRTY);
-            path = savedInstanceState.getString(PATH);
-            file = new File(path);
-            uri = Uri.fromFile(file);
-
-            String title = uri.getLastPathSegment();
-            setTitle(title);
-        }
-
         setListeners();
     }
 
@@ -126,6 +115,23 @@ public class Editor extends Activity
                                        int count) {}
         });
     }
+
+    // onRestoreInstanceState
+    @Override
+    public void onRestoreInstanceState (Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        dirty = savedInstanceState.getBoolean(DIRTY);
+        path = savedInstanceState.getString(PATH);
+        invalidateOptionsMenu();
+
+        file = new File(path);
+        Uri uri = Uri.fromFile(file);
+
+        String title = uri.getLastPathSegment();
+        setTitle(title);
+   }
 
     // onSaveInstanceState
     @Override
