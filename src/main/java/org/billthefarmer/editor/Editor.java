@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -48,6 +49,9 @@ public class Editor extends Activity
     public final static String PATH = "path";
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
+
+    public final static String DOCUMENTS = "Documents";
+    public final static String FILE = "Editor.txt";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int GET_TEXT = 0;
@@ -71,17 +75,25 @@ public class Editor extends Activity
         Intent intent = getIntent();
         Uri uri = intent.getData();
 
-        if (uri == null)
-            isapp = true;
-
-        else
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-
         if (savedInstanceState == null)
         {
             if (uri != null)
                 readFile(uri);
         }
+
+        if (uri == null)
+        {
+            isapp = true;
+
+            File documents = new
+                File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+            file = new File(documents, FILE);
+            uri = Uri.fromFile(file);
+            path = uri.getPath();
+        }
+
+        else
+            getActionBar().setDisplayHomeAsUpEnabled(true);
 
         setListeners();
     }
