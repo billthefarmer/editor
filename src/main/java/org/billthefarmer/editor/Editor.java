@@ -50,7 +50,7 @@ public class Editor extends Activity
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
 
-    public final static String EDITOR = "Editor";
+    public final static String DOCUMENTS = "Documents";
     public final static String FILE = "Editor.txt";
 
     private final static int BUFFER_SIZE = 1024;
@@ -86,7 +86,7 @@ public class Editor extends Activity
             isapp = true;
 
             File documents = new
-                File(Environment.getExternalStorageDirectory(), EDITOR);
+                File(Environment.getExternalStorageDirectory(), DOCUMENTS);
             file = new File(documents, FILE);
             uri = Uri.fromFile(file);
             path = uri.getPath();
@@ -284,6 +284,9 @@ public class Editor extends Activity
     // readFile
     private void readFile(Uri uri)
     {
+        if (uri == null)
+            return;
+
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
             uri = resolveContent(uri);
 
