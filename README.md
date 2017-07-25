@@ -14,6 +14,13 @@ There are two toolbar items which may appear:
 * **Open** - Open a text file using a chooser
 * **Save** - Save the current file if modified
 
-If you touch the back button, and the current file has been modified,
-you will be prompted whether you want to exit, else the editor will
-just exit.
+If you touch the back or open button, and the current file has been
+modified, you will be prompted whether you want to discard it, else
+the editor will just exit or open a file chooser.
+
+If there is no open file any text entered will be saved in
+```Documents/Editor.txt```. Use a file manager to move and rename it
+if required. If you have the OI File Manager installed the file picker
+will allow a file name to be entered. The latest version (2.1.1) from
+F-Droid has issues on Android 7, use the earlier version from the Play
+Store (2.0.5).
