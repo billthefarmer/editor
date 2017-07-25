@@ -187,17 +187,6 @@ public class FileUtils
 
     /**
      * @param uri The Uri to check.
-     * @return Whether the Uri authority is {@link LocalStorageProvider}.
-     * @author paulburke
-     */
-    public static boolean isLocalStorageDocument(Uri uri)
-    {
-        return "com.ianhanniballake.localstorage.documents"
-            .equals(uri.getAuthority());
-    }
-
-    /**
-     * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      * @author paulburke
      */
@@ -320,14 +309,8 @@ public class FileUtils
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri))
         {
-            // LocalStorageProvider
-            if (isLocalStorageDocument(uri))
-            {
-                // The path is the id
-                return DocumentsContract.getDocumentId(uri);
-            }
             // ExternalStorageProvider
-            else if (isExternalStorageDocument(uri))
+            if (isExternalStorageDocument(uri))
             {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
