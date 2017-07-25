@@ -48,8 +48,8 @@ import java.util.Locale;
  */
 public class FileUtils
 {
-    private FileUtils() {} //private constructor to enforce Singleton
-                           //pattern
+    private FileUtils() {} // private constructor to enforce Singleton
+                           // pattern
 
     /** TAG for log messages. */
     static final String TAG = "FileUtils";
@@ -337,6 +337,13 @@ public class FileUtils
                 {
                     return Environment
                         .getExternalStorageDirectory() + "/" + split[1];
+                }
+
+                else if ("home".equalsIgnoreCase(type))
+                {
+                    return Environment
+                        .getExternalStorageDirectory() + "/Documents/" +
+                        split[1];
                 }
 
                 // TODO handle non-primary volumes
