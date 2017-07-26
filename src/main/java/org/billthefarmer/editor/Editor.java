@@ -377,7 +377,9 @@ public class Editor extends Activity
         @Override
         protected void onPostExecute(String result)
         {
-            textView.setText(result);
+            if (textView != null)
+                textView.setText(result);
+
             dirty = false;
             invalidateOptionsMenu();
         }
