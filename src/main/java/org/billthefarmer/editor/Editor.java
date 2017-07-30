@@ -100,6 +100,19 @@ public class Editor extends Activity
         {
             if (uri != null)
                 readFile(uri);
+
+            if (file == null)
+            {
+                File documents = new
+                    File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+                file = new File(documents, FILE);
+
+                Uri fileUri = Uri.fromFile(file);
+                path = fileUri.getPath();
+
+                String title = fileUri.getLastPathSegment();
+                setTitle(title);
+            }
         }
 
         if (uri == null)
@@ -363,23 +376,6 @@ public class Editor extends Activity
         if (file.length() > MAX_LENGTH)
         {
             alertDialog(R.string.appName, R.string.large, null);
-
-            if (this.file == null)
-            {
-                File documents = new
-                    File(Environment.getExternalStorageDirectory(), DOCUMENTS);
-                file = new File(documents, FILE);
-
-                uri = Uri.fromFile(file);
-                path = uri.getPath();
-
-                this.path = path;
-                this.file = file;
-
-                String title = uri.getLastPathSegment();
-                setTitle(title);
-            }
-
             return;
         }
 
