@@ -84,16 +84,13 @@ public class Editor extends Activity
         if (dark)
             setTheme(R.style.AppDarkTheme);
 
-        setContentView(R.layout.editor);
-        textView = (EditText) findViewById(R.id.text);
-
         if (wrap)
-        {
-            ViewGroup.LayoutParams params =
-                (ViewGroup.LayoutParams) textView.getLayoutParams();
-            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            textView.setLayoutParams(params);
-        }
+            setContentView(R.layout.wrap);
+
+        else
+            setContentView(R.layout.editor);
+
+        textView = (EditText) findViewById(R.id.text);
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
