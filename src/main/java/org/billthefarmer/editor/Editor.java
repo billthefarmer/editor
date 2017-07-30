@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -50,6 +52,9 @@ public class Editor extends Activity
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
 
+    public final static String PREF_WRAP = "pref_wrap";
+    public final static String PREF_DARK = "pref_dark";
+
     public final static String DOCUMENTS = "Documents";
     public final static String FILE = "Editor.txt";
 
@@ -60,6 +65,9 @@ public class Editor extends Activity
     private String path;
     private EditText textView;
 
+    private boolean wrap = false;
+    private boolean dark = false;
+
     private boolean dirty = false;
     private boolean isapp = false;
 
@@ -68,9 +76,24 @@ public class Editor extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.editor);
 
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        wrap = preferences.getBoolean(PREF_WRAP, false);
+        dark = preferences.getBoolean(PREF_DARK, false);
+
+        if (dark)
+            setTheme(R.style.AppDarkTheme);
+
+        setContentView(R.layout.editor);
         textView = (EditText) findViewById(R.id.text);
+
+        if (wrap)
+        {
+            ViewGroup.LayoutParams params =
+                (ViewGroup.LayoutParams) textView.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            textView.setLayoutParams(params);
+        }
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -143,7 +166,21 @@ public class Editor extends Activity
 
         String title = uri.getLastPathSegment();
         setTitle(title);
-   }
+    }
+
+    // onPause
+    @Override
+    public void onPause ()
+    {
+        super.onPause();
+
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putBoolean(PREF_WRAP, wrap);
+        editor.putBoolean(PREF_DARK, dark);
+        editor.apply();
+    }
 
     // onSaveInstanceState
     @Override
@@ -170,6 +207,9 @@ public class Editor extends Activity
         menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
 
+        menu.findItem(R.id.wrap).setChecked (wrap);
+        menu.findItem(R.id.dark).setChecked (dark);
+
         return true;
     }
 
@@ -187,6 +227,12 @@ public class Editor extends Activity
             break;
         case R.id.save:
             saveFile();
+            break;
+        case R.id.wrap:
+            wrapClicked(item);
+            break;
+        case R.id.dark:
+            darkClicked(item);
             break;
         default:
             return super.onOptionsItemSelected(item);
@@ -249,6 +295,24 @@ public class Editor extends Activity
 
         // Create the AlertDialog
         builder.show();
+    }
+
+    // wrapClicked
+    private void wrapClicked(MenuItem item)
+    {
+        wrap = !wrap;
+        item.setChecked(wrap);
+
+        recreate();
+    }
+
+    // darkClicked
+    private void darkClicked(MenuItem item)
+    {
+        dark = !dark;
+        item.setChecked(dark);
+
+        recreate();
     }
 
     // openFile
