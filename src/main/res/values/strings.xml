@@ -13,6 +13,10 @@
     Text has been modified,\ndo you want to discard it?
   </string>
 
+  <string name="large">
+    File is too large,\nwill not be loaded
+  </string>
+
   <string name="ok">OK</string>
   <string name="cancel">Cancel</string>
 

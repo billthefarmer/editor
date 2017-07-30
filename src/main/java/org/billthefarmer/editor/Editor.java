@@ -58,6 +58,7 @@ public class Editor extends Activity
     public final static String DOCUMENTS = "Documents";
     public final static String FILE = "Editor.txt";
 
+    private final static int MAX_LENGTH = 1048576;
     private final static int BUFFER_SIZE = 1024;
     private final static int GET_TEXT = 0;
 
@@ -88,7 +89,7 @@ public class Editor extends Activity
             setContentView(R.layout.wrap);
 
         else
-            setContentView(R.layout.editor);
+            setContentView(R.layout.edit);
 
         textView = (EditText) findViewById(R.id.text);
 
@@ -108,8 +109,12 @@ public class Editor extends Activity
             File documents = new
                 File(Environment.getExternalStorageDirectory(), DOCUMENTS);
             file = new File(documents, FILE);
+
             uri = Uri.fromFile(file);
             path = uri.getPath();
+
+            String title = uri.getLastPathSegment();
+            setTitle(title);
         }
 
         else
@@ -288,7 +293,8 @@ public class Editor extends Activity
 
         // Add the buttons
         builder.setPositiveButton(R.string.ok, listener);
-        builder.setNegativeButton(R.string.cancel, listener);
+        if (listener != null)
+            builder.setNegativeButton(R.string.cancel, listener);
 
         // Create the AlertDialog
         builder.show();
@@ -351,13 +357,40 @@ public class Editor extends Activity
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
             uri = resolveContent(uri);
 
+        String path = uri.getPath();
+        File file = new File(path);
+
+        if (file.length() > MAX_LENGTH)
+        {
+            alertDialog(R.string.appName, R.string.large, null);
+
+            if (this.file == null)
+            {
+                File documents = new
+                    File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+                file = new File(documents, FILE);
+
+                uri = Uri.fromFile(file);
+                path = uri.getPath();
+
+                this.path = path;
+                this.file = file;
+
+                String title = uri.getLastPathSegment();
+                setTitle(title);
+            }
+
+            return;
+        }
+
+        this.path = path;
+        this.file = file;
+
         String title = uri.getLastPathSegment();
         setTitle(title);
 
         textView.setText(R.string.loading);
 
-        path = uri.getPath();
-        file = new File(path);
         ReadTask read = new ReadTask();
         read.execute(file);
 
