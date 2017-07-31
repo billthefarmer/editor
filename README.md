@@ -16,6 +16,10 @@ There are two toolbar items which may appear:
 * **Open** - Open a text file using a chooser
 * **Save** - Save the current file if modified
 
+And on the menu:
+* **Word wrap** - Limit text width to screen width and word wrap
+* **Dark theme** - Dark background with light text
+
 If you touch the back or open button, and the current file has been
 modified, you will be prompted whether you want to discard it, else
 the editor will just exit or open a file chooser.
