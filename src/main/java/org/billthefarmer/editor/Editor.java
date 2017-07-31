@@ -101,34 +101,12 @@ public class Editor extends Activity
             if (uri != null)
                 readFile(uri);
 
-            if (file == null)
-            {
-                File documents = new
-                    File(Environment.getExternalStorageDirectory(), DOCUMENTS);
-                file = new File(documents, FILE);
-
-                Uri fileUri = Uri.fromFile(file);
-                path = fileUri.getPath();
-
-                String title = fileUri.getLastPathSegment();
-                setTitle(title);
-            }
+            else
+                defaultFile();
         }
 
         if (uri == null)
-        {
             isapp = true;
-
-            File documents = new
-                File(Environment.getExternalStorageDirectory(), DOCUMENTS);
-            file = new File(documents, FILE);
-
-            uri = Uri.fromFile(file);
-            path = uri.getPath();
-
-            String title = uri.getLastPathSegment();
-            setTitle(title);
-        }
 
         else
             getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -296,6 +274,20 @@ public class Editor extends Activity
         }
     }
 
+    // defaultFile
+    private void defaultFile()
+    {
+        File documents = new
+            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+        file = new File(documents, FILE);
+
+        Uri uri = Uri.fromFile(file);
+        path = uri.getPath();
+
+        String title = uri.getLastPathSegment();
+        setTitle(title);
+    }
+
     // alertDialog
     private void alertDialog(int title, int message,
                              DialogInterface.OnClickListener listener)
@@ -306,8 +298,7 @@ public class Editor extends Activity
 
         // Add the buttons
         builder.setPositiveButton(R.string.ok, listener);
-        if (listener != null)
-            builder.setNegativeButton(R.string.cancel, listener);
+        builder.setNegativeButton(R.string.cancel, listener);
 
         // Create the AlertDialog
         builder.show();
@@ -370,17 +361,8 @@ public class Editor extends Activity
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
             uri = resolveContent(uri);
 
-        String path = uri.getPath();
-        File file = new File(path);
-
-        if (file.length() > MAX_LENGTH)
-        {
-            alertDialog(R.string.appName, R.string.large, null);
-            return;
-        }
-
-        this.path = path;
-        this.file = file;
+        path = uri.getPath();
+        file = new File(path);
 
         String title = uri.getLastPathSegment();
         setTitle(title);
