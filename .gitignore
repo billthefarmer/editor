@@ -29,6 +29,9 @@ proguard/
 # Emacs backup files
 *~
 
+# gzip files
+*.gz
+
 # Android Studio Navigation editor temp files
 .navigation/
 

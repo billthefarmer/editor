@@ -28,8 +28,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -60,6 +62,7 @@ public class Editor extends Activity
 
     private final static int MAX_LENGTH = 1048576;
     private final static int BUFFER_SIZE = 1024;
+    private final static int VERSION_M = 23;
     private final static int GET_TEXT = 0;
 
     private File file;
@@ -78,7 +81,8 @@ public class Editor extends Activity
     {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
         wrap = preferences.getBoolean(PREF_WRAP, false);
         dark = preferences.getBoolean(PREF_DARK, false);
 
@@ -167,7 +171,8 @@ public class Editor extends Activity
     {
         super.onPause();
 
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putBoolean(PREF_WRAP, wrap);
@@ -310,7 +315,8 @@ public class Editor extends Activity
         wrap = !wrap;
         item.setChecked(wrap);
 
-        recreate();
+        if (Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
     }
 
     // darkClicked
@@ -319,7 +325,8 @@ public class Editor extends Activity
         dark = !dark;
         item.setChecked(dark);
 
-        recreate();
+        if (Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
     }
 
     // openFile
