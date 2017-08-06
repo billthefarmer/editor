@@ -27,6 +27,8 @@ the editor will just exit or open a file chooser.
 If there is no open file any text entered will be saved in
 ```Documents/Editor.txt```. Use a file manager to move and rename it
 if required. If you have the OI File Manager installed the file picker
-will allow a file name to be entered. The latest version (2.1.1) from
-F-Droid has issues on Android 7, use the earlier version from the Play
-Store (2.0.5).
+will allow a file name to be entered. The 
+[latest version](https://f-droid.org/packages/org.openintents.filemanager)
+(2.1.1) from F-Droid has issues on Android 7, use the
+[earlier version](https://play.google.com/store/apps/details?id=org.openintents.filemanager)
+from the Play Store (2.0.5).
