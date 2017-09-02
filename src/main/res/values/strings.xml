@@ -3,14 +3,15 @@
 
   <string name="appName">Editor</string>
   
-  <string name="open">Open file…</string>
+  <string name="open">Open file</string>
   <string name="save">Save</string>
+  <string name="saveAs">Save as</string>
   <string name="wrap">Word wrap</string>
   <string name="dark">Dark theme</string>
   <string name="loading">Loading…</string>
 
   <string name="modified">
-    Text has been modified,\ndo you want to discard it?
+    Text has been modified, do you want to discard it?
   </string>
 
   <string name="ok">OK</string>

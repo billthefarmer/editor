@@ -23,6 +23,8 @@ package org.billthefarmer.editor;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -64,6 +66,7 @@ public class Editor extends Activity
     private final static int BUFFER_SIZE = 1024;
     private final static int VERSION_M = 23;
     private final static int GET_TEXT = 0;
+    private final static int TEXT = 1;
 
     private File file;
     private String path;
@@ -204,6 +207,7 @@ public class Editor extends Activity
     {
         menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
+        menu.findItem(R.id.saveAs).setVisible (dirty);
 
         menu.findItem(R.id.wrap).setChecked (wrap);
         menu.findItem(R.id.dark).setChecked (dark);
@@ -225,6 +229,9 @@ public class Editor extends Activity
             break;
         case R.id.save:
             saveFile();
+            break;
+        case R.id.saveAs:
+            saveAs();
             break;
         case R.id.wrap:
             wrapClicked(item);
@@ -309,6 +316,49 @@ public class Editor extends Activity
         builder.show();
     }
 
+    // saveAs
+    private void saveAs()
+    {
+        saveAsDialog(R.string.saveAs, path,
+                     new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    switch (id)
+                    {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        EditText text =
+                            (EditText) ((Dialog) dialog).findViewById(TEXT);
+                        file = new File(text.getText().toString());
+                        saveFile();
+                    }
+                }
+            });
+    }
+
+    // saveAsDialog
+    private void saveAsDialog(int title, String path,
+                              DialogInterface.OnClickListener listener)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.ok, listener);
+        builder.setNegativeButton(R.string.cancel, listener);
+
+        // Create edit text
+        Context context = builder.getContext();
+        EditText text = new EditText(context);
+        text.setId(TEXT);
+        text.setText(path);
+
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.setView(text, 30, 0, 30, 0);
+        dialog.show();
+    }
+
     // wrapClicked
     private void wrapClicked(MenuItem item)
     {
@@ -333,7 +383,7 @@ public class Editor extends Activity
     private void openFile()
     {
         if (dirty)
-            alertDialog(R.string.appName, R.string.modified, new
+            alertDialog(R.string.open, R.string.modified, new
                         DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
