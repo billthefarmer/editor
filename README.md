@@ -17,6 +17,7 @@ There are two toolbar items which may appear:
 * **Save** - Save the current file if modified
 
 And on the menu:
+* **Save as** - Save the current file with a new name
 * **Word wrap** - Limit text width to screen width and word wrap
 * **Dark theme** - Dark background with light text
 
@@ -24,12 +25,6 @@ If you touch the back or open button, and the current file has been
 modified, you will be prompted whether you want to discard it, else
 the editor will just exit or open a file chooser.
 
-If there is no open file any text entered will be saved in
-`Documents/Editor.txt`. Use a file manager to move and rename it if
-required. If you have the
-[OI File Manager](http://www.openintents.org/filemanager) installed
-the file picker will allow a file name to be entered. The
-[latest version](https://f-droid.org/packages/org.openintents.filemanager)
-(2.1.1) from F-Droid has issues on Android 7, use the
-[earlier version](https://play.google.com/store/apps/details?id=org.openintents.filemanager)
-from the Play Store (2.0.5).
+If there is no open file any text entered will by default be saved in
+`Documents/Editor.txt`. Use the `Save as` menu item to save it
+elsewhere.

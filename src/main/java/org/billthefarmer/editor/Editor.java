@@ -207,7 +207,6 @@ public class Editor extends Activity
     {
         menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
-        menu.findItem(R.id.saveAs).setVisible (dirty);
 
         menu.findItem(R.id.wrap).setChecked (wrap);
         menu.findItem(R.id.dark).setChecked (dark);
@@ -329,7 +328,8 @@ public class Editor extends Activity
                     case DialogInterface.BUTTON_POSITIVE:
                         EditText text =
                             (EditText) ((Dialog) dialog).findViewById(TEXT);
-                        file = new File(text.getText().toString());
+                        path = text.getText().toString();
+                        file = new File(path);
                         saveFile();
                     }
                 }
