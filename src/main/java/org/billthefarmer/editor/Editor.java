@@ -49,6 +49,7 @@ import android.widget.ImageButton;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Locale;
 
 public class Editor extends Activity
 {
@@ -299,6 +300,9 @@ public class Editor extends Activity
         case R.id.normal:
             normalClicked(item);
             break;
+        case R.id.about:
+            aboutClicked();
+            break;
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -517,6 +521,25 @@ public class Editor extends Activity
             break;
         }
     }
+
+    // aboutClicked
+    private void aboutClicked()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.about);
+
+        String format = getString(R.string.version);
+        String message =
+            String.format(Locale.getDefault(),
+                          format, BuildConfig.VERSION_NAME);
+        builder.setMessage(message);
+
+        // Add the button
+        builder.setPositiveButton(R.string.ok, null);
+
+        // Create the AlertDialog
+        builder.show();
+   }
 
     // openFile
     private void openFile()

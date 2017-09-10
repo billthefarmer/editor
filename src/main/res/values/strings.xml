@@ -15,6 +15,11 @@
   <string name="typeface">Typeface</string>
   <string name="mono">Monospace</string>
   <string name="normal">Normal</string>
+  <string name="about">About</string>
+
+  <string name="version">
+    Diary version %s\nCopyright \u00A9 2017 Bill Farmer\nGNU GPLv3
+  </string>
 
   <string name="loading">Loading…</string>
 
