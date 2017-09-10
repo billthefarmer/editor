@@ -8,6 +8,14 @@
   <string name="saveAs">Save as</string>
   <string name="wrap">Word wrap</string>
   <string name="dark">Dark theme</string>
+  <string name="size">Text size</string>
+  <string name="small">Small</string>
+  <string name="medium">Medium</string>
+  <string name="large">Large</string>
+  <string name="typeface">Typeface</string>
+  <string name="mono">Monospace</string>
+  <string name="normal">Normal</string>
+
   <string name="loading">Loading…</string>
 
   <string name="modified">

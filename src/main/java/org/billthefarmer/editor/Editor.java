@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -58,6 +59,8 @@ public class Editor extends Activity
 
     public final static String PREF_WRAP = "pref_wrap";
     public final static String PREF_DARK = "pref_dark";
+    public final static String PREF_SIZE = "pref_size";
+    public final static String PREF_TYPE = "pref_type";
 
     public final static String DOCUMENTS = "Documents";
     public final static String FILE = "Editor.txt";
@@ -68,6 +71,13 @@ public class Editor extends Activity
     private final static int GET_TEXT = 0;
     private final static int TEXT = 1;
 
+    private final static int SMALL  = 1;
+    private final static int MEDIUM = 2;
+    private final static int LARGE  = 3;
+
+    private final static int NORMAL = 1;
+    private final static int MONO   = 2;
+
     private File file;
     private String path;
     private EditText textView;
@@ -77,6 +87,9 @@ public class Editor extends Activity
 
     private boolean dirty = false;
     private boolean isapp = false;
+
+    private int size = MEDIUM;
+    private int type = MONO;
 
     // onCreate
     @Override
@@ -89,6 +102,9 @@ public class Editor extends Activity
         wrap = preferences.getBoolean(PREF_WRAP, false);
         dark = preferences.getBoolean(PREF_DARK, false);
 
+        size = preferences.getInt(PREF_SIZE, MEDIUM);
+        type = preferences.getInt(PREF_TYPE, MONO);
+
         if (dark)
             setTheme(R.style.AppDarkTheme);
 
@@ -99,6 +115,8 @@ public class Editor extends Activity
             setContentView(R.layout.edit);
 
         textView = (EditText) findViewById(R.id.text);
+
+        setSizeAndTypeface(size, type);
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -180,6 +198,8 @@ public class Editor extends Activity
 
         editor.putBoolean(PREF_WRAP, wrap);
         editor.putBoolean(PREF_DARK, dark);
+        editor.putInt(PREF_SIZE, size);
+        editor.putInt(PREF_TYPE, type);
         editor.apply();
     }
 
@@ -211,6 +231,32 @@ public class Editor extends Activity
         menu.findItem(R.id.wrap).setChecked (wrap);
         menu.findItem(R.id.dark).setChecked (dark);
 
+        switch (size)
+        {
+        case SMALL:
+            menu.findItem(R.id.small).setChecked (true);
+            break;
+
+        case MEDIUM:
+            menu.findItem(R.id.medium).setChecked (true);
+            break;
+
+        case LARGE:
+            menu.findItem(R.id.large).setChecked (true);
+            break;
+        }
+
+        switch (type)
+        {
+        case MONO:
+            menu.findItem(R.id.mono).setChecked (true);
+            break;
+
+        case NORMAL:
+            menu.findItem(R.id.normal).setChecked (true);
+            break;
+        }
+
         return true;
     }
 
@@ -237,6 +283,21 @@ public class Editor extends Activity
             break;
         case R.id.dark:
             darkClicked(item);
+            break;
+        case R.id.small:
+            smallClicked(item);
+            break;
+        case R.id.medium:
+            mediumClicked(item);
+            break;
+        case R.id.large:
+            largeClicked(item);
+            break;
+        case R.id.mono:
+            monoClicked(item);
+            break;
+        case R.id.normal:
+            normalClicked(item);
             break;
         default:
             return super.onOptionsItemSelected(item);
@@ -377,6 +438,84 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();
+    }
+
+    // smallClicked
+    private void smallClicked(MenuItem item)
+    {
+        size = SMALL;
+        item.setChecked(true);
+
+        setSizeAndTypeface(size, type);
+    }
+
+    // mediumClicked
+    private void mediumClicked(MenuItem item)
+    {
+        size = MEDIUM;
+        item.setChecked(true);
+
+        setSizeAndTypeface(size, type);
+    }
+
+    // largeClicked
+    private void largeClicked(MenuItem item)
+    {
+        size = LARGE;
+        item.setChecked(true);
+
+        setSizeAndTypeface(size, type);
+    }
+
+    // monoClicked
+    private void monoClicked(MenuItem item)
+    {
+        type = MONO;
+        item.setChecked(true);
+
+        textView.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
+    }
+
+    // normalClicked
+    private void normalClicked(MenuItem item)
+    {
+        type = NORMAL;
+        item.setChecked(true);
+
+        textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+    }
+
+    // setSizeAndTypeface
+    private void setSizeAndTypeface(int size, int type)
+    {
+        switch (size)
+        {
+        case SMALL:
+            textView.setTextAppearance(this,
+                                       android.R.style.TextAppearance_Small);
+            break;
+
+        case MEDIUM:
+            textView.setTextAppearance(this,
+                                       android.R.style.TextAppearance_Medium);
+            break;
+
+        case LARGE:
+            textView.setTextAppearance(this,
+                                       android.R.style.TextAppearance_Large);
+            break;
+        }
+
+        switch (type)
+        {
+        case MONO:
+            textView.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
+            break;
+
+        case NORMAL:
+            textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+            break;
+        }
     }
 
     // openFile
