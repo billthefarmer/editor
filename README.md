@@ -20,6 +20,14 @@ And on the menu:
 * **Save as** - Save the current file with a new name
 * **Word wrap** - Limit text width to screen width and word wrap
 * **Dark theme** - Dark background with light text
+* **Text size** - Choose text size
+  * **Small**
+  * **Medium**
+  * **Large**
+* **Typeface** - Choose typeface
+  * **Monospace**
+  * **Normal**
+* **About** - Show version, copyright and licence
 
 If you touch the back or open button, and the current file has been
 modified, you will be prompted whether you want to discard it, else
