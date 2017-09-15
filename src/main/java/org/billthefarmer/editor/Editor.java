@@ -37,6 +37,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -458,7 +459,7 @@ public class Editor extends Activity
         size = SMALL;
         item.setChecked(true);
 
-        setSizeAndTypeface(size, type);
+        textView.setTextSize(14);
     }
 
     // mediumClicked
@@ -467,7 +468,7 @@ public class Editor extends Activity
         size = MEDIUM;
         item.setChecked(true);
 
-        setSizeAndTypeface(size, type);
+        textView.setTextSize(18);
     }
 
     // largeClicked
@@ -476,7 +477,7 @@ public class Editor extends Activity
         size = LARGE;
         item.setChecked(true);
 
-        setSizeAndTypeface(size, type);
+        textView.setTextSize(22);
     }
 
     // monoClicked
@@ -500,21 +501,27 @@ public class Editor extends Activity
     // setSizeAndTypeface
     private void setSizeAndTypeface(int size, int type)
     {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        Log.d(TAG, "Density " + dm.scaledDensity);
+
         switch (size)
         {
         case SMALL:
-            textView.setTextAppearance(this,
-                                       android.R.style.TextAppearance_Small);
+            textView.setTextSize(14);
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Size " + textView.getTextSize());
             break;
 
         case MEDIUM:
-            textView.setTextAppearance(this,
-                                       android.R.style.TextAppearance_Medium);
+            textView.setTextSize(18);
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Size " + textView.getTextSize());
             break;
 
         case LARGE:
-            textView.setTextAppearance(this,
-                                       android.R.style.TextAppearance_Large);
+            textView.setTextSize(22);
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Size " + textView.getTextSize());
             break;
         }
 
