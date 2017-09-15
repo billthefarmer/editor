@@ -373,7 +373,7 @@ public class Editor extends Activity
         builder.setMessage(message);
 
         // Add the buttons
-        builder.setPositiveButton(R.string.ok, listener);
+        builder.setPositiveButton(R.string.discard, listener);
         builder.setNegativeButton(R.string.cancel, listener);
 
         // Create the AlertDialog
@@ -383,7 +383,11 @@ public class Editor extends Activity
     // saveAs
     private void saveAs()
     {
-        saveAsDialog(R.string.saveAs, path,
+        String name =
+            path.replaceFirst(Environment
+                              .getExternalStorageDirectory().getPath(), "");
+
+        saveAsDialog(R.string.saveAs, R.string.choose, name,
                      new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog, int id)
@@ -393,8 +397,11 @@ public class Editor extends Activity
                     case DialogInterface.BUTTON_POSITIVE:
                         EditText text =
                             (EditText) ((Dialog) dialog).findViewById(TEXT);
-                        path = text.getText().toString();
-                        file = new File(path);
+                        String name = text.getText().toString();
+                        file = new
+                            File(Environment.getExternalStorageDirectory(),
+                                 name);
+                        path = file.getPath();
                         saveFile();
                     }
                 }
@@ -402,11 +409,12 @@ public class Editor extends Activity
     }
 
     // saveAsDialog
-    private void saveAsDialog(int title, String path,
+    private void saveAsDialog(int title, int message, String path,
                               DialogInterface.OnClickListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
+        builder.setMessage(message);
 
         // Add the buttons
         builder.setPositiveButton(R.string.ok, listener);
