@@ -73,9 +73,9 @@ public class Editor extends Activity
     private final static int GET_TEXT = 0;
     private final static int TEXT = 1;
 
-    private final static int SMALL  = 1;
-    private final static int MEDIUM = 2;
-    private final static int LARGE  = 3;
+    private final static int SMALL  = 12;
+    private final static int MEDIUM = 18;
+    private final static int LARGE  = 24;
 
     private final static int NORMAL = 1;
     private final static int MONO   = 2;
@@ -459,7 +459,7 @@ public class Editor extends Activity
         size = SMALL;
         item.setChecked(true);
 
-        textView.setTextSize(14);
+        textView.setTextSize(size);
     }
 
     // mediumClicked
@@ -468,7 +468,7 @@ public class Editor extends Activity
         size = MEDIUM;
         item.setChecked(true);
 
-        textView.setTextSize(18);
+        textView.setTextSize(size);
     }
 
     // largeClicked
@@ -477,7 +477,7 @@ public class Editor extends Activity
         size = LARGE;
         item.setChecked(true);
 
-        textView.setTextSize(22);
+        textView.setTextSize(size);
     }
 
     // monoClicked
@@ -501,29 +501,16 @@ public class Editor extends Activity
     // setSizeAndTypeface
     private void setSizeAndTypeface(int size, int type)
     {
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        Log.d(TAG, "Density " + dm.scaledDensity);
-
-        switch (size)
+        if (BuildConfig.DEBUG)
         {
-        case SMALL:
-            textView.setTextSize(14);
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Size " + textView.getTextSize());
-            break;
-
-        case MEDIUM:
-            textView.setTextSize(18);
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Size " + textView.getTextSize());
-            break;
-
-        case LARGE:
-            textView.setTextSize(22);
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Size " + textView.getTextSize());
-            break;
+            DisplayMetrics dm = getResources().getDisplayMetrics();
+            Log.d(TAG, "Density " + dm.density + ", " + dm.scaledDensity);
         }
+
+        textView.setTextSize(size);
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Size " + textView.getTextSize());
 
         switch (type)
         {
