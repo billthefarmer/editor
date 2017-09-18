@@ -507,11 +507,26 @@ public class Editor extends Activity
             Log.d(TAG, "Density " + dm.density + ", " + dm.scaledDensity);
         }
 
+        // Update size
+        switch (size)
+        {
+        case SMALL:
+        case MEDIUM:
+        case LARGE:
+            break;
+
+        default:
+            size = MEDIUM;
+            break;
+        }
+
+        // Set size
         textView.setTextSize(size);
 
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Size " + textView.getTextSize());
 
+        // Set type
         switch (type)
         {
         case MONO:
