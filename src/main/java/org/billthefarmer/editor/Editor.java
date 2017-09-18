@@ -517,6 +517,7 @@ public class Editor extends Activity
 
         default:
             size = MEDIUM;
+            invalidateOptionsMenu();
             break;
         }
 
