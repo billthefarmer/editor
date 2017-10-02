@@ -123,20 +123,28 @@ public class Editor extends Activity
         Intent intent = getIntent();
         Uri uri = intent.getData();
 
-        if (savedInstanceState == null)
+        if (intent.getAction().equals(Intent.ACTION_EDIT) ||
+            intent.getAction().equals(Intent.ACTION_VIEW))
         {
-            if (uri != null)
+            if ((savedInstanceState == null) && (uri != null))
                 readFile(uri);
 
-            else
-                defaultFile();
+            getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if (uri == null)
+        else if (intent.getAction().equals(Intent.ACTION_SEND))
+        {
+            String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+            textView.append(text);
+            defaultFile();
             isapp = true;
+        }
 
-        else
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+        else if (intent.getAction().equals(Intent.ACTION_MAIN))
+        {
+            defaultFile();
+            isapp = true;
+        }
 
         setListeners();
     }
