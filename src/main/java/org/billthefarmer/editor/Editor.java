@@ -136,9 +136,19 @@ public class Editor extends Activity
         {
             if (savedInstanceState == null)
             {
+                // Get text
                 String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-                textView.append(text);
-                defaultFile();
+                if (text != null)
+                {
+                    textView.append(text);
+                    defaultFile();
+                    dirty = true;
+                }
+
+                // Get uri
+                uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                if (uri != null)
+                    readFile(uri);
             }
 
             isapp = true;
