@@ -82,6 +82,7 @@ public class Editor extends Activity
 
     private File file;
     private String path;
+    private String toAppend;
     private EditText textView;
 
     private boolean wrap = false;
@@ -140,8 +141,7 @@ public class Editor extends Activity
                 String text = intent.getStringExtra(Intent.EXTRA_TEXT);
                 if (text != null)
                 {
-                    textView.append(text);
-                    defaultFile();
+                    defaultFile(text);
                     dirty = true;
                 }
 
@@ -157,7 +157,7 @@ public class Editor extends Activity
         else if (intent.getAction().equals(Intent.ACTION_MAIN))
         {
             if (savedInstanceState == null)
-                defaultFile();
+                defaultFile(null);
 
             isapp = true;
         }
@@ -376,7 +376,7 @@ public class Editor extends Activity
     }
 
     // defaultFile
-    private void defaultFile()
+    private void defaultFile(String text)
     {
         File documents = new
             File(Environment.getExternalStorageDirectory(), DOCUMENTS);
@@ -385,8 +385,19 @@ public class Editor extends Activity
         Uri uri = Uri.fromFile(file);
         path = uri.getPath();
 
-        String title = uri.getLastPathSegment();
-        setTitle(title);
+        if (file.exists())
+        {
+            readFile(uri);
+            toAppend = text;
+        }
+
+        else
+        {
+            textView.append(text);
+
+            String title = uri.getLastPathSegment();
+            setTitle(title);
+        }
     }
 
     // alertDialog
@@ -713,7 +724,16 @@ public class Editor extends Activity
             if (textView != null)
                 textView.setText(result);
 
-            dirty = false;
+            if (toAppend != null)
+            {
+                textView.append(toAppend);
+                toAppend = null;
+                dirty = true;
+            }
+
+            else
+                dirty = false;
+
             invalidateOptionsMenu();
         }
     }
