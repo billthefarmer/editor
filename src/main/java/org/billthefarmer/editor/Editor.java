@@ -134,15 +134,21 @@ public class Editor extends Activity
 
         else if (intent.getAction().equals(Intent.ACTION_SEND))
         {
-            String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-            textView.append(text);
-            defaultFile();
+            if (savedInstanceState == null)
+            {
+                String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+                textView.append(text);
+                defaultFile();
+            }
+
             isapp = true;
         }
 
         else if (intent.getAction().equals(Intent.ACTION_MAIN))
         {
-            defaultFile();
+            if (savedInstanceState == null)
+                defaultFile();
+
             isapp = true;
         }
 
