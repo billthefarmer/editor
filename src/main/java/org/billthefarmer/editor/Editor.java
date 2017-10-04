@@ -393,7 +393,8 @@ public class Editor extends Activity
 
         else
         {
-            textView.append(text);
+            if (text != null)
+                textView.append(text);
 
             String title = uri.getLastPathSegment();
             setTitle(title);
