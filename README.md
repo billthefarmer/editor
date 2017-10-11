@@ -6,7 +6,7 @@ and [here](https://github.com/billthefarmer/editor/releases)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-styles.png)
 
-![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-green.png)
+![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-landscape.png)
 
 This is a very simple generic text editor which may be used standalone
 or to show or edit any sort of text file from another app. If you
