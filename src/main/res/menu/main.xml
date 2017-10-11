@@ -23,10 +23,27 @@
       android:showAsAction="never"
       android:title="@string/wrap" />
   <item
-      android:id="@+id/dark"
-      android:checkable="true"
+      android:id="@+id/theme"
       android:showAsAction="never"
-      android:title="@string/dark" />
+      android:title="@string/theme">
+    <menu>
+      <group
+          android:checkableBehavior="single">
+        <item
+            android:id="@+id/light"
+            android:showAsAction="never"
+            android:title="@string/light" />
+        <item
+            android:id="@+id/dark"
+            android:showAsAction="never"
+            android:title="@string/dark" />
+        <item
+            android:id="@+id/retro"
+            android:showAsAction="never"
+            android:title="@string/retro" />
+      </group>
+    </menu>
+  </item>
   <item
       android:id="@+id/size"
       android:showAsAction="never"

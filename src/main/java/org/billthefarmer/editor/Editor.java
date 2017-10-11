@@ -60,7 +60,7 @@ public class Editor extends Activity
     public final static String CONTENT = "content";
 
     public final static String PREF_WRAP = "pref_wrap";
-    public final static String PREF_DARK = "pref_dark";
+    public final static String PREF_THEME = "pref_theme";
     public final static String PREF_SIZE = "pref_size";
     public final static String PREF_TYPE = "pref_type";
 
@@ -72,6 +72,10 @@ public class Editor extends Activity
     private final static int VERSION_M = 23;
     private final static int GET_TEXT = 0;
     private final static int TEXT = 1;
+
+    private final static int LIGHT = 1;
+    private final static int DARK  = 2;
+    private final static int RETRO = 3;
 
     private final static int SMALL  = 12;
     private final static int MEDIUM = 18;
@@ -86,11 +90,11 @@ public class Editor extends Activity
     private EditText textView;
 
     private boolean wrap = false;
-    private boolean dark = false;
 
     private boolean dirty = false;
     private boolean isapp = false;
 
+    private int theme = LIGHT;
     private int size = MEDIUM;
     private int type = MONO;
 
@@ -102,14 +106,23 @@ public class Editor extends Activity
 
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
-        wrap = preferences.getBoolean(PREF_WRAP, false);
-        dark = preferences.getBoolean(PREF_DARK, false);
 
+        wrap = preferences.getBoolean(PREF_WRAP, false);
+
+        theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
         type = preferences.getInt(PREF_TYPE, MONO);
 
-        if (dark)
+        switch (theme)
+        {
+        case DARK:
             setTheme(R.style.AppDarkTheme);
+            break;
+
+        case RETRO:
+            setTheme(R.style.AppRetroTheme);
+            break;
+        }
 
         if (wrap)
             setContentView(R.layout.wrap);
@@ -223,10 +236,12 @@ public class Editor extends Activity
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putBoolean(PREF_WRAP, wrap);
-        editor.putBoolean(PREF_DARK, dark);
+        editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
         editor.putInt(PREF_TYPE, type);
         editor.apply();
+
+        saveFile();
     }
 
     // onSaveInstanceState
@@ -255,7 +270,21 @@ public class Editor extends Activity
         menu.findItem(R.id.save).setVisible (dirty);
 
         menu.findItem(R.id.wrap).setChecked (wrap);
-        menu.findItem(R.id.dark).setChecked (dark);
+
+        switch (theme)
+        {
+        case LIGHT:
+            menu.findItem(R.id.light).setChecked (true);
+            break;
+
+        case DARK:
+            menu.findItem(R.id.dark).setChecked (true);
+            break;
+
+        case RETRO:
+            menu.findItem(R.id.retro).setChecked (true);
+            break;
+        }
 
         switch (size)
         {
@@ -307,8 +336,14 @@ public class Editor extends Activity
         case R.id.wrap:
             wrapClicked(item);
             break;
+        case R.id.light:
+            lightClicked(item);
+            break;
         case R.id.dark:
             darkClicked(item);
+            break;
+        case R.id.retro:
+            retroClicked(item);
             break;
         case R.id.small:
             smallClicked(item);
@@ -479,11 +514,31 @@ public class Editor extends Activity
             recreate();
     }
 
+    // lightClicked
+    private void lightClicked(MenuItem item)
+    {
+        theme = LIGHT;
+        item.setChecked(true);
+
+        if (Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
+    }
+
     // darkClicked
     private void darkClicked(MenuItem item)
     {
-        dark = !dark;
-        item.setChecked(dark);
+        theme = DARK;
+        item.setChecked(true);
+
+        if (Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
+    }
+
+    // retroClicked
+    private void retroClicked(MenuItem item)
+    {
+        theme = RETRO;
+        item.setChecked(true);
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();
