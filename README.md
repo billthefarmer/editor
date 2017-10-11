@@ -6,6 +6,8 @@ and [here](https://github.com/billthefarmer/editor/releases)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-styles.png)
 
+![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-green.png)
+
 This is a very simple generic text editor which may be used standalone
 or to show or edit any sort of text file from another app. If you
 select a text file in a file manager or similar app you will be
@@ -19,7 +21,10 @@ There are two toolbar items which may appear:
 And on the menu:
 * **Save as** - Save the current file with a new name
 * **Word wrap** - Limit text width to screen width and word wrap
-* **Dark theme** - Dark background with light text
+* **Theme** - Choose theme
+  * **Light**
+  * **Dark**
+  * **Retro**
 * **Text size** - Choose text size
   * **Small**
   * **Medium**
@@ -31,8 +36,9 @@ And on the menu:
 
 If you touch the back or open button, and the current file has been
 modified, you will be prompted whether you want to discard it, else
-the editor will just exit or open a file chooser.
+the editor will just exit or open a file chooser. The current file
+will be saved on app pause.
 
 If there is no open file any text entered will by default be saved in
-`Documents/Editor.txt`. Use the `Save as` menu item to save it
-elsewhere.
+`Documents/Editor.txt`. This file will be loaded on start if it
+exists. Use the `Save as` menu item to save it elsewhere.
