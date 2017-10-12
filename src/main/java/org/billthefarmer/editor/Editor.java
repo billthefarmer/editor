@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -60,6 +61,7 @@ public class Editor extends Activity
     public final static String CONTENT = "content";
 
     public final static String PREF_WRAP = "pref_wrap";
+    public final static String PREF_SUGGEST = "pref_suggest";
     public final static String PREF_THEME = "pref_theme";
     public final static String PREF_SIZE = "pref_size";
     public final static String PREF_TYPE = "pref_type";
@@ -90,6 +92,7 @@ public class Editor extends Activity
     private EditText textView;
 
     private boolean wrap = false;
+    private boolean suggest = true;
 
     private boolean dirty = false;
     private boolean isapp = false;
@@ -108,6 +111,7 @@ public class Editor extends Activity
             PreferenceManager.getDefaultSharedPreferences(this);
 
         wrap = preferences.getBoolean(PREF_WRAP, false);
+        suggest = preferences.getBoolean(PREF_SUGGEST, true);
 
         theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
@@ -131,6 +135,11 @@ public class Editor extends Activity
             setContentView(R.layout.edit);
 
         textView = (EditText) findViewById(R.id.text);
+
+        if (!suggest)
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
 
@@ -236,6 +245,7 @@ public class Editor extends Activity
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putBoolean(PREF_WRAP, wrap);
+        editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
         editor.putInt(PREF_TYPE, type);
@@ -270,6 +280,7 @@ public class Editor extends Activity
         menu.findItem(R.id.save).setVisible (dirty);
 
         menu.findItem(R.id.wrap).setChecked (wrap);
+        menu.findItem(R.id.suggest).setChecked (suggest);
 
         switch (theme)
         {
@@ -335,6 +346,9 @@ public class Editor extends Activity
             break;
         case R.id.wrap:
             wrapClicked(item);
+            break;
+        case R.id.suggest:
+            suggestClicked(item);
             break;
         case R.id.light:
             lightClicked(item);
@@ -509,6 +523,24 @@ public class Editor extends Activity
     {
         wrap = !wrap;
         item.setChecked(wrap);
+
+        if (Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
+    }
+
+    // suggestClicked
+    private void suggestClicked(MenuItem item)
+    {
+        suggest = !suggest;
+        item.setChecked(suggest);
+
+        if (suggest)
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        else
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();

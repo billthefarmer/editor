@@ -23,6 +23,12 @@
       android:showAsAction="never"
       android:title="@string/wrap" />
   <item
+      android:id="@+id/suggest"
+      android:checkable="true"
+      android:checked="true"
+      android:showAsAction="never"
+      android:title="@string/suggest" />
+  <item
       android:id="@+id/theme"
       android:showAsAction="never"
       android:title="@string/theme">

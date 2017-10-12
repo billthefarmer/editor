@@ -28,10 +28,6 @@
         res/values-vXX/styles.xml, while customizations related to
         backward-compatibility can go here.
     -->
-    <item name="android:editTextBackground">@color/colorRetroBackground</item>
-    <item name="android:textColorPrimary">@color/colorRetroPrimary</item>
-    <item name="android:textColorSecondary">@color/colorRetroPrimary</item>
-    <item name="android:textColorTertiary">@color/colorRetroPrimary</item>
   </style>
 
   <!-- Application theme. -->
@@ -56,6 +52,10 @@
         All customizations that are NOT specific to a particular
         API-level can go here.
     -->
+    <item name="android:editTextBackground">@color/colorRetroBackground</item>
+    <item name="android:textColorPrimary">@color/colorRetroPrimary</item>
+    <item name="android:textColorSecondary">@color/colorRetroPrimary</item>
+    <item name="android:textColorTertiary">@color/colorRetroPrimary</item>
   </style>
 
 </resources>
