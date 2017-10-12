@@ -21,6 +21,7 @@ There are two toolbar items which may appear:
 And on the menu:
 * **Save as** - Save the current file with a new name
 * **Word wrap** - Limit text width to screen width and word wrap
+* **Suggestions** - Text input and spelling suggestions
 * **Theme** - Choose theme
   * **Light**
   * **Dark**
