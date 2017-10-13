@@ -624,12 +624,6 @@ public class Editor extends Activity
     // setSizeAndTypeface
     private void setSizeAndTypeface(int size, int type)
     {
-        if (BuildConfig.DEBUG)
-        {
-            DisplayMetrics dm = getResources().getDisplayMetrics();
-            Log.d(TAG, "Density " + dm.density + ", " + dm.scaledDensity);
-        }
-
         // Update size
         switch (size)
         {
@@ -646,9 +640,6 @@ public class Editor extends Activity
 
         // Set size
         textView.setTextSize(size);
-
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "Size " + textView.getTextSize());
 
         // Set type
         switch (type)
