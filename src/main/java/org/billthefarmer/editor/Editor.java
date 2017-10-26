@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -37,7 +38,9 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.style.BackgroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -47,11 +50,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
+import android.widget.SearchView;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Editor extends Activity
 {
@@ -65,6 +72,8 @@ public class Editor extends Activity
     public final static String PREF_THEME = "pref_theme";
     public final static String PREF_SIZE = "pref_size";
     public final static String PREF_TYPE = "pref_type";
+    public final static String PREF_FILE = "pref_file";
+    public final static String PREF_POSN = "pref_posn";
 
     public final static String DOCUMENTS = "Documents";
     public final static String FILE = "Editor.txt";
@@ -90,6 +99,7 @@ public class Editor extends Activity
     private String path;
     private String toAppend;
     private EditText textView;
+    private ScrollView scrollView;
 
     private boolean wrap = false;
     private boolean suggest = true;
@@ -135,6 +145,7 @@ public class Editor extends Activity
             setContentView(R.layout.edit);
 
         textView = (EditText) findViewById(R.id.text);
+        scrollView = (ScrollView) findViewById(R.id.vscroll);
 
         if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
@@ -269,6 +280,12 @@ public class Editor extends Activity
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        if (searchView != null)
+            searchView.setOnQueryTextListener(new QueryTextListener());
         return true;
     }
 
@@ -763,6 +780,119 @@ public class Editor extends Activity
         }
 
         catch (Exception e) {}
+    }
+
+    // QueryTextListener
+    private class QueryTextListener
+        implements SearchView.OnQueryTextListener
+    {
+        private BackgroundColorSpan span = new
+            BackgroundColorSpan(Color.YELLOW);
+        private Editable editable;
+        private Matcher matcher;
+        private Pattern pattern;
+        private String text;
+        private int index;
+        private int height;
+
+        // onQueryTextChange
+        @Override
+        @SuppressWarnings("deprecation")
+        public boolean onQueryTextChange (String newText)
+        {
+            // Use regex search and spannable for highlighting
+            height = scrollView.getHeight();
+            editable = textView.getEditableText();
+            text = textView.getText().toString();
+
+            // Check text
+            if (text.length() == 0)
+                return false;
+
+            // Reset the index and clear highlighting
+            if (newText.length() == 0)
+            {
+                index = 0;
+                editable.removeSpan(span);
+                return false;
+            }
+
+            // Check pattern
+            try
+            {
+                pattern = Pattern.compile(newText, Pattern.MULTILINE);
+                matcher = pattern.matcher(text);
+            }
+
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            // Find text
+            if (matcher.find(index))
+            {
+                // Get index
+                index = matcher.start();
+
+                // Check layout
+                if (textView.getLayout() == null)
+                    return false;
+
+                // Get text position
+                int line = textView.getLayout()
+                    .getLineForOffset(index);
+                int pos = textView.getLayout()
+                    .getLineBaseline(line);
+
+                // Scroll to it
+                scrollView.scrollTo(0, pos - height / 2);
+
+                // Highlight it
+                editable
+                    .setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            else
+                index = 0;
+
+            return true;
+        }
+
+        // onQueryTextSubmit
+        @Override
+        public boolean onQueryTextSubmit (String query)
+        {
+            // Find next text
+            if (matcher.find())
+            {
+                // Get index
+                index = matcher.start();
+
+                // Get text position
+                int line = textView.getLayout()
+                    .getLineForOffset(index);
+                int pos = textView.getLayout()
+                    .getLineBaseline(line);
+
+                // Scroll to it
+                scrollView.scrollTo(0, pos - height / 2);
+
+                // Highlight it
+                editable
+                    .setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            else
+            {
+                matcher.reset();
+                index = 0;
+            }
+
+            return true;
+        }
     }
 
     // ReadTask

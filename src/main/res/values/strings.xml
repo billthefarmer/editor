@@ -3,9 +3,10 @@
 
   <string name="appName">Editor</string>
   
-  <string name="open">Open file</string>
+  <string name="search">Search…</string>
+  <string name="open">Open file…</string>
   <string name="save">Save</string>
-  <string name="saveAs">Save as</string>
+  <string name="saveAs">Save as…</string>
   <string name="wrap">Word wrap</string>
   <string name="suggest">Suggestions</string>
   <string name="theme">Theme</string>
@@ -22,7 +23,9 @@
   <string name="about">About</string>
 
   <string name="version">
-    Editor version %s\nCopyright \u00A9 2017 Bill Farmer\nGNU GPLv3
+    Editor version %s\nCopyright \u00A9 2017 Bill Farmer\nFrench
+    translation by <a href="https://github.com/milouse">Étienne
+    Deparis</a>\nGNU GPLv3
   </string>
 
   <string name="choose">Choose a file name</string>

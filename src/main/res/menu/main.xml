@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AppCompatResource">
   <item
+      android:id="@+id/search"
+      android:showAsAction="ifRoom|collapseActionView"
+      android:title="@string/search"
+      android:actionViewClass="android.widget.SearchView"
+      android:icon="@drawable/ic_action_search" />
+  <item
       android:id="@+id/open"
       android:showAsAction="ifRoom"
       android:title="@string/open"
