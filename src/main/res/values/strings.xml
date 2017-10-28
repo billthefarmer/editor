@@ -6,6 +6,7 @@
   <string name="search">Search…</string>
   <string name="open">Open file…</string>
   <string name="save">Save</string>
+  <string name="openRecent">Open Recent</string>
   <string name="saveAs">Save as…</string>
   <string name="wrap">Word wrap</string>
   <string name="suggest">Suggestions</string>

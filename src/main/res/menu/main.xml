@@ -20,6 +20,13 @@
       android:title="@string/save"
       android:icon="@drawable/ic_action_save" />
   <item
+      android:id="@+id/openRecent"
+      android:showAsAction="never"
+      android:title="@string/openRecent">
+    <menu>
+    </menu>
+  </item>
+  <item
       android:id="@+id/saveAs"
       android:showAsAction="never"
       android:title="@string/saveAs" />

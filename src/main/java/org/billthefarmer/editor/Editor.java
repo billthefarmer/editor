@@ -46,6 +46,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -56,7 +57,13 @@ import android.widget.SearchView;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,6 +77,7 @@ public class Editor extends Activity
     public final static String PREF_WRAP = "pref_wrap";
     public final static String PREF_SUGGEST = "pref_suggest";
     public final static String PREF_THEME = "pref_theme";
+    public final static String PREF_PATHS = "pref_paths";
     public final static String PREF_SIZE = "pref_size";
     public final static String PREF_TYPE = "pref_type";
     public final static String PREF_FILE = "pref_file";
@@ -78,8 +86,9 @@ public class Editor extends Activity
     public final static String DOCUMENTS = "Documents";
     public final static String FILE = "Editor.txt";
 
-    private final static int MAX_LENGTH = 1048576;
     private final static int BUFFER_SIZE = 1024;
+    private final static int POSN_DELAY = 100;
+    private final static int MAX_PATHS = 10;
     private final static int VERSION_M = 23;
     private final static int GET_TEXT = 0;
     private final static int TEXT = 1;
@@ -99,7 +108,12 @@ public class Editor extends Activity
     private String path;
     private String toAppend;
     private EditText textView;
+    private MenuItem searchItem;
     private ScrollView scrollView;
+    private SearchView searchView;
+
+    private Map<String, Integer> pathMap;
+    private List<String> removeList;
 
     private boolean wrap = false;
     private boolean suggest = true;
@@ -126,6 +140,15 @@ public class Editor extends Activity
         theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
         type = preferences.getInt(PREF_TYPE, MONO);
+
+        Set<String> pathSet = preferences.getStringSet(PREF_PATHS, null);
+        pathMap = new HashMap<String, Integer>();
+
+        if (pathSet != null)
+            for (String path: pathSet)
+                pathMap.put(path, preferences.getInt(path, 0));
+
+        removeList = new ArrayList<String>();
 
         switch (theme)
         {
@@ -260,6 +283,18 @@ public class Editor extends Activity
         editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
         editor.putInt(PREF_TYPE, type);
+
+        // Add the set of recent files
+        editor.putStringSet(PREF_PATHS, pathMap.keySet());
+
+        // Add a position for each file
+        for (String path: pathMap.keySet())
+            editor.putInt(path, pathMap.get(path));
+
+        // Remove the old ones
+        for (String path: removeList)
+            editor.remove(path);
+
         editor.apply();
 
         saveFile();
@@ -281,8 +316,8 @@ public class Editor extends Activity
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) searchItem.getActionView();
 
         if (searchView != null)
             searchView.setOnQueryTextListener(new QueryTextListener());
@@ -340,6 +375,40 @@ public class Editor extends Activity
             break;
         }
 
+        // Get a list of recent files
+        List<Long> list = new ArrayList<Long>();
+        Map<Long, String> map = new HashMap<Long, String>();
+
+        // Get the last modified dates
+        for (String path: pathMap.keySet())
+        {
+            File file = new File(path);
+            long last = file.lastModified();
+            list.add(last);
+            map.put(last, path);
+        }
+
+        // Sort in reverse order
+        Collections.sort(list);
+        Collections.reverse(list);
+
+        // Get the submenu
+        MenuItem item = menu.findItem(R.id.openRecent);
+        SubMenu sub = item.getSubMenu();
+        sub.clear();
+
+        // Add the recent files
+        for (long date: list)
+        {
+            String path = map.get(date);
+
+            // Remove path prefix
+            String name =
+                path.replaceFirst(Environment
+                                  .getExternalStorageDirectory().getPath(), "");
+            sub.add(name);
+        }
+
         return true;
     }
 
@@ -395,8 +464,13 @@ public class Editor extends Activity
             aboutClicked();
             break;
         default:
-            return super.onOptionsItemSelected(item);
+            openRecent(item);
+            break;
         }
+
+        // Close text search
+        if (searchItem.isActionViewExpanded())
+            searchItem.collapseActionView();
 
         return true;
     }
@@ -483,13 +557,26 @@ public class Editor extends Activity
         builder.show();
     }
 
+    // openRecent
+    private void openRecent(MenuItem item)
+    {
+        // Add the path prefix
+        File file = new File(Environment.getExternalStorageDirectory(),
+                             item.getTitle().toString());
+        // Check it exists
+        if (file.exists())
+            readFile(Uri.fromFile(file));
+    }
+
     // saveAs
     private void saveAs()
     {
+        // Remove path prefix
         String name =
             path.replaceFirst(Environment
                               .getExternalStorageDirectory().getPath(), "");
 
+        // Open dialog
         saveAsDialog(R.string.saveAs, R.string.choose, name,
                      new DialogInterface.OnClickListener()
             {
@@ -765,6 +852,8 @@ public class Editor extends Activity
         String text = textView.getText().toString();
         write(text, file);
         dirty = false;
+
+        savePath(path);
         invalidateOptionsMenu();
     }
 
@@ -782,6 +871,42 @@ public class Editor extends Activity
         catch (Exception e) {}
     }
 
+    // savePath
+    private void savePath(String path)
+    {
+        // Save the current position
+        pathMap.put(path, scrollView.getScrollY());
+
+        // Get a list of files
+        List<Long> list = new ArrayList<Long>();
+        Map<Long, String> map = new HashMap<Long, String>();
+        for (String name: pathMap.keySet())
+        {
+            File file = new File(name);
+            list.add(file.lastModified());
+            map.put(file.lastModified(), name);
+        }
+
+        // Sort in reverse order
+        Collections.sort(list);
+        Collections.reverse(list);
+
+        int count = 0;
+        for (long date: list)
+        {
+            String name = map.get(date);
+
+            // Remove old files
+            if (count >= MAX_PATHS)
+            {
+                pathMap.remove(name);
+                removeList.add(name);
+            }
+
+            count++;
+        }
+    }
+        
     // QueryTextListener
     private class QueryTextListener
         implements SearchView.OnQueryTextListener
@@ -871,10 +996,8 @@ public class Editor extends Activity
                 index = matcher.start();
 
                 // Get text position
-                int line = textView.getLayout()
-                    .getLineForOffset(index);
-                int pos = textView.getLayout()
-                    .getLineBaseline(line);
+                int line = textView.getLayout().getLineForOffset(index);
+                int pos = textView.getLayout().getLineBaseline(line);
 
                 // Scroll to it
                 scrollView.scrollTo(0, pos - height / 2);
@@ -942,6 +1065,20 @@ public class Editor extends Activity
 
             else
                 dirty = false;
+
+            // Check for saved position
+            if (pathMap.containsKey(path))
+            {
+                textView.postDelayed(new Runnable()
+                    {
+                        // run
+                        @Override
+                        public void run()
+                        {
+                            scrollView.scrollTo(0, pathMap.get(path));
+                        }
+                    }, POSN_DELAY);
+            }
 
             invalidateOptionsMenu();
         }

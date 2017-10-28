@@ -6,6 +6,7 @@
   <string name="search">Chercher…</string>
   <string name="open">Ouvrir un fichier…</string>
   <string name="save">Enregistrer</string>
+  <string name="openRecent">Ouvrir récente</string>
   <string name="saveAs">Enregistrer sous…</string>
   <string name="wrap">Retour à la ligne auto</string>
   <string name="suggest">Suggestions</string>
