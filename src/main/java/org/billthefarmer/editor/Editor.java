@@ -146,7 +146,7 @@ public class Editor extends Activity
         pathMap = new HashMap<String, Integer>();
 
         if (pathSet != null)
-            for (String path: pathSet)
+            for (String path : pathSet)
                 pathMap.put(path, preferences.getInt(path, 0));
 
         removeList = new ArrayList<String>();
@@ -182,7 +182,7 @@ public class Editor extends Activity
         Uri uri = intent.getData();
 
         if (intent.getAction().equals(Intent.ACTION_EDIT) ||
-            intent.getAction().equals(Intent.ACTION_VIEW))
+                intent.getAction().equals(Intent.ACTION_VIEW))
         {
             if ((savedInstanceState == null) && (uri != null))
                 readFile(uri);
@@ -289,11 +289,11 @@ public class Editor extends Activity
         editor.putStringSet(PREF_PATHS, pathMap.keySet());
 
         // Add a position for each file
-        for (String path: pathMap.keySet())
+        for (String path : pathMap.keySet())
             editor.putInt(path, pathMap.get(path));
 
         // Remove the old ones
-        for (String path: removeList)
+        for (String path : removeList)
             editor.remove(path);
 
         editor.apply();
@@ -381,7 +381,7 @@ public class Editor extends Activity
         Map<Long, String> map = new HashMap<Long, String>();
 
         // Get the last modified dates
-        for (String path: pathMap.keySet())
+        for (String path : pathMap.keySet())
         {
             File file = new File(path);
             long last = file.lastModified();
@@ -399,7 +399,7 @@ public class Editor extends Activity
         sub.clear();
 
         // Add the recent files
-        for (long date: list)
+        for (long date : list)
         {
             String path = map.get(date);
 
@@ -474,6 +474,9 @@ public class Editor extends Activity
         if (searchItem.isActionViewExpanded())
             searchItem.collapseActionView();
 
+        // Save path
+        savePath(path);
+
         return true;
     }
 
@@ -484,16 +487,16 @@ public class Editor extends Activity
         if (dirty)
             alertDialog(R.string.appName, R.string.modified, new
                         DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                switch (id)
                 {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        switch (id)
-                        {
-                        case DialogInterface.BUTTON_POSITIVE:
-                            finish();
-                        }
-                    }
-                });
+                case DialogInterface.BUTTON_POSITIVE:
+                    finish();
+                }
+            }
+        });
 
         else
             finish();
@@ -521,7 +524,7 @@ public class Editor extends Activity
     private void defaultFile(String text)
     {
         File documents = new
-            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+        File(Environment.getExternalStorageDirectory(), DOCUMENTS);
         file = new File(documents, FILE);
 
         Uri uri = Uri.fromFile(file);
@@ -559,6 +562,42 @@ public class Editor extends Activity
         builder.show();
     }
 
+    // savePath
+    private void savePath(String path)
+    {
+        // Save the current position
+        pathMap.put(path, scrollView.getScrollY());
+
+        // Get a list of files
+        List<Long> list = new ArrayList<Long>();
+        Map<Long, String> map = new HashMap<Long, String>();
+        for (String name : pathMap.keySet())
+        {
+            File file = new File(name);
+            list.add(file.lastModified());
+            map.put(file.lastModified(), name);
+        }
+
+        // Sort in reverse order
+        Collections.sort(list);
+        Collections.reverse(list);
+
+        int count = 0;
+        for (long date : list)
+        {
+            String name = map.get(date);
+
+            // Remove old files
+            if (count >= MAX_PATHS)
+            {
+                pathMap.remove(name);
+                removeList.add(name);
+            }
+
+            count++;
+        }
+    }
+
     // openRecent
     private void openRecent(MenuItem item)
     {
@@ -568,7 +607,7 @@ public class Editor extends Activity
         if (name.startsWith("/"))
             file = new File(name);
 
-            
+
         // Add the path prefix
         else
             file = new File(Environment.getExternalStorageDirectory(),
@@ -590,28 +629,28 @@ public class Editor extends Activity
         // Open dialog
         saveAsDialog(R.string.saveAs, R.string.choose, name,
                      new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
             {
-                public void onClick(DialogInterface dialog, int id)
+                switch (id)
                 {
-                    switch (id)
-                    {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        EditText text =
-                            (EditText) ((Dialog) dialog).findViewById(TEXT);
-                        String name = text.getText().toString();
+                case DialogInterface.BUTTON_POSITIVE:
+                    EditText text =
+                        (EditText) ((Dialog) dialog).findViewById(TEXT);
+                    String name = text.getText().toString();
 
-                        if (name.startsWith("/"))
-                            file = new File(name);
-                        else
-                            file = new
-                                File(Environment.getExternalStorageDirectory(),
-                                     "/" + name);
+                    if (name.startsWith("/"))
+                        file = new File(name);
+                    else
+                        file = new
+                        File(Environment.getExternalStorageDirectory(),
+                             "/" + name);
 
-                        path = file.getPath();
-                        saveFile();
-                    }
+                    path = file.getPath();
+                    saveFile();
                 }
-            });
+            }
+        });
     }
 
     // saveAsDialog
@@ -794,7 +833,7 @@ public class Editor extends Activity
 
         // Create the AlertDialog
         builder.show();
-   }
+    }
 
     // openFile
     private void openFile()
@@ -802,17 +841,17 @@ public class Editor extends Activity
         if (dirty)
             alertDialog(R.string.open, R.string.modified, new
                         DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                switch (id)
                 {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        switch (id)
-                        {
-                        case DialogInterface.BUTTON_POSITIVE:
-                            getContent();
-                            break;
-                        }
-                    }
-                });
+                case DialogInterface.BUTTON_POSITIVE:
+                    getContent();
+                    break;
+                }
+            }
+        });
 
         else
             getContent();
@@ -872,7 +911,6 @@ public class Editor extends Activity
         write(text, file);
         dirty = false;
 
-        savePath(path);
         invalidateOptionsMenu();
     }
 
@@ -890,48 +928,12 @@ public class Editor extends Activity
         catch (Exception e) {}
     }
 
-    // savePath
-    private void savePath(String path)
-    {
-        // Save the current position
-        pathMap.put(path, scrollView.getScrollY());
-
-        // Get a list of files
-        List<Long> list = new ArrayList<Long>();
-        Map<Long, String> map = new HashMap<Long, String>();
-        for (String name: pathMap.keySet())
-        {
-            File file = new File(name);
-            list.add(file.lastModified());
-            map.put(file.lastModified(), name);
-        }
-
-        // Sort in reverse order
-        Collections.sort(list);
-        Collections.reverse(list);
-
-        int count = 0;
-        for (long date: list)
-        {
-            String name = map.get(date);
-
-            // Remove old files
-            if (count >= MAX_PATHS)
-            {
-                pathMap.remove(name);
-                removeList.add(name);
-            }
-
-            count++;
-        }
-    }
-        
     // QueryTextListener
     private class QueryTextListener
         implements SearchView.OnQueryTextListener
     {
         private BackgroundColorSpan span = new
-            BackgroundColorSpan(Color.YELLOW);
+        BackgroundColorSpan(Color.YELLOW);
         private Editable editable;
         private Matcher matcher;
         private Pattern pattern;
@@ -985,9 +987,9 @@ public class Editor extends Activity
 
                 // Get text position
                 int line = textView.getLayout()
-                    .getLineForOffset(index);
+                           .getLineForOffset(index);
                 int pos = textView.getLayout()
-                    .getLineBaseline(line);
+                          .getLineBaseline(line);
 
                 if (BuildConfig.DEBUG)
                     Log.d(TAG, "Scroll " + pos);
@@ -997,8 +999,8 @@ public class Editor extends Activity
 
                 // Highlight it
                 editable
-                    .setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                .setSpan(span, matcher.start(), matcher.end(),
+                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             else
@@ -1029,8 +1031,8 @@ public class Editor extends Activity
 
                 // Highlight it
                 editable
-                    .setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                .setSpan(span, matcher.start(), matcher.end(),
+                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             else
@@ -1095,17 +1097,17 @@ public class Editor extends Activity
             if (pathMap.containsKey(path))
             {
                 textView.postDelayed(new Runnable()
+                {
+                    // run
+                    @Override
+                    public void run()
                     {
-                        // run
-                        @Override
-                        public void run()
-                        {
-                            if (BuildConfig.DEBUG)
-                                Log.d(TAG, "Scroll " + pathMap.get(path));
+                        if (BuildConfig.DEBUG)
+                            Log.d(TAG, "Scroll " + pathMap.get(path));
 
-                            scrollView.smoothScrollTo(0, pathMap.get(path));
-                        }
-                    }, POSN_DELAY);
+                        scrollView.smoothScrollTo(0, pathMap.get(path));
+                    }
+                }, POSN_DELAY);
             }
 
             invalidateOptionsMenu();

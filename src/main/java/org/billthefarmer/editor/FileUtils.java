@@ -49,12 +49,12 @@ import java.util.Locale;
 public class FileUtils
 {
     private FileUtils() {} // private constructor to enforce Singleton
-                           // pattern
+    // pattern
 
     /** TAG for log messages. */
     static final String TAG = "FileUtils";
     private static final boolean DEBUG = false; // Set to true to
-                                                // enable logging
+    // enable logging
 
     public static final String MIME_TYPE_AUDIO = "audio/*";
     public static final String MIME_TYPE_TEXT = "text/*";
@@ -96,7 +96,7 @@ public class FileUtils
     public static boolean isLocal(String url)
     {
         if (url != null && !url.startsWith("http://") &&
-            !url.startsWith("https://"))
+                !url.startsWith("https://"))
         {
             return true;
         }
@@ -153,7 +153,7 @@ public class FileUtils
                 if (pathwithoutname.endsWith("/"))
                 {
                     pathwithoutname = pathwithoutname
-                        .substring(0, pathwithoutname.length() - 1);
+                                      .substring(0, pathwithoutname.length() - 1);
                 }
                 return new File(pathwithoutname);
             }
@@ -171,7 +171,7 @@ public class FileUtils
 
         if (extension.length() > 0)
             return MimeTypeMap.getSingleton()
-                .getMimeTypeFromExtension(extension.substring(1));
+                   .getMimeTypeFromExtension(extension.substring(1));
 
         return "application/octet-stream";
     }
@@ -193,7 +193,7 @@ public class FileUtils
     public static boolean isExternalStorageDocument(Uri uri)
     {
         return "com.android.externalstorage.documents"
-            .equals(uri.getAuthority());
+               .equals(uri.getAuthority());
     }
 
     /**
@@ -204,7 +204,7 @@ public class FileUtils
     public static boolean isDownloadsDocument(Uri uri)
     {
         return "com.android.providers.downloads.documents"
-            .equals(uri.getAuthority());
+               .equals(uri.getAuthority());
     }
 
     /**
@@ -215,7 +215,7 @@ public class FileUtils
     public static boolean isMediaDocument(Uri uri)
     {
         return "com.android.providers.media.documents"
-            .equals(uri.getAuthority());
+               .equals(uri.getAuthority());
     }
 
     /**
@@ -225,7 +225,7 @@ public class FileUtils
     public static boolean isGooglePhotosUri(Uri uri)
     {
         return "com.google.android.apps.photos.content"
-            .equals(uri.getAuthority());
+               .equals(uri.getAuthority());
     }
 
     /**
@@ -256,7 +256,7 @@ public class FileUtils
         try
         {
             cursor = context.getContentResolver()
-                .query(uri, projection, selection, selectionArgs, null);
+                     .query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst())
             {
                 if (DEBUG)
@@ -319,14 +319,14 @@ public class FileUtils
                 if ("primary".equalsIgnoreCase(type))
                 {
                     return Environment
-                        .getExternalStorageDirectory() + "/" + split[1];
+                           .getExternalStorageDirectory() + "/" + split[1];
                 }
 
                 else if ("home".equalsIgnoreCase(type))
                 {
                     return Environment
-                        .getExternalStorageDirectory() + "/Documents/" +
-                        split[1];
+                           .getExternalStorageDirectory() + "/Documents/" +
+                           split[1];
                 }
 
                 // TODO handle non-primary volumes
@@ -564,7 +564,7 @@ public class FileUtils
         {
             // Sort alphabetically by lower case, which is much cleaner
             return f1.getName().toLowerCase(Locale.getDefault())
-            .compareTo(f2.getName().toLowerCase(Locale.getDefault()));
+                   .compareTo(f2.getName().toLowerCase(Locale.getDefault()));
         }
     };
 

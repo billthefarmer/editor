@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<HorizontalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/vscroll"
+    android:id="@+id/hscroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-  <HorizontalScrollView
-      android:id="@+id/hscroll"
-      android:layout_width="match_parent"
+  <ScrollView
+      android:id="@+id/vscroll"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:fillViewport="true">
 
@@ -17,9 +17,8 @@
         android:typeface="monospace"
         android:inputType="text|textMultiLine"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="top" />
 
-  </HorizontalScrollView>
-
-</ScrollView>
+  </ScrollView>
+</HorizontalScrollView>
