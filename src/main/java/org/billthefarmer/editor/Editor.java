@@ -57,6 +57,7 @@ import android.widget.SearchView;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -405,7 +406,8 @@ public class Editor extends Activity
             // Remove path prefix
             String name =
                 path.replaceFirst(Environment
-                                  .getExternalStorageDirectory().getPath(), "");
+                                  .getExternalStorageDirectory()
+                                  .getPath() + "/", "");
             sub.add(name);
         }
 
@@ -560,9 +562,17 @@ public class Editor extends Activity
     // openRecent
     private void openRecent(MenuItem item)
     {
+        String name = item.getTitle().toString();
+        File file = null;
+
+        if (name.startsWith("/"))
+            file = new File(name);
+
+            
         // Add the path prefix
-        File file = new File(Environment.getExternalStorageDirectory(),
-                             item.getTitle().toString());
+        else
+            file = new File(Environment.getExternalStorageDirectory(),
+                            "/" + name);
         // Check it exists
         if (file.exists())
             readFile(Uri.fromFile(file));
@@ -574,7 +584,8 @@ public class Editor extends Activity
         // Remove path prefix
         String name =
             path.replaceFirst(Environment
-                              .getExternalStorageDirectory().getPath(), "");
+                              .getExternalStorageDirectory()
+                              .getPath() + "/", "");
 
         // Open dialog
         saveAsDialog(R.string.saveAs, R.string.choose, name,
@@ -588,9 +599,14 @@ public class Editor extends Activity
                         EditText text =
                             (EditText) ((Dialog) dialog).findViewById(TEXT);
                         String name = text.getText().toString();
-                        file = new
-                            File(Environment.getExternalStorageDirectory(),
-                                 name);
+
+                        if (name.startsWith("/"))
+                            file = new File(name);
+                        else
+                            file = new
+                                File(Environment.getExternalStorageDirectory(),
+                                     "/" + name);
+
                         path = file.getPath();
                         saveFile();
                     }
@@ -764,10 +780,13 @@ public class Editor extends Activity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.about);
 
+        DateFormat dateFormat = DateFormat.getDateTimeInstance();
         String format = getString(R.string.version);
+
         String message =
             String.format(Locale.getDefault(),
-                          format, BuildConfig.VERSION_NAME);
+                          format, BuildConfig.VERSION_NAME,
+                          dateFormat.format(BuildConfig.BUILT));
         builder.setMessage(message);
 
         // Add the button
@@ -970,8 +989,11 @@ public class Editor extends Activity
                 int pos = textView.getLayout()
                     .getLineBaseline(line);
 
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Scroll " + pos);
+
                 // Scroll to it
-                scrollView.scrollTo(0, pos - height / 2);
+                scrollView.smoothScrollTo(0, pos - height / 2);
 
                 // Highlight it
                 editable
@@ -999,8 +1021,11 @@ public class Editor extends Activity
                 int line = textView.getLayout().getLineForOffset(index);
                 int pos = textView.getLayout().getLineBaseline(line);
 
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Scroll " + pos);
+
                 // Scroll to it
-                scrollView.scrollTo(0, pos - height / 2);
+                scrollView.smoothScrollTo(0, pos - height / 2);
 
                 // Highlight it
                 editable
@@ -1075,7 +1100,10 @@ public class Editor extends Activity
                         @Override
                         public void run()
                         {
-                            scrollView.scrollTo(0, pathMap.get(path));
+                            if (BuildConfig.DEBUG)
+                                Log.d(TAG, "Scroll " + pathMap.get(path));
+
+                            scrollView.smoothScrollTo(0, pathMap.get(path));
                         }
                     }, POSN_DELAY);
             }

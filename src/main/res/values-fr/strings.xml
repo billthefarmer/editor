@@ -23,10 +23,11 @@
   <string name="normal">Sans sérif</string>
   <string name="about">À propos</string>
 
-  <string name="version">
-    Editor version %s\n Copyright © 2017 Bill Farmer\nTraduction
-    Française par <a href="https://github.com/milouse">Étienne
-    Deparis</a>\n GNU GPLv3
+  <string name="version" formatted="false">Editor version
+  %s\nConstruit %s\nCopyright \u00A9 2017 Bill Farmer\nTraduction
+  Française par <a href="https://github.com/milouse">Étienne
+  Deparis</a>\nLicence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Choisir un nom de fichier</string>

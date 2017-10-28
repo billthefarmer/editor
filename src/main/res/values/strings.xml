@@ -23,10 +23,10 @@
   <string name="normal">Normal</string>
   <string name="about">About</string>
 
-  <string name="version">
-    Editor version %s\nCopyright \u00A9 2017 Bill Farmer\nFrench
-    translation by <a href="https://github.com/milouse">Étienne
-    Deparis</a>\nGNU GPLv3
+  <string name="version" formatted="false">Editor version %s\nBuilt
+  %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a
+  href="https://github.com/milouse">Étienne Deparis</a>\nLicence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Choose a file name</string>
