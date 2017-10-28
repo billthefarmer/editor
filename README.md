@@ -42,7 +42,7 @@ Enter search text in the field that pops up in the toolbar. The first
 matching item will be highlighted. Use the search button in the
 keyboard for find next. The exact regular expression syntax used is in
 the android documentation for
-[Pattern]("https://developer.android.com/reference/java/util/regex/Pattern.html#sum").
+[Pattern](https://developer.android.com/reference/java/util/regex/Pattern.html#sum).
 
 ### Open
 Depending on what file managers or file pickers are installed, you
