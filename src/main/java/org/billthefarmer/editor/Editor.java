@@ -604,6 +604,7 @@ public class Editor extends Activity
         String name = item.getTitle().toString();
         File file = null;
 
+        // Absolute file
         if (name.startsWith("/"))
             file = new File(name);
 
@@ -614,7 +615,28 @@ public class Editor extends Activity
                             "/" + name);
         // Check it exists
         if (file.exists())
-            readFile(Uri.fromFile(file));
+        {
+            final Uri uri = Uri.fromFile(file);
+
+            if (dirty)
+                alertDialog(R.string.openRecent, R.string.modified, new
+                            DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int id)
+                        {
+                            switch (id)
+                            {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                readFile(uri);
+                                break;
+                            }
+                        }
+                    });
+
+
+            else
+                readFile(uri);
+        }
     }
 
     // saveAs
