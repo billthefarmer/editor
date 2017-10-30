@@ -602,17 +602,12 @@ public class Editor extends Activity
     private void openRecent(MenuItem item)
     {
         String name = item.getTitle().toString();
-        File file = null;
+        File file = new File(name);
 
-        // Absolute file
-        if (name.startsWith("/"))
-            file = new File(name);
-
-
-        // Add the path prefix
-        else
+        // Check absolute file
+        if (!file.isAbsolute())
             file = new File(Environment.getExternalStorageDirectory(),
-                            "/" + name);
+                            File.separator + name);
         // Check it exists
         if (file.exists())
         {
@@ -1020,9 +1015,8 @@ public class Editor extends Activity
                 scrollView.smoothScrollTo(0, pos - height / 2);
 
                 // Highlight it
-                editable
-                .setSpan(span, matcher.start(), matcher.end(),
-                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             else
@@ -1052,9 +1046,8 @@ public class Editor extends Activity
                 scrollView.smoothScrollTo(0, pos - height / 2);
 
                 // Highlight it
-                editable
-                .setSpan(span, matcher.start(), matcher.end(),
-                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             else
