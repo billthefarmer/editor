@@ -407,7 +407,7 @@ public class Editor extends Activity
             String name =
                 path.replaceFirst(Environment
                                   .getExternalStorageDirectory()
-                                  .getPath() + "/", "");
+                                  .getPath() + File.separator, "");
             sub.add(name);
         }
 
@@ -641,7 +641,7 @@ public class Editor extends Activity
         String name =
             path.replaceFirst(Environment
                               .getExternalStorageDirectory()
-                              .getPath() + "/", "");
+                              .getPath() + File.separator, "");
 
         // Open dialog
         saveAsDialog(R.string.saveAs, R.string.choose, name,
@@ -655,13 +655,13 @@ public class Editor extends Activity
                     EditText text =
                         (EditText) ((Dialog) dialog).findViewById(TEXT);
                     String name = text.getText().toString();
+                    file = new File(name);
 
-                    if (name.startsWith("/"))
-                        file = new File(name);
-                    else
+                    // Check absolute file
+                    if (!file.isAbsolute())
                         file = new
-                        File(Environment.getExternalStorageDirectory(),
-                             "/" + name);
+                            File(Environment.getExternalStorageDirectory(),
+                                 File.separator + name);
 
                     path = file.getPath();
                     saveFile();
