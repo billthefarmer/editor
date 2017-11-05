@@ -272,8 +272,8 @@ public class Editor extends Activity
         setTitle(title);
 
         if (file.lastModified() > modified)
-            alertDialog(R.string.appName, R.string.reload, new
-                        DialogInterface.OnClickListener()
+            alertDialog(R.string.appName, R.string.changedReload,
+                        R.string.reload, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
@@ -508,8 +508,8 @@ public class Editor extends Activity
     public void onBackPressed()
     {
         if (dirty)
-            alertDialog(R.string.appName, R.string.modified, new
-                        DialogInterface.OnClickListener()
+            alertDialog(R.string.appName, R.string.modified, R.string.discard,
+                        new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
@@ -570,7 +570,7 @@ public class Editor extends Activity
     }
 
     // alertDialog
-    private void alertDialog(int title, int message,
+    private void alertDialog(int title, int message, int button,
                              DialogInterface.OnClickListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -578,7 +578,7 @@ public class Editor extends Activity
         builder.setMessage(message);
 
         // Add the buttons
-        builder.setPositiveButton(R.string.discard, listener);
+        builder.setPositiveButton(button, listener);
         builder.setNegativeButton(R.string.cancel, listener);
 
         // Create the AlertDialog
@@ -637,7 +637,8 @@ public class Editor extends Activity
             final Uri uri = Uri.fromFile(file);
 
             if (dirty)
-                alertDialog(R.string.openRecent, R.string.modified, new
+                alertDialog(R.string.openRecent, R.string.modified,
+                            R.string.discard, new
                             DialogInterface.OnClickListener()
                     {
                         public void onClick(DialogInterface dialog, int id)
@@ -879,7 +880,7 @@ public class Editor extends Activity
     private void openFile()
     {
         if (dirty)
-            alertDialog(R.string.open, R.string.modified, new
+            alertDialog(R.string.open, R.string.modified, R.string.discard, new
                         DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
@@ -949,7 +950,8 @@ public class Editor extends Activity
     private void saveFile()
     {
         if (file.lastModified() > modified)
-            alertDialog(R.string.appName, R.string.overwrite, new
+            alertDialog(R.string.appName, R.string.changedOverwrite,
+                        R.string.overwrite, new
                         DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)

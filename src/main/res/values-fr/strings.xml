@@ -32,15 +32,17 @@
     Vous avez des changements non enregistrés. Souhaitez-vous les abandonner?
   </string>
 
-  <string name="reload">
+  <string name="changedReload">
     Ce fichier a changé, voulez-vous le recharger?
   </string>
 
-  <string name="overwrite">
+  <string name="changedOverwrite">
     Ce fichier a changé, voulez-vous l\'écraser?
   </string>
 
   <string name="ok">Ok</string>
+  <string name="reload">Recharger</string>
+  <string name="overwrite">Écraser</string>
   <string name="discard">Abandonner</string>
   <string name="cancel">Annuler</string>
 
