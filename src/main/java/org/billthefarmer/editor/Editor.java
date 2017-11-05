@@ -266,13 +266,24 @@ public class Editor extends Activity
         invalidateOptionsMenu();
 
         file = new File(path);
-        Uri uri = Uri.fromFile(file);
-
-        if (file.lastModified() > modified)
-            ;
+        final Uri uri = Uri.fromFile(file);
 
         String title = uri.getLastPathSegment();
         setTitle(title);
+
+        if (file.lastModified() > modified)
+            alertDialog(R.string.appName, R.string.reload, new
+                        DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                switch (id)
+                {
+                case DialogInterface.BUTTON_POSITIVE:
+                    readFile(uri);
+                }
+            }
+        });
     }
 
     // onPause
@@ -938,8 +949,27 @@ public class Editor extends Activity
     private void saveFile()
     {
         if (file.lastModified() > modified)
-            ;
+            alertDialog(R.string.appName, R.string.overwrite, new
+                        DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                switch (id)
+                {
+                case DialogInterface.BUTTON_POSITIVE:
+                    saveFile(file);
+                    break;
+                }
+            }
+        });
 
+        else
+            saveFile(file);
+    }
+
+    // saveFile
+    private void saveFile(File file)
+    {
         String text = textView.getText().toString();
         write(text, file);
         dirty = false;

@@ -28,7 +28,17 @@
   <string name="choose">Donnez le chemin complet d\'accès au fichier</string>
   <string name="loading">Chargement…</string>
 
-  <string name="modified">Vous avez des changements non enregistrés. Souhaitez-vous les abandonner ?</string>
+  <string name="modified">
+    Vous avez des changements non enregistrés. Souhaitez-vous les abandonner?
+  </string>
+
+  <string name="reload">
+    Ce fichier a changé, voulez-vous le recharger?
+  </string>
+
+  <string name="overwrite">
+    Ce fichier a changé, voulez-vous l\'écraser?
+  </string>
 
   <string name="ok">Ok</string>
   <string name="discard">Abandonner</string>
