@@ -508,7 +508,7 @@ public class Editor extends Activity
     public void onBackPressed()
     {
         if (dirty)
-            alertDialog(R.string.appName, R.string.modified, R.string.discard,
+            alertDialog(R.string.appName, R.string.modified,
                         new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
@@ -570,7 +570,14 @@ public class Editor extends Activity
     }
 
     // alertDialog
-    private void alertDialog(int title, int message, int button,
+    private void alertDialog(int title, int message,
+                             DialogInterface.OnClickListener listener)
+    {
+        alertDialog(title, message, R.string.discard, listener);
+    }
+
+    // alertDialog
+    private void alertDialog(int title, int message, int positiveButton,
                              DialogInterface.OnClickListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -578,7 +585,7 @@ public class Editor extends Activity
         builder.setMessage(message);
 
         // Add the buttons
-        builder.setPositiveButton(button, listener);
+        builder.setPositiveButton(positiveButton, listener);
         builder.setNegativeButton(R.string.cancel, listener);
 
         // Create the AlertDialog
@@ -638,8 +645,7 @@ public class Editor extends Activity
 
             if (dirty)
                 alertDialog(R.string.openRecent, R.string.modified,
-                            R.string.discard, new
-                            DialogInterface.OnClickListener()
+                            new DialogInterface.OnClickListener()
                     {
                         public void onClick(DialogInterface dialog, int id)
                         {
@@ -880,8 +886,8 @@ public class Editor extends Activity
     private void openFile()
     {
         if (dirty)
-            alertDialog(R.string.open, R.string.modified, R.string.discard, new
-                        DialogInterface.OnClickListener()
+            alertDialog(R.string.open, R.string.modified,
+                        new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
