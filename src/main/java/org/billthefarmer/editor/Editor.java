@@ -75,6 +75,7 @@ public class Editor extends Activity
     public final static String PATH = "path";
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
+    public final static String MODIFIED = "modified";
 
     public final static String PREF_WRAP = "pref_wrap";
     public final static String PREF_SUGGEST = "pref_suggest";
@@ -261,8 +262,9 @@ public class Editor extends Activity
     {
         super.onRestoreInstanceState(savedInstanceState);
 
-        dirty = savedInstanceState.getBoolean(DIRTY);
         path = savedInstanceState.getString(PATH);
+        dirty = savedInstanceState.getBoolean(DIRTY);
+        modified = savedInstanceState.getLong(MODIFIED);
         invalidateOptionsMenu();
 
         file = new File(path);
@@ -324,6 +326,7 @@ public class Editor extends Activity
     public void onSaveInstanceState (Bundle outState)
     {
         super.onSaveInstanceState(outState);
+        outState.putLong(MODIFIED,modified);
         outState.putBoolean(DIRTY, dirty);
         outState.putString(PATH, path);
     }
