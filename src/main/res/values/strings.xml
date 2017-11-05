@@ -36,6 +36,14 @@
     You have unsaved changes. Do you want to discard your changes?
   </string>
 
+  <string name="reload">
+    This file has changed, do you want to reload it?
+  </string>
+
+  <string name="overwrite">
+    This file has changed, do you want to overwrite it?
+  </string>
+
   <string name="ok">OK</string>
   <string name="discard">Discard</string>
   <string name="cancel">Cancel</string>

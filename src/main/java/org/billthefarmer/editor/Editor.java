@@ -123,6 +123,8 @@ public class Editor extends Activity
     private boolean dirty = false;
     private boolean isapp = false;
 
+    private long modified;
+
     private int theme = LIGHT;
     private int size = MEDIUM;
     private int type = MONO;
@@ -266,6 +268,9 @@ public class Editor extends Activity
         file = new File(path);
         Uri uri = Uri.fromFile(file);
 
+        if (file.lastModified() > modified)
+            ;
+
         String title = uri.getLastPathSegment();
         setTitle(title);
     }
@@ -299,7 +304,8 @@ public class Editor extends Activity
 
         editor.apply();
 
-        saveFile();
+        if (dirty)
+            saveFile();
     }
 
     // onSaveInstanceState
@@ -909,6 +915,7 @@ public class Editor extends Activity
         read.execute(file);
 
         dirty = false;
+        modified = file.lastModified();
         invalidateOptionsMenu();
     }
 
@@ -930,10 +937,14 @@ public class Editor extends Activity
     // saveFile
     private void saveFile()
     {
+        if (file.lastModified() > modified)
+            ;
+
         String text = textView.getText().toString();
         write(text, file);
         dirty = false;
 
+        modified = file.lastModified();
         invalidateOptionsMenu();
     }
 
