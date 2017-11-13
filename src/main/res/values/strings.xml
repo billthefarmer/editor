@@ -25,9 +25,9 @@
 
   <string name="version" formatted="false">Editor version %s\nBuilt
   %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a
-  href="https://github.com/milouse">Étienne Deparis</a>\nLicence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
-  </string>
+  href="https://github.com/milouse">Étienne Deparis</a>\nGerman translation by
+  <a href="https://github.com/Markus00000">Markus Weimar</a>\nLicence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a> </string>
 
   <string name="choose">Choose a file name</string>
   <string name="loading">Loading…</string>
