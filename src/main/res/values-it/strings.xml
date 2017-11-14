@@ -20,7 +20,7 @@
   <string name="large">Largo</string>
   <string name="typeface">Carattere</string>
   <string name="mono">Monospazio</string>
-  <string name="normal">Normale</string>
+  <string name="normal">Proporzionale</string>
   <string name="about">Informazioni</string>
 
   <string name="version" formatted="false">Editor versione %s\nData

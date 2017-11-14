@@ -20,7 +20,7 @@
   <string name="large">Grande</string>
   <string name="typeface">Type de police</string>
   <string name="mono">Chasse fixe</string>
-  <string name="normal">Sans sérif</string>
+  <string name="normal">Proportionnel</string>
   <string name="about">À propos</string>
 
   <string name="version" formatted="false">Editor version %s\nCompilée
