@@ -316,9 +316,6 @@ public class Editor extends Activity
             editor.remove(path);
 
         editor.apply();
-
-        if (dirty)
-            saveFile();
     }
 
     // onSaveInstanceState
@@ -329,6 +326,16 @@ public class Editor extends Activity
         outState.putLong(MODIFIED,modified);
         outState.putBoolean(DIRTY, dirty);
         outState.putString(PATH, path);
+    }
+
+    // onStop
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+
+        if (dirty)
+            saveFile();
     }
 
     // onCreateOptionsMenu
@@ -519,6 +526,7 @@ public class Editor extends Activity
                 switch (id)
                 {
                 case DialogInterface.BUTTON_POSITIVE:
+                    dirty = false;
                     finish();
                 }
             }
@@ -655,6 +663,7 @@ public class Editor extends Activity
                             switch (id)
                             {
                             case DialogInterface.BUTTON_POSITIVE:
+                                dirty = false;
                                 readFile(uri);
                                 break;
                             }
@@ -897,6 +906,7 @@ public class Editor extends Activity
                 switch (id)
                 {
                 case DialogInterface.BUTTON_POSITIVE:
+                    dirty = false;
                     getContent();
                     break;
                 }
