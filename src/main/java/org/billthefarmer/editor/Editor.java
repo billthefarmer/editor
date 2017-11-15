@@ -275,7 +275,8 @@ public class Editor extends Activity
 
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedReload,
-                        R.string.reload, new DialogInterface.OnClickListener()
+                        R.string.reload, R.string.cancel,
+                        new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
@@ -332,10 +333,27 @@ public class Editor extends Activity
     @Override
     public void onStop()
     {
-        super.onStop();
-
         if (dirty)
-            saveFile();
+            alertDialog(R.string.appName, R.string.modified,
+                        R.string.save, R.string.discard,
+                        new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                switch (id)
+                {
+                case DialogInterface.BUTTON_POSITIVE:
+                    saveFile();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    dirty = false;
+                    break;
+                }
+            }
+        });
+
+        super.onStop();
     }
 
     // onCreateOptionsMenu
@@ -519,6 +537,7 @@ public class Editor extends Activity
     {
         if (dirty)
             alertDialog(R.string.appName, R.string.modified,
+                        R.string.save, R.string.discard,
                         new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
@@ -526,8 +545,13 @@ public class Editor extends Activity
                 switch (id)
                 {
                 case DialogInterface.BUTTON_POSITIVE:
+                    saveFile();
+                    finish();
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
                     dirty = false;
                     finish();
+                    break;
                 }
             }
         });
@@ -582,13 +606,7 @@ public class Editor extends Activity
 
     // alertDialog
     private void alertDialog(int title, int message,
-                             DialogInterface.OnClickListener listener)
-    {
-        alertDialog(title, message, R.string.discard, listener);
-    }
-
-    // alertDialog
-    private void alertDialog(int title, int message, int positiveButton,
+                             int positiveButton, int negativeButton,
                              DialogInterface.OnClickListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -597,7 +615,7 @@ public class Editor extends Activity
 
         // Add the buttons
         builder.setPositiveButton(positiveButton, listener);
-        builder.setNegativeButton(R.string.cancel, listener);
+        builder.setNegativeButton(negativeButton, listener);
 
         // Create the AlertDialog
         builder.show();
@@ -656,6 +674,7 @@ public class Editor extends Activity
 
             if (dirty)
                 alertDialog(R.string.openRecent, R.string.modified,
+                            R.string.save, R.string.discard,
                             new DialogInterface.OnClickListener()
                     {
                         public void onClick(DialogInterface dialog, int id)
@@ -663,6 +682,11 @@ public class Editor extends Activity
                             switch (id)
                             {
                             case DialogInterface.BUTTON_POSITIVE:
+                                saveFile();
+                                readFile(uri);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
                                 dirty = false;
                                 readFile(uri);
                                 break;
@@ -899,6 +923,7 @@ public class Editor extends Activity
     {
         if (dirty)
             alertDialog(R.string.open, R.string.modified,
+                        R.string.save, R.string.discard,
                         new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
@@ -906,6 +931,11 @@ public class Editor extends Activity
                 switch (id)
                 {
                 case DialogInterface.BUTTON_POSITIVE:
+                    saveFile();
+                    getContent();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
                     dirty = false;
                     getContent();
                     break;
@@ -970,8 +1000,8 @@ public class Editor extends Activity
     {
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedOverwrite,
-                        R.string.overwrite, new
-                        DialogInterface.OnClickListener()
+                        R.string.overwrite, R.string.cancel,
+                        new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
