@@ -8,6 +8,7 @@
   <string name="save">Salva</string>
   <string name="openRecent">Apri recente</string>
   <string name="saveAs">Salva come…</string>
+  <string name="autoSave">Salva automatico</string>
   <string name="wrap">A capo automatico</string>
   <string name="suggest">Suggerimenti</string>
   <string name="theme">Tema</string>
@@ -34,7 +35,7 @@
   <string name="loading">Caricamento…</string>
 
   <string name="modified">
-    Hai delle modifiche non salvate. Vuoi annullare le tue modifiche?
+    Hai delle modifiche non salvate. Vuoi salva le tue modifiche?
   </string>
 
   <string name="changedReload">

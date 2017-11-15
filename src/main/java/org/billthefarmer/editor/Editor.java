@@ -77,6 +77,7 @@ public class Editor extends Activity
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
 
+    public final static String PREF_SAVE = "pref_save";
     public final static String PREF_WRAP = "pref_wrap";
     public final static String PREF_SUGGEST = "pref_suggest";
     public final static String PREF_THEME = "pref_theme";
@@ -118,6 +119,8 @@ public class Editor extends Activity
     private Map<String, Integer> pathMap;
     private List<String> removeList;
 
+    private boolean save = false;
+
     private boolean wrap = false;
     private boolean suggest = true;
 
@@ -139,6 +142,7 @@ public class Editor extends Activity
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
+        save = preferences.getBoolean(PREF_SAVE, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
 
@@ -299,6 +303,7 @@ public class Editor extends Activity
             PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
+        editor.putBoolean(PREF_SAVE, save);
         editor.putBoolean(PREF_WRAP, wrap);
         editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putInt(PREF_THEME, theme);
@@ -333,27 +338,10 @@ public class Editor extends Activity
     @Override
     public void onStop()
     {
-        if (dirty)
-            alertDialog(R.string.appName, R.string.modified,
-                        R.string.save, R.string.discard,
-                        new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int id)
-            {
-                switch (id)
-                {
-                case DialogInterface.BUTTON_POSITIVE:
-                    saveFile();
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    dirty = false;
-                    break;
-                }
-            }
-        });
-
         super.onStop();
+
+        if (dirty && save)
+            saveFile();
     }
 
     // onCreateOptionsMenu
@@ -383,6 +371,7 @@ public class Editor extends Activity
         menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
 
+        menu.findItem(R.id.autoSave).setChecked (save);
         menu.findItem(R.id.wrap).setChecked (wrap);
         menu.findItem(R.id.suggest).setChecked (suggest);
 
@@ -482,6 +471,9 @@ public class Editor extends Activity
             break;
         case R.id.saveAs:
             saveAs();
+            break;
+        case R.id.autoSave:
+            autoSaveClicked(item);
             break;
         case R.id.wrap:
             wrapClicked(item);
@@ -758,6 +750,13 @@ public class Editor extends Activity
         AlertDialog dialog = builder.create();
         dialog.setView(text, 30, 0, 30, 0);
         dialog.show();
+    }
+
+    // autoSaveClicked
+    private void autoSaveClicked(MenuItem item)
+    {
+        save = !save;
+        item.setChecked(save);
     }
 
     // wrapClicked

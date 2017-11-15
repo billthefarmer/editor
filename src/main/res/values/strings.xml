@@ -8,6 +8,7 @@
   <string name="save">Save</string>
   <string name="openRecent">Open recent</string>
   <string name="saveAs">Save as…</string>
+  <string name="autoSave">Auto save</string>
   <string name="wrap">Word wrap</string>
   <string name="suggest">Suggestions</string>
   <string name="theme">Theme</string>
@@ -36,7 +37,7 @@
   <string name="loading">Loading…</string>
 
   <string name="modified">
-    You have unsaved changes. Do you want to discard or save your changes?
+    You have unsaved changes. Do you want to save your changes?
   </string>
 
   <string name="changedReload">

@@ -8,6 +8,7 @@
   <string name="save">Speichern</string>
   <string name="openRecent">Zuletzt geöffnet</string>
   <string name="saveAs">Speichern unter…</string>
+  <string name="autoSave">Automatisch speichern</string>
   <string name="wrap">Zeilenumbruch</string>
   <string name="suggest">Vorschläge</string>
   <string name="theme">Thema</string>
@@ -33,7 +34,7 @@
   <string name="loading">Laden…</string>
 
   <string name="modified">
-    Ihre Änderungen wurden noch nicht gespeichert. Möchten Sie sie verwerfen?
+    Ihre Änderungen wurden noch nicht gespeichert. Möchten Sie sie speichern?
   </string>
 
   <string name="changedReload">

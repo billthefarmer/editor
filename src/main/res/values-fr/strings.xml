@@ -8,6 +8,7 @@
   <string name="save">Enregistrer</string>
   <string name="openRecent">Fichiers récents</string>
   <string name="saveAs">Enregistrer sous…</string>
+  <string name="autoSave">Enregistrer automatique</string>
   <string name="wrap">Retour à la ligne auto</string>
   <string name="suggest">Suggestions</string>
   <string name="theme">Thème</string>
@@ -33,7 +34,7 @@
   <string name="loading">Chargement…</string>
 
   <string name="modified">
-    Vous avez des changements non enregistrés. Souhaitez-vous les abandonner?
+    Vous avez des changements non enregistrés. Souhaitez-vous les enregistrer?
   </string>
 
   <string name="changedReload">
