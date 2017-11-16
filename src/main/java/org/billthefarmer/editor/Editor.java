@@ -324,7 +324,10 @@ public class Editor extends Activity
             editor.remove(path);
 
         editor.apply();
-    }
+
+        if (dirty && save)
+            saveFile(file);
+   }
 
     // onSaveInstanceState
     @Override
@@ -334,16 +337,6 @@ public class Editor extends Activity
         outState.putLong(MODIFIED,modified);
         outState.putBoolean(DIRTY, dirty);
         outState.putString(PATH, path);
-    }
-
-    // onStop
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-
-        if (dirty && save)
-            saveFile(file);
     }
 
     // onCreateOptionsMenu
@@ -704,7 +697,7 @@ public class Editor extends Activity
                               .getPath() + File.separator, "");
 
         // Open dialog
-        saveAsDialog(R.string.saveAs, R.string.choose, name,
+        saveAsDialog(R.string.save, R.string.choose, name,
                      new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
@@ -739,7 +732,7 @@ public class Editor extends Activity
         builder.setMessage(message);
 
         // Add the buttons
-        builder.setPositiveButton(R.string.ok, listener);
+        builder.setPositiveButton(R.string.save, listener);
         builder.setNegativeButton(R.string.cancel, listener);
 
         // Create edit text
@@ -916,13 +909,12 @@ public class Editor extends Activity
         builder.setPositiveButton(R.string.ok, null);
 
         // Create the AlertDialog
-        Dialog dialog = builder.create();
+        Dialog dialog = builder.show();
 
         // Set movement method
-        TextView msg = (TextView) dialog.findViewById(android.R.id.message);
-        msg.setMovementMethod(LinkMovementMethod.getInstance());
-
-        dialog.show();
+        TextView text = (TextView) dialog.findViewById(android.R.id.message);
+        if (text != null)
+            text.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     // openFile

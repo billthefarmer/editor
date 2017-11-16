@@ -22,6 +22,7 @@ There are three toolbar items which may appear:
 And on the menu:
 * **Open recent** - Pop up a list of recent files
 * **Save as** - Save the current file with a new name
+* **Auto save** - Save the current file on app pause
 * **Word wrap** - Limit text width to screen width and word wrap
 * **Suggestions** - Text input and spelling suggestions
 * **Theme** - Choose theme
@@ -59,10 +60,10 @@ folder, `/sdcard/`, or `/storage/emulated/0/`.
 
 ### Unsaved file
 If you touch the back or open button, and the current file has been
-modified, you will be prompted whether you want to discard it, else
-the editor will just exit or open a file chooser. The current file
-will be saved on app pause. The scroll position and name will be
-remembered for the last 10 files opened.
+modified, you will be prompted whether you want to save it, else the
+editor will just exit or open a file chooser. The current file may be
+saved on app pause using the menu option. The scroll position and name
+will be remembered for the last 10 files opened.
 
 ### Default file
 If there is no open file any text entered will by default be saved in
