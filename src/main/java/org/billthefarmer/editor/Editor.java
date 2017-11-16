@@ -40,6 +40,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -54,6 +55,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileReader;
@@ -341,7 +343,7 @@ public class Editor extends Activity
         super.onStop();
 
         if (dirty && save)
-            saveFile();
+            saveFile(file);
     }
 
     // onCreateOptionsMenu
@@ -914,7 +916,13 @@ public class Editor extends Activity
         builder.setPositiveButton(R.string.ok, null);
 
         // Create the AlertDialog
-        builder.show();
+        Dialog dialog = builder.create();
+
+        // Set movement method
+        TextView msg = (TextView) dialog.findViewById(android.R.id.message);
+        msg.setMovementMethod(LinkMovementMethod.getInstance());
+
+        dialog.show();
     }
 
     // openFile
