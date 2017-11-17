@@ -12,7 +12,10 @@ This is a very simple generic text editor which may be used standalone
 or to show or edit any sort of text file from another app. If you
 select a text file in a file manager or similar app you will be
 offered the option of using this editor along with whatever other apps
-you have installed that can show or edit a text file.
+you have installed that can show or edit a text file. Files will
+initially be opened read only, long touch on the display to enable
+editing. Changing theme, word wrap or suggestions or rotating the
+device will also enable editing.
 
 There are three toolbar items which may appear:
 * **Search** - Interactive search of text using a regular expression
@@ -47,10 +50,12 @@ the android documentation for
 
 ### Open
 Depending on what file managers or file pickers are installed, you
-will get a choice of options to pick a file.
+will get a choice of options to pick a file. The file will initially
+be read only, long touch on the display to enable editing.
 
 ### Open recent
-Choose a file from the list that pops up.
+Choose a file from the list that pops up. As above the file will
+initially be read only.
 
 ### Save as
 Enter a new file name in the dialog that pops up. Absolute names
@@ -64,6 +69,11 @@ modified, you will be prompted whether you want to save it, else the
 editor will just exit or open a file chooser. The current file may be
 saved on app pause using the menu option. The scroll position and name
 will be remembered for the last 10 files opened.
+
+### Changed file
+If a file has changed in storage while it was open in the editor, if
+you attempt to save it, or the app is resumed, you will be prompted
+whether to overwrite or reload the file.
 
 ### Default file
 If there is no open file any text entered will by default be saved in

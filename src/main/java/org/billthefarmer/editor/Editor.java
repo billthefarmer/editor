@@ -1072,7 +1072,7 @@ public class Editor extends Activity
         implements SearchView.OnQueryTextListener
     {
         private BackgroundColorSpan span = new
-        BackgroundColorSpan(Color.YELLOW);
+            BackgroundColorSpan(Color.YELLOW);
         private Editable editable;
         private Matcher matcher;
         private Pattern pattern;
