@@ -237,29 +237,54 @@ public class Editor extends Activity
     {
 
         if (textView != null)
-            textView.addTextChangedListener(new TextWatcher()
         {
-            // afterTextChanged
-            @Override
-            public void afterTextChanged (Editable s)
+            textView.addTextChangedListener(new TextWatcher()
             {
-                dirty = true;
-                invalidateOptionsMenu();
-            }
+                // afterTextChanged
+                @Override
+                public void afterTextChanged (Editable s)
+                {
+                    dirty = true;
+                    invalidateOptionsMenu();
+                }
 
-            // beforeTextChanged
-            @Override
-            public void beforeTextChanged (CharSequence s,
+                // beforeTextChanged
+                @Override
+                public void beforeTextChanged (CharSequence s,
+                                               int start,
+                                               int count,
+                                               int after) {}
+                // onTextChanged
+                @Override
+                public void onTextChanged (CharSequence s,
                                            int start,
-                                           int count,
-                                           int after) {}
-            // onTextChanged
-            @Override
-            public void onTextChanged (CharSequence s,
-                                       int start,
-                                       int before,
-                                       int count) {}
-        });
+                                           int before,
+                                           int count) {}
+            });
+
+            textView.setOnLongClickListener(new View.OnLongClickListener()
+            {
+                // onLongClick
+                @Override
+                public boolean onLongClick (View v)
+                {
+                    // Set editable with or without suggestions
+                    if (suggest)
+                        textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                          InputType
+                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                    else
+                        textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+                    return false;
+                }
+            });
+        }
     }
 
     // onRestoreInstanceState
@@ -1222,6 +1247,8 @@ public class Editor extends Activity
                 }, POSN_DELAY);
             }
 
+            // Set read only
+            textView.setRawInputType(InputType.TYPE_NULL);
             invalidateOptionsMenu();
         }
     }
