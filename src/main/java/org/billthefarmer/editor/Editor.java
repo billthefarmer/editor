@@ -783,23 +783,24 @@ public class Editor extends Activity
         MarkdownProcessor mark = new MarkdownProcessor();
         String text = textView.getText().toString();
         String html = mark.markdown(text);
+        String name = Uri.fromFile(file).getLastPathSegment();
 
         try
         {
-            File file = File.createTempFile("Markdown", "html", getCacheDir());
+            File file = new File(getExternalCacheDir(), name);
             file.deleteOnExit();
 
             FileWriter writer = new FileWriter(file);
             writer.write(html);
             writer.close();
+
+            Uri uri = Uri.fromFile(file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, "text/html");
+            startActivity(intent);
         }
 
         catch (Exception e) {}
-
-        Uri uri = Uri.fromFile(file);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(uri, "text/html");
-        startActivity(intent);
     }
 
     // autoSaveClicked
