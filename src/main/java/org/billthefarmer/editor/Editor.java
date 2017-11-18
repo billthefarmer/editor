@@ -783,11 +783,10 @@ public class Editor extends Activity
         MarkdownProcessor mark = new MarkdownProcessor();
         String text = textView.getText().toString();
         String html = mark.markdown(text);
-        String name = Uri.fromFile(file).getLastPathSegment();
 
         try
         {
-            File file = new File(getExternalCacheDir(), name);
+            File file = new File(getExternalCacheDir(), "Editor.html");
             file.deleteOnExit();
 
             FileWriter writer = new FileWriter(file);
