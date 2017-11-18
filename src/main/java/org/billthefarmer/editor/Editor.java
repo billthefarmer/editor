@@ -71,6 +71,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.markdownj.MarkdownProcessor;
+
 public class Editor extends Activity
 {
     public final static String TAG = "Editor";
@@ -492,6 +494,9 @@ public class Editor extends Activity
         case R.id.saveAs:
             saveAs();
             break;
+        case R.id.viewMarkdown:
+            viewMarkdown();
+            break;
         case R.id.autoSave:
             autoSaveClicked(item);
             break;
@@ -770,6 +775,31 @@ public class Editor extends Activity
         AlertDialog dialog = builder.create();
         dialog.setView(text, 30, 0, 30, 0);
         dialog.show();
+    }
+
+    // viewMarkdown
+    private void viewMarkdown()
+    {
+        MarkdownProcessor mark = new MarkdownProcessor();
+        String text = textView.getText().toString();
+        String html = mark.markdown(text);
+
+        try
+        {
+            File file = File.createTempFile("Markdown", "html", getCacheDir());
+            file.deleteOnExit();
+
+            FileWriter writer = new FileWriter(file);
+            writer.write(html);
+            writer.close();
+        }
+
+        catch (Exception e) {}
+
+        Uri uri = Uri.fromFile(file);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, "text/html");
+        startActivity(intent);
     }
 
     // autoSaveClicked

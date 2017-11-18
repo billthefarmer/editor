@@ -8,6 +8,7 @@
   <string name="save">Save</string>
   <string name="openRecent">Open recent</string>
   <string name="saveAs">Save as…</string>
+  <string name="viewMarkdown">View markdown…</string>
   <string name="autoSave">Auto save</string>
   <string name="wrap">Word wrap</string>
   <string name="suggest">Suggestions</string>
