@@ -25,6 +25,7 @@ There are three toolbar items which may appear:
 And on the menu:
 * **Open recent** - Pop up a list of recent files
 * **Save as** - Save the current file with a new name
+* **View markdown** - View markdown in browser or html viewer
 * **Auto save** - Save the current file on app pause
 * **Word wrap** - Limit text width to screen width and word wrap
 * **Suggestions** - Text input and spelling suggestions
@@ -62,6 +63,11 @@ Enter a new file name in the dialog that pops up. Absolute names
 starting with a slash '/' will be saved in that exact path. Names
 without a starting slash will be saved relative to the main public
 folder, `/sdcard/`, or `/storage/emulated/0/`.
+
+### View markdown
+You will be prompted to choose a viewer for an html file containing
+the encoded markdown from the current open file. If the text contains
+no markdown the result will be the same text.
 
 ### Unsaved file
 If you touch the back or open button, and the current file has been
