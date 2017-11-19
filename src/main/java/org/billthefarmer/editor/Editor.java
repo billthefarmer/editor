@@ -92,7 +92,11 @@ public class Editor extends Activity
     public final static String PREF_POSN = "pref_posn";
 
     public final static String DOCUMENTS = "Documents";
-    public final static String FILE = "Editor.txt";
+    public final static String EDIT_FILE = "Editor.txt";
+    public final static String HTML_FILE = "Editor.html";
+
+    public final static String TEXT_HTML = "text/html";
+    public final static String TEXT_WILD = "text/*";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -600,7 +604,7 @@ public class Editor extends Activity
     {
         File documents = new
         File(Environment.getExternalStorageDirectory(), DOCUMENTS);
-        file = new File(documents, FILE);
+        file = new File(documents, EDIT_FILE);
 
         Uri uri = Uri.fromFile(file);
         path = uri.getPath();
@@ -786,7 +790,7 @@ public class Editor extends Activity
 
         try
         {
-            File file = new File(getExternalCacheDir(), "Editor.html");
+            File file = new File(getExternalCacheDir(), HTML_FILE);
             file.deleteOnExit();
 
             FileWriter writer = new FileWriter(file);
@@ -795,7 +799,7 @@ public class Editor extends Activity
 
             Uri uri = Uri.fromFile(file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(uri, "text/html");
+            intent.setDataAndType(uri, TEXT_HTML);
             startActivity(intent);
         }
 
@@ -1005,7 +1009,7 @@ public class Editor extends Activity
     private void getContent()
     {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("text/*");
+        intent.setType(TEXT_WILD);
         startActivityForResult(Intent.createChooser(intent, null), GET_TEXT);
     }
 
