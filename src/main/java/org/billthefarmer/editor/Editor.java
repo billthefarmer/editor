@@ -1164,9 +1164,6 @@ public class Editor extends Activity
                 int pos = textView.getLayout()
                           .getLineBaseline(line);
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Scroll " + pos);
-
                 // Scroll to it
                 scrollView.smoothScrollTo(0, pos - height / 2);
 
@@ -1194,9 +1191,6 @@ public class Editor extends Activity
                 // Get text position
                 int line = textView.getLayout().getLineForOffset(index);
                 int pos = textView.getLayout().getLineBaseline(line);
-
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Scroll " + pos);
 
                 // Scroll to it
                 scrollView.smoothScrollTo(0, pos - height / 2);
@@ -1273,9 +1267,6 @@ public class Editor extends Activity
                     @Override
                     public void run()
                     {
-                        if (BuildConfig.DEBUG)
-                            Log.d(TAG, "Scroll " + pathMap.get(path));
-
                         scrollView.smoothScrollTo(0, pathMap.get(path));
                     }
                 }, POSN_DELAY);
