@@ -8,8 +8,8 @@
   <string name="save">Enregistrer</string>
   <string name="openRecent">Fichiers récents</string>
   <string name="saveAs">Enregistrer sous…</string>
-  <string name="viewMarkdown">Voir la markdown…</string>
-  <string name="autoSave">Enregistrer automatique</string>
+  <string name="viewMarkdown">Compiler markdown…</string>
+  <string name="autoSave">Enregistrement auto</string>
   <string name="wrap">Retour à la ligne auto</string>
   <string name="suggest">Suggestions</string>
   <string name="theme">Thème</string>
@@ -22,28 +22,27 @@
   <string name="large">Grande</string>
   <string name="typeface">Type de police</string>
   <string name="mono">Chasse fixe</string>
-  <string name="normal">Proportionnel</string>
+  <string name="normal">Proportionnelle</string>
   <string name="about">À propos</string>
 
   <string name="version" formatted="false">Editor version %s\nCompilée
-  le %s\nCopyright © 2017 Bill Farmer\nTraduction française par <a
-  href="https://github.com/milouse">Étienne Deparis</a>\nLicence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
-  </string>
+  le %s\n Copyright © 2017 Bill Farmer\n Traduction française par <a
+  href="https://github.com/milouse">Étienne Deparis</a>\n Licence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
   <string name="choose">Donnez le chemin complet d\'accès au fichier</string>
   <string name="loading">Chargement…</string>
 
   <string name="modified">
-    Vous avez des changements non enregistrés. Souhaitez-vous les enregistrer?
+    Vous avez des changements non enregistrés. Souhaitez-vous les enregistrer ?
   </string>
 
   <string name="changedReload">
-    Ce fichier a changé, voulez-vous le recharger?
+    Ce fichier a changé, voulez-vous le recharger ?
   </string>
 
   <string name="changedOverwrite">
-    Ce fichier a changé, voulez-vous l\'écraser?
+    Ce fichier a changé, voulez-vous l\'écraser ?
   </string>
 
   <string name="ok">Ok</string>

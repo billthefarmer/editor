@@ -39,7 +39,7 @@ And on the menu:
   * **Large**
 * **Typeface** - Choose typeface
   * **Monospace**
-  * **Normal**
+  * **Proportional**
 * **About** - Show version, copyright and licence
 
 ### Search
