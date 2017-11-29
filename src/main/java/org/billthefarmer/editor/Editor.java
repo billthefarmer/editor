@@ -278,14 +278,14 @@ public class Editor extends Activity
                     if (suggest)
                         textView
                             .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                          InputType
-                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
                     else
                         textView
                             .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                          InputType
+                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
                     return false;
                 }
