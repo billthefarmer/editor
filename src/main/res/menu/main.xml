@@ -10,6 +10,11 @@
       android:actionViewClass="android.widget.SearchView"
       android:icon="@drawable/ic_action_search" />
   <item
+      android:id="@+id/edit"
+      android:showAsAction="ifRoom"
+      android:title="@string/edit"
+      android:icon="@drawable/ic_action_edit" />
+  <item
       android:id="@+id/open"
       android:showAsAction="ifRoom"
       android:title="@string/open"
