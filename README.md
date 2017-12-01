@@ -17,8 +17,9 @@ initially be opened read only, long touch on the display to enable
 editing. Changing theme, word wrap or suggestions or rotating the
 device will also enable editing.
 
-There are three toolbar items which may appear:
+There are four toolbar items which may appear:
 * **Search** - Interactive search of text using a regular expression
+* **Edit** - Edit the current read only text
 * **Open** - Open a text file using a chooser
 * **Save** - Save the current file if modified
 
@@ -48,6 +49,9 @@ matching item will be highlighted. Use the search button in the
 keyboard for find next. The exact regular expression syntax used is in
 the android documentation for
 [Pattern](https://developer.android.com/reference/java/util/regex/Pattern.html#sum).
+
+### Edit
+Edit the current read only text.
 
 ### Open
 Depending on what file managers or file pickers are installed, you
