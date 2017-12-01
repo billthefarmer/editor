@@ -56,7 +56,7 @@ Edit the current read only text.
 ### Open
 Depending on what file managers or file pickers are installed, you
 will get a choice of options to pick a file. The file will initially
-be read only, long touch on the display to enable editing.
+be read only, touch the **Edit** toolbar item to enable editing.
 
 ### Open recent
 Choose a file from the list that pops up. As above the file will
