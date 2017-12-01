@@ -278,14 +278,17 @@ public class Editor extends Activity
                     if (suggest)
                         textView
                             .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                          InputType
-                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
                     else
                         textView
                             .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                          InputType
+                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                    // Update menu
+                    invalidateOptionsMenu();
 
                     return false;
                 }
@@ -621,8 +624,8 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-        // Disable edit item
-        item.setEnabled(false);
+        // Update menu
+        invalidateOptionsMenu();
     }
 
     // defaultFile

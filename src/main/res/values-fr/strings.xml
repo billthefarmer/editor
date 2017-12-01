@@ -4,6 +4,7 @@
   <string name="appName">Editor</string>
 
   <string name="search">Chercher…</string>
+  <string name="edit">Modifier</string>
   <string name="open">Ouvrir un fichier…</string>
   <string name="save">Enregistrer</string>
   <string name="openRecent">Fichiers récents</string>
