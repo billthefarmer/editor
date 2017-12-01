@@ -394,6 +394,12 @@ public class Editor extends Activity
     @Override
     public boolean onPrepareOptionsMenu (Menu menu)
     {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Input type " + textView.getInputType());
+
+        menu.findItem(R.id.edit).setVisible
+                  (textView.getInputType() == InputType.TYPE_NULL);
+
         menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
 
@@ -488,6 +494,9 @@ public class Editor extends Activity
         {
         case android.R.id.home:
             onBackPressed();
+            break;
+        case R.id.edit:
+            editClicked(item);
             break;
         case R.id.open:
             openFile();
@@ -597,6 +606,23 @@ public class Editor extends Activity
             readFile(uri);
             break;
         }
+    }
+
+    // editClicked
+    private void editClicked(MenuItem item)
+    {
+        // Set editable with or without suggestions
+        if (suggest)
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+        else
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        // Disable edit item
+        item.setEnabled(false);
     }
 
     // defaultFile
