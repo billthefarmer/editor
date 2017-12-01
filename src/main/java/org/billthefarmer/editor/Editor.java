@@ -397,9 +397,6 @@ public class Editor extends Activity
     @Override
     public boolean onPrepareOptionsMenu (Menu menu)
     {
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "Input type " + textView.getInputType());
-
         menu.findItem(R.id.edit).setVisible
                   (textView.getInputType() == InputType.TYPE_NULL);
 
