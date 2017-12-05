@@ -29,6 +29,12 @@ proguard/
 # Emacs backup files
 *~
 
+# Zip files
+*.zip
+
+# MP4 files
+*.mp4
+
 # gzip files
 *.gz
 
