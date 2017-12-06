@@ -109,6 +109,7 @@ public class Editor extends Activity
     private final static int DARK  = 2;
     private final static int RETRO = 3;
 
+    private final static int TINY  = 8;
     private final static int SMALL  = 12;
     private final static int MEDIUM = 18;
     private final static int LARGE  = 24;
@@ -274,6 +275,10 @@ public class Editor extends Activity
                 @Override
                 public boolean onLongClick (View v)
                 {
+                    // Do nothing if already editable
+                    if (textView.getInputType() != InputType.TYPE_NULL)
+                        return false;
+
                     // Set editable with or without suggestions
                     if (suggest)
                         textView
@@ -286,6 +291,14 @@ public class Editor extends Activity
                                           InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                           InputType
                                           .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                    // Change text size temporarily as workaround for
+                    // yet another obscure feature of android 6
+                    if (Build.VERSION.SDK_INT == VERSION_M)
+                    {
+                        textView.setTextSize(TINY);
+                        textView.setTextSize(size);
+                    }
 
                     // Update menu
                     invalidateOptionsMenu();
@@ -620,6 +633,14 @@ public class Editor extends Activity
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        // Change text size temporarily as workaround for yet another
+        // obscure feature of android 6
+        if (Build.VERSION.SDK_INT == VERSION_M)
+        {
+            textView.setTextSize(TINY);
+            textView.setTextSize(size);
+        }
 
         // Update menu
         invalidateOptionsMenu();
