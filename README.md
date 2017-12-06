@@ -13,9 +13,9 @@ or to show or edit any sort of text file from another app. If you
 select a text file in a file manager or similar app you will be
 offered the option of using this editor along with whatever other apps
 you have installed that can show or edit a text file. Files will
-initially be opened read only, long touch on the display to enable
-editing. Changing theme, word wrap or suggestions or rotating the
-device will also enable editing.
+initially be opened read only, long touch on the display or touch the
+edit item in the toolbar to enable editing. Changing theme, word
+wrap or suggestions or rotating the device will also enable editing.
 
 There are four toolbar items which may appear:
 * **Search** - Interactive search of text using a regular expression
