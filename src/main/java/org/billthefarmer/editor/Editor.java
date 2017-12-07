@@ -413,8 +413,9 @@ public class Editor extends Activity
         menu.findItem(R.id.edit).setVisible
                   (textView.getInputType() == InputType.TYPE_NULL);
 
-        menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
+        menu.findItem(R.id.open).setVisible (isapp);
+        menu.findItem(R.id.openRecent).setVisible (isapp);
 
         menu.findItem(R.id.autoSave).setChecked (save);
         menu.findItem(R.id.wrap).setChecked (wrap);
