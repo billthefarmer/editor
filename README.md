@@ -17,15 +17,15 @@ initially be opened read only, long touch on the display or touch the
 edit item in the toolbar to enable editing. Changing theme, word
 wrap or suggestions or rotating the device will also enable editing.
 
-There are four toolbar items which may appear:
-* **Search** - Interactive search of text using a regular expression
-* **Edit** - Edit the current read only text
-* **Open** - Open a text file using a chooser
+There are three toolbar items which may appear:
+* **Edit** - Edit the current read only file
 * **Save** - Save the current file if modified
+* **Open** - Open a text file using a chooser
 
 And on the menu:
 * **Open recent** - Pop up a list of recent files
 * **Save as** - Save the current file with a new name
+* **Search** - Interactive search of text using a regular expression
 * **View markdown** - View markdown in browser or html viewer
 * **Auto save** - Save the current file on app pause
 * **Word wrap** - Limit text width to screen width and word wrap
@@ -43,15 +43,11 @@ And on the menu:
   * **Proportional**
 * **About** - Show version, copyright and licence
 
-### Search
-Enter search text in the field that pops up in the toolbar. The first
-matching item will be highlighted. Use the search button in the
-keyboard for find next. The exact regular expression syntax used is in
-the android documentation for
-[Pattern](https://developer.android.com/reference/java/util/regex/Pattern.html#sum).
-
 ### Edit
 Edit the current read only text.
+
+### Save
+Save the current file if modified.
 
 ### Open
 Depending on what file managers or file pickers are installed, you
@@ -67,6 +63,13 @@ Enter a new file name in the dialog that pops up. Absolute names
 starting with a slash '/' will be saved in that exact path. Names
 without a starting slash will be saved relative to the main public
 folder, `/sdcard/`, or `/storage/emulated/0/`.
+
+### Search
+Enter search text in the field that pops up in the toolbar. The first
+matching item will be highlighted. Use the search button in the
+keyboard for find next. The exact regular expression syntax used is in
+the android documentation for
+[Pattern](https://developer.android.com/reference/java/util/regex/Pattern.html#sum).
 
 ### View markdown
 You will be prompted to choose a viewer for an html file containing
