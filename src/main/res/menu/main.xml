@@ -9,6 +9,11 @@
       android:title="@string/edit"
       android:icon="@drawable/ic_action_edit" />
   <item
+      android:id="@+id/view"
+      android:showAsAction="ifRoom"
+      android:title="@string/view"
+      android:icon="@drawable/ic_action_view_as_list" />
+  <item
       android:id="@+id/save"
       android:showAsAction="ifRoom"
       android:title="@string/save"

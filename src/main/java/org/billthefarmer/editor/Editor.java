@@ -76,7 +76,9 @@ import org.markdownj.MarkdownProcessor;
 public class Editor extends Activity
 {
     public final static String TAG = "Editor";
+
     public final static String PATH = "path";
+    public final static String EDIT = "edit";
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
@@ -129,6 +131,7 @@ public class Editor extends Activity
     private List<String> removeList;
 
     private boolean save = false;
+    private boolean edit = true;
 
     private boolean wrap = false;
     private boolean suggest = true;
@@ -188,7 +191,13 @@ public class Editor extends Activity
         textView = (EditText) findViewById(R.id.text);
         scrollView = (ScrollView) findViewById(R.id.vscroll);
 
-        if (!suggest)
+        if (savedInstanceState != null)
+            edit = savedInstanceState.getBoolean(EDIT);
+
+        if (!edit)
+            textView.setInputType(InputType.TYPE_NULL);
+
+        else if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -276,7 +285,7 @@ public class Editor extends Activity
                 public boolean onLongClick (View v)
                 {
                     // Do nothing if already editable
-                    if (textView.getInputType() != InputType.TYPE_NULL)
+                    if (edit)
                         return false;
 
                     // Set editable with or without suggestions
@@ -300,6 +309,9 @@ public class Editor extends Activity
                         textView.setTextSize(size);
                     }
 
+                    // Update boolean
+                    edit = true;
+
                     // Update menu
                     invalidateOptionsMenu();
 
@@ -316,6 +328,7 @@ public class Editor extends Activity
         super.onRestoreInstanceState(savedInstanceState);
 
         path = savedInstanceState.getString(PATH);
+        edit = savedInstanceState.getBoolean(EDIT);
         dirty = savedInstanceState.getBoolean(DIRTY);
         modified = savedInstanceState.getLong(MODIFIED);
         invalidateOptionsMenu();
@@ -383,6 +396,7 @@ public class Editor extends Activity
         super.onSaveInstanceState(outState);
         outState.putLong(MODIFIED,modified);
         outState.putBoolean(DIRTY, dirty);
+        outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
     }
 
@@ -410,8 +424,8 @@ public class Editor extends Activity
     @Override
     public boolean onPrepareOptionsMenu (Menu menu)
     {
-        menu.findItem(R.id.edit).setVisible
-                  (textView.getInputType() == InputType.TYPE_NULL);
+        menu.findItem(R.id.edit).setVisible (!edit);
+        menu.findItem(R.id.view).setVisible (edit);
 
         menu.findItem(R.id.save).setVisible (dirty);
         menu.findItem(R.id.open).setVisible (isapp);
@@ -511,6 +525,9 @@ public class Editor extends Activity
             break;
         case R.id.edit:
             editClicked(item);
+            break;
+        case R.id.view:
+            viewClicked(item);
             break;
         case R.id.open:
             openFile();
@@ -642,6 +659,22 @@ public class Editor extends Activity
             textView.setTextSize(TINY);
             textView.setTextSize(size);
         }
+
+        // Update boolean
+        edit = true;
+
+        // Update menu
+        invalidateOptionsMenu();
+    }
+
+    // viewClicked
+    private void viewClicked(MenuItem item)
+    {
+        // Set read only
+        textView.setInputType(InputType.TYPE_NULL);
+
+        // Update boolean
+        edit = false;
 
         // Update menu
         invalidateOptionsMenu();
@@ -1322,6 +1355,11 @@ public class Editor extends Activity
 
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
+
+            // Update boolean
+            edit = false;
+
+            // Update menu
             invalidateOptionsMenu();
         }
     }
