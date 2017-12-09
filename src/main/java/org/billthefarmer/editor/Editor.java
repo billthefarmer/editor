@@ -51,6 +51,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -276,6 +277,20 @@ public class Editor extends Activity
                                            int start,
                                            int before,
                                            int count) {}
+            });
+
+            textView.setOnFocusChangeListener(new View.OnFocusChangeListener()
+            {
+                // onFocusChange
+                @Override
+                public void onFocusChange (View v, boolean hasFocus)
+                {
+                    // Hide keyboard
+                    InputMethodManager imm = (InputMethodManager)
+                        getSystemService(INPUT_METHOD_SERVICE);
+                    if (!hasFocus)
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
             });
 
             textView.setOnLongClickListener(new View.OnLongClickListener()
@@ -672,6 +687,7 @@ public class Editor extends Activity
     {
         // Set read only
         textView.setRawInputType(InputType.TYPE_NULL);
+        textView.clearFocus();
 
         // Update boolean
         edit = false;
@@ -1355,6 +1371,7 @@ public class Editor extends Activity
 
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
+            textView.clearFocus();
 
             // Update boolean
             edit = false;
