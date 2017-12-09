@@ -17,8 +17,9 @@ initially be opened read only, long touch on the display or touch the
 edit item in the toolbar to enable editing. Changing theme, word
 wrap or suggestions or rotating the device will also enable editing.
 
-There are three toolbar items which may appear:
+There are four toolbar items which may appear:
 * **Edit** - Edit the current read only file
+* **View** - View the current file read only
 * **Save** - Save the current file if modified
 * **Open** - Open a text file using a chooser
 
@@ -45,6 +46,9 @@ And on the menu:
 
 ### Edit
 Edit the current read only text.
+
+### View
+View the current file read only.
 
 ### Save
 Save the current file if modified.
