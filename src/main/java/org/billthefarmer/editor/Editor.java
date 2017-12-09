@@ -195,7 +195,7 @@ public class Editor extends Activity
             edit = savedInstanceState.getBoolean(EDIT);
 
         if (!edit)
-            textView.setInputType(InputType.TYPE_NULL);
+            textView.setRawInputType(InputType.TYPE_NULL);
 
         else if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
@@ -671,7 +671,7 @@ public class Editor extends Activity
     private void viewClicked(MenuItem item)
     {
         // Set read only
-        textView.setInputType(InputType.TYPE_NULL);
+        textView.setRawInputType(InputType.TYPE_NULL);
 
         // Update boolean
         edit = false;
