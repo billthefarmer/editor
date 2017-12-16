@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Editor</string>
+  
+  <string name="search">Szukaj...</string>
+  <string name="edit">Edytuj</string>
+  <string name="view">Podgląd</string>
+  <string name="open">Otwórz plik...</string>
+  <string name="save">Zapisz</string>
+  <string name="openRecent">Otwórz poprzedni</string>
+  <string name="saveAs">Zapisz jako...</string>
+  <string name="viewMarkdown">Wyświetl markdown...</string>
+  <string name="autoSave">Autozapis</string>
+  <string name="wrap">Zawijanie słów</string>
+  <string name="suggest">Sugestie</string>
+  <string name="theme">Motyw</string>
+  <string name="light">Jasny</string>
+  <string name="dark">Ciemny</string>
+  <string name="retro">Retro</string>
+  <string name="size">Rozmiar tekstu</string>
+  <string name="small">Mały</string>
+  <string name="medium">Średni</string>
+  <string name="large">Duży</string>
+  <string name="typeface">Krój pisma</string>
+  <string name="mono">Monospace</string>
+  <string name="normal">Proporcjonalna</string>
+  <string name="about">O programie</string>
+
+  <string name="version" formatted="false">
+  Wersja Editor %s\n
+  Data kompilacji %s\n
+  Copyright \\u00A9 2017 Bill Farmer\n
+  Francuskie tłumaczenie <a href=\"https://github.com/milouse\">Étienne Deparis</a>\n
+  Niemieckie tłumaczenie <a href=\"https://github.com/Markus00000\">Markus Weimar</a>\n
+  Włoskie tłumaczenie <a href=\"https://github.com/airon90\">Michael Moroni</a>\n
+  Licencja <a href=\"https://www.gnu.org/licenses/gpl.txt\">GNU GPLv3</a>
+  </string>
+
+  <string name="choose">Wybierz nazwę pliku</string>
+  <string name="loading">Ładowanie...</string>
+
+  <string name="modified">
+    Masz niezapisane zmiany. Czy chcesz je zapisać?
+  </string>
+
+  <string name="changedReload">
+    Plik uległ zmianie, czy chcesz go wczytać ponownie?
+  </string>
+
+  <string name="changedOverwrite">
+    Plik uległ zmianie, czy chcesz go nadpisać?
+  </string>
+
+  <string name="ok">OK</string>
+  <string name="reload">Wczytaj ponownie</string>
+  <string name="overwrite">Nadpisz</string>
+  <string name="discard">Porzuć</string>
+  <string name="cancel">Anuluj</string>
+
+</resources>
