@@ -3,14 +3,14 @@
 
   <string name="appName">Editor</string>
   
-  <string name="search">Szukaj...</string>
+  <string name="search">Szukaj…</string>
   <string name="edit">Edytuj</string>
   <string name="view">Podgląd</string>
-  <string name="open">Otwórz plik...</string>
+  <string name="open">Otwórz plik…</string>
   <string name="save">Zapisz</string>
   <string name="openRecent">Otwórz poprzedni</string>
-  <string name="saveAs">Zapisz jako...</string>
-  <string name="viewMarkdown">Wyświetl markdown...</string>
+  <string name="saveAs">Zapisz jako…</string>
+  <string name="viewMarkdown">Wyświetl markdown…</string>
   <string name="autoSave">Autozapis</string>
   <string name="wrap">Zawijanie słów</string>
   <string name="suggest">Sugestie</string>
@@ -27,18 +27,14 @@
   <string name="normal">Proporcjonalna</string>
   <string name="about">O programie</string>
 
-  <string name="version" formatted="false">
-  Wersja Editor %s\n
-  Data kompilacji %s\n
-  Copyright \\u00A9 2017 Bill Farmer\n
-  Francuskie tłumaczenie <a href=\"https://github.com/milouse\">Étienne Deparis</a>\n
-  Niemieckie tłumaczenie <a href=\"https://github.com/Markus00000\">Markus Weimar</a>\n
-  Włoskie tłumaczenie <a href=\"https://github.com/airon90\">Michael Moroni</a>\n
-  Licencja <a href=\"https://www.gnu.org/licenses/gpl.txt\">GNU GPLv3</a>
+  <string name="version" formatted="false">Wersja Editor %s\nData
+  kompilacji %s\nCopyright \\u00A9 2017 Bill Farmer\nPolskie
+  tłumaczenie <a href="https://github.com/evo16">Evo</a>\nLicencja <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Wybierz nazwę pliku</string>
-  <string name="loading">Ładowanie...</string>
+  <string name="loading">Ładowanie…</string>
 
   <string name="modified">
     Masz niezapisane zmiany. Czy chcesz je zapisać?
