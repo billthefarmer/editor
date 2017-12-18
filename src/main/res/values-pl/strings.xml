@@ -2,7 +2,7 @@
 <resources>
 
   <string name="appName">Editor</string>
-  
+
   <string name="search">Szukaj…</string>
   <string name="edit">Edytuj</string>
   <string name="view">Podgląd</string>
