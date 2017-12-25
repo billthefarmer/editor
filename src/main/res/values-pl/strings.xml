@@ -24,11 +24,11 @@
   <string name="large">Duży</string>
   <string name="typeface">Krój pisma</string>
   <string name="mono">Monospace</string>
-  <string name="normal">Proporcjonalna</string>
+  <string name="normal">Proporcjonalny</string>
   <string name="about">O programie</string>
 
   <string name="version" formatted="false">Wersja Editor %s\nData
-  kompilacji %s\nCopyright \\u00A9 2017 Bill Farmer\nPolskie
+  kompilacji %s\nCopyright \u00A9 2017 Bill Farmer\nPolskie
   tłumaczenie <a href="https://github.com/evo16">Evo</a>\nLicencja <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
