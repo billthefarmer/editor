@@ -304,6 +304,19 @@ public class Editor extends Activity
                         return false;
 
                     // Set editable with or without suggestions
+                    if (!suggest)
+                        textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+                    else
+                        textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                          InputType
+                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                    // Set editable with or without suggestions
                     if (suggest)
                         textView
                             .setInputType(InputType.TYPE_CLASS_TEXT |
@@ -317,12 +330,10 @@ public class Editor extends Activity
                                           .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
                     // Change text size temporarily as workaround for
-                    // yet another obscure feature of android 6
-                    if (Build.VERSION.SDK_INT == VERSION_M)
-                    {
-                        textView.setTextSize(TINY);
-                        textView.setTextSize(size);
-                    }
+                    // yet another obscure feature of some versions of
+                    // android
+                    textView.setTextSize(TINY);
+                    textView.setTextSize(size);
 
                     // Update boolean
                     edit = true;
@@ -658,6 +669,16 @@ public class Editor extends Activity
     private void editClicked(MenuItem item)
     {
         // Set editable with or without suggestions
+        if (!suggest)
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+        else
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        // Set editable with or without suggestions
         if (suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -668,12 +689,9 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // Change text size temporarily as workaround for yet another
-        // obscure feature of android 6
-        if (Build.VERSION.SDK_INT == VERSION_M)
-        {
-            textView.setTextSize(TINY);
-            textView.setTextSize(size);
-        }
+        // obscure feature of some version of android
+        textView.setTextSize(TINY);
+        textView.setTextSize(size);
 
         // Update boolean
         edit = true;
