@@ -266,11 +266,19 @@ public class FileUtils
                 return cursor.getString(column_index);
             }
         }
+
+        catch (Exception e)
+        {
+            if (DEBUG)
+                Log.e(TAG, "getDataColumn", e);
+        }
+
         finally
         {
             if (cursor != null)
                 cursor.close();
         }
+
         return null;
     }
 
