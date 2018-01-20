@@ -51,6 +51,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -76,7 +77,9 @@ import org.markdownj.MarkdownProcessor;
 public class Editor extends Activity
 {
     public final static String TAG = "Editor";
+
     public final static String PATH = "path";
+    public final static String EDIT = "edit";
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
@@ -110,6 +113,7 @@ public class Editor extends Activity
     private final static int DARK  = 2;
     private final static int RETRO = 3;
 
+    private final static int TINY  = 8;
     private final static int SMALL  = 12;
     private final static int MEDIUM = 18;
     private final static int LARGE  = 24;
@@ -129,6 +133,8 @@ public class Editor extends Activity
     private List<String> removeList;
 
     private boolean save = false;
+    private boolean edit = true;
+
     private boolean wrap = false;
     private boolean view = true;
     private boolean suggest = true;
@@ -189,7 +195,13 @@ public class Editor extends Activity
         textView = (EditText) findViewById(R.id.text);
         scrollView = (ScrollView) findViewById(R.id.vscroll);
 
-        if (!suggest)
+        if (savedInstanceState != null)
+            edit = savedInstanceState.getBoolean(EDIT);
+
+        if (!edit)
+            textView.setRawInputType(InputType.TYPE_NULL);
+
+        else if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -270,13 +282,43 @@ public class Editor extends Activity
                                            int count) {}
             });
 
-            if (view)
-                textView.setOnLongClickListener(new View.OnLongClickListener()
+            textView.setOnFocusChangeListener(new View.OnFocusChangeListener()
+            {
+                // onFocusChange
+                @Override
+                public void onFocusChange (View v, boolean hasFocus)
+                {
+                    // Hide keyboard
+                    InputMethodManager imm = (InputMethodManager)
+                        getSystemService(INPUT_METHOD_SERVICE);
+                    if (!hasFocus)
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            });
+
+            textView.setOnLongClickListener(new View.OnLongClickListener()
             {
                 // onLongClick
                 @Override
                 public boolean onLongClick (View v)
                 {
+                    // Do nothing if already editable
+                    if (edit)
+                        return false;
+
+                    // Set editable with or without suggestions
+                    if (!suggest)
+                        textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+                    else
+                        textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                          InputType
+                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
                     // Set editable with or without suggestions
                     if (suggest)
                         textView
@@ -289,6 +331,15 @@ public class Editor extends Activity
                                           InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                           InputType
                                           .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                    // Change text size temporarily as workaround for
+                    // yet another obscure feature of some versions of
+                    // android
+                    textView.setTextSize(TINY);
+                    textView.setTextSize(size);
+
+                    // Update boolean
+                    edit = true;
 
                     // Update menu
                     invalidateOptionsMenu();
@@ -306,6 +357,7 @@ public class Editor extends Activity
         super.onRestoreInstanceState(savedInstanceState);
 
         path = savedInstanceState.getString(PATH);
+        edit = savedInstanceState.getBoolean(EDIT);
         dirty = savedInstanceState.getBoolean(DIRTY);
         modified = savedInstanceState.getLong(MODIFIED);
         invalidateOptionsMenu();
@@ -374,6 +426,7 @@ public class Editor extends Activity
         super.onSaveInstanceState(outState);
         outState.putLong(MODIFIED,modified);
         outState.putBoolean(DIRTY, dirty);
+        outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
     }
 
@@ -401,11 +454,12 @@ public class Editor extends Activity
     @Override
     public boolean onPrepareOptionsMenu (Menu menu)
     {
-        menu.findItem(R.id.edit).setVisible
-                  (textView.getInputType() == InputType.TYPE_NULL);
+        menu.findItem(R.id.edit).setVisible (!edit);
+        menu.findItem(R.id.view).setVisible (edit);
 
-        menu.findItem(R.id.open).setVisible (isapp);
         menu.findItem(R.id.save).setVisible (dirty);
+        menu.findItem(R.id.open).setVisible (isapp);
+        menu.findItem(R.id.openRecent).setVisible (isapp);
 
         menu.findItem(R.id.autoSave).setChecked (save);
         menu.findItem(R.id.wrap).setChecked (wrap);
@@ -502,6 +556,9 @@ public class Editor extends Activity
             break;
         case R.id.edit:
             editClicked(item);
+            break;
+        case R.id.view:
+            viewClicked(item);
             break;
         case R.id.open:
             openFile();
@@ -620,6 +677,16 @@ public class Editor extends Activity
     private void editClicked(MenuItem item)
     {
         // Set editable with or without suggestions
+        if (!suggest)
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+        else
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        // Set editable with or without suggestions
         if (suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -628,6 +695,28 @@ public class Editor extends Activity
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        // Change text size temporarily as workaround for yet another
+        // obscure feature of some version of android
+        textView.setTextSize(TINY);
+        textView.setTextSize(size);
+
+        // Update boolean
+        edit = true;
+
+        // Update menu
+        invalidateOptionsMenu();
+    }
+
+    // viewClicked
+    private void viewClicked(MenuItem item)
+    {
+        // Set read only
+        textView.setRawInputType(InputType.TYPE_NULL);
+        textView.clearFocus();
+
+        // Update boolean
+        edit = false;
 
         // Update menu
         invalidateOptionsMenu();
@@ -1314,9 +1403,13 @@ public class Editor extends Activity
             }
 
             // Set read only
-            if (view)
-                textView.setRawInputType(InputType.TYPE_NULL);
+            textView.setRawInputType(InputType.TYPE_NULL);
+            textView.clearFocus();
 
+            // Update boolean
+            edit = false;
+
+            // Update menu
             invalidateOptionsMenu();
         }
     }

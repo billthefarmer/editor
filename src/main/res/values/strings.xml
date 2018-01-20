@@ -5,6 +5,7 @@
   
   <string name="search">Search…</string>
   <string name="edit">Edit</string>
+  <string name="view">View</string>
   <string name="open">Open file…</string>
   <string name="save">Save</string>
   <string name="openRecent">Open recent</string>
@@ -32,8 +33,9 @@
   href="https://github.com/milouse">Étienne Deparis</a>\nGerman
   translation by <a href="https://github.com/Markus00000">Markus
   Weimar</a>\nItalian translation by <a
-  href="https://github.com/airon90">Michael Moroni</a>\nLicence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  href="https://github.com/airon90">Michael Moroni</a>\nPolish
+  translation by <a href="https://github.com/evo16">Evo</a>\nLicence
+  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Choose a file name</string>

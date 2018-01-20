@@ -4,26 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AppCompatResource">
   <item
-      android:id="@+id/search"
-      android:showAsAction="ifRoom|collapseActionView"
-      android:title="@string/search"
-      android:actionViewClass="android.widget.SearchView"
-      android:icon="@drawable/ic_action_search" />
-  <item
       android:id="@+id/edit"
       android:showAsAction="ifRoom"
       android:title="@string/edit"
       android:icon="@drawable/ic_action_edit" />
   <item
-      android:id="@+id/open"
+      android:id="@+id/view"
       android:showAsAction="ifRoom"
-      android:title="@string/open"
-      android:icon="@drawable/ic_action_collection" />
+      android:title="@string/view"
+      android:icon="@drawable/ic_action_view_as_list" />
   <item
       android:id="@+id/save"
       android:showAsAction="ifRoom"
       android:title="@string/save"
       android:icon="@drawable/ic_action_save" />
+  <item
+      android:id="@+id/open"
+      android:showAsAction="ifRoom"
+      android:title="@string/open"
+      android:icon="@drawable/ic_action_collection" />
   <item
       android:id="@+id/openRecent"
       android:showAsAction="never"
@@ -35,6 +34,11 @@
       android:id="@+id/saveAs"
       android:showAsAction="never"
       android:title="@string/saveAs" />
+  <item
+      android:id="@+id/search"
+      android:showAsAction="never|collapseActionView"
+      android:title="@string/search"
+      android:actionViewClass="android.widget.SearchView" />
   <item
       android:id="@+id/viewMarkdown"
       android:showAsAction="never"
