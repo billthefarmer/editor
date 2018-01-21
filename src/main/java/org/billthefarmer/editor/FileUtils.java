@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.text.DecimalFormat;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -52,9 +53,7 @@ public class FileUtils
     // pattern
 
     /** TAG for log messages. */
-    static final String TAG = "FileUtils";
-    private static final boolean DEBUG = false; // Set to true to
-    // enable logging
+    private static final String TAG = "FileUtils";
 
     public static final String MIME_TYPE_AUDIO = "audio/*";
     public static final String MIME_TYPE_TEXT = "text/*";
@@ -229,6 +228,39 @@ public class FileUtils
     }
 
     /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri is a FileProvider file.
+     */
+    public static boolean isFileProvider(Uri uri)
+    {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Path " + uri.getPath());
+        List<String> segments = uri.getPathSegments();
+        return segments.contains("storage") &&
+            segments.contains("emulated") &&
+            segments.contains("0");
+    }
+
+    /**
+     * @param uri The Uri to match.
+     * @return The file path from the Uri.
+     */
+    public static String fileProviderPath(Uri uri)
+    {
+        List<String> list = uri.getPathSegments();
+        List<String> segments = list.subList(1, list.size());
+
+        String path = "";
+        for (String segment: segments)
+            path += File.separator + segment;
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Path " + path);
+
+        return path;
+    }
+
+    /**
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
@@ -259,7 +291,7 @@ public class FileUtils
                      .query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst())
             {
-                if (DEBUG)
+                if (BuildConfig.DEBUG)
                     DatabaseUtils.dumpCursor(cursor);
 
                 final int column_index = cursor.getColumnIndexOrThrow(column);
@@ -269,7 +301,7 @@ public class FileUtils
 
         catch (Exception e)
         {
-            if (DEBUG)
+            if (BuildConfig.DEBUG)
                 Log.e(TAG, "getDataColumn", e);
         }
 
@@ -300,7 +332,7 @@ public class FileUtils
     public static String getPath(final Context context, final Uri uri)
     {
 
-        if (DEBUG)
+        if (BuildConfig.DEBUG)
             Log.d(TAG + " File -",
                   "Authority: " + uri.getAuthority() +
                   ", Fragment: " + uri.getFragment() +
@@ -392,6 +424,10 @@ public class FileUtils
             // Return the remote address
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
+
+            // Return FileProvider path
+            else if (isFileProvider(uri))
+                return fileProviderPath(uri);
 
             return getDataColumn(context, uri, null, null);
         }
@@ -504,7 +540,7 @@ public class FileUtils
     public static Bitmap getThumbnail(Context context, Uri uri,
                                       String mimeType)
     {
-        if (DEBUG)
+        if (BuildConfig.DEBUG)
             Log.d(TAG, "Attempting to get thumbnail");
 
         if (!isMediaUri(uri))
@@ -525,7 +561,7 @@ public class FileUtils
                 if (cursor.moveToFirst())
                 {
                     final int id = cursor.getInt(0);
-                    if (DEBUG)
+                    if (BuildConfig.DEBUG)
                         Log.d(TAG, "Got thumb ID: " + id);
 
                     if (mimeType.contains("video"))
@@ -548,7 +584,7 @@ public class FileUtils
             }
             catch (Exception e)
             {
-                if (DEBUG)
+                if (BuildConfig.DEBUG)
                     Log.e(TAG, "getThumbnail", e);
             }
             finally

@@ -86,7 +86,6 @@ public class Editor extends Activity
 
     public final static String PREF_SAVE = "pref_save";
     public final static String PREF_WRAP = "pref_wrap";
-    public final static String PREF_VIEW = "pref_view";
     public final static String PREF_SUGGEST = "pref_suggest";
     public final static String PREF_THEME = "pref_theme";
     public final static String PREF_PATHS = "pref_paths";
@@ -136,7 +135,6 @@ public class Editor extends Activity
     private boolean edit = true;
 
     private boolean wrap = false;
-    private boolean view = true;
     private boolean suggest = true;
 
     private boolean dirty = false;
@@ -159,7 +157,6 @@ public class Editor extends Activity
 
         save = preferences.getBoolean(PREF_SAVE, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
-        view = preferences.getBoolean(PREF_VIEW, true);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
 
         theme = preferences.getInt(PREF_THEME, LIGHT);
@@ -396,7 +393,6 @@ public class Editor extends Activity
 
         editor.putBoolean(PREF_SAVE, save);
         editor.putBoolean(PREF_WRAP, wrap);
-        editor.putBoolean(PREF_VIEW, view);
         editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
@@ -463,7 +459,6 @@ public class Editor extends Activity
 
         menu.findItem(R.id.autoSave).setChecked (save);
         menu.findItem(R.id.wrap).setChecked (wrap);
-        menu.findItem(R.id.view).setChecked (view);
         menu.findItem(R.id.suggest).setChecked (suggest);
 
         switch (theme)
@@ -577,9 +572,6 @@ public class Editor extends Activity
             break;
         case R.id.wrap:
             wrapClicked(item);
-            break;
-        case R.id.view:
-            viewClicked(item);
             break;
         case R.id.suggest:
             suggestClicked(item);
@@ -944,13 +936,6 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();
-    }
-
-    // viewClicked
-    private void viewClicked(MenuItem item)
-    {
-        view = !view;
-        item.setChecked(view);
     }
 
     // suggestClicked
