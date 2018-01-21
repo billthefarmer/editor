@@ -50,7 +50,7 @@ import java.util.Locale;
 public class FileUtils
 {
     private FileUtils() {} // private constructor to enforce Singleton
-    // pattern
+                           // pattern
 
     /** TAG for log messages. */
     private static final String TAG = "FileUtils";
@@ -152,7 +152,7 @@ public class FileUtils
                 if (pathwithoutname.endsWith("/"))
                 {
                     pathwithoutname = pathwithoutname
-                                      .substring(0, pathwithoutname.length() - 1);
+                        .substring(0, pathwithoutname.length() - 1);
                 }
                 return new File(pathwithoutname);
             }
@@ -170,7 +170,7 @@ public class FileUtils
 
         if (extension.length() > 0)
             return MimeTypeMap.getSingleton()
-                   .getMimeTypeFromExtension(extension.substring(1));
+                .getMimeTypeFromExtension(extension.substring(1));
 
         return "application/octet-stream";
     }
@@ -192,7 +192,7 @@ public class FileUtils
     public static boolean isExternalStorageDocument(Uri uri)
     {
         return "com.android.externalstorage.documents"
-               .equals(uri.getAuthority());
+            .equals(uri.getAuthority());
     }
 
     /**
@@ -203,7 +203,7 @@ public class FileUtils
     public static boolean isDownloadsDocument(Uri uri)
     {
         return "com.android.providers.downloads.documents"
-               .equals(uri.getAuthority());
+            .equals(uri.getAuthority());
     }
 
     /**
@@ -214,7 +214,7 @@ public class FileUtils
     public static boolean isMediaDocument(Uri uri)
     {
         return "com.android.providers.media.documents"
-               .equals(uri.getAuthority());
+            .equals(uri.getAuthority());
     }
 
     /**
@@ -230,11 +230,13 @@ public class FileUtils
     /**
      * @param uri The Uri to check.
      * @return Whether the Uri is a FileProvider file.
+     * @author billthefarmer
      */
     public static boolean isFileProvider(Uri uri)
     {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Path " + uri.getPath());
+
         List<String> segments = uri.getPathSegments();
         return segments.contains("storage") &&
             segments.contains("emulated") &&
@@ -244,20 +246,24 @@ public class FileUtils
     /**
      * @param uri The Uri to match.
      * @return The file path from the Uri.
+     * @author billthefarmer
      */
     public static String fileProviderPath(Uri uri)
     {
         List<String> list = uri.getPathSegments();
         List<String> segments = list.subList(1, list.size());
 
-        String path = "";
+        StringBuilder path = new StringBuilder();
         for (String segment: segments)
-            path += File.separator + segment;
+        {
+            path.append(File.separator);
+            path.append(segment);
+        }
 
         if (BuildConfig.DEBUG)
-            Log.d(TAG, "Path " + path);
+            Log.d(TAG, "Path " + path.toString());
 
-        return path;
+        return path.toString();
     }
 
     /**
@@ -288,7 +294,7 @@ public class FileUtils
         try
         {
             cursor = context.getContentResolver()
-                     .query(uri, projection, selection, selectionArgs, null);
+                .query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst())
             {
                 if (BuildConfig.DEBUG)
@@ -359,14 +365,14 @@ public class FileUtils
                 if ("primary".equalsIgnoreCase(type))
                 {
                     return Environment
-                           .getExternalStorageDirectory() + "/" + split[1];
+                        .getExternalStorageDirectory() + "/" + split[1];
                 }
 
                 else if ("home".equalsIgnoreCase(type))
                 {
                     return Environment
-                           .getExternalStorageDirectory() + "/Documents/" +
-                           split[1];
+                        .getExternalStorageDirectory() + "/Documents/" +
+                        split[1];
                 }
 
                 // TODO handle non-primary volumes
@@ -608,7 +614,7 @@ public class FileUtils
         {
             // Sort alphabetically by lower case, which is much cleaner
             return f1.getName().toLowerCase(Locale.getDefault())
-                   .compareTo(f2.getName().toLowerCase(Locale.getDefault()));
+            .compareTo(f2.getName().toLowerCase(Locale.getDefault()));
         }
     };
 
