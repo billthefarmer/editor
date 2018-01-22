@@ -251,7 +251,8 @@ public class FileUtils
     public static String fileProviderPath(Uri uri)
     {
         List<String> list = uri.getPathSegments();
-        List<String> segments = list.subList(1, list.size());
+        List<String> segments =
+            list.subList(list.indexOf("storage"), list.size());
 
         StringBuilder path = new StringBuilder();
         for (String segment: segments)
