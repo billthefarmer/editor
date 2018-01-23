@@ -14,8 +14,7 @@ select a text file in a file manager or similar app you will be
 offered the option of using this editor along with whatever other apps
 you have installed that can show or edit a text file. Files will
 initially be opened read only, long touch on the display or touch the
-edit item in the toolbar to enable editing. Changing theme, word
-wrap or suggestions or rotating the device will also enable editing.
+edit item in the toolbar to enable editing.
 
 There are four toolbar items which may appear:
 * **Edit** - Edit the current read only file
@@ -96,3 +95,11 @@ whether to overwrite or reload the file.
 If there is no open file any text entered will by default be saved in
 `Documents/Editor.txt`. This file will be loaded on start if it
 exists. Use the `Save as` menu item to save it elsewhere.
+
+### Shared file
+Text files opened or shared by another app may be viewed and
+edited. Some apps may share files or text using a `content` URI that
+is not resolvable to a path to a file in storage. In that case the
+editor will read the file into the default file. The default file in
+storage will not be overwritten unless the file is saved. Use the
+`Save as` menu item to save the file elsewhere.
