@@ -58,9 +58,12 @@ import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -714,12 +717,18 @@ public class Editor extends Activity
         invalidateOptionsMenu();
     }
 
+    // getDefaultFile
+    private File getDefaultFile()
+    {
+        File documents = new
+            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+        return new File(documents, EDIT_FILE);
+    }
+
     // defaultFile
     private void defaultFile(String text)
     {
-        File documents = new
-        File(Environment.getExternalStorageDirectory(), DOCUMENTS);
-        file = new File(documents, EDIT_FILE);
+        file = getDefaultFile();
 
         Uri uri = Uri.fromFile(file);
         path = uri.getPath();
@@ -1134,19 +1143,40 @@ public class Editor extends Activity
         if (uri == null)
             return;
 
+        // Attempt to resolve content uri
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
             uri = resolveContent(uri);
 
-        path = uri.getPath();
-        file = new File(path);
+        // Read using ContentResolver
+        if (uri.getScheme().equalsIgnoreCase(CONTENT))
+        {
+            file = getDefaultFile();
+            Uri defaultUri = Uri.fromFile(file);
+            path = defaultUri.getPath();
 
-        String title = uri.getLastPathSegment();
-        setTitle(title);
+            String title = defaultUri.getLastPathSegment();
+            setTitle(title);
 
-        textView.setText(R.string.loading);
+            textView.setText(R.string.loading);
 
-        ReadTask read = new ReadTask();
-        read.execute(file);
+            ReadUriTask read = new ReadUriTask();
+            read.execute(uri);
+        }
+
+        // Read file
+        else
+        {
+            path = uri.getPath();
+            file = new File(path);
+
+            String title = uri.getLastPathSegment();
+            setTitle(title);
+
+            textView.setText(R.string.loading);
+
+            ReadFileTask read = new ReadFileTask();
+            read.execute(file);
+        }
 
         dirty = false;
         modified = file.lastModified();
@@ -1325,35 +1355,108 @@ public class Editor extends Activity
         }
     }
 
-    // ReadTask
-    private class ReadTask
-        extends AsyncTask<File, Integer, String>
+    // ReadUriTask
+    private class ReadUriTask
+        extends AsyncTask<Uri, Void, String>
+    {
+        // doInBackground
+        @Override
+        protected String doInBackground(Uri... params)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            try
+            {
+                InputStream inputStream =
+                    getContentResolver().openInputStream(params[0]);
+                BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(inputStream));
+
+                String line;
+                while ((line = reader.readLine()) != null)
+                {
+                    stringBuilder.append(line);
+                    stringBuilder.append(System.getProperty("line.separator"));
+                }
+
+                inputStream.close();
+           }
+
+            catch (Exception e) {}
+
+            return stringBuilder.toString();
+        }
+
+        // onPostExecute
+        @Override
+        protected void onPostExecute(String result)
+        {
+            if (textView != null)
+                textView.setText(result);
+
+            if (toAppend != null)
+            {
+                textView.append(toAppend);
+                toAppend = null;
+                dirty = true;
+            }
+
+            else
+                dirty = false;
+
+            // Check for saved position
+            if (pathMap.containsKey(path))
+            {
+                textView.postDelayed(new Runnable()
+                {
+                    // run
+                    @Override
+                    public void run()
+                    {
+                        scrollView.smoothScrollTo(0, pathMap.get(path));
+                    }
+                }, POSN_DELAY);
+            }
+
+            // Set read only
+            textView.setRawInputType(InputType.TYPE_NULL);
+            textView.clearFocus();
+
+            // Update boolean
+            edit = false;
+
+            // Update menu
+            invalidateOptionsMenu();
+        }
+    }
+
+    // ReadFileTask
+    private class ReadFileTask
+        extends AsyncTask<File, Void, String>
     {
         // doInBackground
         @Override
         protected String doInBackground(File... params)
         {
-            StringBuilder text = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
             try
             {
                 FileReader fileReader = new FileReader(params[0]);
-                char buffer[] = new char[BUFFER_SIZE];
-                int n;
-                while ((n = fileReader.read(buffer)) != -1)
-                    text.append(String.valueOf(buffer, 0, n));
+                BufferedReader reader = new BufferedReader(fileReader);
+
+                String line;
+                while ((line = reader.readLine()) != null)
+                {
+                    stringBuilder.append(line);
+                    stringBuilder.append(System.getProperty("line.separator"));
+                }
+
                 fileReader.close();
             }
 
             catch (Exception e) {}
 
-            return text.toString();
-        }
-
-        // onProgressUpdate
-        @Override
-        protected void onProgressUpdate(Integer... progress)
-        {
-            // no-op
+            return stringBuilder.toString();
         }
 
         // onPostExecute
