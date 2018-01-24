@@ -1147,7 +1147,7 @@ public class Editor extends Activity
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
             uri = resolveContent(uri);
 
-        // Read using ContentResolver
+        // Read into default file
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
         {
             file = getDefaultFile();
@@ -1156,11 +1156,6 @@ public class Editor extends Activity
 
             String title = defaultUri.getLastPathSegment();
             setTitle(title);
-
-            textView.setText(R.string.loading);
-
-            ReadUriTask read = new ReadUriTask();
-            read.execute(uri);
         }
 
         // Read file
@@ -1171,12 +1166,12 @@ public class Editor extends Activity
 
             String title = uri.getLastPathSegment();
             setTitle(title);
-
-            textView.setText(R.string.loading);
-
-            ReadFileTask read = new ReadFileTask();
-            read.execute(file);
         }
+
+        textView.setText(R.string.loading);
+
+        ReadTask read = new ReadTask();
+        read.execute(uri);
 
         dirty = false;
         modified = file.lastModified();
@@ -1355,8 +1350,8 @@ public class Editor extends Activity
         }
     }
 
-    // ReadUriTask
-    private class ReadUriTask
+    // ReadTask
+    private class ReadTask
         extends AsyncTask<Uri, Void, String>
     {
         // doInBackground
@@ -1381,78 +1376,6 @@ public class Editor extends Activity
 
                 inputStream.close();
            }
-
-            catch (Exception e) {}
-
-            return stringBuilder.toString();
-        }
-
-        // onPostExecute
-        @Override
-        protected void onPostExecute(String result)
-        {
-            if (textView != null)
-                textView.setText(result);
-
-            if (toAppend != null)
-            {
-                textView.append(toAppend);
-                toAppend = null;
-                dirty = true;
-            }
-
-            else
-                dirty = false;
-
-            // Check for saved position
-            if (pathMap.containsKey(path))
-            {
-                textView.postDelayed(new Runnable()
-                {
-                    // run
-                    @Override
-                    public void run()
-                    {
-                        scrollView.smoothScrollTo(0, pathMap.get(path));
-                    }
-                }, POSN_DELAY);
-            }
-
-            // Set read only
-            textView.setRawInputType(InputType.TYPE_NULL);
-            textView.clearFocus();
-
-            // Update boolean
-            edit = false;
-
-            // Update menu
-            invalidateOptionsMenu();
-        }
-    }
-
-    // ReadFileTask
-    private class ReadFileTask
-        extends AsyncTask<File, Void, String>
-    {
-        // doInBackground
-        @Override
-        protected String doInBackground(File... params)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            try
-            {
-                FileReader fileReader = new FileReader(params[0]);
-                BufferedReader reader = new BufferedReader(fileReader);
-
-                String line;
-                while ((line = reader.readLine()) != null)
-                {
-                    stringBuilder.append(line);
-                    stringBuilder.append(System.getProperty("line.separator"));
-                }
-
-                fileReader.close();
-            }
 
             catch (Exception e) {}
 

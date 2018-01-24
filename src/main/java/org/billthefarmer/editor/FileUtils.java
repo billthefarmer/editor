@@ -340,7 +340,7 @@ public class FileUtils
     {
 
         if (BuildConfig.DEBUG)
-            Log.d(TAG + " File -",
+            Log.d(TAG + " File",
                   "Authority: " + uri.getAuthority() +
                   ", Fragment: " + uri.getFragment() +
                   ", Port: " + uri.getPort() +
@@ -427,6 +427,25 @@ public class FileUtils
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme()))
         {
+            if (BuildConfig.DEBUG)
+            {
+                Cursor cursor = null;
+                try
+                {
+                    cursor = context.getContentResolver()
+                        .query(uri, null, null, null, null);
+                    if (cursor != null && cursor.moveToFirst())
+                        DatabaseUtils.dumpCursor(cursor);
+                }
+
+                catch (Exception e) {}
+
+                finally
+                {
+                    if (cursor != null)
+                        cursor.close();
+                }
+            }
 
             // Return the remote address
             if (isGooglePhotosUri(uri))
