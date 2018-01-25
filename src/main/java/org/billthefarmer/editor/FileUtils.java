@@ -268,6 +268,35 @@ public class FileUtils
     }
 
     /**
+     * @param uri The Uri to match.
+     * @return The file path from the Uri.
+     * @author billthefarmer
+     */
+    public static String guessExternalPath(Uri uri)
+    {
+        List<String> list = uri.getPathSegments();
+        List<String> segments =
+            list.subList(1, list.size());
+
+        StringBuilder path = new StringBuilder();
+        path.append(Environment.getExternalStorageDirectory());
+        for (String segment: segments)
+        {
+            path.append(File.separator);
+            path.append(segment);
+        }
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Path " + path.toString());
+
+        File file = new File(path.toString());
+        if (file.exists())
+            return path.toString();
+
+        return null;
+    }
+
+    /**
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
@@ -301,16 +330,13 @@ public class FileUtils
                 if (BuildConfig.DEBUG)
                     DatabaseUtils.dumpCursor(cursor);
 
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
+                final int column_index = cursor.getColumnIndex(column);
+                if (column_index >= 0)
+                    return cursor.getString(column_index);
             }
         }
 
-        catch (Exception e)
-        {
-            if (BuildConfig.DEBUG)
-                Log.e(TAG, "getDataColumn", e);
-        }
+        catch (Exception e) {}
 
         finally
         {
@@ -427,33 +453,18 @@ public class FileUtils
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme()))
         {
-            if (BuildConfig.DEBUG)
-            {
-                Cursor cursor = null;
-                try
-                {
-                    cursor = context.getContentResolver()
-                        .query(uri, null, null, null, null);
-                    if (cursor != null && cursor.moveToFirst())
-                        DatabaseUtils.dumpCursor(cursor);
-                }
-
-                catch (Exception e) {}
-
-                finally
-                {
-                    if (cursor != null)
-                        cursor.close();
-                }
-            }
-
             // Return the remote address
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
 
             // Return FileProvider path
-            else if (isFileProvider(uri))
+            if (isFileProvider(uri))
                 return fileProviderPath(uri);
+
+            // Guess external path
+            String path = guessExternalPath(uri);
+            if (path != null)
+                return path;
 
             return getDataColumn(context, uri, null, null);
         }
