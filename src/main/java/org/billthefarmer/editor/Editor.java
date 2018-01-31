@@ -866,6 +866,11 @@ public class Editor extends Activity
                     EditText text =
                         (EditText) ((Dialog) dialog).findViewById(TEXT);
                     String name = text.getText().toString();
+
+                    // Ignore empty string
+                    if (name.isEmpty())
+                        return;
+
                     file = new File(name);
 
                     // Check absolute file
