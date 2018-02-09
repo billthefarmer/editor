@@ -444,12 +444,13 @@ public class FileUtils
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
 
-            // Return FileProvider path
-            String path = fileProviderPath(uri);
+            // Return ContentProvider path
+            String path = getDataColumn(context, uri, null, null);
             if (path != null)
                 return path;
 
-            return getDataColumn(context, uri, null, null);
+            // Return FileProvider path
+            return fileProviderPath(uri);
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme()))

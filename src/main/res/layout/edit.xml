@@ -4,6 +4,8 @@
     android:id="@+id/vscroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:fillViewport="true">
 
   <HorizontalScrollView
@@ -18,8 +20,6 @@
         android:inputType="text|textMultiLine"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:gravity="top" />
 
   </HorizontalScrollView>
