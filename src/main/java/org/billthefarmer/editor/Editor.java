@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -207,6 +208,16 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
+
+        final TypedArray typedArray =
+            obtainStyledAttributes(R.styleable.Editor);
+
+        if (typedArray.hasValue(R.styleable.Editor_BackgroundColour))
+            textView
+                .setBackgroundColor(typedArray
+                                    .getColor(R.styleable
+                                              .Editor_BackgroundColour, 0));
+        typedArray.recycle();
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
