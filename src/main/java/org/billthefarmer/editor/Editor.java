@@ -1338,6 +1338,39 @@ public class Editor extends Activity
         @Override
         public boolean onQueryTextSubmit (String query)
         {
+            // Use regex search and spannable for highlighting
+            height = scrollView.getHeight();
+            editable = textView.getEditableText();
+            text = textView.getText().toString();
+
+            // Check text
+            if (text.length() == 0)
+                return false;
+
+            // Reset the index and clear highlighting
+            if (query.length() == 0)
+            {
+                index = 0;
+                editable.removeSpan(span);
+                return false;
+            }
+
+            // Check matcher
+            if (matcher == null)
+            {
+                // Check pattern
+                try
+                {
+                    pattern = Pattern.compile(query, Pattern.MULTILINE);
+                    matcher = pattern.matcher(text);
+                }
+
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+
             // Find next text
             if (matcher.find())
             {
