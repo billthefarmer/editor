@@ -1334,11 +1334,6 @@ public class Editor extends Activity
         @Override
         public boolean onQueryTextSubmit (String query)
         {
-            // Use regex search and spannable for highlighting
-            height = scrollView.getHeight();
-            editable = textView.getEditableText();
-            text = textView.getText().toString();
-
             // Find next text
             if (matcher.find())
             {

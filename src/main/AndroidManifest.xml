@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.billthefarmer.editor"
     tools:ignore="GoogleAppIndexingWarning"
-    android:versionCode="119"
-    android:versionName="1.19"
+    android:versionCode="120"
+    android:versionName="1.20"
     android:installLocation="auto">
 
   <uses-sdk
