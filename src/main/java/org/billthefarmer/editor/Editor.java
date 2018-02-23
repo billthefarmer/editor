@@ -1280,10 +1280,6 @@ public class Editor extends Activity
             editable = textView.getEditableText();
             text = textView.getText().toString();
 
-            // Check text
-            if (text.length() == 0)
-                return false;
-
             // Reset the index and clear highlighting
             if (newText.length() == 0)
             {
@@ -1342,34 +1338,6 @@ public class Editor extends Activity
             height = scrollView.getHeight();
             editable = textView.getEditableText();
             text = textView.getText().toString();
-
-            // Check text
-            if (text.length() == 0)
-                return false;
-
-            // Reset the index and clear highlighting
-            if (query.length() == 0)
-            {
-                index = 0;
-                editable.removeSpan(span);
-                return false;
-            }
-
-            // Check matcher
-            if (matcher == null)
-            {
-                // Check pattern
-                try
-                {
-                    pattern = Pattern.compile(query, Pattern.MULTILINE);
-                    matcher = pattern.matcher(text);
-                }
-
-                catch (Exception e)
-                {
-                    return false;
-                }
-            }
 
             // Find next text
             if (matcher.find())
