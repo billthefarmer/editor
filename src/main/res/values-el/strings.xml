@@ -3,14 +3,14 @@
 
   <string name="appName">Επεξεργαστής</string>
   
-  <string name="search">Αναζήτηση...</string>
+  <string name="search">Αναζήτηση…</string>
   <string name="edit">Επεξεργασία</string>
   <string name="view">Προβολή</string>
-  <string name="open">Άνοιγμα αρχείου...</string>
+  <string name="open">Άνοιγμα αρχείου…</string>
   <string name="save">Αποθήκευση</string>
   <string name="openRecent">Άνοιγμα πρόσφατου</string>
-  <string name="saveAs">Αποθήκευση ως...</string>
-  <string name="viewMarkdown">Προβολή της Markdown...</string>
+  <string name="saveAs">Αποθήκευση ως…</string>
+  <string name="viewMarkdown">Προβολή της Markdown…</string>
   <string name="autoSave">Αυτόματη αποθήκευση</string>
   <string name="wrap">Αναδίπλωση λέξεων</string>
   <string name="suggest">Προτάσεις</string>
@@ -25,31 +25,25 @@
   <string name="typeface">Γραμματοσειρά</string>
   <string name="mono">Σταθερού πλάτους</string>
   <string name="normal">Αναλογική</string>
-  <string name="about">Σχετικά με...</string>
+  <string name="about">Σχετικά με…</string>
 
-  <string name="version" formatted="false">Έκδοση του Επεξεργαστή %s\n
-  Σύνθεση  %s\n
-  Πνευματικά δικαιώματα \\u00A9 2017 Bill Farmer\n
-  Γαλλική μετάφραση από <a href=\"https://github.com/milouse\" >Étienne Deparis</a>\n
-  Γερμανική μετάφραση από <a href=\"https://github.com/Markus00000\" >Markus   Weimar</a>\n
-  Ιταλική μετάφραση από <a href=\"https://github.com/airon90\" >Michael Moroni</a>\n
-  Πωλονική μετάφραση από <a href=\"https://github.com/evo16\" >Evo</a>\n
-  Άδεια  <a href=\"https://www.gnu.org/licenses/gpl.txt\" >GNU GPLv3</a></string>
+  <string name="version" formatted="false">Έκδοση του Επεξεργαστή
+  %s\nΣύνθεση %s\nΠνευματικά δικαιώματα \\u00A9 2017 Bill
+  Farmer\nΠωλονική μετάφραση από <a href="https://github.com/evo16"
+  >Evo</a>\nΆδεια <a href="https://www.gnu.org/licenses/gpl.txt" >GNU
+  GPLv3</a></string>
 
   <string name="choose">Επέλεξε ένα όνομα αρχείου</string>
-  <string name="loading">Φορτώνει...</string>
+  <string name="loading">Φορτώνει…</string>
 
-  <string name="modified">Υπάρχουν μη αποθηκευμένες αλλαγές.\n
-  \n
-  Θα ήθελες να αποθηκεύσεις τις αλλαγές σου;</string>
+  <string name="modified">Υπάρχουν μη αποθηκευμένες αλλαγές.\nΘα
+  ήθελες να αποθηκεύσεις τις αλλαγές σου;</string>
 
-  <string name="changedReload">Αυτό το αρχείο έχει αλλάξει.\n
-  \n
-  Θα ήθελες να ξαναφορτωθεί;</string>
+  <string name="changedReload">Αυτό το αρχείο έχει αλλάξει.\nΘα ήθελες
+  να ξαναφορτωθεί;</string>
 
-  <string name="changedOverwrite">Αυτό το αρχείο έχει αλλάξει.\n
-  \n
-  Θα ήθελες να επανωγραφεί;</string>
+  <string name="changedOverwrite">Αυτό το αρχείο έχει αλλάξει.\nΘα
+  ήθελες να επανωγραφεί;</string>
 
   <string name="ok">Εντάξει</string>
   <string name="reload">Επαναφόρτωση</string>
