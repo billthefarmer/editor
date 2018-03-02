@@ -15,16 +15,16 @@
   <string name="wrap">自动换行</string>
   <string name="suggest">建议</string>
   <string name="theme">主题</string>
-  <string name="light">明亮</string>
-  <string name="dark">黑暗</string>
+  <string name="light">亮</string>
+  <string name="dark">暗</string>
   <string name="retro">复古</string>
   <string name="size">文本大小</string>
   <string name="small">小</string>
   <string name="medium">中</string>
   <string name="large">大</string>
   <string name="typeface">字体</string>
-  <string name="mono">单间隔</string>
-  <string name="normal">成比例</string>
+  <string name="mono">等宽</string>
+  <string name="normal">变宽</string>
   <string name="about">关于</string>
 
   <string name="version" formatted="false">editor version %s\nBuilt
