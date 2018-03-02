@@ -29,9 +29,9 @@
 
   <string name="version" formatted="false">Έκδοση του Επεξεργαστή
   %s\nΣύνθεση %s\nΠνευματικά δικαιώματα \u00A9 2017 Bill
-  Farmer\nΠωλονική μετάφραση από <a href="https://github.com/evo16"
-  >Evo</a>\nΆδεια <a href="https://www.gnu.org/licenses/gpl.txt" >GNU
-  GPLv3</a></string>
+  Farmer\nΕλληνική μετάφραση από <a
+  href="https://github.com/nikoss">nikoss</a>\nΆδεια <a
+  href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
 
   <string name="choose">Επέλεξε ένα όνομα αρχείου</string>
   <string name="loading">Φορτώνει…</string>
