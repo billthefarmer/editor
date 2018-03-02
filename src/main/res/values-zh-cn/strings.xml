@@ -27,14 +27,14 @@
   <string name="normal">变宽</string>
   <string name="about">关于</string>
 
-  <string name="version" formatted="false">editor version %s\nBuilt
-  %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a
-  href="https://github.com/milouse">Étienne Deparis</a>\nGerman
-  translation by <a href="https://github.com/Markus00000">Markus
-  Weimar</a>\nItalian translation by <a
-  href="https://github.com/airon90">Michael Moroni</a>\nPolish
-  translation by <a href="https://github.com/evo16">Evo</a>\nChinese (Simplified)
-  translation by <a href="https://github.com/ludoux">ludoux</a>\nLicence
+  <string name="version" formatted="false">编辑器版本 %s\n编译时间
+  %s\n版权 \u00A9 2017 Bill Farmer\n法语译者 <a
+  href="https://github.com/milouse">Étienne Deparis</a>\n德语译者
+   <a href="https://github.com/Markus00000">Markus
+  Weimar</a>\n意大利语译者 <a
+  href="https://github.com/airon90">Michael Moroni</a>\n波兰语译者
+   <a href="https://github.com/evo16">Evo</a>\n中文（简体）译者
+   <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>\n开源协议
   <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
