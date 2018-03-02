@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">编辑器</string>
+  
+  <string name="search">查找…</string>
+  <string name="edit">编辑</string>
+  <string name="view">查看</string>
+  <string name="open">打开文件…</string>
+  <string name="save">保存</string>
+  <string name="openRecent">打开最近文本</string>
+  <string name="saveAs">保存为…</string>
+  <string name="viewMarkdown">查看 Markdown…</string>
+  <string name="autoSave">自动保存</string>
+  <string name="wrap">自动换行</string>
+  <string name="suggest">建议</string>
+  <string name="theme">主题</string>
+  <string name="light">亮</string>
+  <string name="dark">暗</string>
+  <string name="retro">复古</string>
+  <string name="size">文本大小</string>
+  <string name="small">小</string>
+  <string name="medium">中</string>
+  <string name="large">大</string>
+  <string name="typeface">字体</string>
+  <string name="mono">等宽</string>
+  <string name="normal">变宽</string>
+  <string name="about">关于</string>
+
+  <string name="version" formatted="false">编辑器版本 %s\n编译时间
+  %s\n版权 \u00A9 2017 Bill Farmer\n法语译者 <a
+  href="https://github.com/milouse">Étienne Deparis</a>\n德语译者
+   <a href="https://github.com/Markus00000">Markus
+  Weimar</a>\n意大利语译者 <a
+  href="https://github.com/airon90">Michael Moroni</a>\n波兰语译者
+   <a href="https://github.com/evo16">Evo</a>\n中文（简体）译者
+   <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>\n开源协议
+  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="choose">选择一个文件</string>
+  <string name="loading">加载中…</string>
+
+  <string name="modified">
+    你有未保存的更改。你想保存这些更改吗？
+  </string>
+
+  <string name="changedReload">
+    文件已被更改，你想重载它吗？
+  </string>
+
+  <string name="changedOverwrite">
+    文件已被更改，你想覆写它吗？
+  </string>
+
+  <string name="ok">OK</string>
+  <string name="reload">重载</string>
+  <string name="overwrite">覆写</string>
+  <string name="discard">放弃更改</string>
+  <string name="cancel">取消</string>
+
+</resources>
