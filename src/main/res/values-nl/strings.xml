@@ -27,18 +27,9 @@
   <string name="normal">Proportioneel</string>
   <string name="about">Over</string>
 
-  <string name="version" formatted="false">Editor - versie %s\nGebouwd op
-  %s\nCopyright \u00A9 2017 Bill Farmer\nFranse vertaling door <a
-  href="https://github.com/milouse">Étienne Deparis</a>\nDuitse
-  vertaling door <a href="https://github.com/Markus00000">Markus
-  Weimar</a>\nItaliaanse vertaling door <a
-  href="https://github.com/airon90">Michael Moroni</a>\nPoolse
-  vertaling door <a href="https://github.com/evo16">Evo</a>\nGriekse
-  vertaling door <a
-  href="https://github.com/nikoss">nikoss</a>\nVereenvoudig Chinese
-  vertaling door <a href="https://github.com/ludoux">Lu Chang
-  (ludoux)</a>\nNederlandse
-  vertaling door <a href="https://github.com/Vistaus">Heimen Stoffels
+  <string name="version" formatted="false">Editor - versie %s\nGebouwd
+  op %s\nCopyright \u00A9 2017 Bill Farmer\nNederlandse vertaling door
+  <a href="https://github.com/Vistaus">Heimen Stoffels
   (vistaus)</a>\nLicentie <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
