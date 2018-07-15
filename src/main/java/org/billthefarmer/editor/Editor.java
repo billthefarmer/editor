@@ -61,9 +61,12 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,6 +89,7 @@ public class Editor extends Activity
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
+    public final static String INCOMING_URI = "incoming_URI";
 
     public final static String PREF_SAVE = "pref_save";
     public final static String PREF_WRAP = "pref_wrap";
@@ -124,6 +128,7 @@ public class Editor extends Activity
     private final static int MONO   = 2;
 
     private File file;
+    private Uri incomingUri;
     private String path;
     private String toAppend;
     private EditText textView;
@@ -370,6 +375,7 @@ public class Editor extends Activity
         edit = savedInstanceState.getBoolean(EDIT);
         dirty = savedInstanceState.getBoolean(DIRTY);
         modified = savedInstanceState.getLong(MODIFIED);
+        incomingUri = Uri.parse(savedInstanceState.getString(INCOMING_URI));
         invalidateOptionsMenu();
 
         file = new File(path);
@@ -437,6 +443,7 @@ public class Editor extends Activity
         outState.putBoolean(DIRTY, dirty);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
+        outState.putString(INCOMING_URI, incomingUri.toString());
     }
 
     // onCreateOptionsMenu
@@ -1160,8 +1167,12 @@ public class Editor extends Activity
 
         // Attempt to resolve content uri
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
+        {
+            incomingUri = uri;
             uri = resolveContent(uri);
-
+            String title = "content://..." + uri.getLastPathSegment();
+            setTitle(title);
+        }
         // Read into default file
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
         {
@@ -1169,8 +1180,8 @@ public class Editor extends Activity
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
 
-            String title = defaultUri.getLastPathSegment();
-            setTitle(title);
+//            String title = defaultUri.getLastPathSegment();
+//            setTitle(title);
         }
 
         // Read file
@@ -1228,7 +1239,12 @@ public class Editor extends Activity
         });
 
         else
-            saveFile(file);
+            if (incomingUri == null)
+            {
+                saveFile(file);
+            } else {
+                saveFile(incomingUri);
+            }
     }
 
     // saveFile
@@ -1240,6 +1256,16 @@ public class Editor extends Activity
 
         modified = file.lastModified();
         invalidateOptionsMenu();
+    }
+
+    private void saveFile(Uri uri) {
+        String text = textView.getText().toString();
+        try {
+            OutputStream outputStream = getContentResolver().openOutputStream(uri);
+            write(text, outputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     // write
@@ -1254,6 +1280,19 @@ public class Editor extends Activity
         }
 
         catch (Exception e) {}
+    }
+
+    private void write(String text, OutputStream os)
+    {
+        try
+        {
+            os.write(text.getBytes());
+            os.close();
+            dirty = false;
+            invalidateOptionsMenu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // QueryTextListener
