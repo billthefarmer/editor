@@ -2,7 +2,7 @@
 //
 //  Editor - Text editor for Android
 //
-//  Copyright © 2017  Bill Farmer
+//  Copyright Â© 2017  Bill Farmer
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -61,9 +61,7 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -89,7 +87,7 @@ public class Editor extends Activity
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
-    public final static String INCOMING_URI = "incoming_URI";
+    public final static String CONTENT_URI = "content_URI";
 
     public final static String PREF_SAVE = "pref_save";
     public final static String PREF_WRAP = "pref_wrap";
@@ -107,6 +105,8 @@ public class Editor extends Activity
 
     public final static String TEXT_HTML = "text/html";
     public final static String TEXT_WILD = "text/*";
+
+    public final static String CONTENT_TITLE = "content://…/";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -128,7 +128,7 @@ public class Editor extends Activity
     private final static int MONO   = 2;
 
     private File file;
-    private Uri incomingUri;
+    private Uri contentUri;
     private String path;
     private String toAppend;
     private EditText textView;
@@ -375,7 +375,7 @@ public class Editor extends Activity
         edit = savedInstanceState.getBoolean(EDIT);
         dirty = savedInstanceState.getBoolean(DIRTY);
         modified = savedInstanceState.getLong(MODIFIED);
-        incomingUri = Uri.parse(savedInstanceState.getString(INCOMING_URI));
+        contentUri = Uri.parse(savedInstanceState.getString(CONTENT_URI));
         invalidateOptionsMenu();
 
         file = new File(path);
@@ -443,7 +443,7 @@ public class Editor extends Activity
         outState.putBoolean(DIRTY, dirty);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
-        outState.putString(INCOMING_URI, incomingUri.toString());
+        outState.putString(CONTENT_URI, contentUri.toString());
     }
 
     // onCreateOptionsMenu
@@ -1165,14 +1165,15 @@ public class Editor extends Activity
         if (uri == null)
             return;
 
+        contentUri = null;
+
         // Attempt to resolve content uri
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
         {
-            incomingUri = uri;
+            contentUri = uri;
             uri = resolveContent(uri);
-            String title = "content://..." + uri.getLastPathSegment();
-            setTitle(title);
         }
+
         // Read into default file
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
         {
@@ -1180,8 +1181,8 @@ public class Editor extends Activity
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
 
-//            String title = defaultUri.getLastPathSegment();
-//            setTitle(title);
+            String title = CONTENT_TITLE + uri.getLastPathSegment();
+            setTitle(title);
         }
 
         // Read file
@@ -1239,12 +1240,13 @@ public class Editor extends Activity
         });
 
         else
-            if (incomingUri == null)
-            {
+        {
+            if (contentUri == null)
                 saveFile(file);
-            } else {
-                saveFile(incomingUri);
-            }
+
+            else
+                saveFile(contentUri);
+        }
     }
 
     // saveFile
@@ -1258,12 +1260,19 @@ public class Editor extends Activity
         invalidateOptionsMenu();
     }
 
-    private void saveFile(Uri uri) {
+    // saveFile
+    private void saveFile(Uri uri)
+    {
         String text = textView.getText().toString();
-        try {
-            OutputStream outputStream = getContentResolver().openOutputStream(uri);
+        try
+        {
+            OutputStream outputStream =
+                getContentResolver().openOutputStream(uri);
             write(text, outputStream);
-        } catch (FileNotFoundException e) {
+        }
+
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
@@ -1279,9 +1288,13 @@ public class Editor extends Activity
             fileWriter.close();
         }
 
-        catch (Exception e) {}
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
+    // write
     private void write(String text, OutputStream os)
     {
         try
@@ -1290,7 +1303,10 @@ public class Editor extends Activity
             os.close();
             dirty = false;
             invalidateOptionsMenu();
-        } catch (IOException e) {
+        }
+
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
