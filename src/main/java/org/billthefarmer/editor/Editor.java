@@ -65,6 +65,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1299,8 +1300,9 @@ public class Editor extends Activity
     {
         try
         {
-            os.write(text.getBytes());
-            os.close();
+            OutputStreamWriter writer = new OutputStreamWriter(os);
+            writer.write(text, 0, text.length());
+            writer.close();
             dirty = false;
             invalidateOptionsMenu();
         }
@@ -1440,7 +1442,7 @@ public class Editor extends Activity
                     stringBuilder.append(System.getProperty("line.separator"));
                 }
 
-                inputStream.close();
+                reader.close();
            }
 
             catch (Exception e) {}
