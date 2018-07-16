@@ -128,6 +128,7 @@ public class Editor extends Activity
     private final static int NORMAL = 1;
     private final static int MONO   = 2;
 
+    private Uri uri;
     private File file;
     private Uri contentUri;
     private String path;
@@ -225,7 +226,7 @@ public class Editor extends Activity
         typedArray.recycle();
 
         Intent intent = getIntent();
-        Uri uri = intent.getData();
+        uri = intent.getData();
 
         if (intent.getAction().equals(Intent.ACTION_EDIT) ||
                 intent.getAction().equals(Intent.ACTION_VIEW))
@@ -440,7 +441,7 @@ public class Editor extends Activity
     public void onSaveInstanceState (Bundle outState)
     {
         super.onSaveInstanceState(outState);
-        outState.putLong(MODIFIED,modified);
+        outState.putLong(MODIFIED, modified);
         outState.putBoolean(DIRTY, dirty);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
