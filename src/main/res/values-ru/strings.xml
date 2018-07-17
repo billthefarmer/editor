@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Редактор</string>
+  
+  <string name="search">Поиск…</string>
+  <string name="edit">Редактор</string>
+  <string name="view">Просмотр</string>
+  <string name="open">Открыть файл…</string>
+  <string name="save">Сохранить</string>
+  <string name="openRecent">Недавние</string>
+  <string name="saveAs">Сохранить как…</string>
+  <string name="viewMarkdown">Просмотр Markdown…</string>
+  <string name="autoSave">Автосохранение</string>
+  <string name="wrap">Перенос строк</string>
+  <string name="suggest">Варианты слов</string>
+  <string name="theme">Тема</string>
+  <string name="light">Светлая</string>
+  <string name="dark">Тёмная</string>
+  <string name="retro">Ретро</string>
+  <string name="size">Размер шрифта</string>
+  <string name="small">Малый</string>
+  <string name="medium">Средний</string>
+  <string name="large">Крупный</string>
+  <string name="typeface">Тип шрифта</string>
+  <string name="mono">Моноширинный</string>
+  <string name="normal">Пропорциональный</string>
+  <string name="about">О программе</string>
+  <string name="choose">Выберите имя файла</string>
+  <string name="loading">Чтение…</string>
+
+  <string name="modified">
+    Сохранить изменения?
+  </string>
+
+  <string name="changedReload">
+    Файл изменился, перечитать?
+  </string>
+
+  <string name="changedOverwrite">
+    Файл изменился, перезаписать?
+  </string>
+
+  <string name="ok">ОК</string>
+  <string name="reload">Перечитать</string>
+  <string name="overwrite">Перезаписать</string>
+  <string name="discard">Не сохранять</string>
+  <string name="cancel">Отмена</string>
+
+</resources>
