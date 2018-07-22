@@ -27,6 +27,13 @@
   <string name="normal">Proportional</string>
   <string name="about">About</string>
 
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+
   <string name="version" formatted="false">Editor version %s\nBuilt
   %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a
   href="https://github.com/milouse">Étienne Deparis</a>\nGerman
@@ -40,7 +47,8 @@
   (ludoux)</a>\nDutch translation by <a
   href="https://github.com/Vistaus">Heimen Stoffels
   (vistaus)</a>\nRussian translation by <a
-  href="https://github.com/bboa">Igor Nedoboy</a>\nLicence <a
+  href="https://github.com/bboa">Igor Nedoboy</a>\nLatvian translation
+  by <a href="https://github.com/rhssk">Rihards Skuja</a>\nLicence <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
