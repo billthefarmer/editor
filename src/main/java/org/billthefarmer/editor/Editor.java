@@ -88,7 +88,6 @@ public class Editor extends Activity
     public final static String DIRTY = "dirty";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
-    public final static String CONTENT_URI = "content_URI";
 
     public final static String PREF_SAVE = "pref_save";
     public final static String PREF_WRAP = "pref_wrap";
@@ -106,8 +105,6 @@ public class Editor extends Activity
 
     public final static String TEXT_HTML = "text/html";
     public final static String TEXT_WILD = "text/*";
-
-    public final static String CONTENT_TITLE = "content://…/";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -128,10 +125,9 @@ public class Editor extends Activity
     private final static int NORMAL = 1;
     private final static int MONO   = 2;
 
-    private Uri uri;
     private File file;
-    private Uri contentUri;
     private String path;
+    private Uri content;
     private String toAppend;
     private EditText textView;
     private MenuItem searchItem;
@@ -226,7 +222,7 @@ public class Editor extends Activity
         typedArray.recycle();
 
         Intent intent = getIntent();
-        uri = intent.getData();
+        Uri uri = intent.getData();
 
         if (intent.getAction().equals(Intent.ACTION_EDIT) ||
                 intent.getAction().equals(Intent.ACTION_VIEW))
@@ -377,7 +373,8 @@ public class Editor extends Activity
         edit = savedInstanceState.getBoolean(EDIT);
         dirty = savedInstanceState.getBoolean(DIRTY);
         modified = savedInstanceState.getLong(MODIFIED);
-        contentUri = Uri.parse(savedInstanceState.getString(CONTENT_URI));
+        if (savedInstanceState.getString(CONTENT) != null)
+            content = Uri.parse(savedInstanceState.getString(CONTENT));
         invalidateOptionsMenu();
 
         file = new File(path);
@@ -445,7 +442,8 @@ public class Editor extends Activity
         outState.putBoolean(DIRTY, dirty);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
-        outState.putString(CONTENT_URI, contentUri.toString());
+        if (content != null)
+            outState.putString(CONTENT, content.toString());
     }
 
     // onCreateOptionsMenu
@@ -1167,23 +1165,21 @@ public class Editor extends Activity
         if (uri == null)
             return;
 
-        contentUri = null;
+        content = null;
 
         // Attempt to resolve content uri
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
-        {
-            contentUri = uri;
             uri = resolveContent(uri);
-        }
 
-        // Read into default file
+        // Read into default file if unresolved
         if (uri.getScheme().equalsIgnoreCase(CONTENT))
         {
+            content = uri;
             file = getDefaultFile();
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
 
-            String title = CONTENT_TITLE + uri.getLastPathSegment();
+            String title = uri.getLastPathSegment();
             setTitle(title);
         }
 
@@ -1243,11 +1239,11 @@ public class Editor extends Activity
 
         else
         {
-            if (contentUri == null)
+            if (content == null)
                 saveFile(file);
 
             else
-                saveFile(contentUri);
+                saveFile(content);
         }
     }
 
