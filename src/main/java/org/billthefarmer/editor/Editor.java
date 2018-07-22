@@ -373,8 +373,7 @@ public class Editor extends Activity
         edit = savedInstanceState.getBoolean(EDIT);
         dirty = savedInstanceState.getBoolean(DIRTY);
         modified = savedInstanceState.getLong(MODIFIED);
-        if (savedInstanceState.getString(CONTENT) != null)
-            content = Uri.parse(savedInstanceState.getString(CONTENT));
+        content = savedInstanceState.getParcelable(CONTENT);
         invalidateOptionsMenu();
 
         file = new File(path);
@@ -438,12 +437,12 @@ public class Editor extends Activity
     public void onSaveInstanceState (Bundle outState)
     {
         super.onSaveInstanceState(outState);
+
+        outState.putParcelable(CONTENT, content);
         outState.putLong(MODIFIED, modified);
         outState.putBoolean(DIRTY, dirty);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
-        if (content != null)
-            outState.putString(CONTENT, content.toString());
     }
 
     // onCreateOptionsMenu
