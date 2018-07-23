@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Ritill</string>
+  
+  <string name="search">Leita…</string>
+  <string name="edit">Breyta</string>
+  <string name="view">Skoða</string>
+  <string name="open">Opna skrá…</string>
+  <string name="save">Vista</string>
+  <string name="openRecent">Opna nýlegt</string>
+  <string name="saveAs">Save as…</string>
+  <string name="viewMarkdown">Skoða markdown-kóða…</string>
+  <string name="autoSave">Sjálfvirk vistun</string>
+  <string name="wrap">Línuskrið orða</string>
+  <string name="suggest">Tillögur</string>
+  <string name="theme">Þema</string>
+  <string name="light">Ljóst</string>
+  <string name="dark">Dökkt</string>
+  <string name="retro">Gamaldags</string>
+  <string name="size">Stærð texta</string>
+  <string name="small">Lítill</string>
+  <string name="medium">Miðlungs</string>
+  <string name="large">Stór</string>
+  <string name="typeface">Leturgerð</string>
+  <string name="mono">Jafnbreitt</string>
+  <string name="normal">Hlutfallslegt</string>
+  <string name="about">Um hugbúnaðinn</string>
+
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+
+  <string name="version" formatted="false">Editor; útgáfa %s\nByggt
+  %s\n
+  Höfundarréttur \u00A9 2017 Bill Farmer\n
+  Frönsk þýðing: <a href="https://github.com/milouse">Étienne Deparis</a>\n
+  Þýsk þýðing: <a href="https://github.com/Markus00000">Markus Weimar</a>\n
+  Ítölsk þýðing: <a href="https://github.com/airon90">Michael Moroni</a>\n
+  Pólsk þýðing: <a href="https://github.com/evo16">Evo</a>\n
+  Grísk þýðing: <a href="https://github.com/nikoss">nikoss</a>\n
+  Einfölduð kínversk þýðing: <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>\n
+  Hollensk þýðing: <a href="https://github.com/Vistaus">Heimen Stoffels (vistaus)</a>\n
+  Rússnesk þýðing: <a href="https://github.com/bboa">Igor Nedoboy</a>\n
+  Lettnesk þýðing: <a href="https://github.com/rhssk">Rihards Skuja\n
+  Íslensk þýðing: <a href="https://github.com/sveinki">Sveinn í Felli</a>\n
+  Notkunarleyfi <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="choose">Veldu skráarheiti</string>
+  <string name="loading">Hleð inn…</string>
+
+  <string name="modified">
+    Þú ert með óvistaðar breytingar. Viltu vista þær?
+  </string>
+
+  <string name="changedReload">
+    Þessi skrá hefur breyst, viltu hlaða henni aftur inn?
+  </string>
+
+  <string name="changedOverwrite">
+    Þessi skrá hefur breyst, viltu skrifa yfir hana?
+  </string>
+
+  <string name="ok">Í lagi</string>
+  <string name="reload">Endurhlaða</string>
+  <string name="overwrite">Skrifa yfir</string>
+  <string name="discard">Henda</string>
+  <string name="cancel">Hætta við</string>
+
+</resources>
