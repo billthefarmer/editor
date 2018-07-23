@@ -31,27 +31,27 @@
   %s\nHöfundarréttur \u00A9 2017 Bill Farmer\nÍslensk þýðing: <a
   href="https://github.com/sveinki">Sveinn í Felli</a>\nNotkunarleyfi
   <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
-</string>
+  </string>
 
-<string name="choose">Veldu skráarheiti</string>
-<string name="loading">Hleð inn…</string>
+  <string name="choose">Veldu skráarheiti</string>
+  <string name="loading">Hleð inn…</string>
 
-<string name="modified">
-  Þú ert með óvistaðar breytingar. Viltu vista þær?
-</string>
+  <string name="modified">
+    Þú ert með óvistaðar breytingar. Viltu vista þær?
+  </string>
 
-<string name="changedReload">
-  Þessi skrá hefur breyst, viltu hlaða henni aftur inn?
-</string>
+  <string name="changedReload">
+    Þessi skrá hefur breyst, viltu hlaða henni aftur inn?
+  </string>
 
-<string name="changedOverwrite">
-  Þessi skrá hefur breyst, viltu skrifa yfir hana?
-</string>
+  <string name="changedOverwrite">
+    Þessi skrá hefur breyst, viltu skrifa yfir hana?
+  </string>
 
-<string name="ok">Í lagi</string>
-<string name="reload">Endurhlaða</string>
-<string name="overwrite">Skrifa yfir</string>
-<string name="discard">Henda</string>
-<string name="cancel">Hætta við</string>
+  <string name="ok">Í lagi</string>
+  <string name="reload">Endurhlaða</string>
+  <string name="overwrite">Skrifa yfir</string>
+  <string name="discard">Henda</string>
+  <string name="cancel">Hætta við</string>
 
 </resources>
