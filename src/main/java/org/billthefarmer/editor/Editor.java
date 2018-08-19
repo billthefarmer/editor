@@ -895,6 +895,11 @@ public class Editor extends Activity
                             File(Environment.getExternalStorageDirectory(),
                                  File.separator + name);
 
+                    // Set interface title
+                    Uri uri = Uri.fromFile(file);
+                    String title = uri.getLastPathSegment();
+                    setTitle(title);
+
                     path = file.getPath();
                     saveFile();
                 }
