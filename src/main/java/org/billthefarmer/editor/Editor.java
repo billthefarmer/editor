@@ -43,21 +43,18 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import org.markdownj.MarkdownProcessor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -77,10 +74,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.markdownj.MarkdownProcessor;
-
-public class Editor extends Activity
-{
+public class Editor extends Activity {
     public final static String TAG = "Editor";
 
     public final static String PATH = "path";
@@ -114,16 +108,16 @@ public class Editor extends Activity
     private final static int TEXT = 1;
 
     private final static int LIGHT = 1;
-    private final static int DARK  = 2;
+    private final static int DARK = 2;
     private final static int RETRO = 3;
 
-    private final static int TINY  = 8;
-    private final static int SMALL  = 12;
+    private final static int TINY = 8;
+    private final static int SMALL = 12;
     private final static int MEDIUM = 18;
-    private final static int LARGE  = 24;
+    private final static int LARGE = 24;
 
     private final static int NORMAL = 1;
-    private final static int MONO   = 2;
+    private final static int MONO = 2;
 
     private File file;
     private String path;
@@ -132,7 +126,6 @@ public class Editor extends Activity
     private EditText textView;
     private MenuItem searchItem;
     private ScrollView scrollView;
-    private SearchView searchView;
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
@@ -144,7 +137,7 @@ public class Editor extends Activity
     private boolean suggest = true;
 
     private boolean dirty = false;
-    private boolean isapp = false;
+    private boolean isApp = false;
 
     private long modified;
 
@@ -154,12 +147,11 @@ public class Editor extends Activity
 
     // onCreate
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SharedPreferences preferences =
-            PreferenceManager.getDefaultSharedPreferences(this);
+                PreferenceManager.getDefaultSharedPreferences(this);
 
         save = preferences.getBoolean(PREF_SAVE, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
@@ -170,23 +162,22 @@ public class Editor extends Activity
         type = preferences.getInt(PREF_TYPE, MONO);
 
         Set<String> pathSet = preferences.getStringSet(PREF_PATHS, null);
-        pathMap = new HashMap<String, Integer>();
+        pathMap = new HashMap<>();
 
         if (pathSet != null)
             for (String path : pathSet)
                 pathMap.put(path, preferences.getInt(path, 0));
 
-        removeList = new ArrayList<String>();
+        removeList = new ArrayList<>();
 
-        switch (theme)
-        {
-        case DARK:
-            setTheme(R.style.AppDarkTheme);
-            break;
+        switch (theme) {
+            case DARK:
+                setTheme(R.style.AppDarkTheme);
+                break;
 
-        case RETRO:
-            setTheme(R.style.AppRetroTheme);
-            break;
+            case RETRO:
+                setTheme(R.style.AppRetroTheme);
+                break;
         }
 
         if (wrap)
@@ -195,8 +186,8 @@ public class Editor extends Activity
         else
             setContentView(R.layout.edit);
 
-        textView = (EditText) findViewById(R.id.text);
-        scrollView = (ScrollView) findViewById(R.id.vscroll);
+        textView = findViewById(R.id.text);
+        scrollView = findViewById(R.id.vscroll);
 
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
@@ -206,167 +197,150 @@ public class Editor extends Activity
 
         else if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                    InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
 
         final TypedArray typedArray =
-            obtainStyledAttributes(R.styleable.Editor);
+                obtainStyledAttributes(R.styleable.Editor);
 
         if (typedArray.hasValue(R.styleable.Editor_BackgroundColour))
             textView
-                .setBackgroundColor(typedArray
-                                    .getColor(R.styleable
-                                              .Editor_BackgroundColour, 0));
+                    .setBackgroundColor(typedArray
+                            .getColor(R.styleable
+                                    .Editor_BackgroundColour, 0));
         typedArray.recycle();
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
 
-        if (intent.getAction().equals(Intent.ACTION_EDIT) ||
-                intent.getAction().equals(Intent.ACTION_VIEW))
-        {
-            if ((savedInstanceState == null) && (uri != null))
-                readFile(uri);
+        switch (intent.getAction()) {
+            case Intent.ACTION_EDIT:
+            case Intent.ACTION_VIEW:
+                if ((savedInstanceState == null) && (uri != null))
+                    readFile(uri);
 
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+                getActionBar().setDisplayHomeAsUpEnabled(true);
+                break;
+            case Intent.ACTION_SEND:
+                if (savedInstanceState == null) {
+                    // Get text
+                    String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+                    if (text != null) {
+                        defaultFile(text);
+                        dirty = true;
+                    }
 
-        else if (intent.getAction().equals(Intent.ACTION_SEND))
-        {
-            if (savedInstanceState == null)
-            {
-                // Get text
-                String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-                if (text != null)
-                {
-                    defaultFile(text);
-                    dirty = true;
+                    // Get uri
+                    uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                    if (uri != null)
+                        readFile(uri);
                 }
 
-                // Get uri
-                uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-                if (uri != null)
-                    readFile(uri);
-            }
+                isApp = true;
+                break;
+            case Intent.ACTION_MAIN:
+                if (savedInstanceState == null)
+                    defaultFile(null);
 
-            isapp = true;
-        }
-
-        else if (intent.getAction().equals(Intent.ACTION_MAIN))
-        {
-            if (savedInstanceState == null)
-                defaultFile(null);
-
-            isapp = true;
+                isApp = true;
+                break;
         }
 
         setListeners();
     }
 
     // setListeners
-    private void setListeners()
-    {
+    private void setListeners() {
 
-        if (textView != null)
-        {
-            textView.addTextChangedListener(new TextWatcher()
-            {
+        if (textView != null) {
+            textView.addTextChangedListener(new TextWatcher() {
                 // afterTextChanged
                 @Override
-                public void afterTextChanged (Editable s)
-                {
+                public void afterTextChanged(Editable s) {
                     dirty = true;
                     invalidateOptionsMenu();
                 }
 
                 // beforeTextChanged
                 @Override
-                public void beforeTextChanged (CharSequence s,
-                                               int start,
-                                               int count,
-                                               int after) {}
+                public void beforeTextChanged(CharSequence s,
+                                              int start,
+                                              int count,
+                                              int after) {
+                }
+
                 // onTextChanged
                 @Override
-                public void onTextChanged (CharSequence s,
-                                           int start,
-                                           int before,
-                                           int count) {}
+                public void onTextChanged(CharSequence s,
+                                          int start,
+                                          int before,
+                                          int count) {
+                }
             });
 
-            textView.setOnFocusChangeListener(new View.OnFocusChangeListener()
-            {
-                // onFocusChange
-                @Override
-                public void onFocusChange (View v, boolean hasFocus)
-                {
-                    // Hide keyboard
-                    InputMethodManager imm = (InputMethodManager)
+            // onFocusChange
+            textView.setOnFocusChangeListener((v, hasFocus) -> {
+                // Hide keyboard
+                InputMethodManager imm = (InputMethodManager)
                         getSystemService(INPUT_METHOD_SERVICE);
-                    if (!hasFocus)
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                }
+                if (!hasFocus)
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             });
 
-            textView.setOnLongClickListener(new View.OnLongClickListener()
-            {
-                // onLongClick
-                @Override
-                public boolean onLongClick (View v)
-                {
-                    // Do nothing if already editable
-                    if (edit)
-                        return false;
-
-                    // Set editable with or without suggestions
-                    if (!suggest)
-                        textView
-                            .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-
-                    else
-                        textView
-                            .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                          InputType
-                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-                    // Set editable with or without suggestions
-                    if (suggest)
-                        textView
-                            .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-
-                    else
-                        textView
-                            .setInputType(InputType.TYPE_CLASS_TEXT |
-                                          InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                          InputType
-                                          .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-                    // Change text size temporarily as workaround for
-                    // yet another obscure feature of some versions of
-                    // android
-                    textView.setTextSize(TINY);
-                    textView.setTextSize(size);
-
-                    // Update boolean
-                    edit = true;
-
-                    // Update menu
-                    invalidateOptionsMenu();
-
+            // onLongClick
+            textView.setOnLongClickListener(v -> {
+                // Do nothing if already editable
+                if (edit)
                     return false;
-                }
+
+                // Set editable with or without suggestions
+                if (!suggest)
+                    textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                    InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+                else
+                    textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                    InputType
+                                            .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                // Set editable with or without suggestions
+                if (suggest)
+                    textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                    InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+                else
+                    textView
+                            .setInputType(InputType.TYPE_CLASS_TEXT |
+                                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                    InputType
+                                            .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+                // Change text size temporarily as workaround for
+                // yet another obscure feature of some versions of
+                // android
+                textView.setTextSize(TINY);
+                textView.setTextSize(size);
+
+                // Update boolean
+                edit = true;
+
+                // Update menu
+                invalidateOptionsMenu();
+
+                return false;
             });
         }
     }
 
     // onRestoreInstanceState
     @Override
-    public void onRestoreInstanceState (Bundle savedInstanceState)
-    {
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
         path = savedInstanceState.getString(PATH);
@@ -384,28 +358,21 @@ public class Editor extends Activity
 
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedReload,
-                        R.string.reload, R.string.cancel,
-                        new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int id)
-            {
-                switch (id)
-                {
-                case DialogInterface.BUTTON_POSITIVE:
-                    readFile(uri);
-                }
-            }
-        });
+                    R.string.reload, R.string.cancel, (dialog, id) -> {
+                        switch (id) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                readFile(uri);
+                        }
+                    });
     }
 
     // onPause
     @Override
-    public void onPause ()
-    {
+    public void onPause() {
         super.onPause();
 
         SharedPreferences preferences =
-            PreferenceManager.getDefaultSharedPreferences(this);
+                PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putBoolean(PREF_SAVE, save);
@@ -430,12 +397,11 @@ public class Editor extends Activity
 
         if (dirty && save)
             saveFile(file);
-   }
+    }
 
     // onSaveInstanceState
     @Override
-    public void onSaveInstanceState (Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putParcelable(CONTENT, content);
@@ -447,16 +413,14 @@ public class Editor extends Activity
 
     // onCreateOptionsMenu
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
 
         searchItem = menu.findItem(R.id.search);
-        searchView = (SearchView) searchItem.getActionView();
+        SearchView searchView = (SearchView) searchItem.getActionView();
 
-        if (searchView != null)
-        {
+        if (searchView != null) {
             searchView.setSubmitButtonEnabled(true);
             searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
             searchView.setOnQueryTextListener(new QueryTextListener());
@@ -467,67 +431,62 @@ public class Editor extends Activity
 
     // onPrepareOptionsMenu
     @Override
-    public boolean onPrepareOptionsMenu (Menu menu)
-    {
-        menu.findItem(R.id.edit).setVisible (!edit);
-        menu.findItem(R.id.view).setVisible (edit);
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.edit).setVisible(!edit);
+        menu.findItem(R.id.view).setVisible(edit);
 
-        menu.findItem(R.id.save).setVisible (dirty);
-        menu.findItem(R.id.open).setVisible (isapp);
-        menu.findItem(R.id.openRecent).setVisible (isapp);
+        menu.findItem(R.id.save).setVisible(dirty);
+        menu.findItem(R.id.open).setVisible(isApp);
+        menu.findItem(R.id.openRecent).setVisible(isApp);
 
-        menu.findItem(R.id.autoSave).setChecked (save);
-        menu.findItem(R.id.wrap).setChecked (wrap);
-        menu.findItem(R.id.suggest).setChecked (suggest);
+        menu.findItem(R.id.autoSave).setChecked(save);
+        menu.findItem(R.id.wrap).setChecked(wrap);
+        menu.findItem(R.id.suggest).setChecked(suggest);
 
-        switch (theme)
-        {
-        case LIGHT:
-            menu.findItem(R.id.light).setChecked (true);
-            break;
+        switch (theme) {
+            case LIGHT:
+                menu.findItem(R.id.light).setChecked(true);
+                break;
 
-        case DARK:
-            menu.findItem(R.id.dark).setChecked (true);
-            break;
+            case DARK:
+                menu.findItem(R.id.dark).setChecked(true);
+                break;
 
-        case RETRO:
-            menu.findItem(R.id.retro).setChecked (true);
-            break;
+            case RETRO:
+                menu.findItem(R.id.retro).setChecked(true);
+                break;
         }
 
-        switch (size)
-        {
-        case SMALL:
-            menu.findItem(R.id.small).setChecked (true);
-            break;
+        switch (size) {
+            case SMALL:
+                menu.findItem(R.id.small).setChecked(true);
+                break;
 
-        case MEDIUM:
-            menu.findItem(R.id.medium).setChecked (true);
-            break;
+            case MEDIUM:
+                menu.findItem(R.id.medium).setChecked(true);
+                break;
 
-        case LARGE:
-            menu.findItem(R.id.large).setChecked (true);
-            break;
+            case LARGE:
+                menu.findItem(R.id.large).setChecked(true);
+                break;
         }
 
-        switch (type)
-        {
-        case MONO:
-            menu.findItem(R.id.mono).setChecked (true);
-            break;
+        switch (type) {
+            case MONO:
+                menu.findItem(R.id.mono).setChecked(true);
+                break;
 
-        case NORMAL:
-            menu.findItem(R.id.normal).setChecked (true);
-            break;
+            case NORMAL:
+                menu.findItem(R.id.normal).setChecked(true);
+                break;
         }
 
         // Get a list of recent files
-        List<Long> list = new ArrayList<Long>();
-        Map<Long, String> map = new HashMap<Long, String>();
+        List<Long> list = new ArrayList<>();
+        Map<Long, String> map = new HashMap<>();
 
         // Get the last modified dates
-        for (String path : pathMap.keySet())
-        {
+        for (String path : pathMap.keySet()) {
             File file = new File(path);
             long last = file.lastModified();
             list.add(last);
@@ -544,15 +503,14 @@ public class Editor extends Activity
         sub.clear();
 
         // Add the recent files
-        for (long date : list)
-        {
+        for (long date : list) {
             String path = map.get(date);
 
             // Remove path prefix
             String name =
-                path.replaceFirst(Environment
-                                  .getExternalStorageDirectory()
-                                  .getPath() + File.separator, "");
+                    path.replaceFirst(Environment
+                            .getExternalStorageDirectory()
+                            .getPath() + File.separator, "");
             sub.add(name);
         }
 
@@ -561,70 +519,68 @@ public class Editor extends Activity
 
     // onOptionsItemSelected
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-        case android.R.id.home:
-            onBackPressed();
-            break;
-        case R.id.edit:
-            editClicked(item);
-            break;
-        case R.id.view:
-            viewClicked(item);
-            break;
-        case R.id.open:
-            openFile();
-            break;
-        case R.id.save:
-            saveFile();
-            break;
-        case R.id.saveAs:
-            saveAs();
-            break;
-        case R.id.viewMarkdown:
-            viewMarkdown();
-            break;
-        case R.id.autoSave:
-            autoSaveClicked(item);
-            break;
-        case R.id.wrap:
-            wrapClicked(item);
-            break;
-        case R.id.suggest:
-            suggestClicked(item);
-            break;
-        case R.id.light:
-            lightClicked(item);
-            break;
-        case R.id.dark:
-            darkClicked(item);
-            break;
-        case R.id.retro:
-            retroClicked(item);
-            break;
-        case R.id.small:
-            smallClicked(item);
-            break;
-        case R.id.medium:
-            mediumClicked(item);
-            break;
-        case R.id.large:
-            largeClicked(item);
-            break;
-        case R.id.mono:
-            monoClicked(item);
-            break;
-        case R.id.normal:
-            normalClicked(item);
-            break;
-        case R.id.about:
-            aboutClicked();
-            break;
-        default:
-            openRecent(item);
-            break;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.edit:
+                editClicked(item);
+                break;
+            case R.id.view:
+                viewClicked(item);
+                break;
+            case R.id.open:
+                openFile();
+                break;
+            case R.id.save:
+                saveFile();
+                break;
+            case R.id.saveAs:
+                saveAs();
+                break;
+            case R.id.viewMarkdown:
+                viewMarkdown();
+                break;
+            case R.id.autoSave:
+                autoSaveClicked(item);
+                break;
+            case R.id.wrap:
+                wrapClicked(item);
+                break;
+            case R.id.suggest:
+                suggestClicked(item);
+                break;
+            case R.id.light:
+                lightClicked(item);
+                break;
+            case R.id.dark:
+                darkClicked(item);
+                break;
+            case R.id.retro:
+                retroClicked(item);
+                break;
+            case R.id.small:
+                smallClicked(item);
+                break;
+            case R.id.medium:
+                mediumClicked(item);
+                break;
+            case R.id.large:
+                largeClicked(item);
+                break;
+            case R.id.mono:
+                monoClicked(item);
+                break;
+            case R.id.normal:
+                normalClicked(item);
+                break;
+            case R.id.about:
+                aboutClicked();
+                break;
+            default:
+                openRecent(item);
+                break;
         }
 
         // Close text search
@@ -639,28 +595,21 @@ public class Editor extends Activity
 
     // onBackPressed
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         if (dirty)
             alertDialog(R.string.appName, R.string.modified,
-                        R.string.save, R.string.discard,
-                        new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int id)
-            {
-                switch (id)
-                {
-                case DialogInterface.BUTTON_POSITIVE:
-                    saveFile();
-                    finish();
-                    break;
-                case DialogInterface.BUTTON_NEGATIVE:
-                    dirty = false;
-                    finish();
-                    break;
-                }
-            }
-        });
+                    R.string.save, R.string.discard, (dialog, id) -> {
+                        switch (id) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                saveFile();
+                                finish();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                dirty = false;
+                                finish();
+                                break;
+                        }
+                    });
 
         else
             finish();
@@ -669,43 +618,40 @@ public class Editor extends Activity
     // onActivityResult
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data)
-    {
+                                    Intent data) {
         // Do nothing if cancelled
         if (resultCode != RESULT_OK)
             return;
 
-        switch (requestCode)
-        {
-        case GET_TEXT:
-            Uri uri = data.getData();
-            readFile(uri);
-            break;
+        switch (requestCode) {
+            case GET_TEXT:
+                Uri uri = data.getData();
+                readFile(uri);
+                break;
         }
     }
 
     // editClicked
-    private void editClicked(MenuItem item)
-    {
+    private void editClicked(MenuItem item) {
         // Set editable with or without suggestions
         if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
         else
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                    InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // Set editable with or without suggestions
         if (suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
         else
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                    InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // Change text size temporarily as workaround for yet another
         // obscure feature of some version of android
@@ -720,8 +666,7 @@ public class Editor extends Activity
     }
 
     // viewClicked
-    private void viewClicked(MenuItem item)
-    {
+    private void viewClicked(MenuItem item) {
         // Set read only
         textView.setRawInputType(InputType.TYPE_NULL);
         textView.clearFocus();
@@ -734,29 +679,23 @@ public class Editor extends Activity
     }
 
     // getDefaultFile
-    private File getDefaultFile()
-    {
+    private File getDefaultFile() {
         File documents = new
-            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+                File(Environment.getExternalStorageDirectory(), DOCUMENTS);
         return new File(documents, EDIT_FILE);
     }
 
     // defaultFile
-    private void defaultFile(String text)
-    {
+    private void defaultFile(String text) {
         file = getDefaultFile();
 
         Uri uri = Uri.fromFile(file);
         path = uri.getPath();
 
-        if (file.exists())
-        {
+        if (file.exists()) {
             readFile(uri);
             toAppend = text;
-        }
-
-        else
-        {
+        } else {
             if (text != null)
                 textView.append(text);
 
@@ -768,8 +707,7 @@ public class Editor extends Activity
     // alertDialog
     private void alertDialog(int title, int message,
                              int positiveButton, int negativeButton,
-                             DialogInterface.OnClickListener listener)
-    {
+                             DialogInterface.OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -783,16 +721,14 @@ public class Editor extends Activity
     }
 
     // savePath
-    private void savePath(String path)
-    {
+    private void savePath(String path) {
         // Save the current position
         pathMap.put(path, scrollView.getScrollY());
 
         // Get a list of files
-        List<Long> list = new ArrayList<Long>();
-        Map<Long, String> map = new HashMap<Long, String>();
-        for (String name : pathMap.keySet())
-        {
+        List<Long> list = new ArrayList<>();
+        Map<Long, String> map = new HashMap<>();
+        for (String name : pathMap.keySet()) {
             File file = new File(name);
             list.add(file.lastModified());
             map.put(file.lastModified(), name);
@@ -803,13 +739,11 @@ public class Editor extends Activity
         Collections.reverse(list);
 
         int count = 0;
-        for (long date : list)
-        {
+        for (long date : list) {
             String name = map.get(date);
 
             // Remove old files
-            if (count >= MAX_PATHS)
-            {
+            if (count >= MAX_PATHS) {
                 pathMap.remove(name);
                 removeList.add(name);
             }
@@ -819,81 +753,65 @@ public class Editor extends Activity
     }
 
     // openRecent
-    private void openRecent(MenuItem item)
-    {
+    private void openRecent(MenuItem item) {
         String name = item.getTitle().toString();
         File file = new File(name);
 
         // Check absolute file
         if (!file.isAbsolute())
             file = new File(Environment.getExternalStorageDirectory(),
-                            File.separator + name);
+                    File.separator + name);
         // Check it exists
-        if (file.exists())
-        {
+        if (file.exists()) {
             final Uri uri = Uri.fromFile(file);
 
             if (dirty)
-                alertDialog(R.string.openRecent, R.string.modified,
-                            R.string.save, R.string.discard,
-                            new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int id)
-                        {
-                            switch (id)
-                            {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                saveFile();
-                                readFile(uri);
-                                break;
+                alertDialog(R.string.openRecent, R.string.modified, R.string.save,
+                        R.string.discard, (dialog, id) -> {
+                            switch (id) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    saveFile();
+                                    readFile(uri);
+                                    break;
 
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                dirty = false;
-                                readFile(uri);
-                                break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    dirty = false;
+                                    readFile(uri);
+                                    break;
                             }
-                        }
-                    });
-
-
+                        });
             else
                 readFile(uri);
         }
     }
 
     // saveAs
-    private void saveAs()
-    {
+    private void saveAs() {
         // Remove path prefix
         String name =
-            path.replaceFirst(Environment
-                              .getExternalStorageDirectory()
-                              .getPath() + File.separator, "");
+                path.replaceFirst(Environment
+                        .getExternalStorageDirectory()
+                        .getPath() + File.separator, "");
 
         // Open dialog
-        saveAsDialog(R.string.save, R.string.choose, name,
-                     new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int id)
-            {
-                switch (id)
-                {
+        saveAsDialog(name, (dialog, id) -> {
+            switch (id) {
                 case DialogInterface.BUTTON_POSITIVE:
                     EditText text =
-                        (EditText) ((Dialog) dialog).findViewById(TEXT);
-                    String name = text.getText().toString();
+                            ((Dialog) dialog).findViewById(TEXT);
+                    String name1 = text.getText().toString();
 
                     // Ignore empty string
-                    if (name.isEmpty())
+                    if (name1.isEmpty())
                         return;
 
-                    file = new File(name);
+                    file = new File(name1);
 
                     // Check absolute file
                     if (!file.isAbsolute())
                         file = new
-                            File(Environment.getExternalStorageDirectory(),
-                                 File.separator + name);
+                                File(Environment.getExternalStorageDirectory(),
+                                File.separator + name1);
 
                     // Set interface title
                     Uri uri = Uri.fromFile(file);
@@ -902,18 +820,15 @@ public class Editor extends Activity
 
                     path = file.getPath();
                     saveFile();
-                }
             }
         });
     }
 
     // saveAsDialog
-    private void saveAsDialog(int title, int message, String path,
-                              DialogInterface.OnClickListener listener)
-    {
+    private void saveAsDialog(String path, DialogInterface.OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title);
-        builder.setMessage(message);
+        builder.setTitle(R.string.save);
+        builder.setMessage(R.string.choose);
 
         // Add the buttons
         builder.setPositiveButton(R.string.save, listener);
@@ -932,14 +847,12 @@ public class Editor extends Activity
     }
 
     // viewMarkdown
-    private void viewMarkdown()
-    {
+    private void viewMarkdown() {
         MarkdownProcessor mark = new MarkdownProcessor();
         String text = textView.getText().toString();
         String html = mark.markdown(text);
 
-        try
-        {
+        try {
             File file = new File(getExternalCacheDir(), HTML_FILE);
             file.deleteOnExit();
 
@@ -951,21 +864,18 @@ public class Editor extends Activity
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, TEXT_HTML);
             startActivity(intent);
+        } catch (Exception e) {
         }
-
-        catch (Exception e) {}
     }
 
     // autoSaveClicked
-    private void autoSaveClicked(MenuItem item)
-    {
+    private void autoSaveClicked(MenuItem item) {
         save = !save;
         item.setChecked(save);
     }
 
     // wrapClicked
-    private void wrapClicked(MenuItem item)
-    {
+    private void wrapClicked(MenuItem item) {
         wrap = !wrap;
         item.setChecked(wrap);
 
@@ -974,26 +884,24 @@ public class Editor extends Activity
     }
 
     // suggestClicked
-    private void suggestClicked(MenuItem item)
-    {
+    private void suggestClicked(MenuItem item) {
         suggest = !suggest;
         item.setChecked(suggest);
 
         if (suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         else
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                    InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();
     }
 
     // lightClicked
-    private void lightClicked(MenuItem item)
-    {
+    private void lightClicked(MenuItem item) {
         theme = LIGHT;
         item.setChecked(true);
 
@@ -1002,8 +910,7 @@ public class Editor extends Activity
     }
 
     // darkClicked
-    private void darkClicked(MenuItem item)
-    {
+    private void darkClicked(MenuItem item) {
         theme = DARK;
         item.setChecked(true);
 
@@ -1012,8 +919,7 @@ public class Editor extends Activity
     }
 
     // retroClicked
-    private void retroClicked(MenuItem item)
-    {
+    private void retroClicked(MenuItem item) {
         theme = RETRO;
         item.setChecked(true);
 
@@ -1022,8 +928,7 @@ public class Editor extends Activity
     }
 
     // smallClicked
-    private void smallClicked(MenuItem item)
-    {
+    private void smallClicked(MenuItem item) {
         size = SMALL;
         item.setChecked(true);
 
@@ -1031,8 +936,7 @@ public class Editor extends Activity
     }
 
     // mediumClicked
-    private void mediumClicked(MenuItem item)
-    {
+    private void mediumClicked(MenuItem item) {
         size = MEDIUM;
         item.setChecked(true);
 
@@ -1040,8 +944,7 @@ public class Editor extends Activity
     }
 
     // largeClicked
-    private void largeClicked(MenuItem item)
-    {
+    private void largeClicked(MenuItem item) {
         size = LARGE;
         item.setChecked(true);
 
@@ -1049,8 +952,7 @@ public class Editor extends Activity
     }
 
     // monoClicked
-    private void monoClicked(MenuItem item)
-    {
+    private void monoClicked(MenuItem item) {
         type = MONO;
         item.setChecked(true);
 
@@ -1058,8 +960,7 @@ public class Editor extends Activity
     }
 
     // normalClicked
-    private void normalClicked(MenuItem item)
-    {
+    private void normalClicked(MenuItem item) {
         type = NORMAL;
         item.setChecked(true);
 
@@ -1067,41 +968,37 @@ public class Editor extends Activity
     }
 
     // setSizeAndTypeface
-    private void setSizeAndTypeface(int size, int type)
-    {
+    private void setSizeAndTypeface(int size, int type) {
         // Update size
-        switch (size)
-        {
-        case SMALL:
-        case MEDIUM:
-        case LARGE:
-            break;
+        switch (size) {
+            case SMALL:
+            case MEDIUM:
+            case LARGE:
+                break;
 
-        default:
-            size = MEDIUM;
-            invalidateOptionsMenu();
-            break;
+            default:
+                size = MEDIUM;
+                invalidateOptionsMenu();
+                break;
         }
 
         // Set size
         textView.setTextSize(size);
 
         // Set type
-        switch (type)
-        {
-        case MONO:
-            textView.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
-            break;
+        switch (type) {
+            case MONO:
+                textView.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
+                break;
 
-        case NORMAL:
-            textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-            break;
+            case NORMAL:
+                textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+                break;
         }
     }
 
     // aboutClicked
-    private void aboutClicked()
-    {
+    private void aboutClicked() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.about);
 
@@ -1109,9 +1006,9 @@ public class Editor extends Activity
         String format = getString(R.string.version);
 
         String message =
-            String.format(Locale.getDefault(),
-                          format, BuildConfig.VERSION_NAME,
-                          dateFormat.format(BuildConfig.BUILT));
+                String.format(Locale.getDefault(),
+                        format, BuildConfig.VERSION_NAME,
+                        dateFormat.format(BuildConfig.BUILT));
         builder.setMessage(message);
 
         // Add the button
@@ -1121,51 +1018,42 @@ public class Editor extends Activity
         Dialog dialog = builder.show();
 
         // Set movement method
-        TextView text = (TextView) dialog.findViewById(android.R.id.message);
+        TextView text = dialog.findViewById(android.R.id.message);
         if (text != null)
             text.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     // openFile
-    private void openFile()
-    {
+    private void openFile() {
         if (dirty)
             alertDialog(R.string.open, R.string.modified,
-                        R.string.save, R.string.discard,
-                        new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int id)
-            {
-                switch (id)
-                {
-                case DialogInterface.BUTTON_POSITIVE:
-                    saveFile();
-                    getContent();
-                    break;
+                    R.string.save, R.string.discard, (dialog, id) -> {
+                        switch (id) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                saveFile();
+                                getContent();
+                                break;
 
-                case DialogInterface.BUTTON_NEGATIVE:
-                    dirty = false;
-                    getContent();
-                    break;
-                }
-            }
-        });
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                dirty = false;
+                                getContent();
+                                break;
+                        }
+                    });
 
         else
             getContent();
     }
 
     // getContent
-    private void getContent()
-    {
+    private void getContent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType(TEXT_WILD);
         startActivityForResult(Intent.createChooser(intent, null), GET_TEXT);
     }
 
     // readFile
-    private void readFile(Uri uri)
-    {
+    private void readFile(Uri uri) {
         if (uri == null)
             return;
 
@@ -1176,8 +1064,7 @@ public class Editor extends Activity
             uri = resolveContent(uri);
 
         // Read into default file if unresolved
-        if (uri.getScheme().equalsIgnoreCase(CONTENT))
-        {
+        if (uri.getScheme().equalsIgnoreCase(CONTENT)) {
             content = uri;
             file = getDefaultFile();
             Uri defaultUri = Uri.fromFile(file);
@@ -1188,8 +1075,7 @@ public class Editor extends Activity
         }
 
         // Read file
-        else
-        {
+        else {
             path = uri.getPath();
             file = new File(path);
 
@@ -1208,12 +1094,10 @@ public class Editor extends Activity
     }
 
     // resolveContent
-    private Uri resolveContent(Uri uri)
-    {
+    private Uri resolveContent(Uri uri) {
         String path = FileUtils.getPath(this, uri);
 
-        if (path != null)
-        {
+        if (path != null) {
             File file = new File(path);
             if (file.canRead())
                 uri = Uri.fromFile(file);
@@ -1223,26 +1107,17 @@ public class Editor extends Activity
     }
 
     // saveFile
-    private void saveFile()
-    {
+    private void saveFile() {
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedOverwrite,
-                        R.string.overwrite, R.string.cancel,
-                        new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int id)
-            {
-                switch (id)
-                {
-                case DialogInterface.BUTTON_POSITIVE:
-                    saveFile(file);
-                    break;
-                }
-            }
-        });
-
-        else
-        {
+                    R.string.overwrite, R.string.cancel, (dialog, id) -> {
+                        switch (id) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                saveFile(file);
+                                break;
+                        }
+                    });
+        else {
             if (content == null)
                 saveFile(file);
 
@@ -1252,8 +1127,7 @@ public class Editor extends Activity
     }
 
     // saveFile
-    private void saveFile(File file)
-    {
+    private void saveFile(File file) {
         String text = textView.getText().toString();
         write(text, file);
         dirty = false;
@@ -1263,63 +1137,47 @@ public class Editor extends Activity
     }
 
     // saveFile
-    private void saveFile(Uri uri)
-    {
+    private void saveFile(Uri uri) {
         String text = textView.getText().toString();
-        try
-        {
+        try {
             OutputStream outputStream =
-                getContentResolver().openOutputStream(uri);
+                    getContentResolver().openOutputStream(uri);
             write(text, outputStream);
-        }
-
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     // write
-    private void write(String text, File file)
-    {
+    private void write(String text, File file) {
         file.getParentFile().mkdirs();
-        try
-        {
+        try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(text);
             fileWriter.close();
-        }
-
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     // write
-    private void write(String text, OutputStream os)
-    {
-        try
-        {
+    private void write(String text, OutputStream os) {
+        try {
             OutputStreamWriter writer = new OutputStreamWriter(os);
             writer.write(text, 0, text.length());
             writer.close();
             dirty = false;
             invalidateOptionsMenu();
-        }
-
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     // QueryTextListener
     private class QueryTextListener
-        implements SearchView.OnQueryTextListener
-    {
+            implements SearchView.OnQueryTextListener {
         private BackgroundColorSpan span = new
-            BackgroundColorSpan(Color.YELLOW);
+                BackgroundColorSpan(Color.YELLOW);
         private Editable editable;
         private Matcher matcher;
         private Pattern pattern;
@@ -1330,36 +1188,29 @@ public class Editor extends Activity
         // onQueryTextChange
         @Override
         @SuppressWarnings("deprecation")
-        public boolean onQueryTextChange (String newText)
-        {
+        public boolean onQueryTextChange(String newText) {
             // Use regex search and spannable for highlighting
             height = scrollView.getHeight();
             editable = textView.getEditableText();
             text = textView.getText().toString();
 
             // Reset the index and clear highlighting
-            if (newText.length() == 0)
-            {
+            if (newText.length() == 0) {
                 index = 0;
                 editable.removeSpan(span);
                 return false;
             }
 
             // Check pattern
-            try
-            {
+            try {
                 pattern = Pattern.compile(newText, Pattern.MULTILINE);
                 matcher = pattern.matcher(text);
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 return false;
             }
 
             // Find text
-            if (matcher.find(index))
-            {
+            if (matcher.find(index)) {
                 // Get index
                 index = matcher.start();
 
@@ -1369,19 +1220,17 @@ public class Editor extends Activity
 
                 // Get text position
                 int line = textView.getLayout()
-                           .getLineForOffset(index);
+                        .getLineForOffset(index);
                 int pos = textView.getLayout()
-                          .getLineBaseline(line);
+                        .getLineBaseline(line);
 
                 // Scroll to it
                 scrollView.smoothScrollTo(0, pos - height / 2);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
-                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-
-            else
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } else
                 index = 0;
 
             return true;
@@ -1389,11 +1238,9 @@ public class Editor extends Activity
 
         // onQueryTextSubmit
         @Override
-        public boolean onQueryTextSubmit (String query)
-        {
+        public boolean onQueryTextSubmit(String query) {
             // Find next text
-            if (matcher.find())
-            {
+            if (matcher.find()) {
                 // Get index
                 index = matcher.start();
 
@@ -1406,11 +1253,8 @@ public class Editor extends Activity
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
-                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-
-            else
-            {
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } else {
                 matcher.reset();
                 index = 0;
             }
@@ -1421,65 +1265,48 @@ public class Editor extends Activity
 
     // ReadTask
     private class ReadTask
-        extends AsyncTask<Uri, Void, String>
-    {
+            extends AsyncTask<Uri, Void, String> {
         // doInBackground
         @Override
-        protected String doInBackground(Uri... params)
-        {
+        protected String doInBackground(Uri... params) {
             StringBuilder stringBuilder = new StringBuilder();
 
-            try
-            {
+            try {
                 InputStream inputStream =
-                    getContentResolver().openInputStream(params[0]);
+                        getContentResolver().openInputStream(params[0]);
                 BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(inputStream));
+                        new BufferedReader(new InputStreamReader(inputStream));
 
                 String line;
-                while ((line = reader.readLine()) != null)
-                {
+                while ((line = reader.readLine()) != null) {
                     stringBuilder.append(line);
                     stringBuilder.append(System.getProperty("line.separator"));
                 }
 
                 reader.close();
-           }
-
-            catch (Exception e) {}
+            } catch (Exception e) {
+            }
 
             return stringBuilder.toString();
         }
 
         // onPostExecute
         @Override
-        protected void onPostExecute(String result)
-        {
+        protected void onPostExecute(String result) {
             if (textView != null)
                 textView.setText(result);
 
-            if (toAppend != null)
-            {
+            if (toAppend != null) {
                 textView.append(toAppend);
                 toAppend = null;
                 dirty = true;
-            }
-
-            else
+            } else
                 dirty = false;
 
             // Check for saved position
-            if (pathMap.containsKey(path))
-            {
-                textView.postDelayed(new Runnable()
-                {
-                    // run
-                    @Override
-                    public void run()
-                    {
-                        scrollView.smoothScrollTo(0, pathMap.get(path));
-                    }
-                }, POSN_DELAY);
+            if (pathMap.containsKey(path)) {
+                // run
+                textView.postDelayed(() -> scrollView.smoothScrollTo(0, pathMap.get(path)), POSN_DELAY);
             }
 
             // Set read only
