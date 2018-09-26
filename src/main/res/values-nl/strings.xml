@@ -1,58 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="appName">Tekstbewerker</string>
-  
-  <string name="search">Zoeken…</string>
-  <string name="edit">Bewerken</string>
-  <string name="view">Tonen</string>
-  <string name="open">Bestand openen…</string>
-  <string name="save">Opslaan</string>
-  <string name="openRecent">Recent bestand openen</string>
-  <string name="saveAs">Opslaan als…</string>
-  <string name="viewMarkdown">Markdown tonen…</string>
-  <string name="autoSave">Automatisch opslaan</string>
-  <string name="wrap">Tekstomloop</string>
-  <string name="suggest">Suggesties</string>
-  <string name="theme">Thema</string>
-  <string name="light">Licht</string>
-  <string name="dark">Donker</string>
-  <string name="retro">Retro</string>
-  <string name="size">Tekstgrootte</string>
-  <string name="small">Klein</string>
-  <string name="medium">Normaal</string>
-  <string name="large">Groot</string>
-  <string name="typeface">Lettertype</string>
-  <string name="mono">Monospace</string>
-  <string name="normal">Proportioneel</string>
-  <string name="about">Over</string>
+    <string name="appName">Tekstbewerker</string>
 
-  <string name="version" formatted="false">Editor - versie %s\nGebouwd
+    <string name="search">Zoeken…</string>
+    <string name="edit">Bewerken</string>
+    <string name="view">Tonen</string>
+    <string name="open">Bestand openen…</string>
+    <string name="save">Opslaan</string>
+    <string name="openRecent">Recent bestand openen</string>
+    <string name="saveAs">Opslaan als…</string>
+    <string name="viewMarkdown">Markdown tonen…</string>
+    <string name="autoSave">Automatisch opslaan</string>
+    <string name="wrap">Tekstomloop</string>
+    <string name="suggest">Suggesties</string>
+    <string name="theme">Thema</string>
+    <string name="light">Licht</string>
+    <string name="dark">Donker</string>
+    <string name="retro">Retro</string>
+    <string name="size">Tekstgrootte</string>
+    <string name="small">Klein</string>
+    <string name="medium">Normaal</string>
+    <string name="large">Groot</string>
+    <string name="typeface">Lettertype</string>
+    <string name="mono">Monospace</string>
+    <string name="normal">Proportioneel</string>
+    <string name="about">Over</string>
+
+    <string name="version" formatted="false">Editor - versie %s\nGebouwd
   op %s\nCopyright \u00A9 2017 Bill Farmer\nNederlandse vertaling door
   <a href="https://github.com/Vistaus">Heimen Stoffels
-  (vistaus)</a>\nLicentie <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  (vistaus)</a>\nLicentie <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="choose">Kies een bestandsnaam</string>
-  <string name="loading">Bezig met laden…</string>
+    <string name="choose">Kies een bestandsnaam</string>
+    <string name="loading">Bezig met laden…</string>
 
-  <string name="modified">
+    <string name="modified">
     Je hebt niet-opgeslagen wijzigingen. Wil je je wijzigingen opslaan?
   </string>
 
-  <string name="changedReload">
+    <string name="changedReload">
     Het bestand is gewijzigd; wil je het herladen?
   </string>
 
-  <string name="changedOverwrite">
+    <string name="changedOverwrite">
     Het bestand is gewijzigd; wil je het overschrijven?
   </string>
 
-  <string name="ok">Oké</string>
-  <string name="reload">Herladen</string>
-  <string name="overwrite">Overschrijven</string>
-  <string name="discard">Verwerpen</string>
-  <string name="cancel">Annuleren</string>
+    <string name="ok">Oké</string>
+    <string name="reload">Herladen</string>
+    <string name="overwrite">Overschrijven</string>
+    <string name="discard">Verwerpen</string>
+    <string name="cancel">Annuleren</string>
 
 </resources>

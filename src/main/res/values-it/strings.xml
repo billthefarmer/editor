@@ -1,58 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="appName">Editor</string>
-  
-  <string name="search">Cerca…</string>
-  <string name="edit">Modificare</string>
-  <string name="view">Vedere</string>
-  <string name="open">Apri file…</string>
-  <string name="save">Salva</string>
-  <string name="openRecent">Apri recente</string>
-  <string name="saveAs">Salva come…</string>
-  <string name="viewMarkdown">Visualizza markdown…</string>
-  <string name="autoSave">Salva automatico</string>
-  <string name="wrap">A capo automatico</string>
-  <string name="suggest">Suggerimenti</string>
-  <string name="theme">Tema</string>
-  <string name="light">Chiaro</string>
-  <string name="dark">Scuro</string>
-  <string name="retro">Retro</string>
-  <string name="size">Dimensione testo</string>
-  <string name="small">Piccola</string>
-  <string name="medium">Medio</string>
-  <string name="large">Largo</string>
-  <string name="typeface">Carattere</string>
-  <string name="mono">Monospazio</string>
-  <string name="normal">Proporzionale</string>
-  <string name="about">Informazioni</string>
+    <string name="appName">Editor</string>
 
-  <string name="version" formatted="false">Editor versione %s\nData
+    <string name="search">Cerca…</string>
+    <string name="edit">Modificare</string>
+    <string name="view">Vedere</string>
+    <string name="open">Apri file…</string>
+    <string name="save">Salva</string>
+    <string name="openRecent">Apri recente</string>
+    <string name="saveAs">Salva come…</string>
+    <string name="viewMarkdown">Visualizza markdown…</string>
+    <string name="autoSave">Salva automatico</string>
+    <string name="wrap">A capo automatico</string>
+    <string name="suggest">Suggerimenti</string>
+    <string name="theme">Tema</string>
+    <string name="light">Chiaro</string>
+    <string name="dark">Scuro</string>
+    <string name="retro">Retro</string>
+    <string name="size">Dimensione testo</string>
+    <string name="small">Piccola</string>
+    <string name="medium">Medio</string>
+    <string name="large">Largo</string>
+    <string name="typeface">Carattere</string>
+    <string name="mono">Monospazio</string>
+    <string name="normal">Proporzionale</string>
+    <string name="about">Informazioni</string>
+
+    <string name="version" formatted="false">Editor versione %s\nData
   di compilazione %s\nCopyright \u00A9 2017 Bill Farmer\nTraduzione
   in italiano di <a href="https://github.com/airon90">Michael
-  Moroni</a>\nLicenza <a href="https://www.gnu.org/licenses/gpl.txt"
-  >GNU GPLv3</a>
+  Moroni</a>\nLicenza <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="choose">Scegli il nome del file</string>
-  <string name="loading">Caricamento…</string>
+    <string name="choose">Scegli il nome del file</string>
+    <string name="loading">Caricamento…</string>
 
-  <string name="modified">
+    <string name="modified">
     Hai delle modifiche non salvate. Vuoi salva le tue modifiche?
   </string>
 
-  <string name="changedReload">
+    <string name="changedReload">
     Il file è cambiato. Vuoi ricaricarlo?
   </string>
 
-  <string name="changedOverwrite">
+    <string name="changedOverwrite">
     Il file è cambiato. Vuoi sovrascriverlo?
   </string>
 
-  <string name="ok">Ok</string>
-  <string name="reload">Ricarica</string>
-  <string name="overwrite">Sovrascrivi</string>
-  <string name="discard">Non salvare</string>
-  <string name="cancel">Annulla</string>
+    <string name="ok">Ok</string>
+    <string name="reload">Ricarica</string>
+    <string name="overwrite">Sovrascrivi</string>
+    <string name="discard">Non salvare</string>
+    <string name="cancel">Annulla</string>
 
 </resources>

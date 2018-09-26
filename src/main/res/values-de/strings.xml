@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="appName">Editor</string>
-  
-  <string name="search">Suchen…</string>
-  <string name="edit">Bearbeiten</string>
-  <string name="view">Sehen</string>
-  <string name="open">Datei öffnen…</string>
-  <string name="save">Speichern</string>
-  <string name="openRecent">Zuletzt geöffnet</string>
-  <string name="saveAs">Speichern unter…</string>
-  <string name="viewMarkdown">Abschlag markdown…</string>
-  <string name="autoSave">Automatisch speichern</string>
-  <string name="wrap">Zeilenumbruch</string>
-  <string name="suggest">Vorschläge</string>
-  <string name="theme">Thema</string>
-  <string name="light">Hell</string>
-  <string name="dark">Dunkel</string>
-  <string name="retro">Retro</string>
-  <string name="size">Schriftgröße</string>
-  <string name="small">Klein</string>
-  <string name="medium">Mittel</string>
-  <string name="large">Groß</string>
-  <string name="typeface">Schriftart</string>
-  <string name="mono">Nichtproportional</string>
-  <string name="normal">Proportional</string>
-  <string name="about">Über</string>
+    <string name="appName">Editor</string>
 
-  <string name="version" formatted="false">Editor Version %s\nBuild
-  %s\nCopyright \u00A9 2017 Bill Farmer\nDeutsche Übersetzung von <a
-  href="https://github.com/Markus00000">Markus Weimar</a>\nLizenz <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+    <string name="search">Suchen…</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="view">Sehen</string>
+    <string name="open">Datei öffnen…</string>
+    <string name="save">Speichern</string>
+    <string name="openRecent">Zuletzt geöffnet</string>
+    <string name="saveAs">Speichern unter…</string>
+    <string name="viewMarkdown">Abschlag markdown…</string>
+    <string name="autoSave">Automatisch speichern</string>
+    <string name="wrap">Zeilenumbruch</string>
+    <string name="suggest">Vorschläge</string>
+    <string name="theme">Thema</string>
+    <string name="light">Hell</string>
+    <string name="dark">Dunkel</string>
+    <string name="retro">Retro</string>
+    <string name="size">Schriftgröße</string>
+    <string name="small">Klein</string>
+    <string name="medium">Mittel</string>
+    <string name="large">Groß</string>
+    <string name="typeface">Schriftart</string>
+    <string name="mono">Nichtproportional</string>
+    <string name="normal">Proportional</string>
+    <string name="about">Über</string>
+
+    <string name="version" formatted="false">Editor Version %s\nBuild
+  %s\nCopyright \u00A9 2017 Bill Farmer\nDeutsche Übersetzung von <a href="https://github.com/Markus00000">Markus Weimar</a>\nLizenz <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="choose">Geben Sie einen Dateinamen ein.</string>
-  <string name="loading">Laden…</string>
+    <string name="choose">Geben Sie einen Dateinamen ein.</string>
+    <string name="loading">Laden…</string>
 
-  <string name="modified">
+    <string name="modified">
     Ihre Änderungen wurden noch nicht gespeichert. Möchten Sie sie speichern?
   </string>
 
-  <string name="changedReload">
+    <string name="changedReload">
     Die Datei wurde geändert. Möchten Sie sie neu laden?
   </string>
 
-  <string name="changedOverwrite">
+    <string name="changedOverwrite">
     Die Datei wurde geändert. Möchten Sie sie überschreiben?
   </string>
 
-  <string name="ok">OK</string>
-  <string name="reload">Neu laden</string>
-  <string name="overwrite">Überschreiben</string>
-  <string name="discard">Verwerfen</string>
-  <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
+    <string name="reload">Neu laden</string>
+    <string name="overwrite">Überschreiben</string>
+    <string name="discard">Verwerfen</string>
+    <string name="cancel">Abbrechen</string>
 
 </resources>

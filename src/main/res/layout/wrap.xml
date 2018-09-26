@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vscroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,12 +9,14 @@
     android:layout_marginBottom="8dp"
     android:fillViewport="true">
 
-  <EditText
-      android:id="@+id/text"
-      android:typeface="monospace"
-      android:inputType="text|textMultiLine"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="top" />
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:importantForAutofill="no"
+        android:inputType="text|textMultiLine"
+        android:typeface="monospace"
+        tools:targetApi="o" />
 
 </ScrollView>

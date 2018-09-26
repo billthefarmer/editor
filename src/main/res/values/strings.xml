@@ -1,77 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="appName">Editor</string>
-  
-  <string name="search">Search…</string>
-  <string name="edit">Edit</string>
-  <string name="view">View</string>
-  <string name="open">Open file…</string>
-  <string name="save">Save</string>
-  <string name="openRecent">Open recent</string>
-  <string name="saveAs">Save as…</string>
-  <string name="viewMarkdown">View markdown…</string>
-  <string name="autoSave">Auto save</string>
-  <string name="wrap">Word wrap</string>
-  <string name="suggest">Suggestions</string>
-  <string name="theme">Theme</string>
-  <string name="light">Light</string>
-  <string name="dark">Dark</string>
-  <string name="retro">Retro</string>
-  <string name="size">Text size</string>
-  <string name="small">Small</string>
-  <string name="medium">Medium</string>
-  <string name="large">Large</string>
-  <string name="typeface">Typeface</string>
-  <string name="mono">Monospace</string>
-  <string name="normal">Proportional</string>
-  <string name="about">About</string>
+    <string name="appName">Editor</string>
 
-  <!--
-      Note for translators: You don't need to translate all these
-      translation credits below. Just the version, copyright, credit
-      for your translation and the licence. Also add your translation
-      credit here.
-  -->
+    <string name="search">Search…</string>
+    <string name="edit">Edit</string>
+    <string name="view">View</string>
+    <string name="open">Open file…</string>
+    <string name="save">Save</string>
+    <string name="openRecent">Open recent</string>
+    <string name="saveAs">Save as…</string>
+    <string name="viewMarkdown">View markdown…</string>
+    <string name="autoSave">Auto save</string>
+    <string name="wrap">Word wrap</string>
+    <string name="suggest">Suggestions</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="retro">Retro</string>
+    <string name="size">Text size</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="typeface">Typeface</string>
+    <string name="mono">Monospace</string>
+    <string name="normal">Proportional</string>
+    <string name="about">About</string>
 
-  <string name="version" formatted="false">Editor version %s\nBuilt
-  %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a
-  href="https://github.com/milouse">Étienne Deparis</a>\nGerman
+    <!--
+        Note for translators: You don't need to translate all these
+        translation credits below. Just the version, copyright, credit
+        for your translation and the licence. Also add your translation
+        credit here.
+    -->
+
+    <string name="version" formatted="false">Editor version %s\nBuilt
+  %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a href="https://github.com/milouse">Étienne Deparis</a>\nGerman
   translation by <a href="https://github.com/Markus00000">Markus
-  Weimar</a>\nItalian translation by <a
-  href="https://github.com/airon90">Michael Moroni</a>\nPolish
+  Weimar</a>\nItalian translation by <a href="https://github.com/airon90">Michael Moroni</a>\nPolish
   translation by <a href="https://github.com/evo16">Evo</a>\nGreek
-  translation by <a
-  href="https://github.com/nikoss">nikoss</a>\nSimplified Chinese
+  translation by <a href="https://github.com/nikoss">nikoss</a>\nSimplified Chinese
   translation by <a href="https://github.com/ludoux">Lu Chang
-  (ludoux)</a>\nDutch translation by <a
-  href="https://github.com/Vistaus">Heimen Stoffels
-  (vistaus)</a>\nRussian translation by <a
-  href="https://github.com/bboa">Igor Nedoboy</a>\nLatvian translation
+  (ludoux)</a>\nDutch translation by <a href="https://github.com/Vistaus">Heimen Stoffels
+  (vistaus)</a>\nRussian translation by <a href="https://github.com/bboa">Igor Nedoboy</a>\nLatvian translation
   by <a href="https://github.com/rhssk">Rihards Skuja</a>\nIcelandic
-  translation by <a href="">Sveinn í Felli</a>\nLicence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  translation by <a href="">Sveinn í Felli</a>\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="choose">Choose a file name</string>
-  <string name="loading">Loading…</string>
+    <string name="choose">Choose a file name</string>
+    <string name="loading">Loading…</string>
 
-  <string name="modified">
+    <string name="modified">
     You have unsaved changes. Do you want to save your changes?
   </string>
 
-  <string name="changedReload">
+    <string name="changedReload">
     This file has changed, do you want to reload it?
   </string>
 
-  <string name="changedOverwrite">
+    <string name="changedOverwrite">
     This file has changed, do you want to overwrite it?
   </string>
 
-  <string name="ok">OK</string>
-  <string name="reload">Reload</string>
-  <string name="overwrite">Overwrite</string>
-  <string name="discard">Discard</string>
-  <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="reload">Reload</string>
+    <string name="overwrite">Overwrite</string>
+    <string name="discard">Discard</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
