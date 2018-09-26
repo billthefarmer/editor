@@ -1,33 +1,48 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:3.2.0'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
     }
 }
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 'android-22'
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
+        applicationId "org.billthefarmer.editor"
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionName "1.24"
+        versionCode 124
+
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     lintOptions {
-	disable 'IconDensities', 'ContentDescription'
+        disable 'IconDensities', 'ContentDescription'
         // abortOnError false
     }
 }
 
-repositories {
-    jcenter()
-}
-
 dependencies {
-    compile 'org.markdownj:markdownj-core:0.4'
+    implementation 'org.markdownj:markdownj-core:0.4'
 }

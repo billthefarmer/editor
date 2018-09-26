@@ -1,7 +1,7 @@
-# ![Logo](src/main/res/drawable-mdpi/ic_launcher.png) Editor [![Build Status](https://travis-ci.org/billthefarmer/editor.svg?branch=master)](https://travis-ci.org/billthefarmer/editor) [![Available on F-Droid](https://f-droid.org/wiki/images/c/ca/F-Droid-button_available-on_smaller.png)](https://f-droid.org/repository/browse/?fdid=org.billthefarmer.editor)
+# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Editor [![Build Status](https://travis-ci.org/billthefarmer/editor.svg?branch=master)](https://travis-ci.org/billthefarmer/editor) [![Available on F-Droid](https://f-droid.org/wiki/images/c/ca/F-Droid-button_available-on_smaller.png)](https://f-droid.org/packages/org.billthefarmer.editor)
 
 Android simple generic text editor. The app is available from
-[F-Droid](https://f-droid.org/repository/browse/?fdid=org.billthefarmer.editor)
+[F-Droid](https://f-droid.org/packages/org.billthefarmer.editor)
 and [here](https://github.com/billthefarmer/editor/releases)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-styles.png)
@@ -55,7 +55,7 @@ Save the current file if modified.
 ### Open
 Depending on what file managers or file pickers are installed, you
 will get a choice of options to pick a file. The file will initially
-be read only, touch the **Edit** toolbar item to enable editing.
+be read-only. Touch the **Edit** toolbar item to enable editing.
 
 ### Open recent
 Choose a file from the list that pops up. As above the file will
@@ -72,7 +72,7 @@ Enter search text in the field that pops up in the toolbar. The first
 matching item will be highlighted. Use the search button in the
 keyboard for find next. The exact regular expression syntax used is in
 the android documentation for
-[Pattern](https://developer.android.com/reference/java/util/regex/Pattern.html#sum).
+[Pattern](https://developer.android.com/reference/java/util/regex/Pattern#sum).
 
 ### View markdown
 You will be prompted to choose a viewer for an html file containing
