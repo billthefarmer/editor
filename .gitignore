@@ -3,3 +3,6 @@ build/
 local.properties
 *.iml
 .idea/
+*.orig
+*~
+*.apk
