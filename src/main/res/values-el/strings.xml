@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="appName">Επεξεργαστής</string>
+  <string name="appName">Επεξεργαστής</string>
 
-    <string name="search">Αναζήτηση…</string>
-    <string name="edit">Επεξεργασία</string>
-    <string name="view">Προβολή</string>
-    <string name="open">Άνοιγμα αρχείου…</string>
-    <string name="save">Αποθήκευση</string>
-    <string name="openRecent">Άνοιγμα πρόσφατου</string>
-    <string name="saveAs">Αποθήκευση ως…</string>
-    <string name="viewMarkdown">Προβολή της Markdown…</string>
-    <string name="autoSave">Αυτόματη αποθήκευση</string>
-    <string name="wrap">Αναδίπλωση λέξεων</string>
-    <string name="suggest">Προτάσεις</string>
-    <string name="theme">Θέμα</string>
-    <string name="light">Φωτεινό</string>
-    <string name="dark">Σκοτεινό</string>
-    <string name="retro">Παλιότροπο</string>
-    <string name="size">Μέγεθος κειμένου</string>
-    <string name="small">Μικρό</string>
-    <string name="medium">Μεσαίο</string>
-    <string name="large">Μεγάλο</string>
-    <string name="typeface">Γραμματοσειρά</string>
-    <string name="mono">Σταθερού πλάτους</string>
-    <string name="normal">Αναλογική</string>
-    <string name="about">Σχετικά με…</string>
+  <string name="search">Αναζήτηση…</string>
+  <string name="edit">Επεξεργασία</string>
+  <string name="view">Προβολή</string>
+  <string name="open">Άνοιγμα αρχείου…</string>
+  <string name="save">Αποθήκευση</string>
+  <string name="openRecent">Άνοιγμα πρόσφατου</string>
+  <string name="saveAs">Αποθήκευση ως…</string>
+  <string name="viewMarkdown">Προβολή της Markdown…</string>
+  <string name="autoSave">Αυτόματη αποθήκευση</string>
+  <string name="wrap">Αναδίπλωση λέξεων</string>
+  <string name="suggest">Προτάσεις</string>
+  <string name="theme">Θέμα</string>
+  <string name="light">Φωτεινό</string>
+  <string name="dark">Σκοτεινό</string>
+  <string name="retro">Παλιότροπο</string>
+  <string name="size">Μέγεθος κειμένου</string>
+  <string name="small">Μικρό</string>
+  <string name="medium">Μεσαίο</string>
+  <string name="large">Μεγάλο</string>
+  <string name="typeface">Γραμματοσειρά</string>
+  <string name="mono">Σταθερού πλάτους</string>
+  <string name="normal">Αναλογική</string>
+  <string name="about">Σχετικά με…</string>
 
-    <string name="version" formatted="false">Έκδοση του Επεξεργαστή
+  <string name="version" formatted="false">Έκδοση του Επεξεργαστή
   %s\nΣύνθεση %s\nΠνευματικά δικαιώματα \u00A9 2017 Bill
   Farmer\nΕλληνική μετάφραση από <a href="https://github.com/nikoss">nikoss</a>\nΆδεια <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
-    <string name="choose">Επέλεξε ένα όνομα αρχείου</string>
-    <string name="loading">Φορτώνει…</string>
+  <string name="choose">Επέλεξε ένα όνομα αρχείου</string>
+  <string name="loading">Φορτώνει…</string>
 
-    <string name="modified">Υπάρχουν μη αποθηκευμένες αλλαγές.\nΘα
+  <string name="modified">Υπάρχουν μη αποθηκευμένες αλλαγές.\nΘα
   ήθελες να αποθηκεύσεις τις αλλαγές σου;</string>
 
-    <string name="changedReload">Αυτό το αρχείο έχει αλλάξει.\nΘα ήθελες
+  <string name="changedReload">Αυτό το αρχείο έχει αλλάξει.\nΘα ήθελες
   να ξαναφορτωθεί;</string>
 
-    <string name="changedOverwrite">Αυτό το αρχείο έχει αλλάξει.\nΘα
+  <string name="changedOverwrite">Αυτό το αρχείο έχει αλλάξει.\nΘα
   ήθελες να επανωγραφεί;</string>
 
-    <string name="ok">Εντάξει</string>
-    <string name="reload">Επαναφόρτωση</string>
-    <string name="overwrite">Επανωγραφή</string>
-    <string name="discard">Απόρριψη</string>
-    <string name="cancel">Ακύρωση</string>
+  <string name="ok">Εντάξει</string>
+  <string name="reload">Επαναφόρτωση</string>
+  <string name="overwrite">Επανωγραφή</string>
+  <string name="discard">Απόρριψη</string>
+  <string name="cancel">Ακύρωση</string>
 
 </resources>

@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="appName">Ritill</string>
+  <string name="appName">Ritill</string>
 
-    <string name="search">Leita…</string>
-    <string name="edit">Breyta</string>
-    <string name="view">Skoða</string>
-    <string name="open">Opna skrá…</string>
-    <string name="save">Vista</string>
-    <string name="openRecent">Opna nýlegt</string>
-    <string name="saveAs">Save as…</string>
-    <string name="viewMarkdown">Skoða markdown-kóða…</string>
-    <string name="autoSave">Sjálfvirk vistun</string>
-    <string name="wrap">Línuskrið orða</string>
-    <string name="suggest">Tillögur</string>
-    <string name="theme">Þema</string>
-    <string name="light">Ljóst</string>
-    <string name="dark">Dökkt</string>
-    <string name="retro">Gamaldags</string>
-    <string name="size">Stærð texta</string>
-    <string name="small">Lítill</string>
-    <string name="medium">Miðlungs</string>
-    <string name="large">Stór</string>
-    <string name="typeface">Leturgerð</string>
-    <string name="mono">Jafnbreitt</string>
-    <string name="normal">Hlutfallslegt</string>
-    <string name="about">Um hugbúnaðinn</string>
+  <string name="search">Leita…</string>
+  <string name="edit">Breyta</string>
+  <string name="view">Skoða</string>
+  <string name="open">Opna skrá…</string>
+  <string name="save">Vista</string>
+  <string name="openRecent">Opna nýlegt</string>
+  <string name="saveAs">Save as…</string>
+  <string name="viewMarkdown">Skoða markdown-kóða…</string>
+  <string name="autoSave">Sjálfvirk vistun</string>
+  <string name="wrap">Línuskrið orða</string>
+  <string name="suggest">Tillögur</string>
+  <string name="theme">Þema</string>
+  <string name="light">Ljóst</string>
+  <string name="dark">Dökkt</string>
+  <string name="retro">Gamaldags</string>
+  <string name="size">Stærð texta</string>
+  <string name="small">Lítill</string>
+  <string name="medium">Miðlungs</string>
+  <string name="large">Stór</string>
+  <string name="typeface">Leturgerð</string>
+  <string name="mono">Jafnbreitt</string>
+  <string name="normal">Hlutfallslegt</string>
+  <string name="about">Um hugbúnaðinn</string>
 
-    <string name="version" formatted="false">Editor útgáfa %s\nByggt
+  <string name="version" formatted="false">Editor útgáfa %s\nByggt
   %s\nHöfundarréttur \u00A9 2017 Bill Farmer\nÍslensk þýðing: <a href="https://github.com/sveinki">Sveinn í Felli</a>\nNotkunarleyfi
   <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-    <string name="choose">Veldu skráarheiti</string>
-    <string name="loading">Hleð inn…</string>
+  <string name="choose">Veldu skráarheiti</string>
+  <string name="loading">Hleð inn…</string>
 
-    <string name="modified">
+  <string name="modified">
     Þú ert með óvistaðar breytingar. Viltu vista þær?
   </string>
 
-    <string name="changedReload">
+  <string name="changedReload">
     Þessi skrá hefur breyst, viltu hlaða henni aftur inn?
   </string>
 
-    <string name="changedOverwrite">
+  <string name="changedOverwrite">
     Þessi skrá hefur breyst, viltu skrifa yfir hana?
   </string>
 
-    <string name="ok">Í lagi</string>
-    <string name="reload">Endurhlaða</string>
-    <string name="overwrite">Skrifa yfir</string>
-    <string name="discard">Henda</string>
-    <string name="cancel">Hætta við</string>
+  <string name="ok">Í lagi</string>
+  <string name="reload">Endurhlaða</string>
+  <string name="overwrite">Skrifa yfir</string>
+  <string name="discard">Henda</string>
+  <string name="cancel">Hætta við</string>
 
 </resources>

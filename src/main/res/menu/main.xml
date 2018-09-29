@@ -1,123 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AppCompatResource">
-    <item
-        android:id="@+id/edit"
-        android:icon="@drawable/ic_action_edit"
-        android:showAsAction="ifRoom"
-        android:title="@string/edit" />
-    <item
-        android:id="@+id/view"
-        android:icon="@drawable/ic_action_view_as_list"
-        android:showAsAction="ifRoom"
-        android:title="@string/view" />
-    <item
-        android:id="@+id/save"
-        android:icon="@drawable/ic_action_save"
-        android:showAsAction="ifRoom"
-        android:title="@string/save" />
-    <item
-        android:id="@+id/open"
-        android:icon="@drawable/ic_action_collection"
-        android:showAsAction="ifRoom"
-        android:title="@string/open" />
-    <item
-        android:id="@+id/openRecent"
-        android:showAsAction="never"
-        android:title="@string/openRecent">
-        <menu></menu>
-    </item>
-    <item
-        android:id="@+id/saveAs"
-        android:showAsAction="never"
-        android:title="@string/saveAs" />
-    <item
-        android:id="@+id/search"
-        android:actionViewClass="android.widget.SearchView"
-        android:showAsAction="never|collapseActionView"
-        android:title="@string/search" />
-    <item
-        android:id="@+id/viewMarkdown"
-        android:showAsAction="never"
-        android:title="@string/viewMarkdown" />
-    <item
-        android:id="@+id/autoSave"
-        android:checkable="true"
-        android:showAsAction="never"
-        android:title="@string/autoSave" />
-    <item
-        android:id="@+id/wrap"
-        android:checkable="true"
-        android:showAsAction="never"
-        android:title="@string/wrap" />
-    <item
-        android:id="@+id/suggest"
-        android:checkable="true"
-        android:checked="true"
-        android:showAsAction="never"
-        android:title="@string/suggest" />
-    <item
-        android:id="@+id/theme"
-        android:showAsAction="never"
-        android:title="@string/theme">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/light"
-                    android:showAsAction="never"
-                    android:title="@string/light" />
-                <item
-                    android:id="@+id/dark"
-                    android:showAsAction="never"
-                    android:title="@string/dark" />
-                <item
-                    android:id="@+id/retro"
-                    android:showAsAction="never"
-                    android:title="@string/retro" />
-            </group>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/size"
-        android:showAsAction="never"
-        android:title="@string/size">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/small"
-                    android:showAsAction="never"
-                    android:title="@string/small" />
-                <item
-                    android:id="@+id/medium"
-                    android:showAsAction="never"
-                    android:title="@string/medium" />
-                <item
-                    android:id="@+id/large"
-                    android:showAsAction="never"
-                    android:title="@string/large" />
-            </group>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/typeface"
-        android:showAsAction="never"
-        android:title="@string/typeface">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/mono"
-                    android:showAsAction="never"
-                    android:title="@string/mono" />
-                <item
-                    android:id="@+id/normal"
-                    android:showAsAction="never"
-                    android:title="@string/normal" />
-            </group>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/about"
-        android:showAsAction="never"
-        android:title="@string/about" />
+  <item
+      android:id="@+id/edit"
+      android:icon="@drawable/ic_action_edit"
+      android:showAsAction="ifRoom"
+      android:title="@string/edit" />
+  <item
+      android:id="@+id/view"
+      android:icon="@drawable/ic_action_view_as_list"
+      android:showAsAction="ifRoom"
+      android:title="@string/view" />
+  <item
+      android:id="@+id/save"
+      android:icon="@drawable/ic_action_save"
+      android:showAsAction="ifRoom"
+      android:title="@string/save" />
+  <item
+      android:id="@+id/open"
+      android:icon="@drawable/ic_action_collection"
+      android:showAsAction="ifRoom"
+      android:title="@string/open" />
+  <item
+      android:id="@+id/openRecent"
+      android:showAsAction="never"
+      android:title="@string/openRecent">
+    <menu></menu>
+  </item>
+  <item
+      android:id="@+id/saveAs"
+      android:showAsAction="never"
+      android:title="@string/saveAs" />
+  <item
+      android:id="@+id/search"
+      android:actionViewClass="android.widget.SearchView"
+      android:showAsAction="never|collapseActionView"
+      android:title="@string/search" />
+  <item
+      android:id="@+id/viewMarkdown"
+      android:showAsAction="never"
+      android:title="@string/viewMarkdown" />
+  <item
+      android:id="@+id/autoSave"
+      android:checkable="true"
+      android:showAsAction="never"
+      android:title="@string/autoSave" />
+  <item
+      android:id="@+id/wrap"
+      android:checkable="true"
+      android:showAsAction="never"
+      android:title="@string/wrap" />
+  <item
+      android:id="@+id/suggest"
+      android:checkable="true"
+      android:checked="true"
+      android:showAsAction="never"
+      android:title="@string/suggest" />
+  <item
+      android:id="@+id/theme"
+      android:showAsAction="never"
+      android:title="@string/theme">
+    <menu>
+      <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/light"
+            android:showAsAction="never"
+            android:title="@string/light" />
+        <item
+            android:id="@+id/dark"
+            android:showAsAction="never"
+            android:title="@string/dark" />
+        <item
+            android:id="@+id/retro"
+            android:showAsAction="never"
+            android:title="@string/retro" />
+      </group>
+    </menu>
+  </item>
+  <item
+      android:id="@+id/size"
+      android:showAsAction="never"
+      android:title="@string/size">
+    <menu>
+      <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/small"
+            android:showAsAction="never"
+            android:title="@string/small" />
+        <item
+            android:id="@+id/medium"
+            android:showAsAction="never"
+            android:title="@string/medium" />
+        <item
+            android:id="@+id/large"
+            android:showAsAction="never"
+            android:title="@string/large" />
+      </group>
+    </menu>
+  </item>
+  <item
+      android:id="@+id/typeface"
+      android:showAsAction="never"
+      android:title="@string/typeface">
+    <menu>
+      <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mono"
+            android:showAsAction="never"
+            android:title="@string/mono" />
+        <item
+            android:id="@+id/normal"
+            android:showAsAction="never"
+            android:title="@string/normal" />
+      </group>
+    </menu>
+  </item>
+  <item
+      android:id="@+id/about"
+      android:showAsAction="never"
+      android:title="@string/about" />
 </menu>
