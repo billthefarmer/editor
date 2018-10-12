@@ -415,16 +415,16 @@ public class Editor extends Activity
         for (String path : pathMap.keySet())
             editor.putInt(path, pathMap.get(path));
 
-        if (BuildConfig.DEBUG)
-            for (String path : pathMap.keySet())
-                Log.d(TAG, String.format("onPause %s %d", path,
-                                         pathMap.get(path)));
         // Remove the old ones
         for (String path : removeList)
             editor.remove(path);
 
         editor.apply();
 
+        if (BuildConfig.DEBUG)
+            for (String path : pathMap.keySet())
+                Log.d(TAG, String.format("onPause %s %d", path,
+                                         pathMap.get(path)));
         if (dirty && save)
             saveFile(file);
     }
@@ -627,9 +627,6 @@ public class Editor extends Activity
         // Close text search
         if (searchItem.isActionViewExpanded())
             searchItem.collapseActionView();
-
-        // Save path
-        savePath(path);
 
         return true;
     }
