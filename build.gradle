@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 22
         versionName "1.24"
         versionCode 124
 
@@ -38,7 +38,8 @@ android {
     }
 
     lintOptions {
-        disable 'IconDensities', 'ContentDescription'
+        disable 'IconDensities', 'ContentDescription',
+            'ExpiringTargetSdkVersion'
         // abortOnError false
     }
 }

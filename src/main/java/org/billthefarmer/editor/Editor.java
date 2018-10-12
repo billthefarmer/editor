@@ -339,8 +339,11 @@ public class Editor extends Activity
                 // Change text size temporarily as workaround for
                 // yet another obscure feature of some versions of
                 // android
-                textView.setTextSize(TINY);
-                textView.setTextSize(size);
+                if (Build.VERSION.SDK_INT == VERSION_M)
+                {
+                    textView.setTextSize(TINY);
+                    textView.setTextSize(size);
+                }
 
                 // Update boolean
                 edit = true;
@@ -690,9 +693,12 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // Change text size temporarily as workaround for yet another
-        // obscure feature of some version of android
-        textView.setTextSize(TINY);
-        textView.setTextSize(size);
+        // obscure feature of some versions of android
+        if (Build.VERSION.SDK_INT == VERSION_M)
+        {
+            textView.setTextSize(TINY);
+            textView.setTextSize(size);
+        }
 
         // Update boolean
         edit = true;
