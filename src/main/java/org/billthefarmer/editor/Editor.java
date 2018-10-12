@@ -393,6 +393,9 @@ public class Editor extends Activity
     {
         super.onPause();
 
+        // Save current path
+        savePath(path);
+
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
