@@ -44,6 +44,7 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -414,6 +415,10 @@ public class Editor extends Activity
         for (String path : pathMap.keySet())
             editor.putInt(path, pathMap.get(path));
 
+        if (BuildConfig.DEBUG)
+            for (String path : pathMap.keySet())
+                Log.d(TAG, String.format("onPause %s %d", path,
+                                         pathMap.get(path)));
         // Remove the old ones
         for (String path : removeList)
             editor.remove(path);
@@ -778,6 +783,9 @@ public class Editor extends Activity
         // Save the current position
         pathMap.put(path, scrollView.getScrollY());
 
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, String.format("savePath %s %d", path,
+                                     pathMap.get(path)));
         // Get a list of files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
