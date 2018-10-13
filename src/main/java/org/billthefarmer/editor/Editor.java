@@ -114,7 +114,6 @@ public class Editor extends Activity
     private final static int DARK = 2;
     private final static int RETRO = 3;
 
-    private final static int TINY = 8;
     private final static int SMALL = 12;
     private final static int MEDIUM = 18;
     private final static int LARGE = 24;
@@ -201,9 +200,9 @@ public class Editor extends Activity
             textView.setRawInputType(InputType.TYPE_NULL);
 
         else if (!suggest)
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                     InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
 
@@ -314,36 +313,26 @@ public class Editor extends Activity
                 // Set editable with or without suggestions
                 if (!suggest)
                     textView
-                    .setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    .setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
                 else
                     textView
-                    .setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType
-                                  .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    .setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                     InputType
+                                     .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-                // Set editable with or without suggestions
-                if (suggest)
-                    textView
-                    .setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-
-                else
-                    textView
-                    .setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType
-                                  .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-                // Change text size temporarily as workaround for
-                // yet another obscure feature of some versions of
-                // android
+                // Change typeface temporarily as workaround for yet
+                // another obscure feature of some versions of android
                 if (Build.VERSION.SDK_INT == VERSION_M)
                 {
-                    textView.setTextSize(TINY);
-                    textView.setTextSize(size);
+                    textView.setTypeface((type == NORMAL)?
+                                         Typeface.MONOSPACE:
+                                         Typeface.DEFAULT, Typeface.NORMAL);
+                    textView.setTypeface((type == NORMAL)?
+                                         Typeface.DEFAULT:
+                                         Typeface.MONOSPACE, Typeface.NORMAL);
                 }
 
                 // Update boolean
@@ -679,30 +668,25 @@ public class Editor extends Activity
     {
         // Set editable with or without suggestions
         if (!suggest)
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
         else
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                     InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-        // Set editable with or without suggestions
-        if (suggest)
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
-        else
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-        // Change text size temporarily as workaround for yet another
+        // Change typeface temporarily as workaround for yet another
         // obscure feature of some versions of android
         if (Build.VERSION.SDK_INT == VERSION_M)
         {
-            textView.setTextSize(TINY);
-            textView.setTextSize(size);
+            textView.setTypeface((type == NORMAL)?
+                                 Typeface.MONOSPACE:
+                                 Typeface.DEFAULT, Typeface.NORMAL);
+            textView.setTypeface((type == NORMAL)?
+                                 Typeface.DEFAULT:
+                                 Typeface.MONOSPACE, Typeface.NORMAL);
         }
 
         // Update boolean
@@ -965,12 +949,12 @@ public class Editor extends Activity
         item.setChecked(suggest);
 
         if (suggest)
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         else
-            textView.setInputType(InputType.TYPE_CLASS_TEXT |
-                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
+                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                     InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();
