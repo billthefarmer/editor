@@ -813,8 +813,8 @@ public class Editor extends Activity
             final Uri uri = Uri.fromFile(file);
 
             if (dirty)
-                alertDialog(R.string.openRecent, R.string.modified, R.string.save,
-                            R.string.discard, (dialog, id) ->
+                alertDialog(R.string.openRecent, R.string.modified,
+                            R.string.save, R.string.discard, (dialog, id) ->
             {
                 switch (id)
                 {
@@ -877,7 +877,8 @@ public class Editor extends Activity
     }
 
     // saveAsDialog
-    private void saveAsDialog(String path, DialogInterface.OnClickListener listener)
+    private void saveAsDialog(String path,
+                              DialogInterface.OnClickListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.save);
