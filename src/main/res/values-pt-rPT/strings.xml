@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Editor</string>
+
+  <string name="search">Procurar...</string>
+  <string name="edit">Editar</string>
+  <string name="view">Ver</string>
+  <string name="open">Abrir ficheiro...</string>
+  <string name="save">Guardar</string>
+  <string name="openRecent">Abrir recente</string>
+  <string name="saveAs">Guardar como...</string>
+  <string name="viewMarkdown">Ver markdown...</string>
+  <string name="autoSave">Auto Guardar</string>
+  <string name="wrap">Quebra de linha</string>
+  <string name="suggest">Sugestões</string>
+  <string name="theme">Tema</string>
+  <string name="light">Claro</string>
+  <string name="dark">Escuro</string>
+  <string name="retro">Retro</string>
+  <string name="size">Tamanho do texto</string>
+  <string name="small">Pequeno</string>
+  <string name="medium">Média</string>
+  <string name="large">Grande</string>
+  <string name="typeface">Tipo de letra</string>
+  <string name="mono">Espaçamento fixo</string>
+  <string name="normal">Espaçamento proporcional</string>
+  <string name="about">Sobre</string>
+
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+
+  <string name="version" formatted="false">Versão %s\n
+ Compilado a   %s\n
+ Copyright \\00A9 2017 Bill Farmer\n
+ Tradução Francesa por <a href="https://github.com/milouse" >Étienne Deparis</a>\n
+ Tradução Alemã por <a href="https://github.com/Markus00000" >Markus   Weimar</a>\n
+ Tradução Italiana por <a href="https://github.com/airon90" >Michael Moroni</a>\n
+ Tradução Polaca por <a href="https://github.com/evo16" >Evo</a>\n
+ Tradução Grega por <a href="https://github.com/nikoss" >nikoss</a>\n
+ Tradução de Chinês Simplificado por <a href="https://github.com/ludoux" >Lu Chang   (ludoux)</a>\n
+ Tradução Holandesa por <a href="https://github.com/Vistaus" >Heimen Stoffels   (vistaus)</a>\n
+ Tradução Russa por <a href="https://github.com/bboa" >Igor Nedoboy</a>\n
+ Tradução Letã por <a href="https://github.com/rhssk" >Rihards Skuja</a>\n
+ Tradução Islandesa por <a href="" >Sveinn í Felli</a>\n
+ Tradução Portuguesa por <a href="https://github.com/Andre-Gloria" >André Glória</a>\n
+ Licença <a href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
+
+  <string name="choose">Escolha um nome de ficheiro</string>
+  <string name="loading">A carregar...</string>
+
+  <string name="modified">Tem modificações não salvas. Pretende guardá-las?</string>
+
+  <string name="changedReload">Este ficheiro foi modificado, deseja relê-lo?</string>
+
+  <string name="changedOverwrite">Este ficheiro foi modificado, deseja substituí-lo (perderá alterações)?</string>
+
+  <string name="ok">OK</string>
+  <string name="reload">Reler</string>
+  <string name="overwrite">Substituir</string>
+  <string name="discard">Descartar</string>
+  <string name="cancel">Cancelar</string>
+
+</resources>
