@@ -323,6 +323,9 @@ public class Editor extends Activity
                                      InputType
                                      .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
+                // Update boolean
+                edit = true;
+
                 // Change typeface temporarily as workaround for yet
                 // another obscure feature of some versions of android
                 if (Build.VERSION.SDK_INT == VERSION_M)
@@ -335,8 +338,10 @@ public class Editor extends Activity
                                          Typeface.MONOSPACE, Typeface.NORMAL);
                 }
 
-                // Update boolean
-                edit = true;
+                // Recreate for other versions to work around other
+                // obscure features
+                else
+                    recreate();
 
                 // Update menu
                 invalidateOptionsMenu();
@@ -675,7 +680,8 @@ public class Editor extends Activity
             textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
                                      InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                      InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
+        // Update boolean
+        edit = true;
 
         // Change typeface temporarily as workaround for yet another
         // obscure feature of some versions of android
@@ -689,8 +695,10 @@ public class Editor extends Activity
                                  Typeface.MONOSPACE, Typeface.NORMAL);
         }
 
-        // Update boolean
-        edit = true;
+        // Recreate for other versions to work around other
+        // obscure features
+        else
+            recreate();
 
         // Update menu
         invalidateOptionsMenu();
