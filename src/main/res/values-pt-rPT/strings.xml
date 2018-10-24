@@ -3,14 +3,14 @@
 
   <string name="appName">Editor</string>
 
-  <string name="search">Procurar...</string>
+  <string name="search">Procurar…</string>
   <string name="edit">Editar</string>
   <string name="view">Ver</string>
-  <string name="open">Abrir ficheiro...</string>
+  <string name="open">Abrir ficheiro…</string>
   <string name="save">Guardar</string>
   <string name="openRecent">Abrir recente</string>
-  <string name="saveAs">Guardar como...</string>
-  <string name="viewMarkdown">Ver markdown...</string>
+  <string name="saveAs">Guardar como…</string>
+  <string name="viewMarkdown">Ver markdown…</string>
   <string name="autoSave">Auto Guardar</string>
   <string name="wrap">Quebra de linha</string>
   <string name="suggest">Sugestões</string>
@@ -34,30 +34,25 @@
       credit here.
   -->
 
-  <string name="version" formatted="false">Versão %s\n
- Compilado a   %s\n
- Copyright \\00A9 2017 Bill Farmer\n
- Tradução Francesa por <a href="https://github.com/milouse" >Étienne Deparis</a>\n
- Tradução Alemã por <a href="https://github.com/Markus00000" >Markus   Weimar</a>\n
- Tradução Italiana por <a href="https://github.com/airon90" >Michael Moroni</a>\n
- Tradução Polaca por <a href="https://github.com/evo16" >Evo</a>\n
- Tradução Grega por <a href="https://github.com/nikoss" >nikoss</a>\n
- Tradução de Chinês Simplificado por <a href="https://github.com/ludoux" >Lu Chang   (ludoux)</a>\n
- Tradução Holandesa por <a href="https://github.com/Vistaus" >Heimen Stoffels   (vistaus)</a>\n
- Tradução Russa por <a href="https://github.com/bboa" >Igor Nedoboy</a>\n
- Tradução Letã por <a href="https://github.com/rhssk" >Rihards Skuja</a>\n
- Tradução Islandesa por <a href="" >Sveinn í Felli</a>\n
- Tradução Portuguesa por <a href="https://github.com/Andre-Gloria" >André Glória</a>\n
- Licença <a href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
+  <string name="version" formatted="false">Versão %s\n Compilado a
+  %s\n Copyright \\00A9 2017 Bill Farmer\nTradução Portuguesa por <a
+  href="https://github.com/Andre-Gloria" >André Glória</a>\nLicença <a
+  href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
 
   <string name="choose">Escolha um nome de ficheiro</string>
-  <string name="loading">A carregar...</string>
+  <string name="loading">A carregar…</string>
 
-  <string name="modified">Tem modificações não salvas. Pretende guardá-las?</string>
+  <string name="modified">
+    Tem modificações não salvas. Pretende guardá-las?
+  </string>
 
-  <string name="changedReload">Este ficheiro foi modificado, deseja relê-lo?</string>
+  <string name="changedReload">
+    Este ficheiro foi modificado, deseja relê-lo?
+  </string>
 
-  <string name="changedOverwrite">Este ficheiro foi modificado, deseja substituí-lo (perderá alterações)?</string>
+  <string name="changedOverwrite">
+    Este ficheiro foi modificado, deseja substituí-lo (perderá alterações)?
+  </string>
 
   <string name="ok">OK</string>
   <string name="reload">Reler</string>
