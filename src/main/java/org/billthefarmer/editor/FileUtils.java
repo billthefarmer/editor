@@ -419,11 +419,7 @@ public class FileUtils
             {
 
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri =
-                    ContentUris
-                    .withAppendedId(Uri.parse("content://downloads/public_downloads"),
-                                    Long.valueOf(id));
-
+                final Uri contentUri=uri;
                 return getDataColumn(context, contentUri, null, null);
             }
             // MediaProvider

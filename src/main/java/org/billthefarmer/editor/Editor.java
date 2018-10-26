@@ -1116,7 +1116,7 @@ public class Editor extends Activity
     private void getContent()
     {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType(TEXT_WILD);
+        intent.setType("*/*");
         startActivityForResult(Intent.createChooser(intent, null), GET_TEXT);
     }
 
