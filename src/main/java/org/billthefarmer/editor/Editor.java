@@ -83,6 +83,7 @@ public class Editor extends Activity
     public final static String PATH = "path";
     public final static String EDIT = "edit";
     public final static String DIRTY = "dirty";
+    public final static String SCROLL = "scroll";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
 
@@ -310,6 +311,9 @@ public class Editor extends Activity
                 if (edit)
                     return false;
 
+                // Get scroll position
+                int y = scrollView.getScrollY();
+
                 // Set editable with or without suggestions
                 if (!suggest)
                     textView
@@ -331,6 +335,10 @@ public class Editor extends Activity
                 textView.setTypeface((type == NORMAL)?
                                      Typeface.DEFAULT:
                                      Typeface.MONOSPACE, Typeface.NORMAL);
+
+                // Restore scroll position
+                scrollView.scrollTo(0, y);
+
                 // Update boolean
                 edit = true;
 
@@ -662,6 +670,9 @@ public class Editor extends Activity
     // editClicked
     private void editClicked(MenuItem item)
     {
+        // Get scroll position
+        int y = scrollView.getScrollY();
+
         // Set editable with or without suggestions
         if (!suggest)
             textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
@@ -680,6 +691,10 @@ public class Editor extends Activity
         textView.setTypeface((type == NORMAL)?
                              Typeface.DEFAULT:
                              Typeface.MONOSPACE, Typeface.NORMAL);
+
+        // Restore scroll position
+        scrollView.scrollTo(0, y);
+
         // Update boolean
         edit = true;
 
@@ -912,9 +927,8 @@ public class Editor extends Activity
             intent.setDataAndType(uri, TEXT_HTML);
             startActivity(intent);
         }
-        catch (Exception e)
-        {
-        }
+
+        catch (Exception e) {}
     }
 
     // autoSaveClicked
@@ -1224,6 +1238,7 @@ public class Editor extends Activity
                 getContentResolver().openOutputStream(uri);
             write(text, outputStream);
         }
+
         catch (Exception e)
         {
             e.printStackTrace();
@@ -1240,6 +1255,7 @@ public class Editor extends Activity
             fileWriter.write(text);
             fileWriter.close();
         }
+
         catch (Exception e)
         {
             e.printStackTrace();
@@ -1257,6 +1273,7 @@ public class Editor extends Activity
             dirty = false;
             invalidateOptionsMenu();
         }
+
         catch (Exception e)
         {
             e.printStackTrace();
@@ -1300,6 +1317,7 @@ public class Editor extends Activity
                 pattern = Pattern.compile(newText, Pattern.MULTILINE);
                 matcher = pattern.matcher(text);
             }
+
             catch (Exception e)
             {
                 return false;
@@ -1392,9 +1410,8 @@ public class Editor extends Activity
 
                 reader.close();
             }
-            catch (Exception e)
-            {
-            }
+
+            catch (Exception e) {}
 
             return stringBuilder.toString();
         }
@@ -1418,8 +1435,12 @@ public class Editor extends Activity
             // Check for saved position
             if (pathMap.containsKey(path))
             {
-                // run
-                textView.postDelayed(() -> scrollView.smoothScrollTo(0, pathMap.get(path)), POSN_DELAY);
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, String.format("onPostExecute %s %d", path,
+                                             pathMap.get(path)));
+                textView.postDelayed(() ->
+                                     scrollView.smoothScrollTo(0, pathMap.get(path)),
+                                     POSN_DELAY);
             }
 
             // Set read only

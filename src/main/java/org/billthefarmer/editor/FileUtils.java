@@ -417,14 +417,24 @@ public class FileUtils
             // DownloadsProvider
             else if (isDownloadsDocument(uri))
             {
+                // Check for non-numeric id
+                try
+                {
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri =
+                        ContentUris
+                        .withAppendedId(Uri.parse("content://downloads/public_downloads"),
+                                        Long.valueOf(id));
 
-                final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri =
-                    ContentUris
-                    .withAppendedId(Uri.parse("content://downloads/public_downloads"),
-                                    Long.valueOf(id));
+                    return getDataColumn(context, contentUri, null, null);
+                }
 
-                return getDataColumn(context, contentUri, null, null);
+
+                // Id not a number
+                catch (Exception e)
+                {
+                    return getDataColumn(context, uri, null, null);
+                }
             }
             // MediaProvider
             else if (isMediaDocument(uri))
