@@ -201,9 +201,9 @@ public class Editor extends Activity
             textView.setRawInputType(InputType.TYPE_NULL);
 
         else if (!suggest)
-            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
-                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                     InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
 
@@ -313,19 +313,29 @@ public class Editor extends Activity
 
                 // Get scroll position
                 int y = scrollView.getScrollY();
+                // Get height
+                int height = scrollView.getHeight();
+                // Get width
+                int width = scrollView.getWidth();
+
+                // Get offset
+                int line = textView.getLayout()
+                    .getLineForVertical(y + height / 2);
+                int offset = textView.getLayout()
+                    .getOffsetForHorizontal(line, width / 2);
+                // Set cursor
+                textView.setSelection(offset);
 
                 // Set editable with or without suggestions
                 if (!suggest)
                     textView
-                    .setRawInputType(InputType.TYPE_CLASS_TEXT |
-                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-
+                    .setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                 else
                     textView
-                    .setRawInputType(InputType.TYPE_CLASS_TEXT |
-                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                     InputType
-                                     .TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    .setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
                 // Change typeface temporarily as workaround for yet
                 // another obscure feature of some versions of android
@@ -335,10 +345,6 @@ public class Editor extends Activity
                 textView.setTypeface((type == NORMAL)?
                                      Typeface.DEFAULT:
                                      Typeface.MONOSPACE, Typeface.NORMAL);
-
-                // Restore scroll position
-                scrollView.scrollTo(0, y);
-
                 // Update boolean
                 edit = true;
 
@@ -414,10 +420,7 @@ public class Editor extends Activity
 
         editor.apply();
 
-        if (BuildConfig.DEBUG)
-            for (String path : pathMap.keySet())
-                Log.d(TAG, String.format("onPause %s %d", path,
-                                         pathMap.get(path)));
+        // Save file
         if (dirty && save)
             saveFile(file);
     }
@@ -672,16 +675,27 @@ public class Editor extends Activity
     {
         // Get scroll position
         int y = scrollView.getScrollY();
+        // Get height
+        int height = scrollView.getHeight();
+        // Get width
+        int width = scrollView.getWidth();
+
+        // Get offset
+        int line = textView.getLayout()
+            .getLineForVertical(y + height / 2);
+        int offset = textView.getLayout()
+            .getOffsetForHorizontal(line, width / 2);
+        // Set cursor
+        textView.setSelection(offset);
 
         // Set editable with or without suggestions
         if (!suggest)
-            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
-                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         else
-            textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
-                                     InputType.TYPE_TEXT_FLAG_MULTI_LINE |
-                                     InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                  InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                  InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // Change typeface temporarily as workaround for yet another
         // obscure feature of some versions of android
@@ -691,10 +705,6 @@ public class Editor extends Activity
         textView.setTypeface((type == NORMAL)?
                              Typeface.DEFAULT:
                              Typeface.MONOSPACE, Typeface.NORMAL);
-
-        // Restore scroll position
-        scrollView.scrollTo(0, y);
-
         // Update boolean
         edit = true;
 
@@ -770,9 +780,6 @@ public class Editor extends Activity
         // Save the current position
         pathMap.put(path, scrollView.getScrollY());
 
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, String.format("savePath %s %d", path,
-                                     pathMap.get(path)));
         // Get a list of files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
@@ -1434,15 +1441,14 @@ public class Editor extends Activity
 
             // Check for saved position
             if (pathMap.containsKey(path))
-            {
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, String.format("onPostExecute %s %d", path,
-                                             pathMap.get(path)));
                 textView.postDelayed(() ->
-                                     scrollView.smoothScrollTo(0, pathMap.get(path)),
+                                     scrollView
+                                     .smoothScrollTo(0, pathMap.get(path)),
                                      POSN_DELAY);
-            }
-
+            else
+                textView.postDelayed(() ->
+                                     scrollView.smoothScrollTo(0, 0),
+                                     POSN_DELAY);
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
             textView.clearFocus();
