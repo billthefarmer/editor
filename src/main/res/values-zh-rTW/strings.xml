@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">編輯器</string>
+
+  <string name="search">搜尋…</string>
+  <string name="edit">編輯</string>
+  <string name="view">檢視</string>
+  <string name="open">開啟檔案…</string>
+  <string name="save">儲存</string>
+  <string name="openRecent">最近開啟</string>
+  <string name="saveAs">儲存為…</string>
+  <string name="viewMarkdown">檢視 markdown…</string>
+  <string name="autoSave">自動儲存</string>
+  <string name="wrap">文字換列</string>
+  <string name="suggest">建議</string>
+  <string name="theme">主題</string>
+  <string name="light">亮</string>
+  <string name="dark">暗</string>
+  <string name="retro">復古</string>
+  <string name="size">文字大小</string>
+  <string name="small">小</string>
+  <string name="medium">中</string>
+  <string name="large">大</string>
+  <string name="typeface">字體</string>
+  <string name="mono">等寬字體</string>
+  <string name="normal">比例字體</string>
+  <string name="about">關於</string>
+
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+
+  <string name="version" formatted="false">編輯器 版本 %s\n組建時間 %s\n
+  版權 \u00A9 2017 Bill Farmer\n中文（繁體）譯者：<a href="https://github.com/cges30901">張修銘</a>\n授權 <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="choose">選擇檔案名稱</string>
+  <string name="loading">載入中…</string>
+
+  <string name="modified">
+    有未儲存的變更。您要儲存變更嗎？
+  </string>
+
+  <string name="changedReload">
+    檔案已變更。您要重新載入嗎？
+  </string>
+
+  <string name="changedOverwrite">
+    檔案已變更。您要覆寫它嗎？
+  </string>
+
+  <string name="ok">確定</string>
+  <string name="reload">重新載入</string>
+  <string name="overwrite">覆寫</string>
+  <string name="discard">放棄</string>
+  <string name="cancel">取消</string>
+
+</resources>
