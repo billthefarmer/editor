@@ -45,10 +45,12 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -193,6 +195,8 @@ public class Editor extends Activity
 
         textView = findViewById(R.id.text);
         scrollView = findViewById(R.id.vscroll);
+
+        registerForContextMenu(textView);
 
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
@@ -1285,6 +1289,41 @@ public class Editor extends Activity
         {
             e.printStackTrace();
         }
+    }
+
+    // onCreateContextMenu
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, 
+                                    ContextMenu.ContextMenuInfo menuInfo)
+    {
+        switch (v.getId())
+        {
+        case R.id.text:
+            menu.add(Menu.NONE, R.id.extend, Menu.NONE, R.string.extend);
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    // onContextItemSelected
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+        case R.id.extend:
+            int start = textView.getSelectionStart();
+            int end = textView.getSelectionEnd();
+            textView.setSelection(start, end + 2);
+            return true;
+
+        default:
+            break;
+        }
+
+        return false;
     }
 
     // QueryTextListener

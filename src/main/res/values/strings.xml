@@ -26,6 +26,7 @@
   <string name="mono">Monospace</string>
   <string name="normal">Proportional</string>
   <string name="about">About</string>
+  <string name="extend">Extend selection</string>
 
   <!--
       Note for translators: You don't need to translate all these
