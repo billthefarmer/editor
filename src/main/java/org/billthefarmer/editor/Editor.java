@@ -1345,9 +1345,15 @@ public class Editor extends Activity
                         c = '{';
                         break;
 
-                        // Check for colon, semicolon and look for eol
+                    case '>':
+                        c = '<';
+                        break;
+
+                        // Check for colon, semicolon, question and
+                        // look for eol
                     case ':':
                     case ';':
+                    case '?':
                         c = '\n';
                         break;
 
@@ -1355,6 +1361,7 @@ public class Editor extends Activity
                     case '(':
                     case '[':
                     case '{':
+                    case '<':
                         skip = true;
                         break;
                     }
