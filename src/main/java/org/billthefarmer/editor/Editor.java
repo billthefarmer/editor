@@ -108,8 +108,9 @@ public class Editor extends Activity
     public final static String TEXT_PLAIN = "text/plain";
     public final static String TEXT_WILD = "text/*";
 
-    public final static String PATTERN_PUNCT = "\\p{Punct}";
-    public final static String INVALID_CHARS = "!$%&*(_-+=[{@#~|<.?";
+    public final static String PATTERN_CHARS =
+        "[\\(\\)\\[\\]\\{\\}\\<\\>\"',;]";
+    public final static String INVALID_CHARS = "([{<";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -1317,7 +1318,7 @@ public class Editor extends Activity
                 // Get a pattern and a matcher for punctuation
                 // characters
                 Pattern pattern =
-                    Pattern.compile(PATTERN_PUNCT, Pattern.MULTILINE);
+                    Pattern.compile(PATTERN_CHARS, Pattern.MULTILINE);
                 Matcher matcher =
                     pattern.matcher(text);
 
@@ -1330,7 +1331,7 @@ public class Editor extends Activity
                     // Get the matched char
                     char c = text.charAt(end);
 
-                    // Do reverse search if valid char
+                    // Check for opening brackets
                     if (INVALID_CHARS.indexOf(c) == -1)
                     {
                         switch (c)
@@ -1353,14 +1354,13 @@ public class Editor extends Activity
                             c = '<';
                             break;
 
-                            // Check for colon, semicolon and look for eol
-                        case ':':
+                            // Check for semicolon and look for eol
                         case ';':
                             c = '\n';
                             break;
                         }
 
-                        // // Do reverse search
+                        // Do reverse search
                         start = text.lastIndexOf(c, start) + 1;
 
                         // Update selection
