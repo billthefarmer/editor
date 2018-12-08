@@ -109,6 +109,7 @@ public class Editor extends Activity
     public final static String TEXT_WILD = "text/*";
 
     public final static String PATTERN_PUNCT = "\\p{Punct}";
+    public final static String INVALID_CHARS = "!$%&*(_-+=[{@#~|<.?";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -1326,52 +1327,45 @@ public class Editor extends Activity
                     // Update the selection end
                     end = matcher.start();
 
-                    boolean skip = false;
                     // Get the matched char
                     char c = text.charAt(end);
-                    switch (c)
+
+                    // Do reverse search if valid char
+                    if (INVALID_CHARS.indexOf(c) == -1)
                     {
-                        // Check for close brackets and look for the
-                        // open brackets
-                    case ')':
-                        c = '(';
-                        break;
+                        switch (c)
+                        {
+                            // Check for close brackets and look for
+                            // the open brackets
+                        case ')':
+                            c = '(';
+                            break;
 
-                    case ']':
-                        c = '[';
-                        break;
+                        case ']':
+                            c = '[';
+                            break;
 
-                    case '}':
-                        c = '{';
-                        break;
+                        case '}':
+                            c = '{';
+                            break;
 
-                    case '>':
-                        c = '<';
-                        break;
+                        case '>':
+                            c = '<';
+                            break;
 
-                        // Check for colon, semicolon, question and
-                        // look for eol
-                    case ':':
-                    case ';':
-                    case '?':
-                        c = '\n';
-                        break;
+                            // Check for colon, semicolon and look for eol
+                        case ':':
+                        case ';':
+                            c = '\n';
+                            break;
+                        }
 
-                        // Skip open brackets
-                    case '(':
-                    case '[':
-                    case '{':
-                    case '<':
-                        skip = true;
-                        break;
-                    }
-
-                    // Do reverse search
-                    if (!skip)
+                        // // Do reverse search
                         start = text.lastIndexOf(c, start) + 1;
 
-                    // Update selection
-                    textView.setSelection(start, end);
+                        // Update selection
+                        textView.setSelection(start, end);
+                    }
                 }
             }
         }
