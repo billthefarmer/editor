@@ -1345,7 +1345,8 @@ public class Editor extends Activity
                         c = '{';
                         break;
 
-                        // Check for semicolon and look for eol
+                        // Check for colon, semicolon and look for eol
+                    case ':':
                     case ';':
                         c = '\n';
                         break;
