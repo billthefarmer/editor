@@ -1313,7 +1313,7 @@ public class Editor extends Activity
                 // And the text
                 String text = textView.getText().toString();
 
-                // Get a pattern and a matcher for puctuation
+                // Get a pattern and a matcher for punctuation
                 // characters
                 Pattern pattern =
                     Pattern.compile(PATTERN_PUNCT, Pattern.MULTILINE);
