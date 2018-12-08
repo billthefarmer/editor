@@ -45,6 +45,7 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -104,7 +105,10 @@ public class Editor extends Activity
     public final static String HTML_FILE = "Editor.html";
 
     public final static String TEXT_HTML = "text/html";
+    public final static String TEXT_PLAIN = "text/plain";
     public final static String TEXT_WILD = "text/*";
+
+    public final static String PATTERN_PUNCT = "\\p{Punct}";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -195,8 +199,6 @@ public class Editor extends Activity
 
         textView = findViewById(R.id.text);
         scrollView = findViewById(R.id.vscroll);
-
-        registerForContextMenu(textView);
 
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
@@ -1291,39 +1293,80 @@ public class Editor extends Activity
         }
     }
 
-    // onCreateContextMenu
+    // onActionModeStarted
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, 
-                                    ContextMenu.ContextMenuInfo menuInfo)
+    public void onActionModeStarted(ActionMode mode)
     {
-        switch (v.getId())
+        super.onActionModeStarted(mode);
+
+        // If there's a file
+        if (file != null)
         {
-        case R.id.text:
-            menu.add(Menu.NONE, R.id.extend, Menu.NONE, R.string.extend);
-            break;
+            // Get the mime type
+            String type = FileUtils.getMimeType(file);
+            // If the type is unknown or not text/plain
+            if (type == null || !type.equals(TEXT_PLAIN))
+            {
+                // Get the start and end of the selection
+                int start = textView.getSelectionStart();
+                int end = textView.getSelectionEnd();
+                // And the text
+                String text = textView.getText().toString();
 
-        default:
-            break;
+                // Get a pattern and a matcher for puctuation
+                // characters
+                Pattern pattern =
+                    Pattern.compile(PATTERN_PUNCT, Pattern.MULTILINE);
+                Matcher matcher =
+                    pattern.matcher(text);
+
+                // Find the first match after the end of the selection
+                if (matcher.find(end))
+                {
+                    // Update the selection end
+                    end = matcher.start();
+
+                    boolean skip = false;
+                    // Get the matched char
+                    char c = text.charAt(end);
+                    switch (c)
+                    {
+                        // Check for close brackets and look for the
+                        // open brackets
+                    case ')':
+                        c = '(';
+                        break;
+
+                    case ']':
+                        c = '[';
+                        break;
+
+                    case '}':
+                        c = '{';
+                        break;
+
+                        // Check for semicolon and look for eol
+                    case ';':
+                        c = '\n';
+                        break;
+
+                        // Skip open brackets
+                    case '(':
+                    case '[':
+                    case '{':
+                        skip = true;
+                        break;
+                    }
+
+                    // Do reverse search
+                    if (!skip)
+                        start = text.lastIndexOf(c, start) + 1;
+
+                    // Update selection
+                    textView.setSelection(start, end);
+                }
+            }
         }
-    }
-
-    // onContextItemSelected
-    @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-        case R.id.extend:
-            int start = textView.getSelectionStart();
-            int end = textView.getSelectionEnd();
-            textView.setSelection(start, end + 2);
-            return true;
-
-        default:
-            break;
-        }
-
-        return false;
     }
 
     // QueryTextListener
