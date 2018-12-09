@@ -109,7 +109,7 @@ public class Editor extends Activity
     public final static String TEXT_WILD = "text/*";
 
     public final static String PATTERN_CHARS =
-        "[\\(\\)\\[\\]\\{\\}\\<\\>\"',;]";
+        "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`,;]";
     public final static String INVALID_CHARS = "([{<";
 
     private final static int BUFFER_SIZE = 1024;
@@ -1315,7 +1315,7 @@ public class Editor extends Activity
                 // And the text
                 String text = textView.getText().toString();
 
-                // Get a pattern and a matcher for punctuation
+                // Get a pattern and a matcher for delimiter
                 // characters
                 Pattern pattern =
                     Pattern.compile(PATTERN_CHARS, Pattern.MULTILINE);
@@ -1363,8 +1363,10 @@ public class Editor extends Activity
                         // Do reverse search
                         start = text.lastIndexOf(c, start) + 1;
 
-                        // Update selection
-                        textView.setSelection(start, end);
+                        // Check for included newline
+                        if (start < text.lastIndexOf('\n', end))
+                            // Update selection
+                            textView.setSelection(start, end);
                     }
                 }
             }
