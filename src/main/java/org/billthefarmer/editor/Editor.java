@@ -109,8 +109,8 @@ public class Editor extends Activity
     public final static String TEXT_WILD = "text/*";
 
     public final static String PATTERN_CHARS =
-        "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`,;]";
-    public final static String INVALID_CHARS = "([{<";
+        "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
+    public final static String BRACKET_CHARS = "([{<";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -1318,7 +1318,7 @@ public class Editor extends Activity
                 // Get a pattern and a matcher for delimiter
                 // characters
                 Pattern pattern =
-                    Pattern.compile(PATTERN_CHARS, Pattern.MULTILINE);
+                    Pattern.compile(PATTERN_CHARS);
                 Matcher matcher =
                     pattern.matcher(text);
 
@@ -1332,7 +1332,7 @@ public class Editor extends Activity
                     char c = text.charAt(end);
 
                     // Check for opening brackets
-                    if (INVALID_CHARS.indexOf(c) == -1)
+                    if (BRACKET_CHARS.indexOf(c) == -1)
                     {
                         switch (c)
                         {
@@ -1353,18 +1353,13 @@ public class Editor extends Activity
                         case '>':
                             c = '<';
                             break;
-
-                            // Check for semicolon and look for eol
-                        case ';':
-                            c = '\n';
-                            break;
                         }
 
                         // Do reverse search
                         start = text.lastIndexOf(c, start) + 1;
 
                         // Check for included newline
-                        if (start < text.lastIndexOf('\n', end))
+                        if (start > text.lastIndexOf('\n', end))
                             // Update selection
                             textView.setSelection(start, end);
                     }
