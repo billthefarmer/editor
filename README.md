@@ -79,6 +79,11 @@ You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
 
+### Extended selection
+If the file being edited is not a plain text file, selections created
+by double tapping or long touching on the text will be extended to
+enclosing delimiters (brackets, quotes) on the same text line.
+
 ### Unsaved file
 If you touch the back or open button, and the current file has been
 modified, you will be prompted whether you want to save it, else the
