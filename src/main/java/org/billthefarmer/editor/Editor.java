@@ -85,8 +85,8 @@ public class Editor extends Activity
 
     public final static String PATH = "path";
     public final static String EDIT = "edit";
-    public final static String DIRTY = "dirty";
     public final static String SCROLL = "scroll";
+    public final static String CHANGED = "changed";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
 
@@ -147,8 +147,8 @@ public class Editor extends Activity
     private boolean wrap = false;
     private boolean suggest = true;
 
-    private boolean dirty = false;
     private boolean isApp = false;
+    private boolean changed = false;
 
     private long modified;
 
@@ -245,7 +245,7 @@ public class Editor extends Activity
                 if (text != null)
                 {
                     defaultFile(text);
-                    dirty = true;
+                    changed = true;
                 }
 
                 // Get uri
@@ -279,7 +279,7 @@ public class Editor extends Activity
                 @Override
                 public void afterTextChanged(Editable s)
                 {
-                    dirty = true;
+                    changed = true;
                     invalidateOptionsMenu();
                 }
 
@@ -372,7 +372,7 @@ public class Editor extends Activity
 
         path = savedInstanceState.getString(PATH);
         edit = savedInstanceState.getBoolean(EDIT);
-        dirty = savedInstanceState.getBoolean(DIRTY);
+        changed = savedInstanceState.getBoolean(CHANGED);
         modified = savedInstanceState.getLong(MODIFIED);
         content = savedInstanceState.getParcelable(CONTENT);
         invalidateOptionsMenu();
@@ -429,7 +429,7 @@ public class Editor extends Activity
         editor.apply();
 
         // Save file
-        if (dirty && save)
+        if (changed && save)
             saveFile(file);
     }
 
@@ -441,7 +441,7 @@ public class Editor extends Activity
 
         outState.putParcelable(CONTENT, content);
         outState.putLong(MODIFIED, modified);
-        outState.putBoolean(DIRTY, dirty);
+        outState.putBoolean(CHANGED, changed);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
     }
@@ -473,7 +473,7 @@ public class Editor extends Activity
         menu.findItem(R.id.edit).setVisible(!edit);
         menu.findItem(R.id.view).setVisible(edit);
 
-        menu.findItem(R.id.save).setVisible(dirty);
+        menu.findItem(R.id.save).setVisible(changed);
         menu.findItem(R.id.open).setVisible(isApp);
         menu.findItem(R.id.openRecent).setVisible(isApp);
 
@@ -639,7 +639,7 @@ public class Editor extends Activity
     @Override
     public void onBackPressed()
     {
-        if (dirty)
+        if (changed)
             alertDialog(R.string.appName, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
@@ -650,7 +650,7 @@ public class Editor extends Activity
                 finish();
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
-                dirty = false;
+                changed = false;
                 finish();
                 break;
             }
@@ -833,7 +833,7 @@ public class Editor extends Activity
         {
             final Uri uri = Uri.fromFile(file);
 
-            if (dirty)
+            if (changed)
                 alertDialog(R.string.openRecent, R.string.modified,
                             R.string.save, R.string.discard, (dialog, id) ->
             {
@@ -845,7 +845,7 @@ public class Editor extends Activity
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    dirty = false;
+                    changed = false;
                     readFile(uri);
                     break;
                 }
@@ -1119,7 +1119,7 @@ public class Editor extends Activity
     // openFile
     private void openFile()
     {
-        if (dirty)
+        if (changed)
             alertDialog(R.string.open, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
@@ -1131,7 +1131,7 @@ public class Editor extends Activity
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                dirty = false;
+                changed = false;
                 getContent();
                 break;
             }
@@ -1188,7 +1188,7 @@ public class Editor extends Activity
         ReadTask read = new ReadTask();
         read.execute(uri);
 
-        dirty = false;
+        changed = false;
         modified = file.lastModified();
         invalidateOptionsMenu();
     }
@@ -1237,7 +1237,7 @@ public class Editor extends Activity
     {
         String text = textView.getText().toString();
         write(text, file);
-        dirty = false;
+        changed = false;
 
         modified = file.lastModified();
         invalidateOptionsMenu();
@@ -1285,7 +1285,7 @@ public class Editor extends Activity
             OutputStreamWriter writer = new OutputStreamWriter(os);
             writer.write(text, 0, text.length());
             writer.close();
-            dirty = false;
+            changed = false;
             invalidateOptionsMenu();
         }
 
@@ -1515,10 +1515,10 @@ public class Editor extends Activity
             {
                 textView.append(toAppend);
                 toAppend = null;
-                dirty = true;
+                changed = true;
             }
             else
-                dirty = false;
+                changed = false;
 
             // Check for saved position
             if (pathMap.containsKey(path))
