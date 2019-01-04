@@ -1096,12 +1096,9 @@ public class Editor extends Activity
         builder.setTitle(R.string.about);
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
-        String format = getString(R.string.version);
-
-        String message =
-            String.format(Locale.getDefault(),
-                          format, BuildConfig.VERSION_NAME,
-                          dateFormat.format(BuildConfig.BUILT));
+        String message = getString(R.string.version,
+                                   BuildConfig.VERSION_NAME,
+                                   dateFormat.format(BuildConfig.BUILT));
         builder.setMessage(message);
 
         // Add the button
