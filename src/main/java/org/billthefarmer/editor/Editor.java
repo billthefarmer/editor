@@ -1108,9 +1108,6 @@ public class Editor extends Activity
         if (matcher.find())
             spannable.replace(matcher.start(), matcher.end(),
                               dateFormat.format(BuildConfig.BUILT));
-        // String message = getString(R.string.version,
-        //                            BuildConfig.VERSION_NAME,
-        //                            dateFormat.format(BuildConfig.BUILT));
         builder.setMessage(spannable);
 
         // Add the button
