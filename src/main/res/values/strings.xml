@@ -34,7 +34,7 @@
       credit here.
   -->
 
-  <string name="version" formatted="false">Editor version %s\nBuilt
+  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">version %s</a>\nBuilt
   %s\nCopyright \u00A9 2017 Bill Farmer\nFrench translation by <a href="https://github.com/milouse">Étienne Deparis</a>\nGerman
   translation by <a href="https://github.com/Markus00000">Markus
   Weimar</a>\nItalian translation by <a href="https://github.com/airon90">Michael Moroni</a>\nPolish

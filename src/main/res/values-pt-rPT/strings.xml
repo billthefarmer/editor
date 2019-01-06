@@ -34,7 +34,7 @@
       credit here.
   -->
 
-  <string name="version" formatted="false">Versão %s\n Compilado a
+  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">versão %s</a>\n Compilado a
   %s\n Copyright \\00A9 2017 Bill Farmer\nTradução Portuguesa por <a
   href="https://github.com/Andre-Gloria" >André Glória</a>\nLicença <a
   href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>

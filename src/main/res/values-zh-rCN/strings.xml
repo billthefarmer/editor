@@ -27,7 +27,7 @@
   <string name="normal">变宽</string>
   <string name="about">关于</string>
 
-  <string name="version" formatted="false">编辑器版本 %s\n编译时间%s\n
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">编辑器版本 %s</a>\n编译时间%s\n
   版权 \u00A9 2017 Bill Farmer\n中文（简体）译者<a href="https://github.com/ludoux">Lu Chang (ludoux)</a>\n开源协议<a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 

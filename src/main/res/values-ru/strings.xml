@@ -27,8 +27,8 @@
   <string name="normal">Пропорциональный</string>
   <string name="about">О программе</string>
 
-  <string name="version" formatted="false">Редактор, версия
-  %s\nСборка %s\nРазработка \u00A9 2017 Bill Farmer\nРусский перевод \u00A9 <a href="https://github.com/bboa">Igor Nedoboy</a>\nЛицензия <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false">Редактор, <a href="https://github.com/billthefarmer/editor/releases/latest">версия
+  %s</a>\nСборка %s\nРазработка \u00A9 2017 Bill Farmer\nРусский перевод \u00A9 <a href="https://github.com/bboa">Igor Nedoboy</a>\nЛицензия <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Выберите имя файла</string>

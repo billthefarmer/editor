@@ -27,7 +27,7 @@
   <string name="normal">Proportionnelle</string>
   <string name="about">À propos</string>
 
-  <string name="version" formatted="false">Editor version %s\nCompilée
+  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">version %s</a>\nCompilée
   le %s\n Copyright © 2017 Bill Farmer\n Traduction française par <a href="https://github.com/milouse">Étienne Deparis</a>\n Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
   <string name="choose">Donnez le chemin complet d\'accès au fichier</string>

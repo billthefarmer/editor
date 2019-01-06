@@ -27,7 +27,7 @@
   <string name="normal">Proportional</string>
   <string name="about">Über</string>
 
-  <string name="version" formatted="false">Editor Version %s\nBuild
+  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">Version %s</a>\nBuild
   %s\nCopyright \u00A9 2017 Bill Farmer\nDeutsche Übersetzung von <a href="https://github.com/Markus00000">Markus Weimar</a>\nLizenz <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 

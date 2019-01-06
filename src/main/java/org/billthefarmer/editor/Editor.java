@@ -40,6 +40,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
@@ -1096,10 +1097,21 @@ public class Editor extends Activity
         builder.setTitle(R.string.about);
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
-        String message = getString(R.string.version,
-                                   BuildConfig.VERSION_NAME,
-                                   dateFormat.format(BuildConfig.BUILT));
-        builder.setMessage(message);
+        SpannableStringBuilder spannable =
+            new SpannableStringBuilder(getText(R.string.version));
+        Pattern pattern = Pattern.compile("%s");
+        Matcher matcher = pattern.matcher(spannable);
+        if (matcher.find())
+            spannable.replace(matcher.start(), matcher.end(),
+                              BuildConfig.VERSION_NAME);
+        matcher = pattern.matcher(spannable);
+        if (matcher.find())
+            spannable.replace(matcher.start(), matcher.end(),
+                              dateFormat.format(BuildConfig.BUILT));
+        // String message = getString(R.string.version,
+        //                            BuildConfig.VERSION_NAME,
+        //                            dateFormat.format(BuildConfig.BUILT));
+        builder.setMessage(spannable);
 
         // Add the button
         builder.setPositiveButton(R.string.ok, null);
