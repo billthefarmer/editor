@@ -1104,7 +1104,7 @@ public class Editor extends Activity
         if (matcher.find())
             spannable.replace(matcher.start(), matcher.end(),
                               BuildConfig.VERSION_NAME);
-        matcher = pattern.matcher(spannable);
+        matcher.reset(spannable);
         if (matcher.find())
             spannable.replace(matcher.start(), matcher.end(),
                               dateFormat.format(BuildConfig.BUILT));
