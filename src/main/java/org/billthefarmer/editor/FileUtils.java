@@ -396,6 +396,7 @@ public class FileUtils
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri))
             {
+                final List<String> segments = uri.getPathSegments();
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -410,6 +411,11 @@ public class FileUtils
                     return Environment
                            .getExternalStorageDirectory() + "/Documents/" +
                            split[1];
+                }
+                else if ("document".equalsIgnoreCase(segments.get(0)))
+                {
+                    return Environment
+                           .getExternalStorageDirectory() + "/" + split[1];
                 }
 
                 // TODO handle non-primary volumes
