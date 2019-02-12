@@ -1,3 +1,4 @@
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  Editor - Text editor for Android
@@ -935,7 +936,10 @@ public class Editor extends Activity
             file.deleteOnExit();
 
             FileWriter writer = new FileWriter(file);
+            // Add HTML header and footer to make a valid page.
+            writer.write("<!DOCTYPE html><html>\n<head>\n<meta id=\"meta\" name=\"viewport\" content=\"width=device-width; initial-scale=1.0\">\n</head>\n<body>\n");
             writer.write(html);
+            writer.write("\n</body>\n</html>");
             writer.close();
 
             Uri uri = Uri.fromFile(file);
