@@ -113,6 +113,9 @@ public class Editor extends Activity
     public final static String PATTERN_CHARS =
         "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
     public final static String BRACKET_CHARS = "([{<";
+    public final static String HTML_HEAD =
+        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0\">\n</head>\n<body>\n";
+    public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
@@ -937,9 +940,9 @@ public class Editor extends Activity
 
             FileWriter writer = new FileWriter(file);
             // Add HTML header and footer to make a valid page.
-            writer.write("<!DOCTYPE html><html>\n<head>\n<meta id=\"meta\" name=\"viewport\" content=\"width=device-width; initial-scale=1.0\">\n</head>\n<body>\n");
+            writer.write(HTML_HEAD);
             writer.write(html);
-            writer.write("\n</body>\n</html>");
+            writer.write(HTML_TAIL);
             writer.close();
 
             Uri uri = Uri.fromFile(file);
