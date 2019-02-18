@@ -122,7 +122,6 @@ public class Editor extends Activity
     private final static int MAX_PATHS = 10;
     private final static int VERSION_M = 23;
     private final static int GET_TEXT = 0;
-    private final static int TEXT = 1;
 
     private final static int LIGHT = 1;
     private final static int DARK = 2;
@@ -312,7 +311,7 @@ public class Editor extends Activity
             {
                 // Hide keyboard
                 InputMethodManager imm = (InputMethodManager)
-                getSystemService(INPUT_METHOD_SERVICE);
+                    getSystemService(INPUT_METHOD_SERVICE);
                 if (!hasFocus)
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             });
@@ -875,21 +874,19 @@ public class Editor extends Activity
             switch (id)
             {
             case DialogInterface.BUTTON_POSITIVE:
-                EditText text =
-                ((Dialog) dialog).findViewById(TEXT);
-                String name1 = text.getText().toString();
+                EditText text = ((Dialog) dialog).findViewById(R.id.path_text);
+                String string = text.getText().toString();
 
                 // Ignore empty string
-                if (name1.isEmpty())
+                if (string.isEmpty())
                     return;
 
-                file = new File(name1);
+                file = new File(string);
 
                 // Check absolute file
                 if (!file.isAbsolute())
                     file = new
-                    File(Environment.getExternalStorageDirectory(),
-                         File.separator + name1);
+                        File(Environment.getExternalStorageDirectory(), string);
 
                 // Set interface title
                 Uri uri = Uri.fromFile(file);
@@ -917,7 +914,7 @@ public class Editor extends Activity
         // Create edit text
         Context context = builder.getContext();
         EditText text = new EditText(context);
-        text.setId(TEXT);
+        text.setId(R.id.path_text);
         text.setText(path);
 
         // Create the AlertDialog
