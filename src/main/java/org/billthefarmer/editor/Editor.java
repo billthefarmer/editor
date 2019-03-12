@@ -118,7 +118,7 @@ public class Editor extends Activity
         "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
     public final static String BRACKET_CHARS = "([{<";
     public final static String HTML_HEAD =
-        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0\">\n</head>\n<body>\n";
+        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body>\n";
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     private final static int BUFFER_SIZE = 1024;
@@ -941,7 +941,7 @@ public class Editor extends Activity
 
         try
         {
-            File file = new File(getExternalCacheDir(), HTML_FILE);
+            File file = new File(getCacheDir(), HTML_FILE);
             file.deleteOnExit();
 
             FileWriter writer = new FileWriter(file);
@@ -953,14 +953,20 @@ public class Editor extends Activity
 
             // Uri uri = Uri.fromFile(file);
             Uri uri = FileProvider
-                .getUriForFile(this, "org.billthefarmer.fileprovider", file);
+                .getUriForFile(this, "org.billthefarmer.editor.fileprovider",
+                               file);
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Uri " + uri);
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(uri, TEXT_HTML);
+            intent.setDataAndType(uri, getContentResolver().getType(uri));
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivity(intent);
         }
 
-        catch (Exception e) {}
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     // autoSaveClicked
