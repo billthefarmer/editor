@@ -951,14 +951,14 @@ public class Editor extends Activity
             writer.write(HTML_TAIL);
             writer.close();
 
-            // Uri uri = Uri.fromFile(file);
+            // Get file provider uri
             Uri uri = FileProvider
                 .getUriForFile(this, "org.billthefarmer.editor.fileprovider",
                                file);
             if (BuildConfig.DEBUG)
                 Log.d(TAG, "Uri " + uri);
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(uri, getContentResolver().getType(uri));
+            intent.setDataAndType(uri, TEXT_HTML);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivity(intent);
         }
