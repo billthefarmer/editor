@@ -22,6 +22,7 @@
 
 package org.billthefarmer.editor;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +31,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -60,6 +62,8 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import android.support.v4.content.FileProvider;
 
 import org.markdownj.MarkdownProcessor;
 
@@ -120,23 +124,27 @@ public class Editor extends Activity
     private final static int BUFFER_SIZE = 1024;
     private final static int POSN_DELAY = 100;
     private final static int MAX_PATHS = 10;
-    private final static int VERSION_M = 23;
+
     private final static int GET_TEXT = 0;
 
+    private final static int REQUEST_READ = 1;
+    private final static int REQUEST_SAVE = 2;
+
     private final static int LIGHT = 1;
-    private final static int DARK = 2;
+    private final static int DARK  = 2;
     private final static int RETRO = 3;
 
-    private final static int SMALL = 12;
+    private final static int SMALL  = 12;
     private final static int MEDIUM = 18;
-    private final static int LARGE = 24;
+    private final static int LARGE  = 24;
 
     private final static int NORMAL = 1;
-    private final static int MONO = 2;
+    private final static int MONO   = 2;
 
     private File file;
     private String path;
     private Uri content;
+    private Uri readUri;
     private String toAppend;
     private EditText textView;
     private MenuItem searchItem;
@@ -434,7 +442,7 @@ public class Editor extends Activity
 
         // Save file
         if (changed && save)
-            saveFile(file);
+            saveFile();
     }
 
     // onSaveInstanceState
@@ -759,6 +767,7 @@ public class Editor extends Activity
             readFile(uri);
             toAppend = text;
         }
+
         else
         {
             if (text != null)
@@ -942,9 +951,12 @@ public class Editor extends Activity
             writer.write(HTML_TAIL);
             writer.close();
 
-            Uri uri = Uri.fromFile(file);
+            // Uri uri = Uri.fromFile(file);
+            Uri uri = FileProvider
+                .getUriForFile(this, "org.billthefarmer.fileprovider", file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, TEXT_HTML);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivity(intent);
         }
 
@@ -964,7 +976,7 @@ public class Editor extends Activity
         wrap = !wrap;
         item.setChecked(wrap);
 
-        if (Build.VERSION.SDK_INT != VERSION_M)
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
     }
 
@@ -982,7 +994,7 @@ public class Editor extends Activity
                                      InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                      InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-        if (Build.VERSION.SDK_INT != VERSION_M)
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
     }
 
@@ -992,7 +1004,7 @@ public class Editor extends Activity
         theme = LIGHT;
         item.setChecked(true);
 
-        if (Build.VERSION.SDK_INT != VERSION_M)
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
     }
 
@@ -1002,7 +1014,7 @@ public class Editor extends Activity
         theme = DARK;
         item.setChecked(true);
 
-        if (Build.VERSION.SDK_INT != VERSION_M)
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
     }
 
@@ -1012,7 +1024,7 @@ public class Editor extends Activity
         theme = RETRO;
         item.setChecked(true);
 
-        if (Build.VERSION.SDK_INT != VERSION_M)
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
     }
 
@@ -1159,11 +1171,52 @@ public class Editor extends Activity
         startActivityForResult(Intent.createChooser(intent, null), GET_TEXT);
     }
 
+    // onRequestPermissionsResult
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults)
+    {
+        switch (requestCode)
+        {
+        case REQUEST_SAVE:
+            for (int i = 0; i < grantResults.length; i++)
+                if (permissions[i].equals(Manifest.permission
+                                          .WRITE_EXTERNAL_STORAGE) &&
+                    grantResults[i] == PackageManager.PERMISSION_GRANTED)
+                    // Granted, save file
+                    saveFile();
+            break;
+
+        case REQUEST_READ:
+            for (int i = 0; i < grantResults.length; i++)
+                if (permissions[i].equals(Manifest.permission
+                                          .READ_EXTERNAL_STORAGE) &&
+                    grantResults[i] == PackageManager.PERMISSION_GRANTED)
+                    // Granted, read file
+                    readFile(readUri);
+            break;
+        }
+    }
+
     // readFile
     private void readFile(Uri uri)
     {
         if (uri == null)
             return;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            {
+                requestPermissions(new String[]
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ);
+                readUri = uri;
+                return;
+            }
+        }
 
         content = null;
 
@@ -1221,6 +1274,18 @@ public class Editor extends Activity
     // saveFile
     private void saveFile()
     {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            {
+                requestPermissions(new String[]
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_SAVE);
+                return;
+            }
+        }
+
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedOverwrite,
                         R.string.overwrite, R.string.cancel, (dialog, id) ->

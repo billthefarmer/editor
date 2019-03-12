@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionName "1.29"
         versionCode 129
 
