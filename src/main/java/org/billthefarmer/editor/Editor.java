@@ -1653,6 +1653,21 @@ public class Editor extends Activity
         }
     }
 
+    // HighlightTask
+    @SuppressLint("StaticFieldLeak")
+    private class HighlightTask
+        extends AsyncTask<Editable, Void, Void>
+    {
+        // doInBackground
+        @Override
+        protected Void doInBackground(Editable... params)
+        {
+            highlightText(params[0]);
+
+            return null;
+        }
+    }
+
     // ReadTask
     @SuppressLint("StaticFieldLeak")
     private class ReadTask
