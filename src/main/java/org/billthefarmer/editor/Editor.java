@@ -48,6 +48,7 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
@@ -118,11 +119,44 @@ public class Editor extends Activity
         "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
     public final static String BRACKET_CHARS = "([{<";
     public final static String HTML_HEAD =
-        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body>\n";
+        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n" +
+        "<meta name=\"viewport\" content=\"width=device-width," +
+        " initial-scale=1.0\">\n</head>\n<body>\n";
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
+    public final static String KEYWORDS =
+        "\\babstract\\b|\\bany\\b|\\basm\\b|\\bassert\\b|\\bauto\\b|" +
+        "\\bboolean\\b|\\bbreak\\b|\\bbyte\\b|\\bcase\\b|\\bcatch\\b|" +
+        "\\bchar\\b|\\bcin\\b|\\bclass\\b|\\bconst\\b|\\bconstructor\\b|" +
+        "\\bcontinue\\b|\\bcout\\b|\\bdefault\\b|\\bdelete\\b|\\bdo\\b|" +
+        "\\bdouble\\b|\\belse\\b|\\benum\\b|\\beval\\b|\\bextends\\b|" +
+        "\\bextern\\b|\\bfalse\\b|\\bfield\\b|\\bfinal\\b|\\bfinally\\b|" +
+        "\\bfloat\\b|\\bfor\\b|\\bfriend\\b|\\bfunct\\b|\\bfunction\\b|" +
+        "\\bgetter\\b|\\bgoto\\b|\\bif\\b|\\bimplements\\b|\\bimport\\b|" +
+        "\\bin\\b|\\binline\\b|\\binstanceof\\b|\\bint\\b|\\binteger\\b|" +
+        "\\binterface\\b|\\blong\\b|\\bmethod\\b|\\bnative\\b|\\bnew\\b|" +
+        "\\bnull\\b|\\bnull_t\\b|\\boperator\\b|\\boverride\\b|" +
+        "\\bpackage\\b|\\bprivate\\b|\\bprotected\\b|\\bpublic\\b|" +
+        "\\breal\\b|\\bregister\\b|\\breturn\\b|\\bsetter\\b|\\bshort\\b|" +
+        "\\bsigned\\b|\\bsizeof\\b|\\bstatic\\b|\\bstrictfp\\b|\\bstring\\b|" +
+        "\\bstruct\\b|\\bsuper\\b|\\bswitch\\b|\\bsynchronized\\b|" +
+        "\\btemplate\\b|\\bthis\\b|\\bthrow\\b|\\bthrows\\b|" +
+        "\\btraditional\\b|\\btransient\\b|\\btrue\\b|\\btry\\b|\\btype\\b|" +
+        "\\btypedef\\b|\\btypeof\\b|\\bubyte\\b|\\buint\\b|\\bulong\\b|" +
+        "\\bunion\\b|\\bunsigned\\b|\\bushort\\b|\\bvar\\b|\\bversion\\b|" +
+        "\\bvirtual\\b|\\bvolatile\\b|\\bwhile\\b|\\bwith\\b";
+
+    public final static String QUOTED =
+        "'([^\\\\']+|\\\\([btnfr\"'\\\\]|[0-3]?[0-7]{1,2}|" +
+        "u[0-9a-fA-F]{4}))*'|\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
+        "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
+
+    public final static String COMMENT =
+        "//.*$";
+
     private final static int BUFFER_SIZE = 1024;
-    private final static int POSN_DELAY = 100;
+    private final static int POSITION_DELAY = 100;
+    private final static int UPDATE_DELAY = 2000;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -149,6 +183,7 @@ public class Editor extends Activity
     private EditText textView;
     private MenuItem searchItem;
     private ScrollView scrollView;
+    private Runnable updateHighlight;
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
@@ -293,6 +328,19 @@ public class Editor extends Activity
                 {
                     changed = true;
                     invalidateOptionsMenu();
+                    if (updateHighlight == null)
+                        updateHighlight = () ->
+                        {
+                            if (BuildConfig.DEBUG)
+                                Log.d(TAG, "Update highlight");
+                            highlightText(s);
+                        };
+
+                    else
+                    {
+                        textView.removeCallbacks(updateHighlight);
+                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                    }
                 }
 
                 // beforeTextChanged
@@ -1376,6 +1424,58 @@ public class Editor extends Activity
         }
     }
 
+    // highlightText
+    private void highlightText(Editable editable)
+    {
+        Pattern pattern;
+        Matcher matcher;
+
+        ForegroundColorSpan spans[] =
+            editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
+
+        for (ForegroundColorSpan span: spans)
+            editable.removeSpan(span);
+
+        pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
+        matcher = pattern.matcher(editable.toString());
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.CYAN);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(QUOTED, Pattern.MULTILINE);
+        matcher.reset().usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.RED);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(COMMENT, Pattern.MULTILINE);
+        matcher.reset().usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.RED);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+    }
+
     // onActionModeStarted
     @Override
     public void onActionModeStarted(ActionMode mode)
@@ -1454,7 +1554,7 @@ public class Editor extends Activity
         implements SearchView.OnQueryTextListener
     {
         private BackgroundColorSpan span = new
-        BackgroundColorSpan(Color.YELLOW);
+            BackgroundColorSpan(Color.YELLOW);
         private Editable editable;
         private Matcher matcher;
         private Pattern pattern;
@@ -1515,6 +1615,7 @@ public class Editor extends Activity
                 editable.setSpan(span, matcher.start(), matcher.end(),
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
+
             else
                 index = 0;
 
@@ -1606,11 +1707,11 @@ public class Editor extends Activity
                 textView.postDelayed(() ->
                                      scrollView
                                      .smoothScrollTo(0, pathMap.get(path)),
-                                     POSN_DELAY);
+                                     POSITION_DELAY);
             else
                 textView.postDelayed(() ->
                                      scrollView.smoothScrollTo(0, 0),
-                                     POSN_DELAY);
+                                     POSITION_DELAY);
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
             textView.clearFocus();
