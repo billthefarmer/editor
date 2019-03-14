@@ -1,4 +1,3 @@
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  Editor - Text editor for Android
@@ -156,7 +155,7 @@ public class Editor extends Activity
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
-    private final static int UPDATE_DELAY = 2000;
+    private final static int UPDATE_DELAY = 1000;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -334,7 +333,7 @@ public class Editor extends Activity
                             if (BuildConfig.DEBUG)
                                 Log.d(TAG, "Update highlight");
                             highlightText(s);
-                        };
+                       };
 
                     else
                     {
@@ -1653,21 +1652,6 @@ public class Editor extends Activity
         }
     }
 
-    // HighlightTask
-    @SuppressLint("StaticFieldLeak")
-    private class HighlightTask
-        extends AsyncTask<Editable, Void, Void>
-    {
-        // doInBackground
-        @Override
-        protected Void doInBackground(Editable... params)
-        {
-            highlightText(params[0]);
-
-            return null;
-        }
-    }
-
     // ReadTask
     @SuppressLint("StaticFieldLeak")
     private class ReadTask
@@ -1675,14 +1659,14 @@ public class Editor extends Activity
     {
         // doInBackground
         @Override
-        protected String doInBackground(Uri... params)
+        protected String doInBackground(Uri... uris)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
             try
             {
                 InputStream inputStream =
-                    getContentResolver().openInputStream(params[0]);
+                    getContentResolver().openInputStream(uris[0]);
                 BufferedReader reader =
                     new BufferedReader(new InputStreamReader(inputStream));
 
