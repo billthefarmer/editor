@@ -26,8 +26,8 @@ android {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 14
         targetSdkVersion 28
-        versionName "1.29"
-        versionCode 129
+        versionName "1.30"
+        versionCode 130
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
@@ -38,8 +38,7 @@ android {
     }
 
     lintOptions {
-        disable 'IconDensities', 'ContentDescription',
-            'ExpiredTargetSdkVersion'
+        disable 'IconDensities', 'ContentDescription'
         // abortOnError false
     }
 }

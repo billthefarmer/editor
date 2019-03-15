@@ -1,4 +1,3 @@
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  Editor - Text editor for Android
@@ -118,11 +117,13 @@ public class Editor extends Activity
         "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
     public final static String BRACKET_CHARS = "([{<";
     public final static String HTML_HEAD =
-        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body>\n";
+        "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n" +
+        "<meta name=\"viewport\" content=\"width=device-width," +
+        " initial-scale=1.0\">\n</head>\n<body>\n";
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     private final static int BUFFER_SIZE = 1024;
-    private final static int POSN_DELAY = 100;
+    private final static int POSITION_DELAY = 100;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -1454,7 +1455,7 @@ public class Editor extends Activity
         implements SearchView.OnQueryTextListener
     {
         private BackgroundColorSpan span = new
-        BackgroundColorSpan(Color.YELLOW);
+            BackgroundColorSpan(Color.YELLOW);
         private Editable editable;
         private Matcher matcher;
         private Pattern pattern;
@@ -1515,6 +1516,7 @@ public class Editor extends Activity
                 editable.setSpan(span, matcher.start(), matcher.end(),
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
+
             else
                 index = 0;
 
@@ -1559,14 +1561,14 @@ public class Editor extends Activity
     {
         // doInBackground
         @Override
-        protected String doInBackground(Uri... params)
+        protected String doInBackground(Uri... uris)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
             try
             {
                 InputStream inputStream =
-                    getContentResolver().openInputStream(params[0]);
+                    getContentResolver().openInputStream(uris[0]);
                 BufferedReader reader =
                     new BufferedReader(new InputStreamReader(inputStream));
 
@@ -1606,11 +1608,11 @@ public class Editor extends Activity
                 textView.postDelayed(() ->
                                      scrollView
                                      .smoothScrollTo(0, pathMap.get(path)),
-                                     POSN_DELAY);
+                                     POSITION_DELAY);
             else
                 textView.postDelayed(() ->
                                      scrollView.smoothScrollTo(0, 0),
-                                     POSN_DELAY);
+                                     POSITION_DELAY);
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
             textView.clearFocus();
