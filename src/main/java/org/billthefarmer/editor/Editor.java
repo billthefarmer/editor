@@ -124,26 +124,17 @@ public class Editor extends Activity
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     public final static String KEYWORDS =
-        "\\babstract\\b|\\bany\\b|\\basm\\b|\\bassert\\b|\\bauto\\b|" +
-        "\\bboolean\\b|\\bbreak\\b|\\bbyte\\b|\\bcase\\b|\\bcatch\\b|" +
-        "\\bchar\\b|\\bcin\\b|\\bclass\\b|\\bconst\\b|\\bconstructor\\b|" +
-        "\\bcontinue\\b|\\bcout\\b|\\bdefault\\b|\\bdelete\\b|\\bdo\\b|" +
-        "\\bdouble\\b|\\belse\\b|\\benum\\b|\\beval\\b|\\bextends\\b|" +
-        "\\bextern\\b|\\bfalse\\b|\\bfield\\b|\\bfinal\\b|\\bfinally\\b|" +
-        "\\bfloat\\b|\\bfor\\b|\\bfriend\\b|\\bfunct\\b|\\bfunction\\b|" +
-        "\\bgetter\\b|\\bgoto\\b|\\bif\\b|\\bimplements\\b|\\bimport\\b|" +
-        "\\bin\\b|\\binline\\b|\\binstanceof\\b|\\bint\\b|\\binteger\\b|" +
-        "\\binterface\\b|\\blong\\b|\\bmethod\\b|\\bnative\\b|\\bnew\\b|" +
-        "\\bnull\\b|\\bnull_t\\b|\\boperator\\b|\\boverride\\b|" +
-        "\\bpackage\\b|\\bprivate\\b|\\bprotected\\b|\\bpublic\\b|" +
-        "\\breal\\b|\\bregister\\b|\\breturn\\b|\\bsetter\\b|\\bshort\\b|" +
-        "\\bsigned\\b|\\bsizeof\\b|\\bstatic\\b|\\bstrictfp\\b|\\bstring\\b|" +
-        "\\bstruct\\b|\\bsuper\\b|\\bswitch\\b|\\bsynchronized\\b|" +
-        "\\btemplate\\b|\\bthis\\b|\\bthrow\\b|\\bthrows\\b|" +
-        "\\btraditional\\b|\\btransient\\b|\\btrue\\b|\\btry\\b|\\btype\\b|" +
-        "\\btypedef\\b|\\btypeof\\b|\\bubyte\\b|\\buint\\b|\\bulong\\b|" +
-        "\\bunion\\b|\\bunsigned\\b|\\bushort\\b|\\bvar\\b|\\bversion\\b|" +
-        "\\bvirtual\\b|\\bvolatile\\b|\\bwhile\\b|\\bwith\\b";
+        "\\b(abstract|any|asm|assert|auto|boolean|break|byte|case|catch|" +
+        "char|cin|class|const|constructor|continue|cout|default|delete|" +
+        "do|double|else|enum|eval|extends|extern|false|field|final|" +
+        "finally|float|for|friend|funct|function|getter|goto|if|" +
+        "implements|import|in|inline|instanceof|int|integer|interface|" +
+        "long|method|native|new|null|operator|override|package|private|" +
+        "protected|public|real|register|return|setter|short|signed|" +
+        "sizeof|static|strictfp|string|struct|super|switch|synchronized|" +
+        "template|this|throw|throws|traditional|transient|true|try|type|" +
+        "typedef|typeof|ubyte|uint|ulong|union|unsigned|ushort|var|" +
+        "version|virtual|volatile|while|with)\\b";
 
     public final static String QUOTED =
         "'([^\\\\']+|\\\\([btnfr\"'\\\\]|[0-3]?[0-7]{1,2}|" +
