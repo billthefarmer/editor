@@ -136,6 +136,12 @@ public class Editor extends Activity
         "typedef|typeof|ubyte|uint|ulong|union|unsigned|ushort|var|" +
         "version|virtual|volatile|while|with)\\b";
 
+    public final static String CLASS =
+        "\\b[A-Z][A-Za-z0-9_]*\\b";
+
+    public final static String NUMBER =
+        "\\b[0-9.]+\\b";
+
     public final static String QUOTED =
         "'([^\\\\']+|\\\\([btnfr\"'\\\\]|[0-3]?[0-7]{1,2}|" +
         "u[0-9a-fA-F]{4}))*'|\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
@@ -143,6 +149,7 @@ public class Editor extends Activity
 
     public final static String COMMENT =
         "//.*$";
+    // "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
