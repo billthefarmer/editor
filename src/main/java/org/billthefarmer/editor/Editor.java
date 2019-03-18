@@ -1449,7 +1449,7 @@ public class Editor extends Activity
         }
 
         pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
-        matcher = pattern.matcher(editable.toString());
+        matcher.reset().usePattern(pattern);
 
         while (matcher.find())
         {
@@ -1703,6 +1703,62 @@ public class Editor extends Activity
             }
 
             return true;
+        }
+    }
+
+    // HighlightTask
+    @SuppressLint("StaticFieldLeak")
+    private class HighlightTask
+        extends AsyncTask<Editable, Void, Editable>
+    {
+        List<ForegroundColorSpan> spans;
+        List<Integer> starts;
+        List<Integer> ends;
+
+        // doInBackground
+        @Override
+        protected Editable doInBackground(Editable... editables)
+        {
+            Pattern pattern;
+            Matcher matcher;
+
+            spans = new ArrayList<ForegroundColorSpan>();
+            starts = new ArrayList<Integer>();
+            ends = new ArrayList<Integer>();
+
+            pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
+            matcher = pattern.matcher(editables[0].toString());
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                spans.add(span);
+                starts.add(matcher.start());
+                ends.add(matcher.end());
+            }
+
+            pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
+            matcher.reset().usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
+
+                spans.add(span);
+                starts.add(matcher.start());
+                ends.add(matcher.end());
+            }
+
+            return editables[0];
+        }
+
+        // onPostExecute
+        @Override
+        protected void onPostExecute(Editable editable)
+        {
         }
     }
 
