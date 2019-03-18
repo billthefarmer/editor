@@ -124,32 +124,39 @@ public class Editor extends Activity
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     public final static String KEYWORDS =
-        "\\b(abstract|any|asm|assert|auto|boolean|break|byte|case|catch|" +
+        "\\b(abstract|any|asm|assert|auto|break|case|catch|" +
         "char|cin|class|const|constructor|continue|cout|default|delete|" +
         "do|double|else|enum|eval|extends|extern|false|field|final|" +
-        "finally|float|for|friend|funct|function|getter|goto|if|" +
-        "implements|import|in|inline|instanceof|int|integer|interface|" +
+        "finally|for|friend|funct|function|getter|goto|if|" +
+        "implements|import|in|inline|instanceof|interface|" +
         "long|method|native|new|null|operator|override|package|private|" +
-        "protected|public|real|register|return|setter|short|signed|" +
+        "protected|public|real|register|return|setter|signed|" +
         "sizeof|static|strictfp|string|struct|super|switch|synchronized|" +
         "template|this|throw|throws|traditional|transient|true|try|type|" +
-        "typedef|typeof|ubyte|uint|ulong|union|unsigned|ushort|var|" +
+        "typedef|typeof|union|unsigned|var|" +
         "version|virtual|volatile|while|with)\\b";
+
+    public final static String TYPES =
+        "\\b(boolean|byte|float|int|integer|" +
+        "short|ubyte|uint|ulong|ushort)\\b";
 
     public final static String CLASS =
         "\\b[A-Z][A-Za-z0-9_]*\\b";
+
+    public final static String CONSTANT =
+        "\\b[A-Z][A-Z0-9_]*\\b";
 
     public final static String NUMBER =
         "\\b[0-9.]+\\b";
 
     public final static String QUOTED =
-        "'([^\\\\']+|\\\\([btnfr\"'\\\\]|[0-3]?[0-7]{1,2}|" +
-        "u[0-9a-fA-F]{4}))*'|\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
+        // "'([^\\\\']+|\\\\([btnfr\"'\\\\]|" +
+        // "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*'|" +
+        "\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
         "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
 
     public final static String COMMENT =
-        "//.*$";
-    // "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
+        "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
@@ -325,15 +332,7 @@ public class Editor extends Activity
                 {
                     changed = true;
                     invalidateOptionsMenu();
-                    if (updateHighlight == null)
-                        updateHighlight = () ->
-                        {
-                            if (BuildConfig.DEBUG)
-                                Log.d(TAG, "Update highlight");
-                            highlightText(s);
-                       };
-
-                    else
+                    if (updateHighlight != null)
                     {
                         textView.removeCallbacks(updateHighlight);
                         textView.postDelayed(updateHighlight, UPDATE_DELAY);
@@ -1441,6 +1440,25 @@ public class Editor extends Activity
             ForegroundColorSpan span = new
                 ForegroundColorSpan(Color.CYAN);
 
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Found keyword " + matcher.group());
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
+        matcher = pattern.matcher(editable.toString());
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.MAGENTA);
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Found type " + matcher.group());
+
             // Highlight it
             editable.setSpan(span, matcher.start(), matcher.end(),
                              Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1454,6 +1472,41 @@ public class Editor extends Activity
             ForegroundColorSpan span = new
                 ForegroundColorSpan(Color.RED);
 
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Found quotes " + matcher.group());
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
+        matcher.reset().usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.BLUE);
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Found class " + matcher.group());
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
+        matcher.reset().usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.LTGRAY);
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Found constant " + matcher.group());
+
             // Highlight it
             editable.setSpan(span, matcher.start(), matcher.end(),
                              Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1466,6 +1519,9 @@ public class Editor extends Activity
         {
             ForegroundColorSpan span = new
                 ForegroundColorSpan(Color.RED);
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Found comment " + matcher.group());
 
             // Highlight it
             editable.setSpan(span, matcher.start(), matcher.end(),
@@ -1709,6 +1765,39 @@ public class Editor extends Activity
                 textView.postDelayed(() ->
                                      scrollView.smoothScrollTo(0, 0),
                                      POSITION_DELAY);
+            // Check extension
+            if (file != null)
+            {
+                Uri uri = Uri.fromFile(file);
+                String ext = FileUtils.getExtension(uri.toString());
+                if (ext != null && (ext.equalsIgnoreCase(".c") ||
+                                    ext.equalsIgnoreCase(".cc") ||
+                                    ext.equalsIgnoreCase(".cpp") ||
+                                    ext.equalsIgnoreCase(".cxx") ||
+                                    ext.equalsIgnoreCase(".c++") ||
+                                    ext.equalsIgnoreCase(".js") ||
+                                    ext.equalsIgnoreCase(".h") ||
+                                    ext.equalsIgnoreCase(".java")))
+                {
+                    if (updateHighlight == null)
+                        updateHighlight = () ->
+                        {
+                            if (BuildConfig.DEBUG)
+                                Log.d(TAG, "Update highlight");
+                            highlightText(textView.getEditableText());
+                        };
+
+                    if (textView != null)
+                    {
+                        textView.removeCallbacks(updateHighlight);
+                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                    }
+                }
+
+                else
+                    updateHighlight = null;
+            }
+                    
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
             textView.clearFocus();
