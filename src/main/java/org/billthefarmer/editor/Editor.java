@@ -161,6 +161,7 @@ public class Editor extends Activity
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
     private final static int UPDATE_DELAY = 1000;
+    private final static int CANCEL_DELAY = 2000;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -999,8 +1000,6 @@ public class Editor extends Activity
             Uri uri = FileProvider
                 .getUriForFile(this, "org.billthefarmer.editor.fileprovider",
                                file);
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Uri " + uri);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, TEXT_HTML);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -1420,13 +1419,6 @@ public class Editor extends Activity
         }
     }
 
-    // highlightText
-    // private void highlightText(Editable editable)
-    // {
-    //     HighlightTask highlight = new HighlightTask();
-    //     highlight.execute(editable);
-    // }
-
     // onActionModeStarted
     @Override
     public void onActionModeStarted(ActionMode mode)
@@ -1628,8 +1620,8 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.CYAN);
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Found keyword " + matcher.group());
+                if (isCancelled())
+                    return null;
 
                 // Highlight it
                 Highlight highlight = new Highlight(span, matcher.start(),
@@ -1645,8 +1637,8 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.MAGENTA);
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Found type " + matcher.group());
+                if (isCancelled())
+                    return null;
 
                 // Highlight it
                 Highlight highlight = new Highlight(span, matcher.start(),
@@ -1662,8 +1654,8 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.BLUE);
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Found class " + matcher.group());
+                if (isCancelled())
+                    return null;
 
                 // Highlight it
                 Highlight highlight = new Highlight(span, matcher.start(),
@@ -1679,8 +1671,8 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.LTGRAY);
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Found constant " + matcher.group());
+                if (isCancelled())
+                    return null;
 
                 // Highlight it
                 Highlight highlight = new Highlight(span, matcher.start(),
@@ -1696,8 +1688,8 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.RED);
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Found comment " + matcher.group());
+                if (isCancelled())
+                    return null;
 
                 // Highlight it
                 Highlight highlight = new Highlight(span, matcher.start(),
@@ -1814,8 +1806,8 @@ public class Editor extends Activity
                                     ext.equalsIgnoreCase(".cpp") ||
                                     ext.equalsIgnoreCase(".cxx") ||
                                     ext.equalsIgnoreCase(".c++") ||
-                                    ext.equalsIgnoreCase(".js") ||
                                     ext.equalsIgnoreCase(".h") ||
+                                    ext.equalsIgnoreCase(".js") ||
                                     ext.equalsIgnoreCase(".java")))
                 {
                     if (updateHighlight == null)
@@ -1823,6 +1815,10 @@ public class Editor extends Activity
                         {
                             HighlightTask highlight = new HighlightTask();
                             highlight.execute(textView.getEditableText());
+                            textView.postDelayed(() ->
+                            {
+                                highlight.cancel(true);
+                            }, CANCEL_DELAY);
                         };
 
                     if (textView != null)
