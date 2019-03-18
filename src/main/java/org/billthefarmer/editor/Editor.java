@@ -1421,113 +1421,11 @@ public class Editor extends Activity
     }
 
     // highlightText
-    private void highlightText(Editable editable)
-    {
-        Pattern pattern;
-        Matcher matcher;
-
-        ForegroundColorSpan spans[] =
-            editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
-
-        for (ForegroundColorSpan span: spans)
-            editable.removeSpan(span);
-
-        pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
-        matcher = pattern.matcher(editable.toString());
-
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.CYAN);
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Found keyword " + matcher.group());
-
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
-        matcher.reset().usePattern(pattern);
-
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.MAGENTA);
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Found type " + matcher.group());
-
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        pattern = Pattern.compile(QUOTED, Pattern.MULTILINE);
-        matcher.reset().usePattern(pattern);
-
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.RED);
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Found quotes " + matcher.group());
-
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
-        matcher.reset().usePattern(pattern);
-
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.BLUE);
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Found class " + matcher.group());
-
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
-        matcher.reset().usePattern(pattern);
-
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.LTGRAY);
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Found constant " + matcher.group());
-
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        pattern = Pattern.compile(COMMENT, Pattern.MULTILINE);
-        matcher.reset().usePattern(pattern);
-
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.RED);
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Found comment " + matcher.group());
-
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-    }
+    // private void highlightText(Editable editable)
+    // {
+    //     HighlightTask highlight = new HighlightTask();
+    //     highlight.execute(editable);
+    // }
 
     // onActionModeStarted
     @Override
@@ -1711,9 +1609,7 @@ public class Editor extends Activity
     private class HighlightTask
         extends AsyncTask<Editable, Void, Editable>
     {
-        List<ForegroundColorSpan> spans;
-        List<Integer> starts;
-        List<Integer> ends;
+        List<Highlight> highlights;
 
         // doInBackground
         @Override
@@ -1722,9 +1618,7 @@ public class Editor extends Activity
             Pattern pattern;
             Matcher matcher;
 
-            spans = new ArrayList<ForegroundColorSpan>();
-            starts = new ArrayList<Integer>();
-            ends = new ArrayList<Integer>();
+            highlights = new ArrayList<Highlight>();
 
             pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
             matcher = pattern.matcher(editables[0].toString());
@@ -1734,9 +1628,13 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.CYAN);
 
-                spans.add(span);
-                starts.add(matcher.start());
-                ends.add(matcher.end());
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Found keyword " + matcher.group());
+
+                // Highlight it
+                Highlight highlight = new Highlight(span, matcher.start(),
+                                                    matcher.end());
+                highlights.add(highlight);
             }
 
             pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
@@ -1747,9 +1645,64 @@ public class Editor extends Activity
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.MAGENTA);
 
-                spans.add(span);
-                starts.add(matcher.start());
-                ends.add(matcher.end());
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Found type " + matcher.group());
+
+                // Highlight it
+                Highlight highlight = new Highlight(span, matcher.start(),
+                                                    matcher.end());
+                highlights.add(highlight);
+            }
+
+            pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
+            matcher.reset().usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.BLUE);
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Found class " + matcher.group());
+
+                // Highlight it
+                Highlight highlight = new Highlight(span, matcher.start(),
+                                                    matcher.end());
+                highlights.add(highlight);
+           }
+
+            pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
+            matcher.reset().usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.LTGRAY);
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Found constant " + matcher.group());
+
+                // Highlight it
+                Highlight highlight = new Highlight(span, matcher.start(),
+                                                    matcher.end());
+                highlights.add(highlight);
+            }
+
+            pattern = Pattern.compile(COMMENT, Pattern.MULTILINE);
+            matcher.reset().usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Found comment " + matcher.group());
+
+                // Highlight it
+                Highlight highlight = new Highlight(span, matcher.start(),
+                                                    matcher.end());
+                highlights.add(highlight);
             }
 
             return editables[0];
@@ -1759,6 +1712,36 @@ public class Editor extends Activity
         @Override
         protected void onPostExecute(Editable editable)
         {
+            ForegroundColorSpan spans[] =
+                editable.getSpans(0, editable.length(),
+                                  ForegroundColorSpan.class);
+
+            for (ForegroundColorSpan span: spans)
+                editable.removeSpan(span);
+
+            for (Highlight highlight: highlights)
+                highlight.highlight(editable);
+        }
+
+        // Highlight
+        private class Highlight
+        {
+            protected ForegroundColorSpan span;
+            protected int start;
+            protected int end;
+
+            Highlight(ForegroundColorSpan span, int start, int end)
+            {
+                this.span = span;
+                this.start = start;
+                this.end = end;
+            }
+
+            protected void highlight(Editable editable)
+            {
+                editable.setSpan(span, start, end,
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
     }
 
@@ -1838,9 +1821,8 @@ public class Editor extends Activity
                     if (updateHighlight == null)
                         updateHighlight = () ->
                         {
-                            if (BuildConfig.DEBUG)
-                                Log.d(TAG, "Update highlight");
-                            highlightText(textView.getEditableText());
+                            HighlightTask highlight = new HighlightTask();
+                            highlight.execute(textView.getEditableText());
                         };
 
                     if (textView != null)
