@@ -956,8 +956,7 @@ public class Editor extends Activity
             Uri uri = FileProvider
                 .getUriForFile(this, "org.billthefarmer.editor.fileprovider",
                                file);
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Uri " + uri);
+
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, TEXT_HTML);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
