@@ -1704,15 +1704,22 @@ public class Editor extends Activity
         @Override
         protected void onPostExecute(Editable editable)
         {
+            // Get current spans
             ForegroundColorSpan spans[] =
                 editable.getSpans(0, editable.length(),
                                   ForegroundColorSpan.class);
+            // Get scroll position
+            int y = scrollView.getScrollY();
 
+            // Remove spans
             for (ForegroundColorSpan span: spans)
                 editable.removeSpan(span);
-
+            // Highlight text
             for (Highlight highlight: highlights)
                 highlight.highlight(editable);
+
+            // Restore scroll position
+            scrollView.scrollTo(0, y);
         }
 
         // Highlight
@@ -1816,9 +1823,7 @@ public class Editor extends Activity
                             HighlightTask highlight = new HighlightTask();
                             highlight.execute(textView.getEditableText());
                             textView.postDelayed(() ->
-                            {
-                                highlight.cancel(true);
-                            }, CANCEL_DELAY);
+                                highlight.cancel(true), CANCEL_DELAY);
                         };
 
                     if (textView != null)
