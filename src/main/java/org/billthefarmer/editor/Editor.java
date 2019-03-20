@@ -59,7 +59,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ScrollView;
+// import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -187,7 +187,7 @@ public class Editor extends Activity
     private String toAppend;
     private EditText textView;
     private MenuItem searchItem;
-    private ScrollView scrollView;
+    private EdScrollView scrollView;
     private Runnable updateHighlight;
 
     private Map<String, Integer> pathMap;
@@ -419,6 +419,16 @@ public class Editor extends Activity
                 return false;
             });
         }
+
+        if (scrollView != null)
+            scrollView.setOnEdScrollChangeListener((v, scrollX, scrollY,
+                                                    oldScrollX, oldScrollY) ->
+            {
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Scroll " + scrollY);
+                textView.removeCallbacks(updateHighlight);
+                textView.postDelayed(updateHighlight, UPDATE_DELAY);
+            });
     }
 
     // onRestoreInstanceState
@@ -1419,6 +1429,104 @@ public class Editor extends Activity
         }
     }
 
+    private int getStart()
+    {
+        int y = scrollView.getScrollY();
+        int line = textView.getLayout().getLineForVertical(y);
+        return textView.getLayout().getOffsetForHorizontal(line, 0);
+    }
+
+    private int getEnd()
+    {
+        int y = scrollView.getScrollY() + scrollView.getHeight();
+        int line = textView.getLayout().getLineForVertical(y);
+        return textView.getLayout().getOffsetForHorizontal(line, 0);
+    }
+
+    // highlightText
+    private void highlightText(Editable editable)
+    {
+        Pattern pattern;
+        Matcher matcher;
+
+        int start = getStart();
+        int end = getEnd();
+
+        // Get current spans
+        ForegroundColorSpan spans[] =
+            editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
+        // Remove spans
+        for (ForegroundColorSpan span: spans)
+            editable.removeSpan(span);
+
+        pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
+        matcher = pattern.matcher(editable);
+        matcher.region(start, end);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.CYAN);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
+        matcher.region(start, end).usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.MAGENTA);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
+        matcher.region(start, end).usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.BLUE);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
+        matcher.region(start, end).usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.LTGRAY);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        pattern = Pattern.compile(COMMENT, Pattern.MULTILINE);
+        matcher.region(start, end).usePattern(pattern);
+
+        while (matcher.find())
+        {
+            ForegroundColorSpan span = new
+                ForegroundColorSpan(Color.RED);
+
+            // Highlight it
+            editable.setSpan(span, matcher.start(), matcher.end(),
+                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+    }
+
+
     // onActionModeStarted
     @Override
     public void onActionModeStarted(ActionMode mode)
@@ -1501,7 +1609,6 @@ public class Editor extends Activity
         private Editable editable;
         private Matcher matcher;
         private Pattern pattern;
-        private String text;
         private int index;
         private int height;
 
@@ -1513,7 +1620,6 @@ public class Editor extends Activity
             // Use regex search and spannable for highlighting
             height = scrollView.getHeight();
             editable = textView.getEditableText();
-            text = textView.getText().toString();
 
             // Reset the index and clear highlighting
             if (newText.length() == 0)
@@ -1527,7 +1633,7 @@ public class Editor extends Activity
             try
             {
                 pattern = Pattern.compile(newText, Pattern.MULTILINE);
-                matcher = pattern.matcher(text);
+                matcher = pattern.matcher(editable);
             }
 
             catch (Exception e)
@@ -1596,154 +1702,6 @@ public class Editor extends Activity
         }
     }
 
-    // HighlightTask
-    @SuppressLint("StaticFieldLeak")
-    private class HighlightTask
-        extends AsyncTask<Editable, Void, Editable>
-    {
-        List<Highlight> highlights;
-
-        // doInBackground
-        @Override
-        protected Editable doInBackground(Editable... editables)
-        {
-            Pattern pattern;
-            Matcher matcher;
-
-            highlights = new ArrayList<Highlight>();
-
-            pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
-            matcher = pattern.matcher(editables[0].toString());
-
-            while (matcher.find())
-            {
-                ForegroundColorSpan span = new
-                    ForegroundColorSpan(Color.CYAN);
-
-                if (isCancelled())
-                    return null;
-
-                // Highlight it
-                Highlight highlight = new Highlight(span, matcher.start(),
-                                                    matcher.end());
-                highlights.add(highlight);
-            }
-
-            pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
-            matcher.reset().usePattern(pattern);
-
-            while (matcher.find())
-            {
-                ForegroundColorSpan span = new
-                    ForegroundColorSpan(Color.MAGENTA);
-
-                if (isCancelled())
-                    return null;
-
-                // Highlight it
-                Highlight highlight = new Highlight(span, matcher.start(),
-                                                    matcher.end());
-                highlights.add(highlight);
-            }
-
-            pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
-            matcher.reset().usePattern(pattern);
-
-            while (matcher.find())
-            {
-                ForegroundColorSpan span = new
-                    ForegroundColorSpan(Color.BLUE);
-
-                if (isCancelled())
-                    return null;
-
-                // Highlight it
-                Highlight highlight = new Highlight(span, matcher.start(),
-                                                    matcher.end());
-                highlights.add(highlight);
-           }
-
-            pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
-            matcher.reset().usePattern(pattern);
-
-            while (matcher.find())
-            {
-                ForegroundColorSpan span = new
-                    ForegroundColorSpan(Color.LTGRAY);
-
-                if (isCancelled())
-                    return null;
-
-                // Highlight it
-                Highlight highlight = new Highlight(span, matcher.start(),
-                                                    matcher.end());
-                highlights.add(highlight);
-            }
-
-            pattern = Pattern.compile(COMMENT, Pattern.MULTILINE);
-            matcher.reset().usePattern(pattern);
-
-            while (matcher.find())
-            {
-                ForegroundColorSpan span = new
-                    ForegroundColorSpan(Color.RED);
-
-                if (isCancelled())
-                    return null;
-
-                // Highlight it
-                Highlight highlight = new Highlight(span, matcher.start(),
-                                                    matcher.end());
-                highlights.add(highlight);
-            }
-
-            return editables[0];
-        }
-
-        // onPostExecute
-        @Override
-        protected void onPostExecute(Editable editable)
-        {
-            // Get current spans
-            ForegroundColorSpan spans[] =
-                editable.getSpans(0, editable.length(),
-                                  ForegroundColorSpan.class);
-            // Get scroll position
-            int y = scrollView.getScrollY();
-
-            // Remove spans
-            for (ForegroundColorSpan span: spans)
-                editable.removeSpan(span);
-            // Highlight text
-            for (Highlight highlight: highlights)
-                highlight.highlight(editable);
-
-            // Restore scroll position
-            scrollView.scrollTo(0, y);
-        }
-
-        // Highlight
-        private class Highlight
-        {
-            protected ForegroundColorSpan span;
-            protected int start;
-            protected int end;
-
-            Highlight(ForegroundColorSpan span, int start, int end)
-            {
-                this.span = span;
-                this.start = start;
-                this.end = end;
-            }
-
-            protected void highlight(Editable editable)
-            {
-                editable.setSpan(span, start, end,
-                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-    }
-
     // ReadTask
     @SuppressLint("StaticFieldLeak")
     private class ReadTask
@@ -1796,13 +1754,19 @@ public class Editor extends Activity
             // Check for saved position
             if (pathMap.containsKey(path))
                 textView.postDelayed(() ->
-                                     scrollView
-                                     .smoothScrollTo(0, pathMap.get(path)),
-                                     POSITION_DELAY);
+                {
+                    if (BuildConfig.DEBUG)
+                        Log.d(TAG, "SmoothScroll " + pathMap.get(path));
+                    scrollView.smoothScrollTo(0, pathMap.get(path));
+                }, POSITION_DELAY);
             else
                 textView.postDelayed(() ->
-                                     scrollView.smoothScrollTo(0, 0),
-                                     POSITION_DELAY);
+                {
+                    if (BuildConfig.DEBUG)
+                        Log.d(TAG, "SmoothScroll " + 0);
+                    scrollView.smoothScrollTo(0, 0);
+                }, POSITION_DELAY);
+
             // Check extension
             if (file != null)
             {
@@ -1819,12 +1783,7 @@ public class Editor extends Activity
                 {
                     if (updateHighlight == null)
                         updateHighlight = () ->
-                        {
-                            HighlightTask highlight = new HighlightTask();
-                            highlight.execute(textView.getEditableText());
-                            textView.postDelayed(() ->
-                                highlight.cancel(true), CANCEL_DELAY);
-                        };
+                            highlightText(textView.getEditableText());
 
                     if (textView != null)
                     {

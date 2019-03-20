@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<org.billthefarmer.editor.EdScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vscroll"
@@ -20,4 +20,4 @@
       android:typeface="monospace"
       tools:ignore="Autofill" />
 
-</ScrollView>
+</org.billthefarmer.editor.EdScrollView>
