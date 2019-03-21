@@ -52,6 +52,8 @@ public class EdScrollView extends ScrollView
                                     int oldl, 
                                     int oldt)
     {
+        super.onScrollChanged(l, t, oldl, oldt);
+
         if (onEdScrollChangeListener != null)
             onEdScrollChangeListener.onScrollChange (this, l, t, oldl, oldt);
     }

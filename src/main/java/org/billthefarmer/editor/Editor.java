@@ -1429,28 +1429,18 @@ public class Editor extends Activity
         }
     }
 
-    private int getStart()
-    {
-        int y = scrollView.getScrollY();
-        int line = textView.getLayout().getLineForVertical(y);
-        return textView.getLayout().getOffsetForHorizontal(line, 0);
-    }
-
-    private int getEnd()
-    {
-        int y = scrollView.getScrollY() + scrollView.getHeight();
-        int line = textView.getLayout().getLineForVertical(y);
-        return textView.getLayout().getOffsetForHorizontal(line, 0);
-    }
-
     // highlightText
     private void highlightText(Editable editable)
     {
         Pattern pattern;
         Matcher matcher;
 
-        int start = getStart();
-        int end = getEnd();
+        int y = scrollView.getScrollY();
+        int line = textView.getLayout().getLineForVertical(y);
+        int start = textView.getLayout().getOffsetForHorizontal(line, 0);
+        line = textView.getLayout()
+            .getLineForVertical(y + scrollView.getHeight());
+        int end = textView.getLayout().getOffsetForHorizontal(line, 0);
 
         // Get current spans
         ForegroundColorSpan spans[] =
@@ -1524,6 +1514,12 @@ public class Editor extends Activity
             editable.setSpan(span, matcher.start(), matcher.end(),
                              Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
+        scrollView.postDelayed(() ->
+            {
+                scrollView.scrollTo(0, y);
+                textView.removeCallbacks(updateHighlight);
+            }, POSITION_DELAY);
     }
 
 
@@ -1652,10 +1648,8 @@ public class Editor extends Activity
                     return false;
 
                 // Get text position
-                int line = textView.getLayout()
-                           .getLineForOffset(index);
-                int pos = textView.getLayout()
-                          .getLineBaseline(line);
+                int line = textView.getLayout().getLineForOffset(index);
+                int pos = textView.getLayout().getLineBaseline(line);
 
                 // Scroll to it
                 scrollView.smoothScrollTo(0, pos - height / 2);
