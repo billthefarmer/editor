@@ -444,10 +444,6 @@ public class Editor extends Activity
                 boolean shown = ((rootHeight - height) /
                                  (double) rootHeight) > KEYBOARD_RATIO;
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Layout " + rootHeight + ", " + height + ", " +
-                          shown);
-
                 if (shown != keyboardShown)
                 {
                     if (!shown)
