@@ -144,7 +144,7 @@ public class Editor extends Activity
         "\\b[A-Z][A-Za-z0-9_]*\\b";
 
     public final static String CONSTANT =
-        "\\b[A-Z][A-Z0-9_]*\\b";
+        "\\b[A-Z][A-Z0-9_]+\\b";
 
     public final static String NUMBER =
         "\\b[0-9.]+\\b";
@@ -158,10 +158,11 @@ public class Editor extends Activity
     public final static String COMMENT =
         "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
 
+    private final static double KEYBOARD_RATIO   = 0.25;
+
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
-    private final static int UPDATE_DELAY = 1000;
-    private final static int CANCEL_DELAY = 2000;
+    private final static int UPDATE_DELAY = 100;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -192,6 +193,8 @@ public class Editor extends Activity
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
+
+    private boolean keyboardShown = false;
 
     private boolean save = false;
     private boolean edit = true;
@@ -367,6 +370,9 @@ public class Editor extends Activity
                     getSystemService(INPUT_METHOD_SERVICE);
                 if (!hasFocus)
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                textView.removeCallbacks(updateHighlight);
+                textView.postDelayed(updateHighlight, UPDATE_DELAY);
             });
 
             // onLongClick
@@ -421,14 +427,39 @@ public class Editor extends Activity
         }
 
         if (scrollView != null)
+        {
+            // onScrollChange
             scrollView.setOnEdScrollChangeListener((v, scrollX, scrollY,
                                                     oldScrollX, oldScrollY) ->
             {
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Scroll " + scrollY);
                 textView.removeCallbacks(updateHighlight);
                 textView.postDelayed(updateHighlight, UPDATE_DELAY);
             });
+
+            scrollView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
+            {
+                int rootHeight = scrollView.getRootView().getHeight();
+                int height = scrollView.getHeight();
+
+                boolean shown = ((rootHeight - height) /
+                                 (double) rootHeight) > KEYBOARD_RATIO;
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Layout " + rootHeight + ", " + height + ", " +
+                          shown);
+
+                if (shown != keyboardShown)
+                {
+                    if (!shown)
+                    {
+                        textView.removeCallbacks(updateHighlight);
+                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                    }
+
+                    keyboardShown = shown;
+                }
+            });
+        }
     }
 
     // onRestoreInstanceState
@@ -1435,12 +1466,19 @@ public class Editor extends Activity
         Pattern pattern;
         Matcher matcher;
 
-        int y = scrollView.getScrollY();
-        int line = textView.getLayout().getLineForVertical(y);
+        int top = scrollView.getScrollY();
+        int height = scrollView.getHeight();
+        int line = textView.getLayout().getLineForVertical(top);
         int start = textView.getLayout().getOffsetForHorizontal(line, 0);
-        line = textView.getLayout()
-            .getLineForVertical(y + scrollView.getHeight());
+        line = textView.getLayout().getLineForVertical(top + height);
         int end = textView.getLayout().getOffsetForHorizontal(line, 0);
+
+        if (!edit)
+        {
+            line = textView.getLayout().getLineForVertical(top + height / 2);
+            int middle = textView.getLayout().getOffsetForHorizontal(line, 0);
+            textView.setSelection(middle, middle);
+        }
 
         // Get current spans
         ForegroundColorSpan spans[] =
@@ -1514,12 +1552,6 @@ public class Editor extends Activity
             editable.setSpan(span, matcher.start(), matcher.end(),
                              Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-
-        scrollView.postDelayed(() ->
-            {
-                scrollView.scrollTo(0, y);
-                textView.removeCallbacks(updateHighlight);
-            }, POSITION_DELAY);
     }
 
 
@@ -1748,18 +1780,11 @@ public class Editor extends Activity
             // Check for saved position
             if (pathMap.containsKey(path))
                 textView.postDelayed(() ->
-                {
-                    if (BuildConfig.DEBUG)
-                        Log.d(TAG, "SmoothScroll " + pathMap.get(path));
-                    scrollView.smoothScrollTo(0, pathMap.get(path));
-                }, POSITION_DELAY);
+                    scrollView.smoothScrollTo(0, pathMap.get(path)),
+                                     POSITION_DELAY);
             else
                 textView.postDelayed(() ->
-                {
-                    if (BuildConfig.DEBUG)
-                        Log.d(TAG, "SmoothScroll " + 0);
-                    scrollView.smoothScrollTo(0, 0);
-                }, POSITION_DELAY);
+                    scrollView.smoothScrollTo(0, 0), POSITION_DELAY);
 
             // Check extension
             if (file != null)
