@@ -96,15 +96,15 @@ public class Editor extends Activity
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
 
+    public final static String PREF_FILE = "pref_file";
+    public final static String PREF_HIGHLIGHT = "pref_highlight";
+    public final static String PREF_PATHS = "pref_paths";
     public final static String PREF_SAVE = "pref_save";
-    public final static String PREF_WRAP = "pref_wrap";
+    public final static String PREF_SIZE = "pref_size";
     public final static String PREF_SUGGEST = "pref_suggest";
     public final static String PREF_THEME = "pref_theme";
-    public final static String PREF_PATHS = "pref_paths";
-    public final static String PREF_SIZE = "pref_size";
     public final static String PREF_TYPE = "pref_type";
-    public final static String PREF_FILE = "pref_file";
-    public final static String PREF_POSN = "pref_posn";
+    public final static String PREF_WRAP = "pref_wrap";
 
     public final static String DOCUMENTS = "Documents";
     public final static String EDIT_FILE = "Editor.txt";
@@ -123,22 +123,99 @@ public class Editor extends Activity
         " initial-scale=1.0\">\n</head>\n<body>\n";
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
+    public final static String CC_EXT =
+        "\\.(c(c|pp|xx|\\+\\+)?|h|js|java|m|py)";
+
+    public final static String HTML_EXT =
+        "\\.html?";
+
+    public final static String CSS_EXT =
+        "\\.css?";
+
     public final static String KEYWORDS =
-        "\\b(abstract|any|asm|assert|auto|break|case|catch|" +
-        "char|cin|class|const|constructor|continue|cout|default|delete|" +
-        "do|double|else|enum|eval|extends|extern|false|field|final|" +
-        "finally|for|friend|funct|function|getter|goto|if|" +
-        "implements|import|in|inline|instanceof|interface|" +
-        "long|method|native|new|null|operator|override|package|private|" +
-        "protected|public|real|register|return|setter|signed|" +
-        "sizeof|static|strictfp|string|struct|super|switch|synchronized|" +
-        "template|this|throw|throws|traditional|transient|true|try|type|" +
-        "typedef|typeof|union|unsigned|var|" +
-        "version|virtual|volatile|while|with)\\b";
+        "\\b(abstract|and|any|as|asm|assert|auto|break|case|catch|" +
+        "cin|class|const|constructor|continue|cout|def|default|del|" +
+        "delete|do|elif|else|end|enum|eval|except|extends|extern|" +
+        "false|field|final|finally|for|friend|from|funct|function|" +
+        "getter|global|goto|if|implementation|implements|import|in|" +
+        "inline|instanceof|interface|is|lambda|let|method|native|" +
+        "new|nil|none|nonlocal|not|null|operator|or|override|" +
+        "package|pass|private|protected|protocol|public|raise|real|" +
+        "register|return|selector|setter|signed|sizeof|static|" +
+        "strictfp|string|struct|super|switch|synchronized|template|" +
+        "this|throw|throws|traditional|transient|true|try|type|" +
+        "typedef|typeof|union|unsigned|var|version|virtual|" +
+        "volatile|while|with|yield)\\b";
 
     public final static String TYPES =
-        "\\b(boolean|byte|float|int|integer|" +
-        "short|ubyte|uint|ulong|ushort)\\b";
+        "\\b(bool(ean)?|byte|char|double|float|int(eger)?|long|" +
+        "short|u(byte|char|int|long|short))\\b";
+
+    public final static String CC_COMMENT =
+        "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
+
+    public final static String HTML_TAGS =
+        "\\b(html|base|head|link|meta|style|title|body|address|article|" +
+        "aside|footer|header|h1|hgroup|main|nav|section|blockquote|dd|" +
+        "dir|div|dl|dt|figcaption|figure|hr|li|main|ol|p|pre|ul|a|abbr|" +
+        "b|bdi|bdo|br|cite|code|data|dfn|em|i|kbd|mark|q|rb|rp|rt|rtc|" +
+        "ruby|s|samp|small|span|strong|sub|sup|time|tt|u|var|wbr|area|" +
+        "audio|img|map|track|video|applet|embed|iframe|noembed|object|" +
+        "param|picture|source|canvas|noscript|script|del|ins|caption|" +
+        "col|colgroup|table|tbody|td|tfoot|th|thead|tr|button|datalist|" +
+        "fieldset|form|input|label|legend|meter|optgroup|option|output|" +
+        "progress|select|textarea|details|dialog|menu|menuitem|summary|" +
+        "content|element|shadow|slot|template|acronym|applet|basefont|" +
+        "bgsound|big|blink|center|command|content|dir|element|font|" +
+        "frame|frameset|image|isindex|keygen|listing|marquee|menuitem|" +
+        "multicol|nextid|nobr|noembed|noframes|plaintext|shadow|spacer|" +
+        "strike|tt|xmp)\\b";
+
+    public final static String HTML_COMMENT =
+        "<!--.*?-->";
+
+    public final static String CSS_STYLES =
+        "\\b(action|active|additive|adjust|after|align|all|alternates|" +
+        "animation|annotation|area|areas|as|asian|attachment|attr|" +
+        "auto|backdrop|backface|background|basis|before|behavior|" +
+        "bezier|bidi|blend|block|blur|border|bottom|box|break|" +
+        "brightness|calc|caps|caption|caret|cells|center|ch|change|" +
+        "character|charset|checked|child|circle|clamp|clear|clip|" +
+        "cm|collapse|color|column|columns|combine|composite|conic|" +
+        "content|contrast|count|counter|counters|cross|cubic|cue|" +
+        "cursor|decoration|default|deg|delay|dir|direction|" +
+        "disabled|display|dpcm|dpi|dppx|drop|duration|east|element|" +
+        "ellipse|em|emphasis|empty|enabled|end|env|events|ex|face|" +
+        "fade|fallback|family|feature|fill|filter|first|fit|flex|" +
+        "float|flow|focus|font|format|forms|fr|frames|fullscreen|" +
+        "function|gap|grad|gradient|grayscale|grid|grow|hanging|" +
+        "height|historical|hover|hsl|hsla|hue|hyphens|hz|image|import|" +
+        "in|increment|indent|indeterminate|index|inherit|initial|" +
+        "inline|inset|inside|invalid|invert|isolation|items|" +
+        "iteration|justify|khz|kerning|keyframes|lang|language|" +
+        "last|layout|leader|left|letter|ligatures|line|linear|link|" +
+        "list|local|margin|mask|matrix|matrix3d|max|media|min|" +
+        "minmax|mix|mm|mode|ms|name|namespace|negative|not|nth|" +
+        "numeric|object|of|offset|only|opacity|optical|optional|" +
+        "order|orientation|origin|ornaments|orphans|out|outline|" +
+        "outset|outside|overflow|override|pad|padding|page|path|pc|" +
+        "perspective|place|placeholder|play|pointer|polygon|" +
+        "position|prefix|property|pt|punctuation|px|q|quotes|rad|" +
+        "radial|radius|range|read|rect|rem|rendering|repeat|" +
+        "repeating|required|reset|resize|revert|rgb|rgba|right|" +
+        "root|rotate|rotate3d|rotatex|rotatey|rotatez|row|rows|" +
+        "rule|s|saturate|scale|scale3d|scalex|scaley|scalez|scope|" +
+        "scroll|scrollbar|selection|self|sepia|set|settings|shadow|" +
+        "shape|shrink|side|size|sizing|skew|skewx|skewy|slice|" +
+        "slotted|snap|source|space|spacing|span|speak|src|start|" +
+        "state|steps|stop|stretch|style|styleset|stylistic|suffix|" +
+        "supports|swash|symbols|synthesis|system|tab|table|target|" +
+        "template|text|threshold|timing|top|touch|transform|" +
+        "transition|translate|translate3d|translatex|translatey|" +
+        "translatez|turn|type|underline|unicode|unset|upright|url|" +
+        "user|valid|values|var|variant|variation|vertical|vh|" +
+        "viewport|visibility|visited|vmax|vmin|vw|weight|white|" +
+        "widows|width|will|word|wrap|write|writing|x|y|z|zoom)\\b";
 
     public final static String CLASS =
         "\\b[A-Z][A-Za-z0-9_]*\\b";
@@ -154,9 +231,6 @@ public class Editor extends Activity
         // "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*'|" +
         "\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
         "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
-
-    public final static String COMMENT =
-        "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
 
     private final static double KEYBOARD_RATIO   = 0.25;
 
@@ -181,6 +255,11 @@ public class Editor extends Activity
     private final static int NORMAL = 1;
     private final static int MONO   = 2;
 
+    private final static int NO_SYNTAX   = 0;
+    private final static int CC_SYNTAX   = 1;
+    private final static int HTML_SYNTAX = 2;
+    private final static int CSS_SYNTAX  = 3;
+
     private File file;
     private String path;
     private Uri content;
@@ -194,7 +273,8 @@ public class Editor extends Activity
     private Map<String, Integer> pathMap;
     private List<String> removeList;
 
-    private boolean keyboardShown = false;
+    private boolean keyboard = false;
+    private boolean highlight = false;
 
     private boolean save = false;
     private boolean edit = true;
@@ -211,6 +291,8 @@ public class Editor extends Activity
     private int size = MEDIUM;
     private int type = MONO;
 
+    private int syntax;
+
     // onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -223,6 +305,7 @@ public class Editor extends Activity
         save = preferences.getBoolean(PREF_SAVE, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
+        highlight = preferences.getBoolean(PREF_HIGHLIGHT, false);
 
         theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
@@ -371,8 +454,11 @@ public class Editor extends Activity
                 if (!hasFocus)
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                textView.removeCallbacks(updateHighlight);
-                textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                if (updateHighlight != null)
+                {
+                    textView.removeCallbacks(updateHighlight);
+                    textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                }
             });
 
             // onLongClick
@@ -432,27 +518,33 @@ public class Editor extends Activity
             scrollView.setOnEdScrollChangeListener((v, scrollX, scrollY,
                                                     oldScrollX, oldScrollY) ->
             {
-                textView.removeCallbacks(updateHighlight);
-                textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                if (updateHighlight != null)
+                {
+                    textView.removeCallbacks(updateHighlight);
+                    textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                }
             });
 
             scrollView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
             {
-                int rootHeight = scrollView.getRootView().getHeight();
-                int height = scrollView.getHeight();
-
-                boolean shown = ((rootHeight - height) /
-                                 (double) rootHeight) > KEYBOARD_RATIO;
-
-                if (shown != keyboardShown)
+                if (updateHighlight != null)
                 {
-                    if (!shown)
-                    {
-                        textView.removeCallbacks(updateHighlight);
-                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
-                    }
+                    int rootHeight = scrollView.getRootView().getHeight();
+                    int height = scrollView.getHeight();
 
-                    keyboardShown = shown;
+                    boolean shown = ((rootHeight - height) /
+                                     (double) rootHeight) > KEYBOARD_RATIO;
+
+                    if (shown != keyboard)
+                    {
+                        if (!shown)
+                        {
+                            textView.removeCallbacks(updateHighlight);
+                            textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                        }
+
+                        keyboard = shown;
+                    }
                 }
             });
         }
@@ -505,6 +597,7 @@ public class Editor extends Activity
         editor.putBoolean(PREF_SAVE, save);
         editor.putBoolean(PREF_WRAP, wrap);
         editor.putBoolean(PREF_SUGGEST, suggest);
+        editor.putBoolean(PREF_HIGHLIGHT, highlight);
         editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
         editor.putInt(PREF_TYPE, type);
@@ -574,6 +667,7 @@ public class Editor extends Activity
         menu.findItem(R.id.autoSave).setChecked(save);
         menu.findItem(R.id.wrap).setChecked(wrap);
         menu.findItem(R.id.suggest).setChecked(suggest);
+        menu.findItem(R.id.highlight).setChecked(highlight);
 
         switch (theme)
         {
@@ -689,6 +783,9 @@ public class Editor extends Activity
             break;
         case R.id.suggest:
             suggestClicked(item);
+            break;
+        case R.id.highlight:
+            highlightClicked(item);
             break;
         case R.id.light:
             lightClicked(item);
@@ -1084,6 +1181,15 @@ public class Editor extends Activity
             recreate();
     }
 
+    // highlightClicked
+    private void highlightClicked(MenuItem item)
+    {
+        highlight = !highlight;
+        item.setChecked(highlight);
+
+        checkHighlight();
+    }
+
     // lightClicked
     private void lightClicked(MenuItem item)
     {
@@ -1456,24 +1562,70 @@ public class Editor extends Activity
         }
     }
 
+    // checkHighlight
+    private void checkHighlight()
+    {
+        // Check extension
+        if (highlight && file != null)
+        {
+            Uri uri = Uri.fromFile(file);
+            String ext = FileUtils.getExtension(uri.toString());
+            if (ext != null)
+            {
+                if (ext.matches(CC_EXT))
+                    syntax = CC_SYNTAX;
+
+                else if (ext.matches(HTML_EXT))
+                    syntax = HTML_SYNTAX;
+
+                else if (ext.matches(CSS_EXT))
+                    syntax = CSS_SYNTAX;
+
+                else
+                    syntax = NO_SYNTAX;
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Syntax " + syntax);
+
+                if (textView != null && syntax != NO_SYNTAX)
+                {
+                    if (updateHighlight == null)
+                        updateHighlight = () ->
+                            highlightText(textView.getEditableText());
+
+                    textView.removeCallbacks(updateHighlight);
+                    textView.postDelayed(updateHighlight, UPDATE_DELAY);
+
+                    return;
+                }
+            }
+        }
+
+        updateHighlight = null;
+    }
+
     // highlightText
     private void highlightText(Editable editable)
     {
         Pattern pattern;
         Matcher matcher;
 
+        // Get visible extent
         int top = scrollView.getScrollY();
         int height = scrollView.getHeight();
+
         int line = textView.getLayout().getLineForVertical(top);
         int start = textView.getLayout().getOffsetForHorizontal(line, 0);
+
         line = textView.getLayout().getLineForVertical(top + height);
         int end = textView.getLayout().getOffsetForHorizontal(line, 0);
 
         if (!edit)
         {
+            // Move selection to centre
             line = textView.getLayout().getLineForVertical(top + height / 2);
-            int middle = textView.getLayout().getOffsetForHorizontal(line, 0);
-            textView.setSelection(middle, middle);
+            int centre = textView.getLayout().getOffsetForHorizontal(line, 0);
+            textView.setSelection(centre, centre);
         }
 
         // Get current spans
@@ -1483,70 +1635,133 @@ public class Editor extends Activity
         for (ForegroundColorSpan span: spans)
             editable.removeSpan(span);
 
-        pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
-        matcher = pattern.matcher(editable);
-        matcher.region(start, end);
-
-        while (matcher.find())
+        switch (syntax)
         {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.CYAN);
+        case CC_SYNTAX:
+            pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
+            matcher = pattern.matcher(editable);
+            matcher.region(start, end);
 
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
 
-        pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
-        matcher.region(start, end).usePattern(pattern);
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.MAGENTA);
+            pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
 
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
 
-        pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
-        matcher.region(start, end).usePattern(pattern);
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.BLUE);
+            pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
 
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.BLUE);
 
-        pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
-        matcher.region(start, end).usePattern(pattern);
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.LTGRAY);
+            pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
 
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.LTGRAY);
 
-        pattern = Pattern.compile(COMMENT, Pattern.MULTILINE);
-        matcher.region(start, end).usePattern(pattern);
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
-        while (matcher.find())
-        {
-            ForegroundColorSpan span = new
-                ForegroundColorSpan(Color.RED);
+            pattern = Pattern.compile(CC_COMMENT, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
 
-            // Highlight it
-            editable.setSpan(span, matcher.start(), matcher.end(),
-                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
+
+        case HTML_SYNTAX:
+            pattern = Pattern.compile(HTML_TAGS, Pattern.MULTILINE);
+            matcher = pattern.matcher(editable);
+            matcher.region(start, end);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(HTML_COMMENT, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
+
+        case CSS_SYNTAX:
+            pattern = Pattern.compile(CSS_STYLES, Pattern.MULTILINE);
+            matcher = pattern.matcher(editable);
+            matcher.region(start, end);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(CC_COMMENT, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
         }
     }
 
@@ -1782,34 +1997,8 @@ public class Editor extends Activity
                 textView.postDelayed(() ->
                     scrollView.smoothScrollTo(0, 0), POSITION_DELAY);
 
-            // Check extension
-            if (file != null)
-            {
-                Uri uri = Uri.fromFile(file);
-                String ext = FileUtils.getExtension(uri.toString());
-                if (ext != null && (ext.equalsIgnoreCase(".c") ||
-                                    ext.equalsIgnoreCase(".cc") ||
-                                    ext.equalsIgnoreCase(".cpp") ||
-                                    ext.equalsIgnoreCase(".cxx") ||
-                                    ext.equalsIgnoreCase(".c++") ||
-                                    ext.equalsIgnoreCase(".h") ||
-                                    ext.equalsIgnoreCase(".js") ||
-                                    ext.equalsIgnoreCase(".java")))
-                {
-                    if (updateHighlight == null)
-                        updateHighlight = () ->
-                            highlightText(textView.getEditableText());
-
-                    if (textView != null)
-                    {
-                        textView.removeCallbacks(updateHighlight);
-                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
-                    }
-                }
-
-                else
-                    updateHighlight = null;
-            }
+            // Check highlighting
+            checkHighlight();
                     
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);

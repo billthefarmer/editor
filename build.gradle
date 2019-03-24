@@ -40,7 +40,7 @@ android {
     lintOptions {
         disable 'IconDensities', 'ContentDescription',
             'ExpiredTargetSdkVersion'
-        // abortOnError false
+        abortOnError false
     }
 }
 

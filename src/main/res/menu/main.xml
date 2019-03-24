@@ -60,6 +60,12 @@
       android:showAsAction="never"
       android:title="@string/suggest" />
   <item
+      android:id="@+id/highlight"
+      android:checkable="true"
+      android:checked="false"
+      android:showAsAction="never"
+      android:title="@string/highlight" />
+  <item
       android:id="@+id/theme"
       android:showAsAction="never"
       android:title="@string/theme">
