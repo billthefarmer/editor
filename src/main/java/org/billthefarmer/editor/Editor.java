@@ -59,7 +59,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-// import android.widget.ScrollView;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -178,7 +178,7 @@ public class Editor extends Activity
         "\\b(action|active|additive|adjust|after|align|all|alternates|" +
         "animation|annotation|area|areas|as|asian|attachment|attr|" +
         "auto|backdrop|backface|background|basis|before|behavior|" +
-        "bezier|bidi|blend|block|blur|border|bottom|box|break|" +
+        "bezier|bidi|blend|block|blur|border|both|bottom|box|break|" +
         "brightness|calc|caps|caption|caret|cells|center|ch|change|" +
         "character|charset|checked|child|circle|clamp|clear|clip|" +
         "cm|collapse|color|column|columns|combine|composite|conic|" +
@@ -195,20 +195,20 @@ public class Editor extends Activity
         "iteration|justify|khz|kerning|keyframes|lang|language|" +
         "last|layout|leader|left|letter|ligatures|line|linear|link|" +
         "list|local|margin|mask|matrix|matrix3d|max|media|min|" +
-        "minmax|mix|mm|mode|ms|name|namespace|negative|not|nth|" +
+        "minmax|mix|mm|mode|ms|name|namespace|negative|none|not|nth|" +
         "numeric|object|of|offset|only|opacity|optical|optional|" +
         "order|orientation|origin|ornaments|orphans|out|outline|" +
         "outset|outside|overflow|override|pad|padding|page|path|pc|" +
         "perspective|place|placeholder|play|pointer|polygon|" +
         "position|prefix|property|pt|punctuation|px|q|quotes|rad|" +
-        "radial|radius|range|read|rect|rem|rendering|repeat|" +
+        "radial|radius|range|read|rect|relative|rem|rendering|repeat|" +
         "repeating|required|reset|resize|revert|rgb|rgba|right|" +
         "root|rotate|rotate3d|rotatex|rotatey|rotatez|row|rows|" +
         "rule|s|saturate|scale|scale3d|scalex|scaley|scalez|scope|" +
         "scroll|scrollbar|selection|self|sepia|set|settings|shadow|" +
         "shape|shrink|side|size|sizing|skew|skewx|skewy|slice|" +
         "slotted|snap|source|space|spacing|span|speak|src|start|" +
-        "state|steps|stop|stretch|style|styleset|stylistic|suffix|" +
+        "state|static|steps|stop|stretch|style|styleset|stylistic|suffix|" +
         "supports|swash|symbols|synthesis|system|tab|table|target|" +
         "template|text|threshold|timing|top|touch|transform|" +
         "transition|translate|translate3d|translatex|translatey|" +
@@ -267,7 +267,7 @@ public class Editor extends Activity
     private String toAppend;
     private EditText textView;
     private MenuItem searchItem;
-    private EdScrollView scrollView;
+    private ScrollView scrollView;
     private Runnable updateHighlight;
 
     private Map<String, Integer> pathMap;
@@ -515,8 +515,7 @@ public class Editor extends Activity
         if (scrollView != null)
         {
             // onScrollChange
-            scrollView.setOnEdScrollChangeListener((v, scrollX, scrollY,
-                                                    oldScrollX, oldScrollY) ->
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
             {
                 if (updateHighlight != null)
                 {
@@ -1584,14 +1583,11 @@ public class Editor extends Activity
                 else
                     syntax = NO_SYNTAX;
 
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Syntax " + syntax);
-
+                // Add callback
                 if (textView != null && syntax != NO_SYNTAX)
                 {
                     if (updateHighlight == null)
-                        updateHighlight = () ->
-                            highlightText(textView.getEditableText());
+                        updateHighlight = () -> highlightText();
 
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
@@ -1605,11 +1601,8 @@ public class Editor extends Activity
     }
 
     // highlightText
-    private void highlightText(Editable editable)
+    private void highlightText()
     {
-        Pattern pattern;
-        Matcher matcher;
-
         // Get visible extent
         int top = scrollView.getScrollY();
         int height = scrollView.getHeight();
@@ -1628,12 +1621,18 @@ public class Editor extends Activity
             textView.setSelection(centre, centre);
         }
 
+        // Get editable
+        Editable editable = textView.getEditableText();
+
         // Get current spans
         ForegroundColorSpan spans[] =
             editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
         // Remove spans
         for (ForegroundColorSpan span: spans)
             editable.removeSpan(span);
+
+        Pattern pattern;
+        Matcher matcher;
 
         switch (syntax)
         {
@@ -1714,6 +1713,19 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(QUOTED, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
