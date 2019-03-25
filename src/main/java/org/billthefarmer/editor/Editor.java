@@ -169,7 +169,7 @@ public class Editor extends Activity
         "bgsound|big|blink|center|command|content|dir|element|font|" +
         "frame|frameset|image|isindex|keygen|listing|marquee|menuitem|" +
         "multicol|nextid|nobr|noembed|noframes|plaintext|shadow|spacer|" +
-        "strike|tt|xmp)\\b";
+        "strike|tt|xmp|doctype)\\b";
 
     public final static String HTML_COMMENT =
         "<!--.*?-->";
@@ -1701,7 +1701,8 @@ public class Editor extends Activity
             break;
 
         case HTML_SYNTAX:
-            pattern = Pattern.compile(HTML_TAGS, Pattern.MULTILINE);
+            pattern = Pattern.compile(HTML_TAGS, Pattern.MULTILINE |
+                                      Pattern.CASE_INSENSITIVE);
             matcher = pattern.matcher(editable);
             matcher.region(start, end);
 
