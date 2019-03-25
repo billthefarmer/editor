@@ -148,8 +148,8 @@ public class Editor extends Activity
         "volatile|while|with|yield)\\b";
 
     public final static String TYPES =
-        "\\b(bool(ean)?|byte|char|double|float|int(eger)?|long|" +
-        "short|u(byte|char|int|long|short))\\b";
+        "\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +
+        "long|short))\\b";
 
     public final static String CC_COMMENT =
         "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
@@ -431,18 +431,14 @@ public class Editor extends Activity
                 public void beforeTextChanged(CharSequence s,
                                               int start,
                                               int count,
-                                              int after)
-                {
-                }
+                                              int after) {}
 
                 // onTextChanged
                 @Override
                 public void onTextChanged(CharSequence s,
                                           int start,
                                           int before,
-                                          int count)
-                {
-                }
+                                          int count) {}
             });
 
             // onFocusChange
@@ -510,12 +506,9 @@ public class Editor extends Activity
 
                 return false;
             });
-        }
 
-        if (scrollView != null)
-        {
             // onScrollChange
-            scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
+            textView.getViewTreeObserver().addOnScrollChangedListener(() ->
             {
                 if (updateHighlight != null)
                 {
@@ -524,7 +517,7 @@ public class Editor extends Activity
                 }
             });
 
-            scrollView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
+            textView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
             {
                 if (updateHighlight != null)
                 {
@@ -588,6 +581,9 @@ public class Editor extends Activity
 
         // Save current path
         savePath(path);
+
+        // Stop highlighting
+        textView.removeCallbacks(updateHighlight);
 
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
@@ -1608,16 +1604,16 @@ public class Editor extends Activity
         int height = scrollView.getHeight();
 
         int line = textView.getLayout().getLineForVertical(top);
-        int start = textView.getLayout().getOffsetForHorizontal(line, 0);
+        int start = textView.getLayout().getLineStart(line);
 
         line = textView.getLayout().getLineForVertical(top + height);
-        int end = textView.getLayout().getOffsetForHorizontal(line, 0);
+        int end = textView.getLayout().getLineEnd(line);
 
         if (!edit)
         {
             // Move selection to centre
             line = textView.getLayout().getLineForVertical(top + height / 2);
-            int centre = textView.getLayout().getOffsetForHorizontal(line, 0);
+            int centre = textView.getLayout().getLineStart(line);
             textView.setSelection(centre, centre);
         }
 
