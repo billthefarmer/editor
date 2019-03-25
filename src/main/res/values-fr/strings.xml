@@ -14,6 +14,7 @@
   <string name="autoSave">Enregistrement auto</string>
   <string name="wrap">Retour à la ligne auto</string>
   <string name="suggest">Suggestions</string>
+  <string name="highlight">Surligner la syntaxe</string>
   <string name="theme">Thème</string>
   <string name="light">Clair</string>
   <string name="dark">Foncé</string>

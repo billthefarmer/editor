@@ -14,6 +14,7 @@
   <string name="autoSave">Automātiska saglabāšana</string>
   <string name="wrap">Vārdu aplaušana</string>
   <string name="suggest">Ieteikumi</string>
+  <string name="highlight">Izcelt sintaksi</string>
   <string name="theme">Motīvs</string>
   <string name="light">Gaišs</string>
   <string name="dark">Tumšs</string>

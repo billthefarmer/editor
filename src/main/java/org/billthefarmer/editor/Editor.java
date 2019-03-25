@@ -91,7 +91,6 @@ public class Editor extends Activity
 
     public final static String PATH = "path";
     public final static String EDIT = "edit";
-    public final static String SCROLL = "scroll";
     public final static String CHANGED = "changed";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
@@ -424,6 +423,10 @@ public class Editor extends Activity
                         textView.removeCallbacks(updateHighlight);
                         textView.postDelayed(updateHighlight, UPDATE_DELAY);
                     }
+
+                    if (BuildConfig.DEBUG && updateHighlight == null &&
+                        highlight && syntax != NO_SYNTAX)
+                        Log.d(TAG, "afterTextChanged");
                 }
 
                 // beforeTextChanged
@@ -455,6 +458,10 @@ public class Editor extends Activity
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
+
+                if (BuildConfig.DEBUG && updateHighlight == null &&
+                    highlight && syntax != NO_SYNTAX)
+                    Log.d(TAG, "onFocusChange");
             });
 
             // onLongClick
@@ -515,8 +522,13 @@ public class Editor extends Activity
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
+
+                if (BuildConfig.DEBUG && updateHighlight == null &&
+                    highlight && syntax != NO_SYNTAX)
+                    Log.d(TAG, "onScrollChange");
             });
 
+            // onGlobalLayout
             textView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
             {
                 if (updateHighlight != null)
@@ -538,6 +550,10 @@ public class Editor extends Activity
                         keyboard = shown;
                     }
                 }
+
+                if (BuildConfig.DEBUG && updateHighlight == null &&
+                    highlight && syntax != NO_SYNTAX)
+                    Log.d(TAG, "onGlobalLayout");
             });
         }
     }
@@ -560,6 +576,8 @@ public class Editor extends Activity
 
         String title = uri.getLastPathSegment();
         setTitle(title);
+
+        checkHighlight();
 
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedReload,

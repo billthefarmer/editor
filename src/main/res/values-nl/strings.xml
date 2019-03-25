@@ -14,6 +14,7 @@
   <string name="autoSave">Automatisch opslaan</string>
   <string name="wrap">Tekstomloop</string>
   <string name="suggest">Suggesties</string>
+  <string name="highlight">Markeer syntaxis</string>
   <string name="theme">Thema</string>
   <string name="light">Licht</string>
   <string name="dark">Donker</string>

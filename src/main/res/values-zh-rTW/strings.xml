@@ -14,6 +14,7 @@
   <string name="autoSave">自動儲存</string>
   <string name="wrap">文字換列</string>
   <string name="suggest">建議</string>
+  <string name="highlight">突出顯示語法</string>
   <string name="theme">主題</string>
   <string name="light">亮</string>
   <string name="dark">暗</string>

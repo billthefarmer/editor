@@ -14,6 +14,7 @@
   <string name="autoSave">Αυτόματη αποθήκευση</string>
   <string name="wrap">Αναδίπλωση λέξεων</string>
   <string name="suggest">Προτάσεις</string>
+  <string name="highlight">Επισήμανση σύνταξης</string>
   <string name="theme">Θέμα</string>
   <string name="light">Φωτεινό</string>
   <string name="dark">Σκοτεινό</string>

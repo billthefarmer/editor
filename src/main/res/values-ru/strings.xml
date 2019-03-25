@@ -14,6 +14,7 @@
   <string name="autoSave">Автосохранение</string>
   <string name="wrap">Перенос строк</string>
   <string name="suggest">Варианты слов</string>
+  <string name="highlight">Выделить синтаксис</string>
   <string name="theme">Тема</string>
   <string name="light">Светлая</string>
   <string name="dark">Тёмная</string>

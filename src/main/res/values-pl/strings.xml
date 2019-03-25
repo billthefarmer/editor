@@ -14,6 +14,7 @@
   <string name="autoSave">Autozapis</string>
   <string name="wrap">Zawijanie słów</string>
   <string name="suggest">Sugestie</string>
+  <string name="highlight">Podświetl składnię</string>
   <string name="theme">Motyw</string>
   <string name="light">Jasny</string>
   <string name="dark">Ciemny</string>

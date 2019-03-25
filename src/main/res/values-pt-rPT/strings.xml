@@ -14,6 +14,7 @@
   <string name="autoSave">Auto Guardar</string>
   <string name="wrap">Quebra de linha</string>
   <string name="suggest">Sugestões</string>
+  <string name="highlight">Destaque a sintaxe</string>
   <string name="theme">Tema</string>
   <string name="light">Claro</string>
   <string name="dark">Escuro</string>
