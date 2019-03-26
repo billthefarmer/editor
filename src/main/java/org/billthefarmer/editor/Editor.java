@@ -155,7 +155,7 @@ public class Editor extends Activity
 
     public final static String HTML_TAGS =
         "\\b(html|base|head|link|meta|style|title|body|address|article|" +
-        "aside|footer|header|h1|hgroup|main|nav|section|blockquote|dd|" +
+        "aside|footer|header|h\\d|hgroup|main|nav|section|blockquote|dd|" +
         "dir|div|dl|dt|figcaption|figure|hr|li|main|ol|p|pre|ul|a|abbr|" +
         "b|bdi|bdo|br|cite|code|data|dfn|em|i|kbd|mark|q|rb|rp|rt|rtc|" +
         "ruby|s|samp|small|span|strong|sub|sup|time|tt|u|var|wbr|area|" +
@@ -423,10 +423,6 @@ public class Editor extends Activity
                         textView.removeCallbacks(updateHighlight);
                         textView.postDelayed(updateHighlight, UPDATE_DELAY);
                     }
-
-                    if (BuildConfig.DEBUG && updateHighlight == null &&
-                        highlight && syntax != NO_SYNTAX)
-                        Log.d(TAG, "afterTextChanged");
                 }
 
                 // beforeTextChanged
@@ -458,10 +454,6 @@ public class Editor extends Activity
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
-
-                if (BuildConfig.DEBUG && updateHighlight == null &&
-                    highlight && syntax != NO_SYNTAX)
-                    Log.d(TAG, "onFocusChange");
             });
 
             // onLongClick
@@ -522,10 +514,6 @@ public class Editor extends Activity
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
-
-                if (BuildConfig.DEBUG && updateHighlight == null &&
-                    highlight && syntax != NO_SYNTAX)
-                    Log.d(TAG, "onScrollChange");
             });
 
             // onGlobalLayout
@@ -550,11 +538,33 @@ public class Editor extends Activity
                         keyboard = shown;
                     }
                 }
-
-                if (BuildConfig.DEBUG && updateHighlight == null &&
-                    highlight && syntax != NO_SYNTAX)
-                    Log.d(TAG, "onGlobalLayout");
             });
+        }
+
+        if (scrollView != null)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                // onScrollChange
+                scrollView.setOnScrollChangeListener((v, x, y, oldX, oldY) ->
+                {
+                    if (updateHighlight != null)
+                    {
+                        textView.removeCallbacks(updateHighlight);
+                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                    }
+                });
+
+            else
+                // onScrollChange
+                scrollView.getViewTreeObserver()
+                    .addOnScrollChangedListener(() ->
+                {
+                    if (updateHighlight != null)
+                    {
+                        textView.removeCallbacks(updateHighlight);
+                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                    }
+                });
         }
     }
 
