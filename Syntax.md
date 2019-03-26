@@ -14,8 +14,8 @@ highlighted accordingly. Therefore it will not be exactly correct, but
 good enough for a simple text editor.
 
 ### C type
-Keywords are matched from a list of C/C++/Objective
-C/Java/Javascript/Python keywords. Classes are capitalised
+Keywords and types are matched from lists of C/C++/Objective
+C/Java/Javascript/Python keywords and types. Classes are capitalised
 words. Constants are all caps, underscore and digit words. Strings are
 in double quotes. Single quotes are ignored because apostrophes break
 the algorithm. Both `/* */` and `// ` C style comments are recognised.
