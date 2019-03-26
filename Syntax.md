@@ -35,19 +35,18 @@ Because scanning and highlighting a large file can be quite slow,
 making the app unresponsive, only the text currently in view is
 scanned and highlighted. Therefore as the text is edited or scrolled,
 the new region in view will be scanned and highlighted after a short
-delay to allow for user typing without the algorithm running
+delay to allow for user typing without the highlighting running
 constantly.
 
 ### Scrolling
 After the text is highlighted, the android view system will re-layout
 the views whether they need it or not. That causes the current cursor
 position to be scrolled back into view, which can be extremely
-annoying. So the cursor is moved to the centre of the highlighted
-region if not being edited. If the file is being edited move the
-cursor to stop the view scrolling back again.
+annoying. So the cursor is moved if necessary to keep it within the
+visible region.
 
 ### Horizontal scrolling
-On devices running android versions less than Marshmallow M,
+On devices running android versions less than Marshmallow M (23),
 horizontal scrolling will scroll back again. Make the text size
 smaller or rotate the device to avoid this. Or turn the highlighting
 off.

@@ -1627,12 +1627,14 @@ public class Editor extends Activity
         line = textView.getLayout().getLineForVertical(top + height);
         int end = textView.getLayout().getLineEnd(line);
 
-        if (!edit)
+        // Move selection if outside range
+        if (textView.getSelectionStart() < start)
+            textView.setSelection(start, start);
+
+        if (textView.getSelectionStart() > end)
         {
-            // Move selection to centre
-            line = textView.getLayout().getLineForVertical(top + height / 2);
-            int centre = textView.getLayout().getLineStart(line);
-            textView.setSelection(centre, centre);
+            int last = textView.getLayout().getLineStart(line - 1);
+            textView.setSelection(last, last);
         }
 
         // Get editable
