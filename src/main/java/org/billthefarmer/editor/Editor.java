@@ -506,16 +506,6 @@ public class Editor extends Activity
                 return false;
             });
 
-            // onScrollChange
-            textView.getViewTreeObserver().addOnScrollChangedListener(() ->
-            {
-                if (updateHighlight != null)
-                {
-                    textView.removeCallbacks(updateHighlight);
-                    textView.postDelayed(updateHighlight, UPDATE_DELAY);
-                }
-            });
-
             // onGlobalLayout
             textView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
             {
