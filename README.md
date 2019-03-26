@@ -8,6 +8,8 @@ and [here](https://github.com/billthefarmer/editor/releases)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-landscape.png)
 
+![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-syntax.png)
+
 This is a very simple generic text editor which may be used standalone
 or to show or edit any sort of text file from another app. If you
 select a text file in a file manager or similar app you will be
