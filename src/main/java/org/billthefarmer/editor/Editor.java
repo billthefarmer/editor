@@ -1578,6 +1578,9 @@ public class Editor extends Activity
     // checkHighlight
     private void checkHighlight()
     {
+        // No syntax
+        syntax = NO_SYNTAX;
+
         // Check extension
         if (highlight && file != null)
         {
@@ -1611,7 +1614,14 @@ public class Editor extends Activity
             }
         }
 
-        updateHighlight = null;
+        // Remove highlighting
+        if (updateHighlight != null)
+        {
+            textView.removeCallbacks(updateHighlight);
+            textView.postDelayed(updateHighlight, UPDATE_DELAY);
+
+            updateHighlight = null;
+        }
     }
 
     // highlightText
