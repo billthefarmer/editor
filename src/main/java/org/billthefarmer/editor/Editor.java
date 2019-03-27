@@ -56,6 +56,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -216,8 +217,11 @@ public class Editor extends Activity
         "viewport|visibility|visited|vmax|vmin|vw|weight|white|" +
         "widows|width|will|word|wrap|write|writing|x|y|z|zoom)\\b";
 
+    public final static String CSS_HEX =
+        "#\\b[A-Fa-f0-9]+\\b";
+
     public final static String CLASS =
-        "\\b[A-Z][A-Za-z0-9_]*\\b";
+        "\\b[A-Z][A-Za-z0-9_]+\\b";
 
     public final static String CONSTANT =
         "\\b[A-Z][A-Z0-9_]+\\b";
@@ -272,7 +276,6 @@ public class Editor extends Activity
     private Map<String, Integer> pathMap;
     private List<String> removeList;
 
-    private boolean keyboard = false;
     private boolean highlight = false;
 
     private boolean save = false;
@@ -506,26 +509,35 @@ public class Editor extends Activity
                 return false;
             });
 
-            // onGlobalLayout
-            textView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
+            textView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener()
             {
-                if (updateHighlight != null)
+                private boolean keyboard;
+
+                // onGlobalLayout
+                @Override
+                public void onGlobalLayout()
                 {
-                    int rootHeight = scrollView.getRootView().getHeight();
-                    int height = scrollView.getHeight();
-
-                    boolean shown = ((rootHeight - height) /
-                                     (double) rootHeight) > KEYBOARD_RATIO;
-
-                    if (shown != keyboard)
+                    if (updateHighlight != null)
                     {
-                        if (!shown)
-                        {
-                            textView.removeCallbacks(updateHighlight);
-                            textView.postDelayed(updateHighlight, UPDATE_DELAY);
-                        }
+                        int rootHeight = scrollView.getRootView().getHeight();
+                        int height = scrollView.getHeight();
 
-                        keyboard = shown;
+                        boolean shown = (((rootHeight - height) /
+                                         (double) rootHeight) >
+                                         KEYBOARD_RATIO);
+
+                        if (shown != keyboard)
+                        {
+                            if (!shown)
+                            {
+                                textView.removeCallbacks(updateHighlight);
+                                textView.postDelayed(updateHighlight,
+                                                     UPDATE_DELAY);
+                            }
+
+                            keyboard = shown;
+                        }
                     }
                 }
             });
@@ -1584,8 +1596,7 @@ public class Editor extends Activity
         // Check extension
         if (highlight && file != null)
         {
-            Uri uri = Uri.fromFile(file);
-            String ext = FileUtils.getExtension(uri.toString());
+            String ext = FileUtils.getExtension(file.getName());
             if (ext != null)
             {
                 if (ext.matches(CC_EXT))
@@ -1782,6 +1793,19 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(CSS_HEX, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
