@@ -235,7 +235,7 @@ public class Editor extends Activity
         "\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
         "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
 
-    private final static double KEYBOARD_RATIO   = 0.25;
+    private final static double KEYBOARD_RATIO = 0.25;
 
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
