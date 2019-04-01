@@ -47,7 +47,7 @@ annoying. So the cursor is moved if necessary to keep it within the
 visible region.
 
 ### Horizontal scrolling
-On devices running android versions less than Marshmallow M (23),
+On devices running android versions less than Marshmallow M (6),
 horizontal scrolling will scroll back again. Make the text size
 smaller or rotate the device to avoid this. Or turn the highlighting
 off.
