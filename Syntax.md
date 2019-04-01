@@ -11,7 +11,8 @@ extensions will be highlighted with 'C' style highlighting. Files with
 The algorithm makes no attempt at parsing. The text is scanned for
 relevent keywords, classes, constants, strings and comments and
 highlighted accordingly. Therefore it will not be exactly correct, but
-good enough for a simple text editor.
+good enough for a simple text editor. See [Source Code Syntax
+Highlighting][1].
 
 ### C type
 Keywords and types are matched from lists of C/C++/Objective
@@ -50,3 +51,5 @@ On devices running android versions less than Marshmallow M (23),
 horizontal scrolling will scroll back again. Make the text size
 smaller or rotate the device to avoid this. Or turn the highlighting
 off.
+
+ [1]: https://billthefarmer.github.io/blog/post/source-code-highlighting (https://billthefarmer.github.io/blog/post/source-code-highlighting)
