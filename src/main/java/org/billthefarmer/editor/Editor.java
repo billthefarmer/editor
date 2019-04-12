@@ -151,6 +151,9 @@ public class Editor extends Activity
         "\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +
         "long|short))\\b";
 
+    public final static String ANNOTATION =
+        "@\\b[A-Za-z]+\\b";
+
     public final static String CC_COMMENT =
         "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
 
@@ -1708,6 +1711,19 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.BLUE);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(ANNOTATION, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
