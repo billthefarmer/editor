@@ -1666,7 +1666,7 @@ public class Editor extends Activity
 
         // Get current spans
         ForegroundColorSpan spans[] =
-            editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
+            editable.getSpans(start, end, ForegroundColorSpan.class);
         // Remove spans
         for (ForegroundColorSpan span: spans)
             editable.removeSpan(span);
