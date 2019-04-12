@@ -138,7 +138,7 @@ public class Editor extends Activity
         "defer|del|delete|do|elif|else|end|enum|eval|except|" +
         "extends|extern|fallthrough|false|field|final|finally|for|" +
         "friend|from|func(tion)?|getter|global|go|goto|if|" +
-        "implement(ation|s)|import|in|inline|instanceof|interface|" +
+        "implement(ation|s)|import|in(line|stanceof|terface)?|" +
         "is|lambda|let|map|method|native|new|nil|none|nonlocal|not|" +
         "null|operator|or|override|package|pass|private|protected|" +
         "protocol|public|raise|range|real|register|return|select|" +
@@ -224,7 +224,7 @@ public class Editor extends Activity
         "\\b[A-Z][A-Za-z0-9_]+\\b";
 
     public final static String CONSTANT =
-        "\\b[A-Z][A-Z0-9_]+\\b";
+        "\\b(([A-Z][A-Z0-9_]+)|(k[A-Z][A-Za-z0-9]+))\\b";
 
     public final static String NUMBER =
         "\\b[0-9.]+\\b";
