@@ -124,7 +124,7 @@ public class Editor extends Activity
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     public final static String CC_EXT =
-        "\\.(c(c|pp|xx|\\+\\+)?|h|js|java|m|py)";
+        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|swift)";
 
     public final static String HTML_EXT =
         "\\.html?";
@@ -133,19 +133,19 @@ public class Editor extends Activity
         "\\.css?";
 
     public final static String KEYWORDS =
-        "\\b(abstract|and|any|as|asm|assert|auto|break|case|catch|" +
-        "cin|class|const|constructor|continue|cout|def|default|del|" +
-        "delete|do|elif|else|end|enum|eval|except|extends|extern|" +
-        "false|field|final|finally|for|friend|from|funct|function|" +
-        "getter|global|goto|if|implementation|implements|import|in|" +
-        "inline|instanceof|interface|is|lambda|let|method|native|" +
-        "new|nil|none|nonlocal|not|null|operator|or|override|" +
-        "package|pass|private|protected|protocol|public|raise|real|" +
-        "register|return|selector|setter|signed|sizeof|static|" +
-        "strictfp|string|struct|super|switch|synchronized|template|" +
-        "this|throw|throws|traditional|transient|true|try|type|" +
-        "typedef|typeof|union|unsigned|var|version|virtual|" +
-        "volatile|while|with|yield)\\b";
+        "\\b(abstract|and|any|as|asm|assert|auto|break|case|catch|chan|" +
+        "cin|class|const|const(ructor)?|continue|cout|def|default|" +
+        "defer|del|delete|do|elif|else|end|enum|eval|except|" +
+        "extends|extern|fallthrough|false|field|final|finally|for|" +
+        "friend|from|func(tion)?|getter|global|go|goto|if|" +
+        "implement(ation|s)|import|in|inline|instanceof|interface|" +
+        "is|lambda|let|map|method|native|new|nil|none|nonlocal|not|" +
+        "null|operator|or|override|package|pass|private|protected|" +
+        "protocol|public|raise|range|real|register|return|select|" +
+        "selector|setter|signed|sizeof|static|strictfp|string|" +
+        "struct|super|switch|synchronized|template|this|throws?|" +
+        "traditional|transient|true|try|type(def|of)|un(ion|signed)|" +
+        "var|version|virtual|volatile|while|with|yield)\\b";
 
     public final static String TYPES =
         "\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +

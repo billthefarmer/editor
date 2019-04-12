@@ -2,10 +2,11 @@
 
 ## Selection
 The type of highlighting is selected by file extension. Files with
-`.c`, `.cc`, `.c++`, `.cxx`, `.m`, `.h`, `.js`, `.java`, `.py`
-extensions will be highlighted with 'C' style highlighting. Files with
-`.htm`, `.html` extensions will be highlighted as HTML. Files with
-`.cs`, `.css` extensions will be highlighted as CSS.
+`.c`, `.cc`, `.c++`, `.cxx`, `.m`, `.h`, `.go`, `.js`, `.java`, `.py`,
+`.swift` extensions will be highlighted with 'C' style
+highlighting. Files with `.htm`, `.html` extensions will be
+highlighted as HTML. Files with `.cs`, `.css` extensions will be
+highlighted as CSS.
 
 ## Parsing
 The algorithm makes no attempt at parsing. The text is scanned for
@@ -16,10 +17,10 @@ Highlighting][1].
 
 ### C type
 Keywords and types are matched from lists of C/C++/Objective
-C/Java/Javascript/Python keywords and types. Classes are capitalised
-words. Constants are all caps, underscore and digit words. Strings are
-in double quotes. Single quotes are ignored because apostrophes break
-the algorithm. Both `/* */` and `// ` C style comments are recognised.
+C/Go/Java/Javascript/Python/Swift keywords and types. Classes are
+capitalised words. Constants are all caps words. Strings are in double
+quotes. Single quotes are ignored because apostrophes break the
+algorithm. Both `/* */` and `// ` C style comments are recognised.
 
 ### HTML
 HTML keywords are matched from a list. Double quoted arguments are

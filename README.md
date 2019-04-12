@@ -83,9 +83,10 @@ the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
 
 ### Highlight syntax
-If the current open file is a C, C++, Objective C, Java, Javascript,
-Python, CSS or HTML file, the keywords, classes comments, strings, etc
-will be highlighted. See [Syntax Highlighting](Syntax.md).
+If the current open file is a C, C++, Objective C, Go, Java,
+Javascript, Python, Swift, CSS or HTML file, the keywords, classes
+comments, strings, etc will be highlighted. See [Syntax
+Highlighting](Syntax.md).
 
 ### Extended selection
 If the file being edited is not a plain text file, selections created
