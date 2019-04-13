@@ -138,11 +138,11 @@ public class Editor extends Activity
         "defer|del|delete|do|elif|else|end|enum|eval|except|" +
         "extends|extern|fallthrough|false|field|final|finally|for|" +
         "friend|from|func(tion)?|getter|global|go|goto|if|" +
-        "implement(ation|s)|import|in(line|stanceof|terface)?|" +
+        "implement(ation|s)|import|in(it|line|stanceof|terface)?|" +
         "is|lambda|let|map|method|native|new|nil|none|nonlocal|not|" +
         "null|operator|or|override|package|pass|private|protected|" +
         "protocol|public|raise|range|real|register|return|select|" +
-        "selector|setter|signed|sizeof|static|strictfp|string|" +
+        "selector|self|setter|signed|sizeof|static|strictfp|string|" +
         "struct|super|switch|synchronized|template|this|throws?|" +
         "traditional|transient|true|try|type(def|of)|un(ion|signed)|" +
         "var|version|virtual|volatile|while|with|yield)\\b";
