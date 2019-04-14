@@ -192,8 +192,8 @@ public class Editor extends Activity
         "kind|label|lang|language|list|loading|loop|low|manifest|" +
         "max|maxlength|media|method|min|minlength|multiple|muted|" +
         "name|novalidate|open|optimum|pattern|ping|placeholder|" +
-        "poster|preload|radiogroup|readonly|referrerpolicy|rel|" +
-        "required|reversed|rows|rowspan|sandbox|scope|scoped|" +
+        "poster|preload|property|radiogroup|readonly|referrerpolicy|" +
+        "rel|required|reversed|rows|rowspan|sandbox|scope|scoped|" +
         "selected|shape|size|sizes|slot|span|spellcheck|src|srcdoc|" +
         "srclang|srcset|start|step|style|summary|tabindex|target|" +
         "title|translate|type|usemap|value|width|wrap)\\b";
