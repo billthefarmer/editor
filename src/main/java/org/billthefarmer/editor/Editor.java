@@ -254,7 +254,7 @@ public class Editor extends Activity
         "\\b(([A-Z][A-Z0-9_]+)|(k[A-Z][A-Za-z0-9]+))\\b";
 
     public final static String NUMBER =
-        "\\b[0-9.]+\\b";
+        "\\b\\d+(\\.\\d*)?(e(\\+|\\-)?\\d+)?\\b";
 
     public final static String QUOTED =
         // "'([^\\\\']+|\\\\([btnfr\"'\\\\]|" +
