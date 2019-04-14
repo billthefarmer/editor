@@ -133,23 +133,23 @@ public class Editor extends Activity
         "\\.css?";
 
     public final static String KEYWORDS =
-        "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break" +
-        "|case|catch|chan|char|class|con(st|tinue|venience)" +
-        "|de(bugger|f|fault|fer|init|l|lete)|didset|do|dynamic" +
-        "|dynamictype|el(if|else)|enum|eval|ex(cept|ec|plicit|port" +
-        "|tends|tension|tern)|fal(lthrough|se)|final(ly)?|for" +
-        "|friend|from|func(tion)?||get|global|go(to)?|if" +
-        "|im(plements|port)|in(fix|it|line|out|stanceof|terface" +
-        "|ternal)?|is|lambda|lazy|left|let|map|mut(able|ating)" +
-        "|namespace|native|new|nil|none|nonmutating|not|null" +
-        "|operator|optional|or|override|package|pass|postfix" +
-        "|pre(cedence|fix)|print|private|prot(ected|ocol)|public" +
-        "|raise|range|register|required|return|right|select|self" +
-        "|set|signed|sizeof|static|strictfp|struct|subscript|super" +
-        "|switch|synchronized|template|this|throw|throws|transient" +
-        "|true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)" +
-        "|using|var|virtual|void|volatile|weak|wh(ere|ile)|willset" +
-        "|with|yield)\\b";
+        "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
+        "case|catch|chan|char|class|con(st|tinue|venience)|" +
+        "de(bugger|f|fault|fer|init|l|lete)|didset|do|dynamic|" +
+        "dynamictype|el(if|else)|enum|eval|ex(cept|ec|plicit|port|" +
+        "tends|tension|tern)|fal(lthrough|se)|final(ly)?|for|" +
+        "friend|from|func(tion)?|get|global|go(to)?|if|" +
+        "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
+        "ternal)?|is|lambda|lazy|left|let|map|mut(able|ating)|" +
+        "namespace|native|new|nil|none|nonmutating|not|null|" +
+        "operator|optional|or|override|package|pass|postfix|" +
+        "pre(cedence|fix)|print|private|prot(ected|ocol)|public|" +
+        "raise|range|register|required|return|right|select|self|" +
+        "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
+        "switch|synchronized|template|this|throw|throws|transient|" +
+        "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
+        "using|var|virtual|void|volatile|weak|wh(ere|ile)|willset|" +
+        "with|yield)\\b";
 
     public final static String TYPES =
         "\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +
@@ -177,6 +177,26 @@ public class Editor extends Activity
         "frame|frameset|image|isindex|keygen|listing|marquee|menuitem|" +
         "multicol|nextid|nobr|noembed|noframes|plaintext|shadow|spacer|" +
         "strike|tt|xmp|doctype)\\b";
+
+    public final static String HTML_ATTRS =
+        "\\b(accept|accesskey|action|align|allow|alt|async|" +
+        "auto(capitalize|complete|focus|play)|background|" +
+        "bgcolor|border|buffered|challenge|charset|checked|cite|" +
+        "class|code(base)?|color|cols|colspan|content(" +
+        "editable)?|contextmenu|controls|coords|crossorigin|" +
+        "csp|data|datetime|decoding|def(ault|er)|dir|dirname|" +
+        "disabled|download|draggable|dropzone|enctype|enterkeyhint|" +
+        "equiv|for|form(action|novalidate)?|headers|height|" +
+        "hidden|high|href(lang)?|http|icon|id|importance|" +
+        "inputmode|integrity|intrinsicsize|ismap|itemprop|keytype|" +
+        "kind|label|lang|language|list|loading|loop|low|manifest|" +
+        "max|maxlength|media|method|min|minlength|multiple|muted|" +
+        "name|novalidate|open|optimum|pattern|ping|placeholder|" +
+        "poster|preload|radiogroup|readonly|referrerpolicy|rel|" +
+        "required|reversed|rows|rowspan|sandbox|scope|scoped|" +
+        "selected|shape|size|sizes|slot|span|spellcheck|src|srcdoc|" +
+        "srclang|srcset|start|step|style|summary|tabindex|target|" +
+        "title|translate|type|usemap|value|width|wrap)\\b";
 
     public final static String HTML_COMMENT =
         "<!--.*?-->";
@@ -1776,6 +1796,20 @@ public class Editor extends Activity
                 editable.setSpan(span, matcher.start(), matcher.end(),
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
+
+            pattern = Pattern.compile(HTML_ATTRS, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
 
             pattern = Pattern.compile(QUOTED, Pattern.MULTILINE);
             matcher.region(start, end).usePattern(pattern);
