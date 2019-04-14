@@ -133,19 +133,23 @@ public class Editor extends Activity
         "\\.css?";
 
     public final static String KEYWORDS =
-        "\\b(abstract|and|any|as|asm|assert|auto|break|case|catch|chan|" +
-        "cin|class|const|const(ructor)?|continue|cout|def|default|" +
-        "defer|del|delete|do|elif|else|end|enum|eval|except|" +
-        "extends|extern|fallthrough|false|field|final|finally|for|" +
-        "friend|from|func(tion)?|getter|global|go|goto|if|" +
-        "implement(ation|s)|import|in(it|line|stanceof|terface)?|" +
-        "is|lambda|let|map|method|native|new|nil|none|nonlocal|not|" +
-        "null|operator|or|override|package|pass|private|protected|" +
-        "protocol|public|raise|range|real|register|return|select|" +
-        "selector|self|setter|signed|sizeof|static|strictfp|string|" +
-        "struct|super|switch|synchronized|template|this|throws?|" +
-        "traditional|transient|true|try|type(def|of)|un(ion|signed)|" +
-        "var|version|virtual|volatile|while|with|yield)\\b";
+        "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break" +
+        "|case|catch|chan|char|class|con(st|tinue|venience)" +
+        "|de(bugger|f|fault|fer|init|l|lete)|didset|do|dynamic" +
+        "|dynamictype|el(if|else)|enum|eval|ex(cept|ec|plicit|port" +
+        "|tends|tension|tern)|fal(lthrough|se)|final(ly)?|for" +
+        "|friend|from|func(tion)?||get|global|go(to)?|if" +
+        "|im(plements|port)|in(fix|it|line|out|stanceof|terface" +
+        "|ternal)?|is|lambda|lazy|left|let|map|mut(able|ating)" +
+        "|namespace|native|new|nil|none|nonmutating|not|null" +
+        "|operator|optional|or|override|package|pass|postfix" +
+        "|pre(cedence|fix)|print|private|prot(ected|ocol)|public" +
+        "|raise|range|register|required|return|right|select|self" +
+        "|set|signed|sizeof|static|strictfp|struct|subscript|super" +
+        "|switch|synchronized|template|this|throw|throws|transient" +
+        "|true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)" +
+        "|using|var|virtual|void|volatile|weak|wh(ere|ile)|willset" +
+        "|with|yield)\\b";
 
     public final static String TYPES =
         "\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +
