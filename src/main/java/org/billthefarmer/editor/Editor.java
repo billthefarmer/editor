@@ -1700,6 +1700,15 @@ public class Editor extends Activity
 
         switch (syntax)
         {
+        case NO_SYNTAX:
+            // Get current spans
+            spans = editable.getSpans(0, editable.length(),
+                                      ForegroundColorSpan.class);
+            // Remove spans
+            for (ForegroundColorSpan span: spans)
+                editable.removeSpan(span);
+            break;
+
         case CC_SYNTAX:
             pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
             matcher = pattern.matcher(editable);
@@ -1735,6 +1744,19 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.BLUE);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(NUMBER, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.YELLOW);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
