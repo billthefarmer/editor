@@ -1554,7 +1554,7 @@ public class Editor extends Activity
     // saveFile
     private void saveFile(File file)
     {
-        String text = textView.getText().toString();
+        CharSequence text = textView.getText();
         write(text, file);
         changed = false;
 
@@ -1565,7 +1565,7 @@ public class Editor extends Activity
     // saveFile
     private void saveFile(Uri uri)
     {
-        String text = textView.getText().toString();
+        CharSequence text = textView.getText();
         try
         {
             OutputStream outputStream =
@@ -1580,13 +1580,13 @@ public class Editor extends Activity
     }
 
     // write
-    private void write(String text, File file)
+    private void write(CharSequence text, File file)
     {
         file.getParentFile().mkdirs();
         try
         {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(text);
+            fileWriter.append(text);
             fileWriter.close();
         }
 
@@ -1597,12 +1597,12 @@ public class Editor extends Activity
     }
 
     // write
-    private void write(String text, OutputStream os)
+    private void write(CharSequence text, OutputStream os)
     {
         try
         {
             OutputStreamWriter writer = new OutputStreamWriter(os);
-            writer.write(text, 0, text.length());
+            writer.append(text);
             writer.close();
             changed = false;
             invalidateOptionsMenu();
@@ -1677,12 +1677,12 @@ public class Editor extends Activity
 
         // Move selection if outside range
         if (textView.getSelectionStart() < start)
-            textView.setSelection(start, start);
+            textView.setSelection(start);
 
         if (textView.getSelectionStart() > end)
         {
             int last = textView.getLayout().getLineStart(line - 1);
-            textView.setSelection(last, last);
+            textView.setSelection(last);
         }
 
         // Get editable
@@ -1923,7 +1923,7 @@ public class Editor extends Activity
                 int start = textView.getSelectionStart();
                 int end = textView.getSelectionEnd();
                 // And the text
-                String text = textView.getText().toString();
+                CharSequence text = textView.getText();
 
                 // Get a pattern and a matcher for delimiter
                 // characters
@@ -1965,11 +1965,12 @@ public class Editor extends Activity
                             break;
                         }
 
+                        String string = text.toString();
                         // Do reverse search
-                        start = text.lastIndexOf(c, start) + 1;
+                        start = string.lastIndexOf(c, start) + 1;
 
                         // Check for included newline
-                        if (start > text.lastIndexOf('\n', end))
+                        if (start > string.lastIndexOf('\n', end))
                             // Update selection
                             textView.setSelection(start, end);
                     }
