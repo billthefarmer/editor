@@ -2081,11 +2081,11 @@ public class Editor extends Activity
     // ReadTask
     @SuppressLint("StaticFieldLeak")
     private class ReadTask
-        extends AsyncTask<Uri, Void, String>
+        extends AsyncTask<Uri, Void, CharSequence>
     {
         // doInBackground
         @Override
-        protected String doInBackground(Uri... uris)
+        protected CharSequence doInBackground(Uri... uris)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -2108,12 +2108,12 @@ public class Editor extends Activity
 
             catch (Exception e) {}
 
-            return stringBuilder.toString();
+            return stringBuilder;
         }
 
         // onPostExecute
         @Override
-        protected void onPostExecute(String result)
+        protected void onPostExecute(CharSequence result)
         {
             if (textView != null)
                 textView.setText(result);
