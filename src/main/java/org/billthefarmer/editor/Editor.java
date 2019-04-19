@@ -132,6 +132,9 @@ public class Editor extends Activity
     public final static String CSS_EXT =
         "\\.css?";
 
+    public final static String MD_EXT =
+        "\\.md";
+
     public final static String KEYWORDS =
         "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
         "case|catch|chan|char|class|con(st|tinue|venience)|" +
@@ -262,6 +265,16 @@ public class Editor extends Activity
         "\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
         "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
 
+    public final static String MD_HEADER =
+        "(^.+\\R(-|=)+$)|(^#+ +.+$)";
+
+    public final static String MD_LINK =
+        "(\\!?\\[.+\\] *\\(.+\\))|(!?\\[.+\\] *\\[.+\\])|" +
+        "( *\\[.+\\]: +.+$)";
+
+    public final static String MD_EMPH =
+        "(\\*+\\b\\w+\\b\\*+)|(\\b_+\\w+_+\\b)|(~+\\b\\w+\\b~+)";
+
     private final static double KEYBOARD_RATIO = 0.25;
 
     private final static int BUFFER_SIZE = 1024;
@@ -289,6 +302,7 @@ public class Editor extends Activity
     private final static int CC_SYNTAX   = 1;
     private final static int HTML_SYNTAX = 2;
     private final static int CSS_SYNTAX  = 3;
+    private final static int MD_SYNTAX   = 4;
 
     private File file;
     private String path;
@@ -1635,6 +1649,9 @@ public class Editor extends Activity
                 else if (ext.matches(CSS_EXT))
                     syntax = CSS_SYNTAX;
 
+                else if (ext.matches(MD_EXT))
+                    syntax = MD_SYNTAX;
+
                 else
                     syntax = NO_SYNTAX;
 
@@ -1895,6 +1912,48 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
+
+        case MD_SYNTAX:
+            pattern = Pattern.compile(MD_HEADER, Pattern.MULTILINE);
+            matcher = pattern.matcher(editable);
+            matcher.region(start, end);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.BLUE);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(MD_LINK, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(MD_EMPH, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
