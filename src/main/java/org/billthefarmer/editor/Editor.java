@@ -266,7 +266,7 @@ public class Editor extends Activity
         "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
 
     public final static String MD_HEADER =
-        "(^.+\\R(-|=)+$)|(^#+ +.+$)";
+        "(^.+\\R-+$)|(^.+\\R=+$)|(^#+ +.+$)";
 
     public final static String MD_LINK =
         "(\\!?\\[.+\\] *\\(.+\\))|(!?\\[.+\\] *\\[.+\\])|" +
