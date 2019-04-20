@@ -274,7 +274,10 @@ public class Editor extends Activity
         "( *\\[.+\\]: +.+$)";
 
     public final static String MD_EMPH =
-        "(\\*+\\b\\w+\\b\\*+)|(\\b_+\\w+_+\\b)|(~+\\b\\w+\\b~+)";
+        "(\\*{1,2}\\b(\\w| )+\\b\\*{1,2})|(\\b_{1,2}(\\w| )+_{1,2}\\b)|" +
+        "(~{1,2}\\b(\\w| )+\\b~{1,2})";
+
+    public final static String MD_CODE = "(^ {4,}.+$)|(`.+?`)";
 
     private final static double KEYBOARD_RATIO = 0.25;
 
@@ -918,24 +921,6 @@ public class Editor extends Activity
             finish();
     }
 
-    // onActivityResult
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data)
-    {
-        // Do nothing if cancelled
-        if (resultCode != RESULT_OK)
-            return;
-
-        switch (requestCode)
-        {
-        case GET_TEXT:
-            Uri uri = data.getData();
-            readFile(uri);
-            break;
-        }
-    }
-
     // editClicked
     private void editClicked(MenuItem item)
     {
@@ -1408,47 +1393,42 @@ public class Editor extends Activity
             {
             case DialogInterface.BUTTON_POSITIVE:
                 saveFile();
-                getContent();
+                getFile();
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
                 changed = false;
-                getContent();
+                getFile();
                 break;
             }
         });
 
         else
-        {
-            if (highlight)
-                getFile();
+            getFile();
 
-            else
-                getContent();
-        }
     }
 
     // getFile
     private void getFile()
     {
-        File file = new
-            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
-        getFile(file);
+        File dir = file.getParentFile();
+        getFile(dir);
     }
 
     // getFile
-    private void getFile(File file)
+    private void getFile(File dir)
     {
-        File files[] = file.listFiles();
+        File files[] = dir.listFiles();
         if (files == null)
         {
-            file = Environment.getExternalStorageDirectory();
-            files = file.listFiles();
+            dir = Environment.getExternalStorageDirectory();
+            files = dir.listFiles();
         }
 
+        Arrays.sort(files);
         List<File> list = new ArrayList<File>(Arrays.asList(files));
-        list.add(0, file.getParentFile());
-        String title = "Folder " + file.getPath();
+        list.add(0, dir.getParentFile());
+        String title = "Folder " + dir.getPath();
         openDialog(title, list, (dialog, which) ->
             {
                 File selection = list.get(which);
@@ -1477,14 +1457,6 @@ public class Editor extends Activity
         // Create the Dialog
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    // getContent
-    private void getContent()
-    {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType(TEXT_WILD);
-        startActivityForResult(Intent.createChooser(intent, null), GET_TEXT);
     }
 
     // onRequestPermissionsResult
@@ -2012,6 +1984,19 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.MAGENTA);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            pattern = Pattern.compile(MD_CODE, Pattern.MULTILINE);
+            matcher.region(start, end).usePattern(pattern);
+
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
