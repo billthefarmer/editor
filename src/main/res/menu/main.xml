@@ -5,22 +5,22 @@
     tools:ignore="AppCompatResource">
   <item
       android:id="@+id/edit"
-      android:icon="@drawable/ic_action_edit"
+      android:icon="@drawable/ic_action_edit_dark"
       android:showAsAction="ifRoom"
       android:title="@string/edit" />
   <item
       android:id="@+id/view"
-      android:icon="@drawable/ic_action_view_as_list"
+      android:icon="@drawable/ic_action_view_as_list_dark"
       android:showAsAction="ifRoom"
       android:title="@string/view" />
   <item
       android:id="@+id/save"
-      android:icon="@drawable/ic_action_save"
+      android:icon="@drawable/ic_action_save_dark"
       android:showAsAction="ifRoom"
       android:title="@string/save" />
   <item
       android:id="@+id/open"
-      android:icon="@drawable/ic_action_collection"
+      android:icon="@drawable/ic_action_collection_dark"
       android:showAsAction="ifRoom"
       android:title="@string/open" />
   <item

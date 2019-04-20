@@ -36,6 +36,10 @@
         All customizations that are NOT specific to a particular
         API-level can go here.
     -->
+
+    <item name="file">@drawable/ic_action_view_as_list</item>
+    <item name="folder">@drawable/ic_action_collection</item>
+
   </style>
 
   <!-- Application theme. -->
@@ -44,6 +48,10 @@
         All customizations that are NOT specific to a particular
         API-level can go here.
     -->
+
+    <item name="file">@drawable/ic_action_view_as_list_dark</item>
+    <item name="folder">@drawable/ic_action_collection_dark</item>
+
   </style>
 
   <!-- Application theme. -->
@@ -52,6 +60,9 @@
         All customizations that are NOT specific to a particular
         API-level can go here.
     -->
+
+    <item name="file">@drawable/ic_action_view_as_list_dark</item>
+    <item name="folder">@drawable/ic_action_collection_dark</item>
 
     <item name="BackgroundColour">@color/colorRetroBackground</item>
 

@@ -6,6 +6,9 @@
     <attr name="TextColour" format="reference" />
     <attr name="BackgroundColour" format="reference" />
 
+    <attr name="file" format="reference" />
+    <attr name="folder" format="reference" />
+
   </declare-styleable>
 
 </resources>

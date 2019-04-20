@@ -77,6 +77,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -995,7 +996,7 @@ public class Editor extends Activity
     private File getDefaultFile()
     {
         File documents = new
-        File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
         return new File(documents, EDIT_FILE);
     }
 
@@ -1418,7 +1419,64 @@ public class Editor extends Activity
         });
 
         else
-            getContent();
+        {
+            if (highlight)
+                getFile();
+
+            else
+                getContent();
+        }
+    }
+
+    // getFile
+    private void getFile()
+    {
+        File file = new
+            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+        getFile(file);
+    }
+
+    // getFile
+    private void getFile(File file)
+    {
+        File files[] = file.listFiles();
+        if (files == null)
+        {
+            file = Environment.getExternalStorageDirectory();
+            files = file.listFiles();
+        }
+
+        List<File> list = new ArrayList<File>(Arrays.asList(files));
+        list.add(0, file.getParentFile());
+        String title = "Folder " + file.getPath();
+        openDialog(title, list, (dialog, which) ->
+            {
+                File selection = list.get(which);
+                if (selection.isDirectory())
+                    getFile(selection);
+
+                else
+                    readFile(Uri.fromFile(selection));
+            });
+    }
+
+    // openDialog
+    private void openDialog(String title, List<File> list,
+                            DialogInterface.OnClickListener listener)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+
+        // Add the adapter
+        FileAdapter adapter = new FileAdapter(builder.getContext(), list);
+        builder.setAdapter(adapter, listener);
+
+        // Add the button
+        builder.setNegativeButton(R.string.cancel, null);
+
+        // Create the Dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     // getContent
