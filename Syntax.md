@@ -6,7 +6,8 @@ The type of highlighting is selected by file extension. Files with
 `.swift` extensions will be highlighted with 'C' style
 highlighting. Files with `.htm`, `.html` extensions will be
 highlighted as HTML. Files with `.cs`, `.css` extensions will be
-highlighted as CSS.
+highlighted as CSS. Files with `.md` extensions will be highlighted as
+markdown.
 
 ## Parsing
 The algorithm makes no attempt at parsing. The text is scanned for
@@ -31,6 +32,9 @@ highlighted. As above, single quotes are ignored. HTML comments `<!--
 CSS style names are matched from a list. Double quoted arguments are
 highlighted. As above, single quotes are ignored. C style comments are
 recognised.
+
+### Markdown
+Markdown headers, links, emphasis and code will be highlighted.
 
 ## Limitations
 Because scanning and highlighting a large file can be quite slow,

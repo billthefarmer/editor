@@ -56,9 +56,9 @@ View the current file read only.
 Save the current file if modified.
 
 ### Open
-Depending on what file managers or file pickers are installed, you
-will get a choice of options to pick a file. The file will initially
-be read-only. Touch the **Edit** toolbar item to enable editing.
+Choose a file to open from the chooser dialog that pops up. The parent
+folder will be the first in the list. The file will initially be
+read-only. Touch the **Edit** toolbar item to enable editing.
 
 ### Open recent
 Choose a file from the list that pops up. As above the file will
@@ -84,8 +84,8 @@ no markdown the result will be the same text.
 
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,
-Javascript, Python, Swift, CSS or HTML file, the keywords, classes
-comments, strings, etc will be highlighted. See [Syntax
+Javascript, Python, Swift, CSS, HTML or Markdown file, the keywords,
+classes comments, strings, etc will be highlighted. See [Syntax
 Highlighting](Syntax.md).
 
 ### Extended selection

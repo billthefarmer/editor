@@ -23,11 +23,11 @@ package org.billthefarmer.editor;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -36,9 +36,16 @@ import java.util.List;
 // FileAdapter class
 public class FileAdapter extends BaseAdapter
 {
+    private final static String TAG = "FileAdapter";
+
+    private final static String IMAGE = "image";
+    private final static String AUDIO = "audio";
+    private final static String VIDEO = "video";
+
     private LayoutInflater inflater;
     private List<File> files;
     private int folderId;
+    private int fileId;
 
     // Constructor
     public FileAdapter(Context context, List<File> files)
@@ -52,6 +59,10 @@ public class FileAdapter extends BaseAdapter
         if (typedArray.hasValue(R.styleable.Editor_folder))
             folderId =
                 typedArray.getResourceId(R.styleable.Editor_folder, 0);
+
+        if (typedArray.hasValue(R.styleable.Editor_file))
+            fileId =
+                typedArray.getResourceId(R.styleable.Editor_file, 0);
 
         typedArray.recycle();
     }
@@ -91,6 +102,25 @@ public class FileAdapter extends BaseAdapter
             name.setText(file.getName());
             if (file.isDirectory())
                 name.setCompoundDrawablesWithIntrinsicBounds(folderId, 0, 0, 0);
+
+            else
+                name.setCompoundDrawablesWithIntrinsicBounds(fileId, 0, 0, 0);
+
+            name.setEnabled(true);
+            name.setClickable(false);
+
+            // Get the mime type
+            String type = FileUtils.getMimeType(file);
+            if (type != null)
+            {
+                if (type.startsWith(IMAGE) ||
+                    type.startsWith(AUDIO) ||
+                    type.startsWith(VIDEO))
+                {
+                    name.setEnabled(false);
+                    name.setClickable(true);
+                }
+            }
         }
 
         return convertView;
