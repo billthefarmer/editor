@@ -108,12 +108,13 @@ public class Editor extends Activity
     public final static String PREF_WRAP = "pref_wrap";
 
     public final static String DOCUMENTS = "Documents";
+    public final static String FOLDER = "Folder  ";
+
     public final static String EDIT_FILE = "Editor.txt";
     public final static String HTML_FILE = "Editor.html";
 
     public final static String TEXT_HTML = "text/html";
     public final static String TEXT_PLAIN = "text/plain";
-    public final static String TEXT_WILD = "text/*";
 
     public final static String PATTERN_CHARS =
         "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
@@ -1427,7 +1428,7 @@ public class Editor extends Activity
         Arrays.sort(files);
         List<File> list = new ArrayList<File>(Arrays.asList(files));
         list.add(0, dir.getParentFile());
-        String title = "Folder " + dir.getPath();
+        String title = FOLDER + dir.getPath();
         openDialog(title, list, (dialog, which) ->
             {
                 File selection = list.get(which);
