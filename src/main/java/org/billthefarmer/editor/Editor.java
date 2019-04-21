@@ -274,8 +274,7 @@ public class Editor extends Activity
         "( *\\[.+\\]: +.+$)";
 
     public final static String MD_EMPH =
-        "(\\*{1,2}\\b(\\w| )+\\b\\*{1,2})|(\\b_{1,2}(\\w| )+_{1,2}\\b)|" +
-        "(~{1,2}\\b(\\w| )+\\b~{1,2})";
+        "(([*~]{1,2})\\b(\\w| )+?\\b\\2)|(\\b(_{1,2})(\\w| )+?\\5\\b)";
 
     public final static String MD_CODE = "(^ {4,}.+$)|(`.+?`)";
 

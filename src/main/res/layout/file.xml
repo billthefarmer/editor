@@ -5,7 +5,6 @@
     android:id="@+id/name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawableLeft="?attr/file"
     android:drawablePadding="8dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"

@@ -8,6 +8,9 @@
 
     <attr name="file" format="reference" />
     <attr name="folder" format="reference" />
+    <attr name="audio" format="reference" />
+    <attr name="image" format="reference" />
+    <attr name="video" format="reference" />
 
   </declare-styleable>
 
