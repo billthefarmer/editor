@@ -290,6 +290,7 @@ public class Editor extends Activity
 
     private final static int REQUEST_READ = 1;
     private final static int REQUEST_SAVE = 2;
+    private final static int REQUEST_OPEN = 3;
 
     private final static int LIGHT = 1;
     private final static int DARK  = 2;
@@ -1411,6 +1412,18 @@ public class Editor extends Activity
     // getFile
     private void getFile()
     {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            {
+                requestPermissions(new String[]
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_OPEN);
+                return;
+            }
+        }
+
         File dir = file.getParentFile();
         getFile(dir);
     }
@@ -1483,6 +1496,15 @@ public class Editor extends Activity
                     grantResults[i] == PackageManager.PERMISSION_GRANTED)
                     // Granted, read file
                     readFile(readUri);
+            break;
+
+        case REQUEST_OPEN:
+            for (int i = 0; i < grantResults.length; i++)
+                if (permissions[i].equals(Manifest.permission
+                                          .READ_EXTERNAL_STORAGE) &&
+                    grantResults[i] == PackageManager.PERMISSION_GRANTED)
+                    // Granted, open file
+                    getFile();
             break;
         }
     }
@@ -1718,19 +1740,18 @@ public class Editor extends Activity
 
         int line = textView.getLayout().getLineForVertical(top);
         int start = textView.getLayout().getLineStart(line);
+        int first = textView.getLayout().getLineStart(line + 1);
 
         line = textView.getLayout().getLineForVertical(top + height);
         int end = textView.getLayout().getLineEnd(line);
+        int last = textView.getLayout().getLineStart(line - 1);
 
         // Move selection if outside range
         if (textView.getSelectionStart() < start)
-            textView.setSelection(start);
+            textView.setSelection(first);
 
         if (textView.getSelectionStart() > end)
-        {
-            int last = textView.getLayout().getLineStart(line - 1);
             textView.setSelection(last);
-        }
 
         // Get editable
         Editable editable = textView.getEditableText();
