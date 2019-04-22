@@ -57,8 +57,9 @@ Save the current file if modified.
 
 ### Open
 Choose a file to open from the chooser dialog that pops up. The parent
-folder will be the first in the list. The file will initially be
-read-only. Touch the **Edit** toolbar item to enable editing.
+folder will be the first in the list. See [File
+Chooser](Chooser.md). The file will initially be read-only. Touch the
+**Edit** toolbar item to enable editing.
 
 ### Open recent
 Choose a file from the list that pops up. As above the file will
