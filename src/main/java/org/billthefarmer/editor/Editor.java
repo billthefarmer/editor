@@ -1431,16 +1431,10 @@ public class Editor extends Activity
     // getFile
     private void getFile(File dir)
     {
-        File files[] = dir.listFiles();
-        if (files == null)
-        {
-            dir = Environment.getExternalStorageDirectory();
-            files = dir.listFiles();
-        }
+        List<File> list = getList(dir);
+        if (list == null)
+            return;
 
-        Arrays.sort(files);
-        List<File> list = new ArrayList<File>(Arrays.asList(files));
-        list.add(0, dir.getParentFile());
         String title = FOLDER + dir.getPath();
         openDialog(title, list, (dialog, which) ->
             {
@@ -1451,6 +1445,25 @@ public class Editor extends Activity
                 else
                     readFile(Uri.fromFile(selection));
             });
+    }
+
+    // getList
+    private List<File> getList(File dir)
+    {
+        File[] files = dir.listFiles();
+        if (files == null)
+        {
+            dir = Environment.getExternalStorageDirectory();
+            files = dir.listFiles();
+
+            if (files == null)
+                return null;
+        }
+
+        Arrays.sort(files);
+        List<File> list = new ArrayList<File>(Arrays.asList(files));
+        list.add(0, dir.getParentFile());
+        return list;
     }
 
     // openDialog
