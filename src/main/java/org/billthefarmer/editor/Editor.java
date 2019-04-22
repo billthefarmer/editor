@@ -80,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -108,7 +109,7 @@ public class Editor extends Activity
     public final static String PREF_WRAP = "pref_wrap";
 
     public final static String DOCUMENTS = "Documents";
-    public final static String FOLDER = "Folder  ";
+    public final static String FOLDER = "Folder:  ";
 
     public final static String EDIT_FILE = "Editor.txt";
     public final static String HTML_FILE = "Editor.html";
@@ -1462,6 +1463,14 @@ public class Editor extends Activity
 
         Arrays.sort(files);
         List<File> list = new ArrayList<File>(Arrays.asList(files));
+        Iterator<File> iterator = list.iterator();
+        while (iterator.hasNext())
+        {
+            File item = iterator.next();
+            if (item.getName().startsWith("."))
+                iterator.remove();
+        }
+
         list.add(0, dir.getParentFile());
         return list;
     }
