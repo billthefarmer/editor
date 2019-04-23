@@ -3,9 +3,5 @@
 
   <color name="colorRetroBackground">#000000</color>
   <color name="colorRetroPrimary">#00ff00</color>
-  <!--
-  <color name="colorRetroSecondary">#007f00</color>
-  <color name="colorRetroTertiary">#003f00</color>
-  -->
 
 </resources>

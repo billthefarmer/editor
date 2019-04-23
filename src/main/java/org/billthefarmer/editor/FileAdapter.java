@@ -38,6 +38,8 @@ public class FileAdapter extends BaseAdapter
 {
     private final static String TAG = "FileAdapter";
 
+    private final static String ROOT = "/";
+
     private final static String IMAGE = "image";
     private final static String AUDIO = "audio";
     private final static String VIDEO = "video";
@@ -46,6 +48,7 @@ public class FileAdapter extends BaseAdapter
 
     private LayoutInflater inflater;
     private List<File> files;
+
     private int folderId;
     private int fileId;
     private int audioId;
@@ -116,7 +119,11 @@ public class FileAdapter extends BaseAdapter
 
         if (name != null)
         {
-            name.setText(file.getName());
+            if (file.getPath().equals(ROOT))
+                name.setText(ROOT);
+
+            else
+                name.setText(file.getName());
 
             name.setEnabled(true);
             name.setClickable(false);

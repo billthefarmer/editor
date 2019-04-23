@@ -1451,18 +1451,19 @@ public class Editor extends Activity
     // getList
     private List<File> getList(File dir)
     {
+        List<File> list = null;
         File[] files = dir.listFiles();
         if (files == null)
         {
-            dir = Environment.getExternalStorageDirectory();
-            files = dir.listFiles();
-
-            if (files == null)
-                return null;
+            list = new ArrayList<File>();
+            if (dir.getParentFile() != null)
+                list.add(dir.getParentFile());
+            list.add(Environment.getExternalStorageDirectory());
+            return list;
         }
 
         Arrays.sort(files);
-        List<File> list = new ArrayList<File>(Arrays.asList(files));
+        list = new ArrayList<File>(Arrays.asList(files));
         Iterator<File> iterator = list.iterator();
         while (iterator.hasNext())
         {
@@ -1471,7 +1472,8 @@ public class Editor extends Activity
                 iterator.remove();
         }
 
-        list.add(0, dir.getParentFile());
+        if (dir.getParentFile() != null)
+            list.add(0, dir.getParentFile());
         return list;
     }
 
