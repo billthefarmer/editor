@@ -1387,6 +1387,7 @@ public class Editor extends Activity
     // openFile
     private void openFile()
     {
+        // Check if file changed
         if (changed)
             alertDialog(R.string.open, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
@@ -1413,6 +1414,7 @@ public class Editor extends Activity
     // getFile
     private void getFile()
     {
+        // Check permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -1425,6 +1427,7 @@ public class Editor extends Activity
             }
         }
 
+        // Open parent folder
         File dir = file.getParentFile();
         getFile(dir);
     }
@@ -1432,10 +1435,12 @@ public class Editor extends Activity
     // getFile
     private void getFile(File dir)
     {
+        // Get list of files
         List<File> list = getList(dir);
         if (list == null)
             return;
 
+        // Pop up dialog
         String title = FOLDER + dir.getPath();
         openDialog(title, list, (dialog, which) ->
             {
@@ -1453,8 +1458,11 @@ public class Editor extends Activity
     {
         List<File> list = null;
         File[] files = dir.listFiles();
+        // Check files
         if (files == null)
         {
+            // Create a list with just the parent folder and the
+            // external storage folder
             list = new ArrayList<File>();
             if (dir.getParentFile() != null)
                 list.add(dir.getParentFile());
@@ -1462,8 +1470,11 @@ public class Editor extends Activity
             return list;
         }
 
+        // Sort the files
         Arrays.sort(files);
+        // Create a list
         list = new ArrayList<File>(Arrays.asList(files));
+        // Remove hidden files
         Iterator<File> iterator = list.iterator();
         while (iterator.hasNext())
         {
@@ -1472,6 +1483,7 @@ public class Editor extends Activity
                 iterator.remove();
         }
 
+        // Add parent folder
         if (dir.getParentFile() != null)
             list.add(0, dir.getParentFile());
         return list;
