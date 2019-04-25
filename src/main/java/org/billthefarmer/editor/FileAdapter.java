@@ -44,16 +44,19 @@ public class FileAdapter extends BaseAdapter
     private final static String AUDIO = "audio";
     private final static String VIDEO = "video";
 
+    private final static String APPLICATION = "application";
+
     private final static long LARGE = 262144;
 
     private LayoutInflater inflater;
     private List<File> files;
 
-    private int folderId;
     private int fileId;
     private int audioId;
     private int imageId;
     private int videoId;
+    private int folderId;
+    private int applicationId;
 
     // Constructor
     public FileAdapter(Context context, List<File> files)
@@ -83,6 +86,10 @@ public class FileAdapter extends BaseAdapter
         if (typedArray.hasValue(R.styleable.Editor_video))
             videoId =
                 typedArray.getResourceId(R.styleable.Editor_video, 0);
+
+        if (typedArray.hasValue(R.styleable.Editor_application))
+            applicationId =
+                typedArray.getResourceId(R.styleable.Editor_application, 0);
 
         typedArray.recycle();
     }
@@ -158,6 +165,10 @@ public class FileAdapter extends BaseAdapter
                     name.setCompoundDrawablesWithIntrinsicBounds(videoId,
                                                                  0, 0, 0);
                 }
+
+                else if (type != null && type.startsWith(APPLICATION))
+                    name.setCompoundDrawablesWithIntrinsicBounds(applicationId,
+                                                                 0, 0, 0);
 
                 else
                     name.setCompoundDrawablesWithIntrinsicBounds(fileId,
