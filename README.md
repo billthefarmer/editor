@@ -85,9 +85,9 @@ no markdown the result will be the same text.
 
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,
-Javascript, Python, Swift, CSS, HTML or Markdown file, the keywords,
-classes comments, strings, etc will be highlighted. See [Syntax
-Highlighting](Syntax.md).
+Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file,
+the keywords, classes comments, strings, etc will be highlighted. See
+[Syntax Highlighting](Syntax.md).
 
 ### Extended selection
 If the file being edited is not a plain text file, selections created
