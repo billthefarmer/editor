@@ -127,7 +127,7 @@ public class Editor extends Activity
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     public final static String CC_EXT =
-        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|swift)";
+        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|sh|swift)";
 
     public final static String HTML_EXT =
         "\\.html?";
@@ -140,19 +140,19 @@ public class Editor extends Activity
 
     public final static String KEYWORDS =
         "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
-        "case|catch|chan|char|class|con(st|tinue|venience)|" +
-        "de(bugger|f|fault|fer|init|l|lete)|didset|do|dynamic|" +
-        "dynamictype|el(if|else)|enum|eval|ex(cept|ec|plicit|port|" +
+        "case|catch|chan|char|class|con(st|tinue|venience)|continue|" +
+        "de(bugger|f|fi|fault|fer|in|init|l|lete)|didset|do|done|dynamic|" +
+        "dynamictype|el(if|else)|enum|esac|eval|ex(cept|ec|plicit|port|" +
         "tends|tension|tern)|fal(lthrough|se)|final(ly)?|for|" +
         "friend|from|func(tion)?|get|global|go(to)?|if|" +
         "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
-        "ternal)?|is|lambda|lazy|left|let|map|mut(able|ating)|" +
+        "ternal)?|is|lambda|lazy|left|let|local|map|mut(able|ating)|" +
         "namespace|native|new|nil|none|nonmutating|not|null|" +
         "operator|optional|or|override|package|pass|postfix|" +
         "pre(cedence|fix)|print|private|prot(ected|ocol)|public|" +
         "raise|range|register|required|return|right|select|self|" +
         "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
-        "switch|synchronized|template|this|throw|throws|transient|" +
+        "switch|synchronized|template|th(en|is)|throw|throws|transient|" +
         "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
         "using|var|virtual|void|volatile|weak|wh(ere|ile)|willset|" +
         "with|yield)\\b";
@@ -165,7 +165,7 @@ public class Editor extends Activity
         "@\\b[A-Za-z]+\\b";
 
     public final static String CC_COMMENT =
-        "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
+        "//.*|#.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
 
     public final static String HTML_TAGS =
         "\\b(html|base|head|link|meta|style|title|body|address|article|" +
