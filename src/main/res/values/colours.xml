@@ -3,6 +3,6 @@
 
   <color name="colorRetroBackground">#000000</color>
   <color name="colorRetroForeground">#00ff00</color>
-  <color name="colorRetroForegroundDisabled">#4d00ff00</color>
+  <color name="colorRetroForegroundDisabled">#4c00ff00</color>
 
 </resources>

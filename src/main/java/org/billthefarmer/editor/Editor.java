@@ -141,9 +141,9 @@ public class Editor extends Activity
     public final static String KEYWORDS =
         "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
         "case|catch|chan|char|class|con(st|tinue|venience)|continue|" +
-        "de(bugger|f|fi|fault|fer|in|init|l|lete)|didset|do|done|dynamic|" +
-        "dynamictype|el(if|else)|enum|esac|eval|ex(cept|ec|plicit|port|" +
-        "tends|tension|tern)|fal(lthrough|se)|final(ly)?|for|" +
+        "de(bugger|f|fault|fer|in|init|l|lete)|didset|do(ne)?|dynamic" +
+        "(type)?|el(if|se)|enum|esac|eval|ex(cept|ec|plicit|port|" +
+        "tends|tension|tern)|fal(lthrough|se)|fi(nal|nally)?|for|" +
         "friend|from|func(tion)?|get|global|go(to)?|if|" +
         "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
         "ternal)?|is|lambda|lazy|left|let|local|map|mut(able|ating)|" +
@@ -152,7 +152,7 @@ public class Editor extends Activity
         "pre(cedence|fix)|print|private|prot(ected|ocol)|public|" +
         "raise|range|register|required|return|right|select|self|" +
         "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
-        "switch|synchronized|template|th(en|is)|throw|throws|transient|" +
+        "switch|synchronized|template|th(en|is|rows?)|transient|" +
         "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
         "using|var|virtual|void|volatile|weak|wh(ere|ile)|willset|" +
         "with|yield)\\b";
