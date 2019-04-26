@@ -23,6 +23,7 @@ package org.billthefarmer.editor;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class FileAdapter extends BaseAdapter
     private int imageId;
     private int videoId;
     private int folderId;
+    private int externalId;
     private int applicationId;
 
     // Constructor
@@ -86,6 +88,10 @@ public class FileAdapter extends BaseAdapter
         if (typedArray.hasValue(R.styleable.Editor_video))
             videoId =
                 typedArray.getResourceId(R.styleable.Editor_video, 0);
+
+        if (typedArray.hasValue(R.styleable.Editor_external))
+            externalId =
+                typedArray.getResourceId(R.styleable.Editor_external, 0);
 
         if (typedArray.hasValue(R.styleable.Editor_application))
             applicationId =
@@ -136,7 +142,16 @@ public class FileAdapter extends BaseAdapter
             name.setClickable(false);
 
             if (file.isDirectory())
-                name.setCompoundDrawablesWithIntrinsicBounds(folderId, 0, 0, 0);
+            {
+                if (file.getPath()
+                    .equals(Environment
+                            .getExternalStorageDirectory().getPath()))
+                    name.setCompoundDrawablesWithIntrinsicBounds(externalId,
+                                                                 0, 0, 0);
+                else
+                    name.setCompoundDrawablesWithIntrinsicBounds(folderId,
+                                                                 0, 0, 0);
+            }
 
             else
             {

@@ -3,15 +3,15 @@
 
   <declare-styleable name="Editor">
 
-    <attr name="TextColour" format="reference" />
     <attr name="BackgroundColour" format="reference" />
 
     <attr name="application" format="reference" />
-    <attr name="file" format="reference" />
+    <attr name="external" format="reference" />
     <attr name="folder" format="reference" />
     <attr name="audio" format="reference" />
     <attr name="image" format="reference" />
     <attr name="video" format="reference" />
+    <attr name="file" format="reference" />
 
   </declare-styleable>
 

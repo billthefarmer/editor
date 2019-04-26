@@ -38,6 +38,7 @@
     -->
 
     <item name="application">@drawable/ic_action_stop</item>
+    <item name="external">@drawable/ic_action_sd_storage</item>
     <item name="file">@drawable/ic_action_view_as_list</item>
     <item name="folder">@drawable/ic_action_collection</item>
     <item name="audio">@drawable/ic_action_volume_on</item>
@@ -54,6 +55,7 @@
     -->
 
     <item name="application">@drawable/ic_action_stop_dark</item>
+    <item name="external">@drawable/ic_action_sd_storage_dark</item>
     <item name="file">@drawable/ic_action_view_as_list_dark</item>
     <item name="folder">@drawable/ic_action_collection_dark</item>
     <item name="audio">@drawable/ic_action_volume_on_dark</item>
@@ -70,6 +72,7 @@
     -->
 
     <item name="application">@drawable/ic_action_stop_dark</item>
+    <item name="external">@drawable/ic_action_sd_storage_dark</item>
     <item name="file">@drawable/ic_action_view_as_list_dark</item>
     <item name="folder">@drawable/ic_action_collection_dark</item>
     <item name="audio">@drawable/ic_action_volume_on_dark</item>
@@ -78,9 +81,10 @@
 
     <item name="BackgroundColour">@color/colorRetroBackground</item>
 
-    <item name="android:textColorPrimary">@color/colorRetroPrimary</item>
-    <item name="android:textColorSecondary">@color/colorRetroPrimary</item>
-    <item name="android:textColorTertiary">@color/colorRetroPrimary</item>
+    <item name="android:textColorPrimary">@color/text_color_retro</item>
+    <item name="android:textColorSecondary">@color/text_color_retro</item>
+    <item name="android:textColorTertiary">@color/text_color_retro</item>
+
   </style>
 
 </resources>
