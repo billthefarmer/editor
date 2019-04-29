@@ -2086,10 +2086,8 @@ public class Editor extends Activity
 
                 // Get a pattern and a matcher for delimiter
                 // characters
-                Pattern pattern =
-                    Pattern.compile(PATTERN_CHARS);
-                Matcher matcher =
-                    pattern.matcher(text);
+                Pattern pattern = Pattern.compile(PATTERN_CHARS);
+                Matcher matcher = pattern.matcher(text);
 
                 // Find the first match after the end of the selection
                 if (matcher.find(end))
