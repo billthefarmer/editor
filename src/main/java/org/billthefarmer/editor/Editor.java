@@ -117,17 +117,18 @@ public class Editor extends Activity
     public final static String TEXT_HTML = "text/html";
     public final static String TEXT_PLAIN = "text/plain";
 
-    public final static String PATTERN_CHARS =
-        "[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]";
+    public final static Pattern PATTERN_CHARS =
+        Pattern.compile("[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]");
     public final static String BRACKET_CHARS = "([{<";
+
     public final static String HTML_HEAD =
         "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n" +
-        "<meta name=\"viewport\" content=\"width=device-width," +
-        " initial-scale=1.0\">\n</head>\n<body>\n";
+        "<meta name=\"viewport\" content=\"width=device-width, " +
+        "initial-scale=1.0\">\n</head>\n<body>\n";
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
 
     public final static String CC_EXT =
-        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|sh|swift)";
+        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|swift)";
 
     public final static String HTML_EXT =
         "\\.html?";
@@ -138,147 +139,163 @@ public class Editor extends Activity
     public final static String MD_EXT =
         "\\.md";
 
-    public final static String KEYWORDS =
-        "\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
-        "case|catch|chan|char|class|con(st|tinue|venience)|continue|" +
-        "de(bugger|f|fault|fer|in|init|l|lete)|didset|do(ne)?|dynamic" +
-        "(type)?|el(if|se)|enum|esac|eval|ex(cept|ec|plicit|port|" +
-        "tends|tension|tern)|fal(lthrough|se)|fi(nal|nally)?|for|" +
-        "friend|from|func(tion)?|get|global|go(to)?|if|" +
-        "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
-        "ternal)?|is|lambda|lazy|left|let|local|map|mut(able|ating)|" +
-        "namespace|native|new|nil|none|nonmutating|not|null|" +
-        "operator|optional|or|override|package|pass|postfix|" +
-        "pre(cedence|fix)|print|private|prot(ected|ocol)|public|" +
-        "raise|range|register|required|return|right|select|self|" +
-        "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
-        "switch|synchronized|template|th(en|is|rows?)|transient|" +
-        "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
-        "using|var|virtual|void|volatile|weak|wh(ere|ile)|willset|" +
-        "with|yield)\\b";
+    public final static String SH_EXT =
+        "\\.sh";
 
-    public final static String TYPES =
-        "\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +
-        "long|short))\\b";
+    // Syntax patterns
+    public final static Pattern KEYWORDS = Pattern.compile
+        ("\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
+         "case|catch|chan|char|class|con(st|tinue|venience)|continue|" +
+         "de(bugger|f|fault|fer|in|init|l|lete)|didset|do(ne)?|dynamic" +
+         "(type)?|el(if|se)|enum|esac|eval|ex(cept|ec|plicit|port|" +
+         "tends|tension|tern)|fal(lthrough|se)|fi(nal|nally)?|for|" +
+         "friend|from|func(tion)?|get|global|go(to)?|if|" +
+         "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
+         "ternal)?|is|lambda|lazy|left|let|local|map|mut(able|ating)|" +
+         "namespace|native|new|nil|none|nonmutating|not|null|" +
+         "operator|optional|or|override|package|pass|postfix|" +
+         "pre(cedence|fix)|print|private|prot(ected|ocol)|public|" +
+         "raise|range|register|required|return|right|select|self|" +
+         "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
+         "switch|synchronized|template|th(en|is|rows?)|transient|" +
+         "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
+         "using|var|virtual|void|volatile|weak|wh(ere|ile)|willset|" +
+         "with|yield)\\b", Pattern.MULTILINE);
 
-    public final static String ANNOTATION =
-        "@\\b[A-Za-z]+\\b";
+    public final static Pattern TYPES = Pattern.compile
+        ("\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +
+         "long|short))\\b", Pattern.MULTILINE);
 
-    public final static String CC_COMMENT =
-        "//.*|#.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
+    public final static Pattern ANNOTATION =
+        Pattern.compile("@\\b[A-Za-z]+\\b", Pattern.MULTILINE);
 
-    public final static String HTML_TAGS =
-        "\\b(html|base|head|link|meta|style|title|body|address|article|" +
-        "aside|footer|header|h\\d|hgroup|main|nav|section|blockquote|dd|" +
-        "dir|div|dl|dt|figcaption|figure|hr|li|main|ol|p|pre|ul|a|abbr|" +
-        "b|bdi|bdo|br|cite|code|data|dfn|em|i|kbd|mark|q|rb|rp|rt|rtc|" +
-        "ruby|s|samp|small|span|strong|sub|sup|time|tt|u|var|wbr|area|" +
-        "audio|img|map|track|video|applet|embed|iframe|noembed|object|" +
-        "param|picture|source|canvas|noscript|script|del|ins|caption|" +
-        "col|colgroup|table|tbody|td|tfoot|th|thead|tr|button|datalist|" +
-        "fieldset|form|input|label|legend|meter|optgroup|option|output|" +
-        "progress|select|textarea|details|dialog|menu|menuitem|summary|" +
-        "content|element|shadow|slot|template|acronym|applet|basefont|" +
-        "bgsound|big|blink|center|command|content|dir|element|font|" +
-        "frame|frameset|image|isindex|keygen|listing|marquee|menuitem|" +
-        "multicol|nextid|nobr|noembed|noframes|plaintext|shadow|spacer|" +
-        "strike|tt|xmp|doctype)\\b";
+    public final static Pattern CC_COMMENT = Pattern.compile
+        ("//.*$|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/",
+         Pattern.MULTILINE);
 
-    public final static String HTML_ATTRS =
-        "\\b(accept|accesskey|action|align|allow|alt|async|" +
-        "auto(capitalize|complete|focus|play)|background|" +
-        "bgcolor|border|buffered|challenge|charset|checked|cite|" +
-        "class|code(base)?|color|cols|colspan|content(" +
-        "editable)?|contextmenu|controls|coords|crossorigin|" +
-        "csp|data|datetime|decoding|def(ault|er)|dir|dirname|" +
-        "disabled|download|draggable|dropzone|enctype|enterkeyhint|" +
-        "equiv|for|form(action|novalidate)?|headers|height|" +
-        "hidden|high|href(lang)?|http|icon|id|importance|" +
-        "inputmode|integrity|intrinsicsize|ismap|itemprop|keytype|" +
-        "kind|label|lang|language|list|loading|loop|low|manifest|" +
-        "max|maxlength|media|method|min|minlength|multiple|muted|" +
-        "name|novalidate|open|optimum|pattern|ping|placeholder|" +
-        "poster|preload|property|radiogroup|readonly|referrerpolicy|" +
-        "rel|required|reversed|rows|rowspan|sandbox|scope|scoped|" +
-        "selected|shape|size|sizes|slot|span|spellcheck|src|srcdoc|" +
-        "srclang|srcset|start|step|style|summary|tabindex|target|" +
-        "title|translate|type|usemap|value|width|wrap)\\b";
+    public final static Pattern CLASS = Pattern.compile
+        ("\\b[A-Z][A-Za-z0-9_]+\\b", Pattern.MULTILINE);
 
-    public final static String HTML_COMMENT =
-        "<!--.*?-->";
+    public final static Pattern CONSTANT = Pattern.compile
+        ("\\b(([A-Z][A-Z0-9_]+)|(k[A-Z][A-Za-z0-9]+))\\b",
+         Pattern.MULTILINE);
 
-    public final static String CSS_STYLES =
-        "\\b(action|active|additive|adjust|after|align|all|alternates|" +
-        "animation|annotation|area|areas|as|asian|attachment|attr|" +
-        "auto|backdrop|backface|background|basis|before|behavior|" +
-        "bezier|bidi|blend|block|blur|border|both|bottom|box|break|" +
-        "brightness|calc|caps|caption|caret|cells|center|ch|change|" +
-        "character|charset|checked|child|circle|clamp|clear|clip|" +
-        "cm|collapse|color|column|columns|combine|composite|conic|" +
-        "content|contrast|count|counter|counters|cross|cubic|cue|" +
-        "cursor|decoration|default|deg|delay|dir|direction|" +
-        "disabled|display|dpcm|dpi|dppx|drop|duration|east|element|" +
-        "ellipse|em|emphasis|empty|enabled|end|env|events|ex|face|" +
-        "fade|fallback|family|feature|fill|filter|first|fit|flex|" +
-        "float|flow|focus|font|format|forms|fr|frames|fullscreen|" +
-        "function|gap|grad|gradient|grayscale|grid|grow|hanging|" +
-        "height|historical|hover|hsl|hsla|hue|hyphens|hz|image|import|" +
-        "in|increment|indent|indeterminate|index|inherit|initial|" +
-        "inline|inset|inside|invalid|invert|isolation|items|" +
-        "iteration|justify|khz|kerning|keyframes|lang|language|" +
-        "last|layout|leader|left|letter|ligatures|line|linear|link|" +
-        "list|local|margin|mask|matrix|matrix3d|max|media|min|" +
-        "minmax|mix|mm|mode|ms|name|namespace|negative|none|not|nth|" +
-        "numeric|object|of|offset|only|opacity|optical|optional|" +
-        "order|orientation|origin|ornaments|orphans|out|outline|" +
-        "outset|outside|overflow|override|pad|padding|page|path|pc|" +
-        "perspective|place|placeholder|play|pointer|polygon|" +
-        "position|prefix|property|pt|punctuation|px|q|quotes|rad|" +
-        "radial|radius|range|read|rect|relative|rem|rendering|repeat|" +
-        "repeating|required|reset|resize|revert|rgb|rgba|right|" +
-        "root|rotate|rotate3d|rotatex|rotatey|rotatez|row|rows|" +
-        "rule|s|saturate|scale|scale3d|scalex|scaley|scalez|scope|" +
-        "scroll|scrollbar|selection|self|sepia|set|settings|shadow|" +
-        "shape|shrink|side|size|sizing|skew|skewx|skewy|slice|" +
-        "slotted|snap|source|space|spacing|span|speak|src|start|" +
-        "state|static|steps|stop|stretch|style|styleset|stylistic|suffix|" +
-        "supports|swash|symbols|synthesis|system|tab|table|target|" +
-        "template|text|threshold|timing|top|touch|transform|" +
-        "transition|translate|translate3d|translatex|translatey|" +
-        "translatez|turn|type|underline|unicode|unset|upright|url|" +
-        "user|valid|values|var|variant|variation|vertical|vh|" +
-        "viewport|visibility|visited|vmax|vmin|vw|weight|white|" +
-        "widows|width|will|word|wrap|write|writing|x|y|z|zoom)\\b";
+    public final static Pattern NUMBER = Pattern.compile
+        ("\\b\\d+(\\.\\d*)?(e(\\+|\\-)?\\d+)?\\b",
+         Pattern.MULTILINE);
 
-    public final static String CSS_HEX =
-        "#\\b[A-Fa-f0-9]+\\b";
-
-    public final static String CLASS =
-        "\\b[A-Z][A-Za-z0-9_]+\\b";
-
-    public final static String CONSTANT =
-        "\\b(([A-Z][A-Z0-9_]+)|(k[A-Z][A-Za-z0-9]+))\\b";
-
-    public final static String NUMBER =
-        "\\b\\d+(\\.\\d*)?(e(\\+|\\-)?\\d+)?\\b";
-
-    public final static String QUOTED =
+    public final static Pattern QUOTED = Pattern.compile
         // "'([^\\\\']+|\\\\([btnfr\"'\\\\]|" +
         // "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*'|" +
-        "\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
-        "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"";
+        ("\"([^\\\\\"]+|\\\\([btnfr\"'\\\\]|" +
+         "[0-3]?[0-7]{1,2}|u[0-9a-fA-F]{4}))*\"",
+         Pattern.MULTILINE);
 
-    public final static String MD_HEADER =
-        "(^.+\\R-+$)|(^.+\\R=+$)|(^#+ +.+$)";
+    public final static Pattern HTML_TAGS = Pattern.compile
+        ("\\b(html|base|head|link|meta|style|title|body|address|article|" +
+         "aside|footer|header|h\\d|hgroup|main|nav|section|blockquote|dd|" +
+         "dir|div|dl|dt|figcaption|figure|hr|li|main|ol|p|pre|ul|a|abbr|" +
+         "b|bdi|bdo|br|cite|code|data|dfn|em|i|kbd|mark|q|rb|rp|rt|rtc|" +
+         "ruby|s|samp|small|span|strong|sub|sup|time|tt|u|var|wbr|area|" +
+         "audio|img|map|track|video|applet|embed|iframe|noembed|object|" +
+         "param|picture|source|canvas|noscript|script|del|ins|caption|" +
+         "col|colgroup|table|tbody|td|tfoot|th|thead|tr|button|datalist|" +
+         "fieldset|form|input|label|legend|meter|optgroup|option|output|" +
+         "progress|select|textarea|details|dialog|menu|menuitem|summary|" +
+         "content|element|shadow|slot|template|acronym|applet|basefont|" +
+         "bgsound|big|blink|center|command|content|dir|element|font|" +
+         "frame|frameset|image|isindex|keygen|listing|marquee|menuitem|" +
+         "multicol|nextid|nobr|noembed|noframes|plaintext|shadow|spacer|" +
+         "strike|tt|xmp|doctype)\\b",
+         Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
 
-    public final static String MD_LINK =
-        "(\\!?\\[.+\\] *\\(.+\\))|(!?\\[.+\\] *\\[.+\\])|" +
-        "( *\\[.+\\]: +.+$)";
+    public final static Pattern HTML_ATTRS = Pattern.compile
+        ("\\b(accept|accesskey|action|align|allow|alt|async|" +
+         "auto(capitalize|complete|focus|play)|background|" +
+         "bgcolor|border|buffered|challenge|charset|checked|cite|" +
+         "class|code(base)?|color|cols|colspan|content(" +
+         "editable)?|contextmenu|controls|coords|crossorigin|" +
+         "csp|data|datetime|decoding|def(ault|er)|dir|dirname|" +
+         "disabled|download|draggable|dropzone|enctype|enterkeyhint|" +
+         "equiv|for|form(action|novalidate)?|headers|height|" +
+         "hidden|high|href(lang)?|http|icon|id|importance|" +
+         "inputmode|integrity|intrinsicsize|ismap|itemprop|keytype|" +
+         "kind|label|lang|language|list|loading|loop|low|manifest|" +
+         "max|maxlength|media|method|min|minlength|multiple|muted|" +
+         "name|novalidate|open|optimum|pattern|ping|placeholder|" +
+         "poster|preload|property|radiogroup|readonly|referrerpolicy|" +
+         "rel|required|reversed|rows|rowspan|sandbox|scope|scoped|" +
+         "selected|shape|size|sizes|slot|span|spellcheck|src|srcdoc|" +
+         "srclang|srcset|start|step|style|summary|tabindex|target|" +
+         "title|translate|type|usemap|value|width|wrap)\\b",
+         Pattern.MULTILINE);
 
-    public final static String MD_EMPH =
-        "(([*~]{1,2})\\b(\\w| )+?\\b\\2)|(\\b(_{1,2})(\\w| )+?\\5\\b)";
+    public final static Pattern HTML_COMMENT =
+        Pattern.compile("<!--.*?-->", Pattern.MULTILINE);
 
-    public final static String MD_CODE = "(^ {4,}.+$)|(`.+?`)";
+    public final static Pattern CSS_STYLES = Pattern.compile
+        ("\\b(action|active|additive|adjust|after|align|all|alternates|" +
+         "animation|annotation|area|areas|as|asian|attachment|attr|" +
+         "auto|backdrop|backface|background|basis|before|behavior|" +
+         "bezier|bidi|blend|block|blur|border|both|bottom|box|break|" +
+         "brightness|calc|caps|caption|caret|cells|center|ch|change|" +
+         "character|charset|checked|child|circle|clamp|clear|clip|" +
+         "cm|collapse|color|column|columns|combine|composite|conic|" +
+         "content|contrast|count|counter|counters|cross|cubic|cue|" +
+         "cursor|decoration|default|deg|delay|dir|direction|" +
+         "disabled|display|dpcm|dpi|dppx|drop|duration|east|element|" +
+         "ellipse|em|emphasis|empty|enabled|end|env|events|ex|face|" +
+         "fade|fallback|family|feature|fill|filter|first|fit|flex|" +
+         "float|flow|focus|font|format|forms|fr|frames|fullscreen|" +
+         "function|gap|grad|gradient|grayscale|grid|grow|hanging|" +
+         "height|historical|hover|hsl|hsla|hue|hyphens|hz|image|import|" +
+         "in|increment|indent|indeterminate|index|inherit|initial|" +
+         "inline|inset|inside|invalid|invert|isolation|items|" +
+         "iteration|justify|khz|kerning|keyframes|lang|language|" +
+         "last|layout|leader|left|letter|ligatures|line|linear|link|" +
+         "list|local|margin|mask|matrix|matrix3d|max|media|min|" +
+         "minmax|mix|mm|mode|ms|name|namespace|negative|none|not|nth|" +
+         "numeric|object|of|offset|only|opacity|optical|optional|" +
+         "order|orientation|origin|ornaments|orphans|out|outline|" +
+         "outset|outside|overflow|override|pad|padding|page|path|pc|" +
+         "perspective|place|placeholder|play|pointer|polygon|" +
+         "position|prefix|property|pt|punctuation|px|q|quotes|rad|" +
+         "radial|radius|range|read|rect|relative|rem|rendering|repeat|" +
+         "repeating|required|reset|resize|revert|rgb|rgba|right|" +
+         "root|rotate|rotate3d|rotatex|rotatey|rotatez|row|rows|" +
+         "rule|s|saturate|scale|scale3d|scalex|scaley|scalez|scope|" +
+         "scroll|scrollbar|selection|self|sepia|set|settings|shadow|" +
+         "shape|shrink|side|size|sizing|skew|skewx|skewy|slice|" +
+         "slotted|snap|source|space|spacing|span|speak|src|start|" +
+         "state|static|steps|stop|stretch|style|styleset|stylistic|suffix|" +
+         "supports|swash|symbols|synthesis|system|tab|table|target|" +
+         "template|text|threshold|timing|top|touch|transform|" +
+         "transition|translate|translate3d|translatex|translatey|" +
+         "translatez|turn|type|underline|unicode|unset|upright|url|" +
+         "user|valid|values|var|variant|variation|vertical|vh|" +
+         "viewport|visibility|visited|vmax|vmin|vw|weight|white|" +
+         "widows|width|will|word|wrap|write|writing|x|y|z|zoom)\\b",
+         Pattern.MULTILINE);
+
+    public final static Pattern CSS_HEX = Pattern.compile
+        ("#\\b[A-Fa-f0-9]+\\b", Pattern.MULTILINE);
+
+    public final static Pattern MD_HEADER = Pattern.compile
+        ("(^.+\\R-+$)|(^.+\\R=+$)|(^#+ +.+$)", Pattern.MULTILINE);
+
+    public final static Pattern MD_LINK = Pattern.compile
+        ("(\\!?\\[.+\\] *\\(.+\\))|(!?\\[.+\\] *\\[.+\\])|" +
+         "( *\\[.+\\]: +.+$)", Pattern.MULTILINE);
+
+    public final static Pattern MD_EMPH = Pattern.compile
+        ("(([*~]{1,2})\\b(\\w| )+?\\b\\2)|(\\b(_{1,2})(\\w| )+?\\5\\b)",
+         Pattern.MULTILINE);
+
+    public final static Pattern MD_CODE = Pattern.compile
+        ("(^ {4,}.+$)|(`.+?`)", Pattern.MULTILINE);
+
+    public final static Pattern SH_COMMENT = Pattern.compile
+        ("#.*$", Pattern.MULTILINE);
 
     private final static double KEYBOARD_RATIO = 0.25;
 
@@ -309,6 +326,7 @@ public class Editor extends Activity
     private final static int HTML_SYNTAX = 2;
     private final static int CSS_SYNTAX  = 3;
     private final static int MD_SYNTAX   = 4;
+    private final static int SH_SYNTAX   = 5;
 
     private File file;
     private String path;
@@ -1567,11 +1585,11 @@ public class Editor extends Activity
         content = null;
 
         // Attempt to resolve content uri
-        if (uri.getScheme().equalsIgnoreCase(CONTENT))
+        if (CONTENT.equalsIgnoreCase(uri.getScheme()))
             uri = resolveContent(uri);
 
         // Read into default file if unresolved
-        if (uri.getScheme().equalsIgnoreCase(CONTENT))
+        if (CONTENT.equalsIgnoreCase(uri.getScheme()))
         {
             content = uri;
             file = getDefaultFile();
@@ -1740,6 +1758,9 @@ public class Editor extends Activity
                 else if (ext.matches(MD_EXT))
                     syntax = MD_SYNTAX;
 
+                else if (ext.matches(SH_EXT))
+                    syntax = SH_SYNTAX;
+
                 else
                     syntax = NO_SYNTAX;
 
@@ -1799,7 +1820,6 @@ public class Editor extends Activity
         for (ForegroundColorSpan span: spans)
             editable.removeSpan(span);
 
-        Pattern pattern;
         Matcher matcher;
 
         switch (syntax)
@@ -1814,10 +1834,8 @@ public class Editor extends Activity
             break;
 
         case CC_SYNTAX:
-            pattern = Pattern.compile(KEYWORDS, Pattern.MULTILINE);
-            matcher = pattern.matcher(editable);
+            matcher = KEYWORDS.matcher(editable);
             matcher.region(start, end);
-
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1828,9 +1846,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(TYPES, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(TYPES);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1841,9 +1857,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(CLASS, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(CLASS);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1854,9 +1868,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(NUMBER, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(NUMBER);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1867,9 +1879,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(ANNOTATION, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(ANNOTATION);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1880,9 +1890,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(CONSTANT, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(CONSTANT);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1893,9 +1901,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(CC_COMMENT, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(CC_COMMENT);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1908,11 +1914,8 @@ public class Editor extends Activity
             break;
 
         case HTML_SYNTAX:
-            pattern = Pattern.compile(HTML_TAGS, Pattern.MULTILINE |
-                                      Pattern.CASE_INSENSITIVE);
-            matcher = pattern.matcher(editable);
+            matcher = HTML_TAGS.matcher(editable);
             matcher.region(start, end);
-
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1923,9 +1926,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(HTML_ATTRS, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(HTML_ATTRS);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1937,9 +1938,7 @@ public class Editor extends Activity
             }
 
 
-            pattern = Pattern.compile(QUOTED, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(QUOTED);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1950,9 +1949,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(HTML_COMMENT, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(HTML_COMMENT);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1965,10 +1962,8 @@ public class Editor extends Activity
             break;
 
         case CSS_SYNTAX:
-            pattern = Pattern.compile(CSS_STYLES, Pattern.MULTILINE);
-            matcher = pattern.matcher(editable);
+            matcher = CSS_STYLES.matcher(editable);
             matcher.region(start, end);
-
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1979,9 +1974,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(CSS_HEX, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(CSS_HEX);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -1992,9 +1985,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(CC_COMMENT, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(CC_COMMENT);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -2007,10 +1998,8 @@ public class Editor extends Activity
             break;
 
         case MD_SYNTAX:
-            pattern = Pattern.compile(MD_HEADER, Pattern.MULTILINE);
-            matcher = pattern.matcher(editable);
+            matcher = MD_HEADER.matcher(editable);
             matcher.region(start, end);
-
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -2021,9 +2010,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(MD_LINK, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(MD_LINK);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -2034,9 +2021,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(MD_EMPH, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(MD_EMPH);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -2047,9 +2032,7 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            pattern = Pattern.compile(MD_CODE, Pattern.MULTILINE);
-            matcher.region(start, end).usePattern(pattern);
-
+            matcher.region(start, end).usePattern(MD_CODE);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
@@ -2060,9 +2043,55 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             break;
+
+        case SH_SYNTAX:
+            matcher = KEYWORDS.matcher(editable);
+            matcher.region(start, end);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(NUMBER);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.YELLOW);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(CONSTANT);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.LTGRAY);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(SH_COMMENT);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
         }
     }
-
 
     // onActionModeStarted
     @Override
@@ -2075,8 +2104,8 @@ public class Editor extends Activity
         {
             // Get the mime type
             String type = FileUtils.getMimeType(file);
-            // If the type is unknown or not text/plain
-            if (type == null || !type.equals(TEXT_PLAIN))
+            // If the type is not text/plain
+            if (!TEXT_PLAIN.equals(type))
             {
                 // Get the start and end of the selection
                 int start = textView.getSelectionStart();
@@ -2086,8 +2115,7 @@ public class Editor extends Activity
 
                 // Get a pattern and a matcher for delimiter
                 // characters
-                Pattern pattern = Pattern.compile(PATTERN_CHARS);
-                Matcher matcher = pattern.matcher(text);
+                Matcher matcher = PATTERN_CHARS.matcher(text);
 
                 // Find the first match after the end of the selection
                 if (matcher.find(end))
