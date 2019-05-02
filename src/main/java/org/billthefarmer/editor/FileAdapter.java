@@ -57,6 +57,7 @@ public class FileAdapter extends BaseAdapter
     private int imageId;
     private int videoId;
     private int folderId;
+    private int parentId;
     private int externalId;
     private int applicationId;
 
@@ -72,6 +73,10 @@ public class FileAdapter extends BaseAdapter
         if (typedArray.hasValue(R.styleable.Editor_folder))
             folderId =
                 typedArray.getResourceId(R.styleable.Editor_folder, 0);
+
+        if (typedArray.hasValue(R.styleable.Editor_parent))
+            parentId =
+                typedArray.getResourceId(R.styleable.Editor_parent, 0);
 
         if (typedArray.hasValue(R.styleable.Editor_file))
             fileId =
@@ -143,9 +148,12 @@ public class FileAdapter extends BaseAdapter
 
             if (file.isDirectory())
             {
-                if (file.getPath()
-                    .equals(Environment
-                            .getExternalStorageDirectory().getPath()))
+                if (position == 0)
+                    name.setCompoundDrawablesWithIntrinsicBounds(parentId,
+                                                                 0, 0, 0);
+                else if (file.getPath()
+                         .equals(Environment
+                                 .getExternalStorageDirectory().getPath()))
                     name.setCompoundDrawablesWithIntrinsicBounds(externalId,
                                                                  0, 0, 0);
                 else

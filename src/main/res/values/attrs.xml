@@ -8,6 +8,7 @@
     <attr name="application" format="reference" />
     <attr name="external" format="reference" />
     <attr name="folder" format="reference" />
+    <attr name="parent" format="reference" />
     <attr name="audio" format="reference" />
     <attr name="image" format="reference" />
     <attr name="video" format="reference" />

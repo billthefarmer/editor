@@ -44,6 +44,7 @@
     <item name="audio">@drawable/ic_action_volume_on</item>
     <item name="image">@drawable/ic_action_picture</item>
     <item name="video">@drawable/ic_action_video</item>
+    <item name="parent">@drawable/ic_action_undo</item>
 
   </style>
 
@@ -60,6 +61,7 @@
     <item name="folder">@drawable/ic_action_collection_dark</item>
     <item name="audio">@drawable/ic_action_volume_on_dark</item>
     <item name="image">@drawable/ic_action_picture_dark</item>
+    <item name="parent">@drawable/ic_action_undo_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
 
   </style>
@@ -77,6 +79,7 @@
     <item name="folder">@drawable/ic_action_collection_dark</item>
     <item name="audio">@drawable/ic_action_volume_on_dark</item>
     <item name="image">@drawable/ic_action_picture_dark</item>
+    <item name="parent">@drawable/ic_action_undo_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
 
     <item name="BackgroundColour">@color/colorRetroBackground</item>
