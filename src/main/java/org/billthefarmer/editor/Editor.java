@@ -1801,7 +1801,8 @@ public class Editor extends Activity
 
         line = textView.getLayout().getLineForVertical(top + height);
         int end = textView.getLayout().getLineEnd(line);
-        int last = textView.getLayout().getLineStart(line - 1);
+        int last = (line == 0)? end:
+            textView.getLayout().getLineStart(line - 1);
 
         // Move selection if outside range
         if (textView.getSelectionStart() < start)

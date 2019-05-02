@@ -137,7 +137,7 @@ public class FileAdapter extends BaseAdapter
 
         if (name != null)
         {
-            if (file.getPath().equals(ROOT))
+            if (file.getParentFile() == null)
                 name.setText(ROOT);
 
             else
@@ -148,12 +148,11 @@ public class FileAdapter extends BaseAdapter
 
             if (file.isDirectory())
             {
-                if (position == 0)
+                if (false)
                     name.setCompoundDrawablesWithIntrinsicBounds(parentId,
                                                                  0, 0, 0);
-                else if (file.getPath()
-                         .equals(Environment
-                                 .getExternalStorageDirectory().getPath()))
+
+                else if (file.equals(Environment.getExternalStorageDirectory()))
                     name.setCompoundDrawablesWithIntrinsicBounds(externalId,
                                                                  0, 0, 0);
                 else
