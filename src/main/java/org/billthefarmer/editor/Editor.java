@@ -1482,8 +1482,13 @@ public class Editor extends Activity
             // Create a list with just the parent folder and the
             // external storage folder
             list = new ArrayList<File>();
-            if (dir.getParentFile() != null)
+
+            if (dir.getParentFile() == null)
+                list.add(dir);
+
+            else
                 list.add(dir.getParentFile());
+
             list.add(Environment.getExternalStorageDirectory());
             return list;
         }
@@ -1502,8 +1507,12 @@ public class Editor extends Activity
         }
 
         // Add parent folder
-        if (dir.getParentFile() != null)
+        if (dir.getParentFile() == null)
+            list.add(0, dir);
+
+        else
             list.add(0, dir.getParentFile());
+
         return list;
     }
 

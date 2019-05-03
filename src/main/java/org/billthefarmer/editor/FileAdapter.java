@@ -148,7 +148,7 @@ public class FileAdapter extends BaseAdapter
 
             if (file.isDirectory())
             {
-                if (false)
+                if (position == 0)
                     name.setCompoundDrawablesWithIntrinsicBounds(parentId,
                                                                  0, 0, 0);
 
