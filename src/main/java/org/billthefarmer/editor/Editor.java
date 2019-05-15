@@ -547,7 +547,7 @@ public class Editor extends Activity
                 textView.setSelection(offset);
 
                 // Set editable with or without suggestions
-                if (!suggest)
+                if (suggest)
                     textView
                     .setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE);
@@ -960,7 +960,7 @@ public class Editor extends Activity
         textView.setSelection(offset);
 
         // Set editable with or without suggestions
-        if (!suggest)
+        if (suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         else
