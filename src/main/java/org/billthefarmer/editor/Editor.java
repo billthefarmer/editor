@@ -76,15 +76,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -297,6 +300,9 @@ public class Editor extends Activity
     public final static Pattern SH_COMMENT = Pattern.compile
         ("#.*$", Pattern.MULTILINE);
 
+    public final static Pattern DATE_PATTERN = Pattern.compile
+        ("\\{\\{<(.+)>\\}\\}");
+
     private final static double KEYBOARD_RATIO = 0.25;
 
     private final static int BUFFER_SIZE = 1024;
@@ -336,6 +342,7 @@ public class Editor extends Activity
     private EditText textView;
     private MenuItem searchItem;
     private ScrollView scrollView;
+    private Runnable dateCheck;
     private Runnable updateHighlight;
 
     private Map<String, Integer> pathMap;
@@ -486,6 +493,13 @@ public class Editor extends Activity
                 {
                     changed = true;
                     invalidateOptionsMenu();
+
+                    if (dateCheck != null)
+                    {
+                        textView.removeCallbacks(dateCheck);
+                        textView.postDelayed(dateCheck, UPDATE_DELAY);
+                    }
+
                     if (updateHighlight != null)
                     {
                         textView.removeCallbacks(updateHighlight);
@@ -2103,6 +2117,24 @@ public class Editor extends Activity
         }
     }
 
+    // checkDate
+    void checkDate(Editable editable)
+    {
+        Matcher matcher = DATE_PATTERN.matcher(editable);
+        while (matcher.find())
+        {
+            try
+            {
+                DateFormat format = new
+                    SimpleDateFormat(matcher.group(1), Locale.getDefault());
+                String date = format.format(new Date());
+                editable.replace(matcher.start(), matcher.end(), date);
+            }
+
+            catch (Exception e) {}
+        }
+    }
+
     // onActionModeStarted
     @Override
     public void onActionModeStarted(ActionMode mode)
@@ -2334,7 +2366,10 @@ public class Editor extends Activity
 
             // Check highlighting
             checkHighlight();
-                    
+
+            // Check date
+            dateCheck = () -> checkDate(textView.getEditableText());
+
             // Set read only
             textView.setRawInputType(InputType.TYPE_NULL);
             textView.clearFocus();
