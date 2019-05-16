@@ -281,7 +281,7 @@ public class Editor extends Activity
         ("#\\b[A-Fa-f0-9]+\\b", Pattern.MULTILINE);
 
     public final static Pattern MD_HEADER = Pattern.compile
-        ("(^.+\\R-+$)|(^.+\\R=+$)|(^#+ +.+$)", Pattern.MULTILINE);
+        ("(^.+\\s+-+$)|(^.+\\s+=+$)|(^#+ +.+$)", Pattern.MULTILINE);
 
     public final static Pattern MD_LINK = Pattern.compile
         ("(\\!?\\[.+\\] *\\(.+\\))|(!?\\[.+\\] *\\[.+\\])|" +
