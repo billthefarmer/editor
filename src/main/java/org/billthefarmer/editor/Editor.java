@@ -2288,9 +2288,10 @@ public class Editor extends Activity
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            try (BufferedReader reader = new BufferedReader
-                 (new InputStreamReader
-                  (getContentResolver().openInputStream(uris[0]))))
+            try (InputStream inputStream = getContentResolver()
+                 .openInputStream(uris[0]);
+                 BufferedReader reader = new BufferedReader
+                 (new InputStreamReader(inputStream)))
             {
                 String line;
                 while ((line = reader.readLine()) != null)
