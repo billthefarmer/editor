@@ -1204,22 +1204,27 @@ public class Editor extends Activity
         String text = textView.getText().toString();
         String html = mark.markdown(text);
 
-        try
-        {
-            File file = new File(getCacheDir(), HTML_FILE);
-            file.deleteOnExit();
+        File file = new File(getCacheDir(), HTML_FILE);
+        file.deleteOnExit();
 
-            FileWriter writer = new FileWriter(file);
+        try (FileWriter writer = new FileWriter(file))
+        {
             // Add HTML header and footer to make a valid page.
             writer.write(HTML_HEAD);
             writer.write(html);
             writer.write(HTML_TAIL);
-            writer.close();
+        }
 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
             // Get file provider uri
-            Uri uri = FileProvider
-                .getUriForFile(this, "org.billthefarmer.editor.fileprovider",
-                               file);
+            Uri uri = FileProvider.getUriForFile
+                (this, "org.billthefarmer.editor.fileprovider", file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, TEXT_HTML);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -1709,10 +1714,9 @@ public class Editor extends Activity
     private void saveFile(Uri uri)
     {
         CharSequence text = textView.getText();
-        try
+        try (OutputStream outputStream =
+             getContentResolver().openOutputStream(uri))
         {
-            OutputStream outputStream =
-                getContentResolver().openOutputStream(uri);
             write(text, outputStream);
         }
 
@@ -1720,17 +1724,18 @@ public class Editor extends Activity
         {
             e.printStackTrace();
         }
+
+        changed = false;
+        invalidateOptionsMenu();
     }
 
     // write
     private void write(CharSequence text, File file)
     {
         file.getParentFile().mkdirs();
-        try
+        try (FileWriter fileWriter = new FileWriter(file))
         {
-            FileWriter fileWriter = new FileWriter(file);
             fileWriter.append(text);
-            fileWriter.close();
         }
 
         catch (Exception e)
@@ -1742,13 +1747,9 @@ public class Editor extends Activity
     // write
     private void write(CharSequence text, OutputStream os)
     {
-        try
+        try (OutputStreamWriter writer = new OutputStreamWriter(os))
         {
-            OutputStreamWriter writer = new OutputStreamWriter(os);
             writer.append(text);
-            writer.close();
-            changed = false;
-            invalidateOptionsMenu();
         }
 
         catch (Exception e)
@@ -2317,24 +2318,22 @@ public class Editor extends Activity
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            try
+            try (BufferedReader reader = new BufferedReader
+                 (new InputStreamReader
+                  (getContentResolver().openInputStream(uris[0]))))
             {
-                InputStream inputStream =
-                    getContentResolver().openInputStream(uris[0]);
-                BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(inputStream));
-
                 String line;
                 while ((line = reader.readLine()) != null)
                 {
                     stringBuilder.append(line);
                     stringBuilder.append(System.getProperty("line.separator"));
                 }
-
-                reader.close();
             }
 
-            catch (Exception e) {}
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
 
             return stringBuilder;
         }
