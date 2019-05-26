@@ -1633,6 +1633,7 @@ public class Editor extends Activity
 
         changed = false;
         modified = file.lastModified();
+        savePath(path);
         invalidateOptionsMenu();
     }
 
@@ -1695,6 +1696,7 @@ public class Editor extends Activity
         changed = false;
 
         modified = file.lastModified();
+        savePath(file.getPath());
         invalidateOptionsMenu();
     }
 
