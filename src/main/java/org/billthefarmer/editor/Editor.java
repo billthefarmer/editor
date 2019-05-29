@@ -1048,6 +1048,20 @@ public class Editor extends Activity
         builder.show();
     }
 
+    // alertDialog
+    private void alertDialog(int title, String message, int neutralButton)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+
+        // Add the buttons
+        builder.setNeutralButton(neutralButton, null);
+
+        // Create the AlertDialog
+        builder.show();
+    }
+
     // savePath
     private void savePath(String path)
     {
@@ -1678,6 +1692,7 @@ public class Editor extends Activity
                 break;
             }
         });
+
         else
         {
             if (content == null)
@@ -1693,11 +1708,6 @@ public class Editor extends Activity
     {
         CharSequence text = textView.getText();
         write(text, file);
-        changed = false;
-
-        modified = file.lastModified();
-        savePath(file.getPath());
-        invalidateOptionsMenu();
     }
 
     // saveFile
@@ -1712,11 +1722,10 @@ public class Editor extends Activity
 
         catch (Exception e)
         {
+            alertDialog(R.string.appName, e.getMessage(), R.string.ok);
             e.printStackTrace();
+            return;
         }
-
-        changed = false;
-        invalidateOptionsMenu();
     }
 
     // write
@@ -1730,8 +1739,15 @@ public class Editor extends Activity
 
         catch (Exception e)
         {
+            alertDialog(R.string.appName, e.getMessage(), R.string.ok);
             e.printStackTrace();
+            return;
         }
+
+        changed = false;
+        invalidateOptionsMenu();
+        modified = file.lastModified();
+        savePath(file.getPath());
     }
 
     // write
@@ -1744,8 +1760,13 @@ public class Editor extends Activity
 
         catch (Exception e)
         {
+            alertDialog(R.string.appName, e.getMessage(), R.string.ok);
             e.printStackTrace();
+            return;
         }
+
+        changed = false;
+        invalidateOptionsMenu();
     }
 
     // checkHighlight
