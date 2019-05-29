@@ -2326,6 +2326,9 @@ public class Editor extends Activity
 
             catch (Exception e)
             {
+                textView.post(() ->
+                              alertDialog(R.string.appName, e.getMessage(),
+                                          R.string.ok));
                 e.printStackTrace();
             }
 
