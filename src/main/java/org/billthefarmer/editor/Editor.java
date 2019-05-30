@@ -22,7 +22,6 @@
 package org.billthefarmer.editor;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -75,6 +74,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1642,7 +1642,7 @@ public class Editor extends Activity
 
         textView.setText(R.string.loading);
 
-        ReadTask read = new ReadTask();
+        ReadTask read = new ReadTask(this);
         read.execute(uri);
 
         changed = false;
@@ -2200,6 +2200,47 @@ public class Editor extends Activity
         }
     }
 
+    // loadText
+    private void loadText(CharSequence text)
+    {
+        if (textView != null)
+            textView.setText(text);
+
+        if (toAppend != null)
+        {
+            textView.append(toAppend);
+            toAppend = null;
+            changed = true;
+        }
+
+        else
+            changed = false;
+
+        // Check for saved position
+        if (pathMap.containsKey(path))
+            textView.postDelayed(() ->
+                                 scrollView.smoothScrollTo
+                                 (0, pathMap.get(path)),
+                                 POSITION_DELAY);
+        else
+            textView.postDelayed(() ->
+                                 scrollView.smoothScrollTo(0, 0),
+                                 POSITION_DELAY);
+
+        // Check highlighting
+        checkHighlight();
+
+        // Set read only
+        textView.setRawInputType(InputType.TYPE_NULL);
+        textView.clearFocus();
+
+        // Update boolean
+        edit = false;
+
+        // Update menu
+        invalidateOptionsMenu();
+    }
+
     // QueryTextListener
     private class QueryTextListener
         implements SearchView.OnQueryTextListener
@@ -2301,17 +2342,26 @@ public class Editor extends Activity
     }
 
     // ReadTask
-    @SuppressLint("StaticFieldLeak")
-    private class ReadTask
+    private static class ReadTask
         extends AsyncTask<Uri, Void, CharSequence>
     {
+        private WeakReference<Editor> editorWeakReference;
+
+        public ReadTask(Editor editor)
+        {
+            editorWeakReference = new WeakReference<>(editor);
+        }
+
         // doInBackground
         @Override
         protected CharSequence doInBackground(Uri... uris)
         {
             StringBuilder stringBuilder = new StringBuilder();
+            final Editor editor = editorWeakReference.get();
+            if (editor == null)
+                return stringBuilder;
 
-            try (InputStream inputStream = getContentResolver()
+            try (InputStream inputStream = editor.getContentResolver()
                  .openInputStream(uris[0]);
                  BufferedReader reader = new BufferedReader
                  (new InputStreamReader(inputStream)))
@@ -2326,9 +2376,10 @@ public class Editor extends Activity
 
             catch (Exception e)
             {
-                textView.post(() ->
-                              alertDialog(R.string.appName, e.getMessage(),
-                                          R.string.ok));
+                editor.textView.post(() ->
+                                     editor.alertDialog(R.string.appName,
+                                                        e.getMessage(),
+                                                        R.string.ok));
                 e.printStackTrace();
             }
 
@@ -2339,39 +2390,11 @@ public class Editor extends Activity
         @Override
         protected void onPostExecute(CharSequence result)
         {
-            if (textView != null)
-                textView.setText(result);
+            final Editor editor = editorWeakReference.get();
+            if (editor == null)
+                return;
 
-            if (toAppend != null)
-            {
-                textView.append(toAppend);
-                toAppend = null;
-                changed = true;
-            }
-            else
-                changed = false;
-
-            // Check for saved position
-            if (pathMap.containsKey(path))
-                textView.postDelayed(() ->
-                    scrollView.smoothScrollTo(0, pathMap.get(path)),
-                                     POSITION_DELAY);
-            else
-                textView.postDelayed(() ->
-                    scrollView.smoothScrollTo(0, 0), POSITION_DELAY);
-
-            // Check highlighting
-            checkHighlight();
-
-            // Set read only
-            textView.setRawInputType(InputType.TYPE_NULL);
-            textView.clearFocus();
-
-            // Update boolean
-            edit = false;
-
-            // Update menu
-            invalidateOptionsMenu();
+            editor.loadText(result);
         }
     }
 }
