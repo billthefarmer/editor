@@ -2216,16 +2216,10 @@ public class Editor extends Activity
         {
             boolean change = false;
 
-            for (int i = 0; i <= matcher.groupCount(); i++)
-                Log.d(TAG, "Match " + i + ": " + matcher.group(i));
-
             matcher.region(matcher.start(1), matcher.end(1));
             matcher.usePattern(OPTION_PATTERN);
             while (matcher.find())
             {
-                for (int i = 0; i <= matcher.groupCount(); i++)
-                    Log.d(TAG, "Match " + i + ": " + matcher.group(i));
-
                 boolean no = "no".equals(matcher.group(2));
 
                 if ("ww".equals(matcher.group(3)))
