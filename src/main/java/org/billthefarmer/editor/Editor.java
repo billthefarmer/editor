@@ -2225,22 +2225,28 @@ public class Editor extends Activity
                 if ("ww".equals(matcher.group(3)))
                 {
                     if (wrap == no)
+                    {
+                        wrap = !no;
                         change = true;
-                    wrap = !no;
+                    }
                 }
 
                 else if ("sg".equals(matcher.group(3)))
                 {
                     if (suggest == no)
+                    {
+                        suggest = !no;
                         change = true;
-                    suggest = !no;
+                    }
                 }
 
                 else if ("hs".equals(matcher.group(3)))
                 {
                     if (highlight == no)
+                    {
+                        highlight = !no;
                         change = true;
-                    highlight = !no;
+                    }
                 }
 
                 else if ("th".equals(matcher.group(3)))
@@ -2248,22 +2254,28 @@ public class Editor extends Activity
                     if (":l".equals(matcher.group(4)))
                     {
                         if (theme != LIGHT)
+                        {
+                            theme = LIGHT;
                             change = true;
-                        theme = LIGHT;
+                        }
                     }
 
                     else if (":d".equals(matcher.group(4)))
                     {
                         if (theme != DARK)
+                        {
+                            theme = DARK;
                             change = true;
-                        theme = DARK;
+                        }
                     }
 
                     else if (":r".equals(matcher.group(4)))
                     {
                         if (theme != RETRO)
+                        {
+                            theme = RETRO;
                             change = true;
-                        theme = RETRO;
+                        }
                     }
                 }
 
@@ -2272,22 +2284,28 @@ public class Editor extends Activity
                     if (":l".equals(matcher.group(4)))
                     {
                         if (size != LARGE)
+                        {
+                            size = LARGE;
                             change = true;
-                        size = LARGE;
+                        }
                     }
 
                     else if (":m".equals(matcher.group(4)))
                     {
                         if (size != MEDIUM)
+                        {
+                            size = MEDIUM;
                             change = true;
-                        size = MEDIUM;
+                        }
                     }
 
                     else if (":s".equals(matcher.group(4)))
                     {
                         if (size != SMALL)
+                        {
+                            size = SMALL;
                             change = true;
-                        size = SMALL;
+                        }
                     }
                 }
 
@@ -2296,15 +2314,19 @@ public class Editor extends Activity
                     if (":m".equals(matcher.group(4)))
                     {
                         if (type != MONO)
+                        {
+                            type = MONO;
                             change = true;
-                        type = type;
+                        }
                     }
 
                     else if (":p".equals(matcher.group(4)))
                     {
                         if (type != NORMAL)
+                        {
+                            type = NORMAL;
                             change = true;
-                        type = NORMAL;
+                        }
                     }
                 }
             }
