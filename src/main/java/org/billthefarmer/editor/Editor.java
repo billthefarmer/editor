@@ -298,8 +298,14 @@ public class Editor extends Activity
     public final static Pattern SH_COMMENT = Pattern.compile
         ("#.*$", Pattern.MULTILINE);
 
+    public final static Pattern MODE_PATTERN = Pattern.compile
+        ("^\\S+\\s+ed:(.+)$", Pattern.MULTILINE);
+    public final static Pattern OPTION_PATTERN = Pattern.compile
+        ("(\\s+(no)?(ww|sg|hs|th|ts|tf)(:\\w)?)", Pattern.MULTILINE);
+
     private final static double KEYBOARD_RATIO = 0.25;
 
+    private final static int FIRST_SIZE = 256;
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
     private final static int UPDATE_DELAY = 100;
@@ -2200,6 +2206,120 @@ public class Editor extends Activity
         }
     }
 
+    // checkMode
+    private void checkMode(CharSequence text)
+    {
+        CharSequence first =
+            text.subSequence(0, Math.min(text.length(), FIRST_SIZE));
+        Matcher matcher = MODE_PATTERN.matcher(first);
+        if (matcher.find())
+        {
+            boolean change = false;
+
+            for (int i = 0; i <= matcher.groupCount(); i++)
+                Log.d(TAG, "Match " + i + ": " + matcher.group(i));
+
+            matcher.region(matcher.start(1), matcher.end(1));
+            matcher.usePattern(OPTION_PATTERN);
+            while (matcher.find())
+            {
+                for (int i = 0; i <= matcher.groupCount(); i++)
+                    Log.d(TAG, "Match " + i + ": " + matcher.group(i));
+
+                boolean no = "no".equals(matcher.group(2));
+
+                if ("ww".equals(matcher.group(3)))
+                {
+                    if (wrap == no)
+                        change = true;
+                    wrap = !no;
+                }
+
+                else if ("sg".equals(matcher.group(3)))
+                {
+                    if (suggest == no)
+                        change = true;
+                    suggest = !no;
+                }
+
+                else if ("hs".equals(matcher.group(3)))
+                {
+                    if (highlight == no)
+                        change = true;
+                    highlight = !no;
+                }
+
+                else if ("th".equals(matcher.group(3)))
+                {
+                    if (":l".equals(matcher.group(4)))
+                    {
+                        if (theme != LIGHT)
+                            change = true;
+                        theme = LIGHT;
+                    }
+
+                    else if (":d".equals(matcher.group(4)))
+                    {
+                        if (theme != DARK)
+                            change = true;
+                        theme = DARK;
+                    }
+
+                    else if (":r".equals(matcher.group(4)))
+                    {
+                        if (theme != RETRO)
+                            change = true;
+                        theme = RETRO;
+                    }
+                }
+
+                else if ("ts".equals(matcher.group(3)))
+                {
+                    if (":l".equals(matcher.group(4)))
+                    {
+                        if (size != LARGE)
+                            change = true;
+                        size = LARGE;
+                    }
+
+                    else if (":m".equals(matcher.group(4)))
+                    {
+                        if (size != MEDIUM)
+                            change = true;
+                        size = MEDIUM;
+                    }
+
+                    else if (":s".equals(matcher.group(4)))
+                    {
+                        if (size != SMALL)
+                            change = true;
+                        size = SMALL;
+                    }
+                }
+
+                else if ("tf".equals(matcher.group(3)))
+                {
+                    if (":m".equals(matcher.group(4)))
+                    {
+                        if (type != MONO)
+                            change = true;
+                        type = type;
+                    }
+
+                    else if (":p".equals(matcher.group(4)))
+                    {
+                        if (type != NORMAL)
+                            change = true;
+                        type = NORMAL;
+                    }
+                }
+            }
+
+            if (change && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+                recreate();
+        }
+    }
+
     // loadText
     private void loadText(CharSequence text)
     {
@@ -2233,6 +2353,9 @@ public class Editor extends Activity
         // Set read only
         textView.setRawInputType(InputType.TYPE_NULL);
         textView.clearFocus();
+
+        // Check mode
+        checkMode(text);
 
         // Update boolean
         edit = false;

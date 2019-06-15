@@ -89,6 +89,14 @@ Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file,
 the keywords, classes comments, strings, etc will be highlighted. See
 [Syntax Highlighting](Syntax.md).
 
+### Mode line
+If a line of text is found within the first two or three lines of the
+file which matches the mode line pattern, the mode of the editor will
+be changed after the file is loaded. See [Mode line](Mode.md).
+```
+# ed: [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
+```
+
 ### Extended selection
 If the file being edited is not a plain text file, selections created
 by double tapping or long touching on the text will be extended to
