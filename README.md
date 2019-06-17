@@ -90,9 +90,10 @@ the keywords, classes comments, strings, etc will be highlighted. See
 [Syntax Highlighting](Syntax.md).
 
 ### Mode line
-If a line of text is found within the first two or three lines of the
-file which matches the mode line pattern, the mode of the editor will
-be changed after the file is loaded. See [Mode line](Mode.md).
+If a line of text is found within the first or last two or three lines
+of the file which matches the mode line pattern, the mode of the
+editor will be changed after the file is loaded. See [Mode
+line](Mode.md).
 ```
 # ed: [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
 ```

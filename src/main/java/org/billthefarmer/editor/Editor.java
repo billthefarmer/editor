@@ -305,6 +305,7 @@ public class Editor extends Activity
 
     private final static double KEYBOARD_RATIO = 0.25;
 
+    private final static int LAST_SIZE = 256;
     private final static int FIRST_SIZE = 256;
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 100;
@@ -2209,131 +2210,138 @@ public class Editor extends Activity
     // checkMode
     private void checkMode(CharSequence text)
     {
-        CharSequence first =
-            text.subSequence(0, Math.min(text.length(), FIRST_SIZE));
-        Matcher matcher = MODE_PATTERN.matcher(first);
-        if (matcher.find())
+        boolean change = false;
+
+        CharSequence first = text.subSequence
+            (0, Math.min(text.length(), FIRST_SIZE));
+        CharSequence last = text.subSequence
+            (Math.max(0, text.length() - LAST_SIZE), text.length());
+        for (CharSequence sequence: new CharSequence[]{first, last})
         {
-            boolean change = false;
-
-            matcher.region(matcher.start(1), matcher.end(1));
-            matcher.usePattern(OPTION_PATTERN);
-            while (matcher.find())
+            Matcher matcher = MODE_PATTERN.matcher(sequence);
+            if (matcher.find())
             {
-                boolean no = "no".equals(matcher.group(2));
-
-                if ("ww".equals(matcher.group(3)))
+                matcher.region(matcher.start(1), matcher.end(1));
+                matcher.usePattern(OPTION_PATTERN);
+                while (matcher.find())
                 {
-                    if (wrap == no)
-                    {
-                        wrap = !no;
-                        change = true;
-                    }
-                }
+                    boolean no = "no".equals(matcher.group(2));
 
-                else if ("sg".equals(matcher.group(3)))
-                {
-                    if (suggest == no)
+                    if ("ww".equals(matcher.group(3)))
                     {
-                        suggest = !no;
-                        change = true;
-                    }
-                }
-
-                else if ("hs".equals(matcher.group(3)))
-                {
-                    if (highlight == no)
-                    {
-                        highlight = !no;
-                        change = true;
-                    }
-                }
-
-                else if ("th".equals(matcher.group(3)))
-                {
-                    if (":l".equals(matcher.group(4)))
-                    {
-                        if (theme != LIGHT)
+                        if (wrap == no)
                         {
-                            theme = LIGHT;
+                            wrap = !no;
                             change = true;
                         }
                     }
 
-                    else if (":d".equals(matcher.group(4)))
+                    else if ("sg".equals(matcher.group(3)))
                     {
-                        if (theme != DARK)
+                        if (suggest == no)
                         {
-                            theme = DARK;
+                            suggest = !no;
                             change = true;
                         }
                     }
 
-                    else if (":r".equals(matcher.group(4)))
+                    else if ("hs".equals(matcher.group(3)))
                     {
-                        if (theme != RETRO)
+                        if (highlight == no)
                         {
-                            theme = RETRO;
-                            change = true;
-                        }
-                    }
-                }
-
-                else if ("ts".equals(matcher.group(3)))
-                {
-                    if (":l".equals(matcher.group(4)))
-                    {
-                        if (size != LARGE)
-                        {
-                            size = LARGE;
-                            change = true;
+                            highlight = !no;
+                            checkHighlight();
                         }
                     }
 
-                    else if (":m".equals(matcher.group(4)))
+                    else if ("th".equals(matcher.group(3)))
                     {
-                        if (size != MEDIUM)
+                        if (":l".equals(matcher.group(4)))
                         {
-                            size = MEDIUM;
-                            change = true;
+                            if (theme != LIGHT)
+                            {
+                                theme = LIGHT;
+                                change = true;
+                            }
+                        }
+
+                        else if (":d".equals(matcher.group(4)))
+                        {
+                            if (theme != DARK)
+                            {
+                                theme = DARK;
+                                change = true;
+                            }
+                        }
+
+                        else if (":r".equals(matcher.group(4)))
+                        {
+                            if (theme != RETRO)
+                            {
+                                theme = RETRO;
+                                change = true;
+                            }
                         }
                     }
 
-                    else if (":s".equals(matcher.group(4)))
+                    else if ("ts".equals(matcher.group(3)))
                     {
-                        if (size != SMALL)
+                        if (":l".equals(matcher.group(4)))
                         {
-                            size = SMALL;
-                            change = true;
+                            if (size != LARGE)
+                            {
+                                size = LARGE;
+                                textView.setTextSize(size);
+                            }
+                        }
+
+                        else if (":m".equals(matcher.group(4)))
+                        {
+                            if (size != MEDIUM)
+                            {
+                                size = MEDIUM;
+                                textView.setTextSize(size);
+                            }
+                        }
+
+                        else if (":s".equals(matcher.group(4)))
+                        {
+                            if (size != SMALL)
+                            {
+                                size = SMALL;
+                                textView.setTextSize(size);
+                            }
                         }
                     }
-                }
 
-                else if ("tf".equals(matcher.group(3)))
-                {
-                    if (":m".equals(matcher.group(4)))
+                    else if ("tf".equals(matcher.group(3)))
                     {
-                        if (type != MONO)
+                        if (":m".equals(matcher.group(4)))
                         {
-                            type = MONO;
-                            change = true;
+                            if (type != MONO)
+                            {
+                                type = MONO;
+                                textView.setTypeface
+                                    (Typeface.MONOSPACE, Typeface.NORMAL);
+                            }
                         }
-                    }
 
-                    else if (":p".equals(matcher.group(4)))
-                    {
-                        if (type != NORMAL)
+                        else if (":p".equals(matcher.group(4)))
                         {
-                            type = NORMAL;
-                            change = true;
+                            if (type != NORMAL)
+                            {
+                                type = NORMAL;
+                                textView.setTypeface
+                                    (Typeface.DEFAULT, Typeface.NORMAL);
+                            }
                         }
                     }
                 }
             }
-
-            if (change && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-                recreate();
         }
+
+        if (change && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+            recreate();
     }
 
     // loadText

@@ -1,17 +1,18 @@
 # Mode line
 
-If a line of text is found within the first two or three lines of the
-file which matches the mode line pattern, the mode of the editor will
-be changed after the file is loaded. The pattern is one or more non
-white space characters, one or more white space characters, the text
-`ed:` followed by one or more option patterns separated by white space.
+If a line of text is found within the first or last two or three lines
+of the file which matches the mode line pattern, the mode of the
+editor will be changed after the file is loaded. The pattern is one or
+more text or punctuation characters, white space, the text `ed:`
+followed by one or more option patterns separated by white space.
 
 ```
 # ed: [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
 ```
 
-The initial non white space characters are intended to be used to hide
-the mode line from compilers and interpreters by commenting it out.
+The initial text or punctuation characters are intended to be used to
+hide the mode line from compilers and interpreters by commenting it
+out.
 
 The option patterns are:
 
