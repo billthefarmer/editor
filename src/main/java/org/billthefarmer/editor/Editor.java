@@ -343,6 +343,7 @@ public class Editor extends Activity
     private String toAppend;
     private EditText textView;
     private MenuItem searchItem;
+    private SearchView searchView;
     private ScrollView scrollView;
     private Runnable updateHighlight;
 
@@ -488,6 +489,8 @@ public class Editor extends Activity
         {
             textView.addTextChangedListener(new TextWatcher()
             {
+                CharSequence query = null;
+
                 // afterTextChanged
                 @Override
                 public void afterTextChanged(Editable s)
@@ -507,14 +510,36 @@ public class Editor extends Activity
                 public void beforeTextChanged(CharSequence s,
                                               int start,
                                               int count,
-                                              int after) {}
+                                              int after)
+                {
+                    if (searchItem != null &&
+                        searchItem.isActionViewExpanded())
+                    {
+                        query = searchView.getQuery();
+
+                        if (BuildConfig.DEBUG)
+                            Log.d(TAG, "Query " + query);
+
+                        textView.postDelayed(() ->
+                        {
+                            if (searchItem != null &&
+                                searchItem.isActionViewExpanded())
+                            {
+                                if (query != null)
+                                    searchView.setQuery(query, false);
+                            }
+                        }, UPDATE_DELAY);
+                    }
+                }
 
                 // onTextChanged
                 @Override
                 public void onTextChanged(CharSequence s,
                                           int start,
                                           int before,
-                                          int count) {}
+                                          int count)
+                {
+                }
             });
 
             // onFocusChange
@@ -740,7 +765,7 @@ public class Editor extends Activity
         inflater.inflate(R.menu.main, menu);
 
         searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView = (SearchView) searchItem.getActionView();
 
         if (searchView != null)
         {
