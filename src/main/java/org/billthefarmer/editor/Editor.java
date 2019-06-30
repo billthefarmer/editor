@@ -517,9 +517,6 @@ public class Editor extends Activity
                     {
                         query = searchView.getQuery();
 
-                        if (BuildConfig.DEBUG)
-                            Log.d(TAG, "Query " + query);
-
                         textView.postDelayed(() ->
                         {
                             if (searchItem != null &&
