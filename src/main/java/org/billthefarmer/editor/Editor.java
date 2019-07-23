@@ -335,6 +335,7 @@ public class Editor extends Activity
     private final static int CSS_SYNTAX  = 3;
     private final static int MD_SYNTAX   = 4;
     private final static int SH_SYNTAX   = 5;
+    private final static int DEF_SYNTAX  = 6;
 
     private File file;
     private String path;
@@ -1810,6 +1811,8 @@ public class Editor extends Activity
             String ext = FileUtils.getExtension(file.getName());
             if (ext != null)
             {
+                String type = FileUtils.getMimeType(file);
+
                 if (ext.matches(CC_EXT))
                     syntax = CC_SYNTAX;
 
@@ -1824,6 +1827,9 @@ public class Editor extends Activity
 
                 else if (ext.matches(SH_EXT))
                     syntax = SH_SYNTAX;
+
+                else if (!TEXT_PLAIN.equals(type))
+                    syntax = DEF_SYNTAX;
 
                 else
                     syntax = NO_SYNTAX;
@@ -2002,7 +2008,6 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-
             matcher.region(start, end).usePattern(QUOTED);
             while (matcher.find())
             {
@@ -2145,6 +2150,75 @@ public class Editor extends Activity
             }
 
             matcher.region(start, end).usePattern(SH_COMMENT);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
+
+        case DEF_SYNTAX:
+            matcher = KEYWORDS.matcher(editable);
+            matcher.region(start, end);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(TYPES);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(CLASS);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.BLUE);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(NUMBER);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.YELLOW);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(CONSTANT);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.LTGRAY);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(QUOTED);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
