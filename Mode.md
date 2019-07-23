@@ -20,7 +20,7 @@ The option patterns are:
  * **[no]sg** &ndash; Suggestions
  * **[no]hs** &ndash; Syntax highlighting
  * **th:l|d|r** &ndash; Theme &ndash; light, dark or retro
- * **ts:l|m|s** &ndash; TextSize &ndash; large, medium or small
+ * **ts:l|m|s** &ndash; Text size &ndash; large, medium or small
  * **tf:m|p** &ndash; Typeface &ndash; monospace or proportional
 
 The mode line is read after the file is loaded and will change
