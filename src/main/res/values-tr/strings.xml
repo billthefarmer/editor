@@ -38,18 +38,7 @@
   <string name="version" formatted="false">Düzenleyici <a href="https://github.com/billthefarmer/editor/releases/latest" >%s sürümü</a>\n
  %s  tarihinde oluşturuldu\n
  Telif Hakkı \\00A9 2017 Bill Farmer\n
- Fransızca çeviri <a href="https://github.com/milouse" >Étienne Deparis tarafından</a>\n
- Almanca çeviri <a href="https://github.com/Markus00000" >Markus   Weimar tarafından</a>\n
- Italyanc çeviri <a href="https://github.com/airon90" >Michael Moroni tarafından</a>\n
- Lehçe çeviri <a href="https://github.com/evo16" >Evo tarafından</a>\n
- Yunanca çeviri <a href="https://github.com/nikoss" >nikoss tarafından</a>\n
- Basitleştirilmiş Çince çevirisi <a href="https://github.com/ludoux" >Lu Chang   (ludoux) tarafından</a>\n
- Hollandaca çeviri <a href="https://github.com/Vistaus" >Heimen Stoffels   (vistaus) tarafından</a>\n
- Rusça çeviri <a href="https://github.com/bboa" >Igor Nedoboy tarafından</a>\n
- Letonca çeviri <a href="https://github.com/rhssk" >Rihards Skuja tarafından</a>\n
- İzlandaca çeviri <a href="" >Sveinn í Felli tarafından</a>\n
- Portekizce çevirisi <a href="https://github.com/Andre-Gloria" >André Glória tarafından</a>\n
- Çince (Taiwan)   çevirisi <a href="https://github.com/cges30901" >cges30901 tarafından</a>\nTürkçe çevirisi <a href="https://github.com/yasarciv67" >Yaşar Çiv tarafından</a>
+ Türkçe çevirisi <a href="https://github.com/yasarciv67" >Yaşar Çiv tarafından</a>
  Licence   <a href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
 
   <string name="choose">Bir dosya adı seçin</string>
