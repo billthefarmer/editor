@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Düzenleyici</string>
+
+  <string name="search">Ara...</string>
+  <string name="edit">Düzenle</string>
+  <string name="view">Görünüm</string>
+  <string name="open">Dosya aç...</string>
+  <string name="save">Kaydet</string>
+  <string name="openRecent">Son kullanılanı aç</string>
+  <string name="saveAs">Farklı kaydet...</string>
+  <string name="viewMarkdown">Markdown görünümü...</string>
+  <string name="autoSave">Otomatik kaydet</string>
+  <string name="wrap">Sözcük kaydırma</string>
+  <string name="suggest">Öneriler</string>
+  <string name="highlight">Sözdizimini vurgula</string>
+  <string name="theme">Tema</string>
+  <string name="light">Açık</string>
+  <string name="dark">Koyu</string>
+  <string name="retro">Geriye git</string>
+  <string name="size">Metin boyutu</string>
+  <string name="small">Küçük</string>
+  <string name="medium">Orta</string>
+  <string name="large">Büyük</string>
+  <string name="typeface">Harf karakteri</string>
+  <string name="mono">Eş aralıklı</string>
+  <string name="normal">Orantılı</string>
+  <string name="about">Hakkında</string>
+
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+
+  <string name="version" formatted="false">Düzenleyici <a href="https://github.com/billthefarmer/editor/releases/latest" >%s sürümü</a>\n
+ %s  tarihinde oluşturuldu\n
+ Telif Hakkı \\00A9 2017 Bill Farmer\n
+ Türkçe çevirisi <a href="https://github.com/yasarciv67" >Yaşar Çiv tarafından</a>
+ Licence   <a href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
+
+  <string name="choose">Bir dosya adı seçin</string>
+  <string name="loading">Yükleniyor...</string>
+
+  <string name="modified">Kaydedilmemiş değişiklikleriniz mevcut.  Değişikliklerinizi kaydetmek ister misiniz?</string>
+
+  <string name="changedReload">Bu dosya değişti, yeniden yüklemek ister misiniz?</string>
+
+  <string name="changedOverwrite">Bu dosya değişti, üzerine yazmak istiyor musunuz?</string>
+
+  <string name="ok">Tamam</string>
+  <string name="reload">Yeniden yükle</string>
+  <string name="overwrite">Üzerine yaz</string>
+  <string name="discard">Artık</string>
+  <string name="cancel">İptal et</string>
+
+</resources>

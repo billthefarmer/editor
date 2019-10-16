@@ -37,6 +37,12 @@ recognised.
 ### Markdown
 Markdown headers, links, emphasis and code will be highlighted.
 
+### Default
+Files with unrecognised extensions which are not plain text files
+will be highlighted with default highlighting, similar to C type
+highlighting. Comments will not be highlighted as there is little
+consistency with comment delimiters outside C type languages.
+
 ## Limitations
 Because scanning and highlighting a large file can be quite slow,
 making the app unresponsive, only the text currently in view is
