@@ -74,8 +74,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -2619,7 +2621,7 @@ public class Editor extends Activity
 
             catch (Exception e)
             {
-                editor.textView.post(() ->
+                editor.runOnUiThread(() ->
                                      editor.alertDialog(R.string.appName,
                                                         e.getMessage(),
                                                         R.string.ok));
