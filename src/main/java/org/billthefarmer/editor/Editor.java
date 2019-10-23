@@ -129,6 +129,8 @@ public class Editor extends Activity
         "<meta name=\"viewport\" content=\"width=device-width, " +
         "initial-scale=1.0\">\n</head>\n<body>\n";
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
+    public final static String FILE_PROVIDER =
+        "org.billthefarmer.editor.fileprovider";
 
     public final static String CC_EXT =
         "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|swift)";
@@ -343,7 +345,7 @@ public class Editor extends Activity
     private String path;
     private Uri content;
     private Uri readUri;
-    private String toAppend;
+    private String append;
     private EditText textView;
     private MenuItem searchItem;
     private SearchView searchView;
@@ -1050,7 +1052,7 @@ public class Editor extends Activity
         if (file.exists())
         {
             readFile(uri);
-            toAppend = text;
+            append = text;
         }
 
         else
@@ -1227,7 +1229,7 @@ public class Editor extends Activity
 
         // Create the AlertDialog
         AlertDialog dialog = builder.create();
-        dialog.setView(text, 30, 0, 30, 0);
+        dialog.setView(text, 40, 0, 40, 0);
         dialog.show();
     }
 
@@ -1258,7 +1260,7 @@ public class Editor extends Activity
         {
             // Get file provider uri
             Uri uri = FileProvider.getUriForFile
-                (this, "org.billthefarmer.editor.fileprovider", file);
+                (this, FILE_PROVIDER, file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, TEXT_HTML);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -2448,10 +2450,10 @@ public class Editor extends Activity
         if (textView != null)
             textView.setText(text);
 
-        if (toAppend != null)
+        if (append != null)
         {
-            textView.append(toAppend);
-            toAppend = null;
+            textView.append(append);
+            append = null;
             changed = true;
         }
 
