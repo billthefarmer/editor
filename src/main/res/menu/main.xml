@@ -44,6 +44,12 @@
       android:showAsAction="never"
       android:title="@string/viewMarkdown" />
   <item
+      android:id="@+id/viewFile"
+      android:checkable="true"
+      android:checked="true"
+      android:showAsAction="never"
+      android:title="@string/viewFile" />
+  <item
       android:id="@+id/autoSave"
       android:checkable="true"
       android:showAsAction="never"

@@ -105,6 +105,7 @@ public class Editor extends Activity
     public final static String PREF_HIGHLIGHT = "pref_highlight";
     public final static String PREF_PATHS = "pref_paths";
     public final static String PREF_SAVE = "pref_save";
+    public final static String PREF_VIEW = "pref_view";
     public final static String PREF_SIZE = "pref_size";
     public final static String PREF_SUGGEST = "pref_suggest";
     public final static String PREF_THEME = "pref_theme";
@@ -358,7 +359,8 @@ public class Editor extends Activity
     private boolean highlight = false;
 
     private boolean save = false;
-    private boolean edit = true;
+    private boolean edit = false;
+    private boolean view = false;
 
     private boolean wrap = false;
     private boolean suggest = true;
@@ -384,6 +386,7 @@ public class Editor extends Activity
             PreferenceManager.getDefaultSharedPreferences(this);
 
         save = preferences.getBoolean(PREF_SAVE, false);
+        view = preferences.getBoolean(PREF_VIEW, true);
         wrap = preferences.getBoolean(PREF_WRAP, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
         highlight = preferences.getBoolean(PREF_HIGHLIGHT, false);
@@ -790,6 +793,7 @@ public class Editor extends Activity
         menu.findItem(R.id.open).setVisible(isApp);
         menu.findItem(R.id.openRecent).setVisible(isApp);
 
+        menu.findItem(R.id.viewFile).setChecked(view);
         menu.findItem(R.id.autoSave).setChecked(save);
         menu.findItem(R.id.wrap).setChecked(wrap);
         menu.findItem(R.id.suggest).setChecked(suggest);
@@ -900,6 +904,9 @@ public class Editor extends Activity
             break;
         case R.id.viewMarkdown:
             viewMarkdown();
+            break;
+        case R.id.viewFile:
+            viewFileClicked(item);
             break;
         case R.id.autoSave:
             autoSaveClicked(item);
@@ -1271,6 +1278,13 @@ public class Editor extends Activity
         {
             e.printStackTrace();
         }
+    }
+
+    // viewFileClicked
+    private void viewFileClicked(MenuItem item)
+    {
+        view = !view;
+        item.setChecked(view);
     }
 
     // autoSaveClicked
@@ -2475,14 +2489,42 @@ public class Editor extends Activity
         checkHighlight();
 
         // Set read only
-        textView.setRawInputType(InputType.TYPE_NULL);
+        if (view)
+        {
+            textView.setRawInputType(InputType.TYPE_NULL);
+
+            // Update boolean
+            edit = false;
+        }
+
+        else
+        {
+            // Set editable with or without suggestions
+            if (suggest)
+                textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                      InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            else
+                textView.setInputType(InputType.TYPE_CLASS_TEXT |
+                                      InputType.TYPE_TEXT_FLAG_MULTI_LINE |
+                                      InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+            // Change typeface temporarily as workaround for yet another
+            // obscure feature of some versions of android
+            textView.setTypeface((type == NORMAL)?
+                                 Typeface.MONOSPACE:
+                                 Typeface.DEFAULT, Typeface.NORMAL);
+            textView.setTypeface((type == NORMAL)?
+                                 Typeface.DEFAULT:
+                                 Typeface.MONOSPACE, Typeface.NORMAL);
+            // Update boolean
+            edit = true;
+        }
+
+        // Dismiss keyboard
         textView.clearFocus();
 
         // Check mode
         checkMode(text);
-
-        // Update boolean
-        edit = false;
 
         // Update menu
         invalidateOptionsMenu();
