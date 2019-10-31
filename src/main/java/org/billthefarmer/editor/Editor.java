@@ -306,7 +306,7 @@ public class Editor extends Activity
     public final static Pattern MODE_PATTERN = Pattern.compile
         ("^\\S+\\s+ed:(.+)$", Pattern.MULTILINE);
     public final static Pattern OPTION_PATTERN = Pattern.compile
-        ("(\\s+(no)?(ww|sg|hs|th|ts|tf)(:\\w)?)", Pattern.MULTILINE);
+        ("(\\s+(no)?(vw|ww|sg|hs|th|ts|tf)(:\\w)?)", Pattern.MULTILINE);
 
     private final static double KEYBOARD_RATIO = 0.25;
 
@@ -724,6 +724,7 @@ public class Editor extends Activity
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putBoolean(PREF_SAVE, save);
+        editor.putBoolean(PREF_VIEW, view);
         editor.putBoolean(PREF_WRAP, wrap);
         editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putBoolean(PREF_HIGHLIGHT, highlight);
@@ -2341,6 +2342,15 @@ public class Editor extends Activity
                 {
                     boolean no = "no".equals(matcher.group(2));
 
+                    if ("vw".equals(matcher.group(3)))
+                    {
+                        if (view == no)
+                        {
+                            view = !no;
+                            change = true;
+                        }
+                    }
+
                     if ("ww".equals(matcher.group(3)))
                     {
                         if (wrap == no)
@@ -2484,6 +2494,8 @@ public class Editor extends Activity
             textView.postDelayed(() ->
                                  scrollView.smoothScrollTo(0, 0),
                                  POSITION_DELAY);
+        // Check mode
+        checkMode(text);
 
         // Check highlighting
         checkHighlight();

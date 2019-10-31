@@ -7,7 +7,7 @@ more text or punctuation characters, white space, the text `ed:`
 followed by one or more option patterns separated by white space.
 
 ```
-# ed: [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
 ```
 
 The initial text or punctuation characters are intended to be used to
@@ -16,6 +16,7 @@ out.
 
 The option patterns are:
 
+ * **[no]vw** &ndash; View files read only
  * **[no]ww** &ndash; Word wrap
  * **[no]sg** &ndash; Suggestions
  * **[no]hs** &ndash; Syntax highlighting
