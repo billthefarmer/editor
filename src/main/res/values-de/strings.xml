@@ -11,6 +11,7 @@
   <string name="openRecent">Zuletzt geöffnet</string>
   <string name="saveAs">Speichern unter…</string>
   <string name="viewMarkdown">Abschlag markdown…</string>
+  <string name="viewFile">Dateien anzeigen</string>
   <string name="autoSave">Automatisch speichern</string>
   <string name="wrap">Zeilenumbruch</string>
   <string name="suggest">Vorschläge</string>

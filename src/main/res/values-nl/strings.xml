@@ -11,6 +11,7 @@
   <string name="openRecent">Recent bestand openen</string>
   <string name="saveAs">Opslaan als…</string>
   <string name="viewMarkdown">Markdown tonen…</string>
+  <string name="viewFile">Bekijk bestanden</string>
   <string name="autoSave">Automatisch opslaan</string>
   <string name="wrap">Tekstomloop</string>
   <string name="suggest">Suggesties</string>
