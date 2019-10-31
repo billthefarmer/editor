@@ -29,6 +29,7 @@ And on the menu:
 * **Save as** - Save the current file with a new name
 * **Search** - Interactive search of text using a regular expression
 * **View markdown** - View markdown in browser or html viewer
+* **View files** - Open files read only for viewing
 * **Auto save** - Save the current file on app pause
 * **Word wrap** - Limit text width to screen width and word wrap
 * **Suggestions** - Text input and spelling suggestions
