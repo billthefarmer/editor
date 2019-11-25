@@ -2535,9 +2535,6 @@ public class Editor extends Activity
         // Dismiss keyboard
         textView.clearFocus();
 
-        // Check mode
-        checkMode(text);
-
         // Update menu
         invalidateOptionsMenu();
     }
