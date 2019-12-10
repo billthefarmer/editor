@@ -39,7 +39,7 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ContentDescription'
-        abortOnError false
+        // abortOnError false
     }
 }
 

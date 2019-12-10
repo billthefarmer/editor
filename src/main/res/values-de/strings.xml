@@ -9,6 +9,7 @@
   <string name="open">Datei öffnen…</string>
   <string name="save">Speichern</string>
   <string name="openRecent">Zuletzt geöffnet</string>
+  <string name="clearList">Liste leeren</string>
   <string name="saveAs">Speichern unter…</string>
   <string name="viewMarkdown">Abschlag markdown…</string>
   <string name="viewFile">Dateien anzeigen</string>

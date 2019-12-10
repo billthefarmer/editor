@@ -9,6 +9,7 @@
   <string name="open">Otwórz plik…</string>
   <string name="save">Zapisz</string>
   <string name="openRecent">Otwórz poprzedni</string>
+  <string name="clearList">Czysta lista</string>
   <string name="saveAs">Zapisz jako…</string>
   <string name="viewMarkdown">Wyświetl markdown…</string>
   <string name="viewFile">Pokaż pliki</string>

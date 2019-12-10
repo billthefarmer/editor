@@ -9,6 +9,7 @@
   <string name="open">開啟檔案…</string>
   <string name="save">儲存</string>
   <string name="openRecent">最近開啟</string>
+  <string name="clearList">清晰的列表</string>
   <string name="saveAs">儲存為…</string>
   <string name="viewMarkdown">檢視 markdown…</string>
   <string name="viewFile">查看文件</string>

@@ -9,7 +9,8 @@
   <string name="open">Opna skrá…</string>
   <string name="save">Vista</string>
   <string name="openRecent">Opna nýlegt</string>
-  <string name="saveAs">Save as…</string>
+  <string name="clearList">Hreinsa lista</string>
+  <string name="saveAs">Vista sem…</string>
   <string name="viewMarkdown">Skoða markdown-kóða…</string>
   <string name="viewFile">Skoða skrár</string>
   <string name="autoSave">Sjálfvirk vistun</string>

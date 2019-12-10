@@ -9,6 +9,7 @@
   <string name="open">Bestand openen…</string>
   <string name="save">Opslaan</string>
   <string name="openRecent">Recent bestand openen</string>
+  <string name="clearList">Duidelijke lijst</string>
   <string name="saveAs">Opslaan als…</string>
   <string name="viewMarkdown">Markdown tonen…</string>
   <string name="viewFile">Bekijk bestanden</string>
