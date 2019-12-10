@@ -876,6 +876,9 @@ public class Editor extends Activity
             sub.add(name);
         }
 
+        // Add clear list item
+        sub.add(Menu.NONE, R.id.clearList, Menu.NONE, R.string.clearList);
+
         return true;
     }
 
@@ -902,6 +905,9 @@ public class Editor extends Activity
             break;
         case R.id.saveAs:
             saveAs();
+            break;
+        case R.id.clearList:
+            clearList();
             break;
         case R.id.viewMarkdown:
             viewMarkdown();
@@ -1239,6 +1245,13 @@ public class Editor extends Activity
         AlertDialog dialog = builder.create();
         dialog.setView(text, 40, 0, 40, 0);
         dialog.show();
+    }
+
+    // clearList
+    private void clearList()
+    {
+        pathMap.clear();
+        removeList.clear();
     }
 
     // viewMarkdown

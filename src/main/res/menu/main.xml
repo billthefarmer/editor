@@ -28,6 +28,11 @@
       android:showAsAction="never"
       android:title="@string/openRecent">
     <menu>
+      <item
+          android:id="@+id/clearList"
+          android:showAsAction="never"
+          android:title="@string/clearList">
+      </item>
     </menu>
   </item>
   <item
