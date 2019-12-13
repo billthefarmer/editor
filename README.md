@@ -26,6 +26,7 @@ There are four toolbar items which may appear:
 
 And on the menu:
 * **Open recent** - Pop up a list of recent files
+  * **Clear list** - Clear list of recent files
 * **Save as** - Save the current file with a new name
 * **Search** - Interactive search of text using a regular expression
 * **View markdown** - View markdown in browser or html viewer
@@ -64,7 +65,8 @@ Chooser](Chooser.md). The file will initially be read-only. Touch the
 
 ### Open recent
 Choose a file from the list that pops up. As above the file will
-initially be read only.
+initially be read only. The last entry, **Clear list**, will clear the
+list.
 
 ### Save as
 Enter a new file name in the dialog that pops up. Absolute names
