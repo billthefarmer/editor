@@ -1250,8 +1250,10 @@ public class Editor extends Activity
     // clearList
     private void clearList()
     {
+        for (String path : pathMap.keySet())
+            removeList.add(path);
+
         pathMap.clear();
-        removeList.clear();
     }
 
     // viewMarkdown
