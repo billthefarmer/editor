@@ -19,34 +19,35 @@ initially be opened read only, long touch on the display or touch the
 edit item in the toolbar to enable editing.
 
 There are four toolbar items which may appear:
-* **Edit** - Edit the current read only file
-* **View** - View the current file read only
-* **Save** - Save the current file if modified
-* **Open** - Open a text file using a chooser
+* **Edit** &ndash; Edit the current read only file
+* **View** &ndash; View the current file read only
+* **Save** &ndash; Save the current file if modified
+* **Open** &ndash; Open a text file using a chooser
 
 And on the menu:
-* **Open recent** - Pop up a list of recent files
-  * **Clear list** - Clear list of recent files
-* **Save as** - Save the current file with a new name
-* **Search** - Interactive search of text using a regular expression
-* **View markdown** - View markdown in browser or html viewer
-* **View files** - Open files read only for viewing
-* **Auto save** - Save the current file on app pause
-* **Word wrap** - Limit text width to screen width and word wrap
-* **Suggestions** - Text input and spelling suggestions
-* **Highlight syntax** - Highlight programming language syntax
-* **Theme** - Choose theme
+* **Open recent** &ndash; Pop up a list of recent files
+  * **Clear list** &ndash; Clear list of recent files
+* **Save as** &ndash; Save the current file with a new name
+* **Search** &ndash; Interactive search of text using a regular
+    expression
+* **View markdown** &ndash; View markdown in browser or html viewer
+* **View files** &ndash; Open files read only for viewing
+* **Auto save** &ndash; Save the current file on app pause
+* **Word wrap** &ndash; Limit text width to screen width and word wrap
+* **Suggestions** &ndash; Text input and spelling suggestions
+* **Highlight syntax** &ndash; Highlight programming language syntax
+* **Theme** &ndash; Choose theme
   * **Light**
   * **Dark**
   * **Retro**
-* **Text size** - Choose text size
+* **Text size** &ndash; Choose text size
   * **Small**
   * **Medium**
   * **Large**
-* **Typeface** - Choose typeface
+* **Typeface** &ndash; Choose typeface
   * **Monospace**
   * **Proportional**
-* **About** - Show version, copyright and licence
+* **About** &ndash; Show version, copyright and licence
 
 ### Edit
 Edit the current read only text.
