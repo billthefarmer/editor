@@ -892,7 +892,7 @@ public class Editor extends Activity
         case android.R.id.home:
             onBackPressed();
             break;
-        case R.id.fresh:
+        case R.id.neu:
             freshFile();
             break;
         case R.id.edit:
@@ -1056,7 +1056,7 @@ public class Editor extends Activity
     {
         // Check if file changed
         if (changed)
-            alertDialog(R.string.fresh, R.string.modified,
+            alertDialog(R.string.neu, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
             switch (id)
