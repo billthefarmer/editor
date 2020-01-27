@@ -115,6 +115,7 @@ public class Editor extends Activity
     public final static String DOCUMENTS = "Documents";
     public final static String FOLDER = "Folder:  ";
 
+    public final static String NEW_FILE = "Untitled.txt";
     public final static String EDIT_FILE = "Editor.txt";
     public final static String HTML_FILE = "Editor.html";
 
@@ -891,6 +892,9 @@ public class Editor extends Activity
         case android.R.id.home:
             onBackPressed();
             break;
+        case R.id.fresh:
+            freshFile();
+            break;
         case R.id.edit:
             editClicked(item);
             break;
@@ -1045,6 +1049,56 @@ public class Editor extends Activity
 
         // Update menu
         invalidateOptionsMenu();
+    }
+
+    // freshFile
+    private void freshFile()
+    {
+        // Check if file changed
+        if (changed)
+            alertDialog(R.string.fresh, R.string.modified,
+                        R.string.save, R.string.discard, (dialog, id) ->
+        {
+            switch (id)
+            {
+            case DialogInterface.BUTTON_POSITIVE:
+                saveFile();
+                newFile();
+                break;
+
+            case DialogInterface.BUTTON_NEGATIVE:
+                newFile();
+                break;
+            }
+
+            invalidateOptionsMenu();
+        });
+
+        else
+            newFile();
+
+        invalidateOptionsMenu();
+    }
+
+    // newFile
+    private void newFile()
+    {
+        textView.setText("");
+        changed = false;
+
+        file = getNewFile();
+        Uri uri = Uri.fromFile(file);
+        path = uri.getPath();
+
+        setTitle(uri.getLastPathSegment());
+    }
+
+    // getNewFile
+    private File getNewFile()
+    {
+        File documents = new
+            File(Environment.getExternalStorageDirectory(), DOCUMENTS);
+        return new File(documents, NEW_FILE);
     }
 
     // getDefaultFile

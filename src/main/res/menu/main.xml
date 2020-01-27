@@ -19,6 +19,11 @@
       android:showAsAction="ifRoom"
       android:title="@string/save" />
   <item
+      android:id="@+id/fresh"
+      android:icon="@drawable/ic_action_new_dark"
+      android:showAsAction="ifRoom"
+      android:title="@string/fresh" />
+  <item
       android:id="@+id/open"
       android:icon="@drawable/ic_action_collection_dark"
       android:showAsAction="ifRoom"
