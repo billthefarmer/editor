@@ -18,10 +18,11 @@ you have installed that can show or edit a text file. Files will
 initially be opened read only, long touch on the display or touch the
 edit item in the toolbar to enable editing.
 
-There are four toolbar items which may appear:
+There are five toolbar items which may appear:
 * **Edit** &ndash; Edit the current read only file
 * **View** &ndash; View the current file read only
 * **Save** &ndash; Save the current file if modified
+* **New** &ndash; Start a new empty file
 * **Open** &ndash; Open a text file using a chooser
 
 And on the menu:
@@ -57,6 +58,9 @@ View the current file read only.
 
 ### Save
 Save the current file if modified.
+
+### New
+Start a new empty file. Use the **Save as** item to save the new file.
 
 ### Open
 Choose a file to open from the chooser dialog that pops up. The parent
@@ -108,7 +112,7 @@ by double tapping or long touching on the text will be extended to
 enclosing delimiters (brackets, quotes) on the same text line.
 
 ### Unsaved file
-If you touch the back or open button, and the current file has been
+If you touch the new, back or open button, and the current file has been
 modified, you will be prompted whether you want to save it, else the
 editor will just exit or open a file chooser. The current file may be
 saved on app pause using the menu option. The scroll position and name
