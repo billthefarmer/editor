@@ -314,8 +314,8 @@ public class Editor extends Activity
     private final static int LAST_SIZE = 256;
     private final static int FIRST_SIZE = 256;
     private final static int BUFFER_SIZE = 1024;
-    private final static int POSITION_DELAY = 100;
-    private final static int UPDATE_DELAY = 100;
+    private final static int POSITION_DELAY = 128;
+    private final static int UPDATE_DELAY = 128;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -504,8 +504,11 @@ public class Editor extends Activity
                 @Override
                 public void afterTextChanged(Editable s)
                 {
-                    changed = true;
-                    invalidateOptionsMenu();
+                    if (!changed)
+                    {
+                        changed = true;
+                        invalidateOptionsMenu();
+                    }
 
                     if (updateHighlight != null)
                     {
@@ -543,9 +546,7 @@ public class Editor extends Activity
                 public void onTextChanged(CharSequence s,
                                           int start,
                                           int before,
-                                          int count)
-                {
-                }
+                                          int count) {}
             });
 
             // onFocusChange
@@ -964,7 +965,7 @@ public class Editor extends Activity
         }
 
         // Close text search
-        if (searchItem.isActionViewExpanded())
+        if (searchItem != null && searchItem.isActionViewExpanded())
             searchItem.collapseActionView();
 
         return true;

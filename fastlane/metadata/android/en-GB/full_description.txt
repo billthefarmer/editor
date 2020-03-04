@@ -1,17 +1,21 @@
-This is a very simple generic text editor which may be used standalone
-or to show or edit any sort of text file from another app. If you
-select a text file in a file manager or similar app you will be
-offered the option of using this editor along with whatever other apps
-you have installed that can show or edit a text file. Files will
-initially be opened read only, long touch on the display or touch the
-edit item in the toolbar to enable editing.
+<p>
+  This is a very simple generic text editor which may be used
+  standalone or to show or edit any sort of text file from another
+  app. If you select a text file in a file manager or similar app you
+  will be offered the option of using this editor along with whatever
+  other apps you have installed that can show or edit a text
+  file. Files will initially be opened read only, long touch on the
+  display or touch the edit item in the toolbar to enable editing.
+</p>
 
-* Regular expression text search
-* View markdown in browser or html viewer
-* Optional auto save
-* Optional word wrap
-* Optional suggestions
-* Optional syntax highlighting
-* Light/Dark/Retro themes
-* Small/Medium/Large text size
-* Monospace/Proportional typefaces
+<ul>
+  <li>Regular expression text search</li>
+  <li>View markdown in browser or html viewer</li>
+  <li>Optional auto save</li>
+  <li>Optional word wrap</li>
+  <li>Optional suggestions</li>
+  <li>Optional syntax highlighting</li>
+  <li>Light/Dark/Retro themes</li>
+  <li>Small/Medium/Large text size</li>
+  <li>Monospace/Proportional typefaces</li>
+</ul>
