@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Editor</title>
+    <link>https://billthefarmer.github.io/editor/tags/</link>
+    <description>Recent content in Tags on Editor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>Copyright &amp;copy; 2020 Bill Farmer</copyright>
+    
+	<atom:link href="https://billthefarmer.github.io/editor/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

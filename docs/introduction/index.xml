@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Introduction on Editor</title>
+    <link>https://billthefarmer.github.io/editor/introduction/</link>
+    <description>Recent content in Introduction on Editor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>Copyright &amp;copy; 2020 Bill Farmer</copyright>
+    <lastBuildDate>Wed, 04 Mar 2020 15:38:25 +0000</lastBuildDate>
+    
+	<atom:link href="https://billthefarmer.github.io/editor/introduction/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Features</title>
+      <link>https://billthefarmer.github.io/editor/introduction/features/</link>
+      <pubDate>Wed, 04 Mar 2020 15:40:25 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/introduction/features/</guid>
+      <description> File chooser Default file View markdown in browser or html viewer Regular expression text search Optional syntax highlighting Open recent files from menu Optionally view files Optional auto save Optional Word wrap Light/Dark/Retro themes Small/Medium/Large font size Monospace/Proportional font faces  </description>
+    </item>
+    
+  </channel>
+</rss>

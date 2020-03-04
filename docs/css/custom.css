@@ -1,0 +1,20 @@
+table, th, td {
+    border: none;
+}
+
+td {
+    vertical-align: top;
+    padding: 0;
+}
+
+section.page h1,
+section.page h3 {
+    border: none;
+    padding: 0;
+}
+
+section.page h3 a,
+section.page h3 a:hover,
+section.page h3 a:visited {
+  text-decoration: none;
+}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Using on Editor</title>
+    <link>https://billthefarmer.github.io/editor/using/</link>
+    <description>Recent content in Using on Editor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>Copyright &amp;copy; 2020 Bill Farmer</copyright>
+    <lastBuildDate>Wed, 04 Mar 2020 16:05:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://billthefarmer.github.io/editor/using/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Toolbar</title>
+      <link>https://billthefarmer.github.io/editor/using/toolbar/</link>
+      <pubDate>Wed, 04 Mar 2020 16:06:10 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/toolbar/</guid>
+      <description>There are five toolbar items which may appear:
+ Edit – Edit the current read only file View – View the current file read only Save – Save the current file if modified New – Start a new empty file Open – Open a text file using a chooser  And on the menu:
+ Open recent – Pop up a list of recent files  Clear list – Clear list of recent files   Save as – Save the current file with a new name Search – Interactive search of text using a regular expression View markdown – View markdown in browser or html viewer View files – Open files read only for viewing Auto save – Save the current file on app pause Word wrap – Limit text width to screen width and word wrap Suggestions – Text input and spelling suggestions Highlight syntax – Highlight programming language syntax Theme – Choose theme  Light Dark Retro   Text size – Choose text size  Small Medium Large   Typeface – Choose typeface  Monospace Proportional   About – Show version, copyright and licence  </description>
+    </item>
+    
+    <item>
+      <title>Open</title>
+      <link>https://billthefarmer.github.io/editor/using/open/</link>
+      <pubDate>Wed, 04 Mar 2020 19:32:49 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/open/</guid>
+      <description>Choose a file to open from the chooser dialog that pops up. The parent folder will be the first in the list. The file will initially be read-only. Touch the Edit toolbar item to enable editing.
+The chooser shows a list of files with icons. Files which appear to be media files, or are too large will be disabled and not selectable. Touch a folder to change folder, or a file to open a file.</description>
+    </item>
+    
+    <item>
+      <title>Open Recent</title>
+      <link>https://billthefarmer.github.io/editor/using/open-recent/</link>
+      <pubDate>Wed, 04 Mar 2020 19:32:37 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/open-recent/</guid>
+      <description>Choose a file from the list that pops up. As above the file will initially be read only. The last entry, Clear list, will clear the list.</description>
+    </item>
+    
+    <item>
+      <title>Save As</title>
+      <link>https://billthefarmer.github.io/editor/using/save-as/</link>
+      <pubDate>Wed, 04 Mar 2020 19:33:09 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/save-as/</guid>
+      <description>Enter a new file name in the dialog that pops up. Absolute names starting with a slash &amp;lsquo;/&amp;rsquo; will be saved in that exact path. Names without a starting slash will be saved relative to the main public folder, /sdcard/, or /storage/emulated/0/.</description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>https://billthefarmer.github.io/editor/using/search/</link>
+      <pubDate>Wed, 04 Mar 2020 19:38:08 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/search/</guid>
+      <description>Enter search text in the field that pops up in the toolbar. The first matching item will be highlighted. Use the search button in the keyboard for find next. The exact regular expression syntax used is in the android documentation for Pattern.</description>
+    </item>
+    
+    <item>
+      <title>View Markdown</title>
+      <link>https://billthefarmer.github.io/editor/using/view-markdown/</link>
+      <pubDate>Wed, 04 Mar 2020 19:40:02 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/view-markdown/</guid>
+      <description>You will be prompted to choose a viewer for an html file containing the encoded markdown from the current open file. If the text contains no markdown the result will be the same text.</description>
+    </item>
+    
+    <item>
+      <title>Highlight Syntax</title>
+      <link>https://billthefarmer.github.io/editor/using/highlight-syntax/</link>
+      <pubDate>Wed, 04 Mar 2020 19:41:14 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/highlight-syntax/</guid>
+      <description>If the current open file is a C, C++, Objective C, Go, Java, Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file, the keywords, classes comments, strings, etc will be highlighted.
+Selection The type of highlighting is selected by file extension. Files with .c, .cc, .c++, .cxx, .m, .h, .go, .js, .java, .py, .sh, .swift extensions will be highlighted with &amp;lsquo;C&amp;rsquo; style highlighting. Files with .htm, .html extensions will be highlighted as HTML.</description>
+    </item>
+    
+    <item>
+      <title>Mode Line</title>
+      <link>https://billthefarmer.github.io/editor/using/mode-line/</link>
+      <pubDate>Wed, 04 Mar 2020 17:41:40 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/mode-line/</guid>
+      <description>If a line of text is found within the first or last two or three lines of the file which matches the mode line pattern, the mode of the editor will be changed after the file is loaded. The pattern is one or more text or punctuation characters, white space, the text ed: followed by one or more option patterns separated by white space.
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]  The initial text or punctuation characters are intended to be used to hide the mode line from compilers and interpreters by commenting it out.</description>
+    </item>
+    
+    <item>
+      <title>Extended Selection</title>
+      <link>https://billthefarmer.github.io/editor/using/extended-selection/</link>
+      <pubDate>Wed, 04 Mar 2020 17:42:02 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/extended-selection/</guid>
+      <description>If the file being edited is not a plain text file, selections created by double tapping or long touching on the text will be extended to enclosing delimiters (brackets, quotes) on the same text line.</description>
+    </item>
+    
+    <item>
+      <title>Unsaved File</title>
+      <link>https://billthefarmer.github.io/editor/using/unsaved-file/</link>
+      <pubDate>Wed, 04 Mar 2020 17:42:32 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/unsaved-file/</guid>
+      <description>If you touch the new, back or open button, and the current file has been modified, you will be prompted whether you want to save it, else the editor will just exit or open a file chooser. The current file may be saved on app pause using the menu option. The scroll position and name will be remembered for the last 10 files opened.</description>
+    </item>
+    
+    <item>
+      <title>Changed File</title>
+      <link>https://billthefarmer.github.io/editor/using/changed-file/</link>
+      <pubDate>Wed, 04 Mar 2020 17:42:49 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/changed-file/</guid>
+      <description>If a file has changed in storage while it was open in the editor, if you attempt to save it, or the app is resumed, you will be prompted whether to overwrite or reload the file.</description>
+    </item>
+    
+    <item>
+      <title>Default File</title>
+      <link>https://billthefarmer.github.io/editor/using/default-file/</link>
+      <pubDate>Wed, 04 Mar 2020 17:43:09 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/default-file/</guid>
+      <description>If there is no open file any text entered will by default be saved in Documents/Editor.txt. This file will be loaded on start if it exists. Use the Save as menu item to save it elsewhere.</description>
+    </item>
+    
+    <item>
+      <title>Shared File</title>
+      <link>https://billthefarmer.github.io/editor/using/shared-file/</link>
+      <pubDate>Wed, 04 Mar 2020 17:43:39 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/shared-file/</guid>
+      <description>Text files opened or shared by another app may be viewed and edited. Some apps may share files or text using a content URI that is not resolvable to a path to a file in storage. In that case the editor will read the file into the default file. The default file in storage will not be overwritten unless the file is saved. Use the Save as menu item to save the file elsewhere.</description>
+    </item>
+    
+  </channel>
+</rss>

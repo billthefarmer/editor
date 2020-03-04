@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <meta name="generator" content="Hugo 0.66.0" />
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Editor</title>
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://billthefarmer.github.io/editor/css/styles.css">
+  <link rel="stylesheet" href="https://billthefarmer.github.io/editor/css/custom.css">
+  <link href="/editor/index.xml" rel="alternate" type="application/rss+xml" title="Editor" />
+
+</head>
+<body>
+
+<div class="sidebar sidebar-cyan">
+  <div class="navigation">
+    <div>
+  <a href="https://github.com/billthefarmer/editor">
+    <img src="images/icon.png" style="max-width: 20%" />
+  </a>
+  <a href="https://f-droid.org/packages/org.billthefarmer.editor">
+    <img src="https://f-droid.org/wiki/images/c/ca/F-Droid-button_available-on_smaller.png" />
+  </a>
+  <a href="https://github.com/billthefarmer/editor/releases">
+    <img src="https://img.shields.io/github/v/release/billthefarmer/editor.svg?logo=github" />
+  </a>
+</div>
+
+    <h1 class="site-title"><a href="https://billthefarmer.github.io/editor/">Editor</a></h1>
+
+
+    <nav class="internal">
+      <ul>
+    
+        
+            
+    <li>
+        <a href="#introduction">Introduction</a>
+        <ul>
+            
+                
+                    <li><a href="#features">Features</a></li>
+                
+            
+        </ul>
+    </li>
+
+
+
+        
+            
+    <li>
+        <a href="#using">Using</a>
+        <ul>
+            
+                
+                    <li><a href="#toolbar">Toolbar</a></li>
+                
+                    <li><a href="#open">Open</a></li>
+                
+                    <li><a href="#open-recent">Open Recent</a></li>
+                
+                    <li><a href="#save-as">Save As</a></li>
+                
+                    <li><a href="#search">Search</a></li>
+                
+                    <li><a href="#view-markdown">View Markdown</a></li>
+                
+                    <li><a href="#highlight-syntax">Highlight Syntax</a></li>
+                
+                    <li><a href="#mode-line">Mode Line</a></li>
+                
+                    <li><a href="#extended-selection">Extended Selection</a></li>
+                
+                    <li><a href="#unsaved-file">Unsaved File</a></li>
+                
+                    <li><a href="#changed-file">Changed File</a></li>
+                
+                    <li><a href="#default-file">Default File</a></li>
+                
+                    <li><a href="#shared-file">Shared File</a></li>
+                
+            
+        </ul>
+    </li>
+
+
+
+        
+    
+</ul>
+
+    </nav>
+
+    <nav class="external">
+      <div class="external-title"></div>
+      
+    </nav>
+  </div>
+
+  <div class="version">
+    <p>
+  Copyright &copy; 2020 Bill Farmer
+</p>
+
+  </div>
+</div>
+
+<div class="content">
+    
+        
+            
+    <section class="page" id="introduction">
+    
+    <h1>
+        <a href="#introduction">Introduction</a>
+    </h1>
+    
+    <div class="content">
+        <p>Android simple generic text editor.</p>
+<p><img src="images/Editor.png" alt="Editor"> <img src="images/Editor-chooser.png" alt="Chooser"></p>
+<p>This is a very simple generic text editor which may be used standalone
+or to show or edit any sort of text file from another app. If you
+select a text file in a file manager or similar app you will be
+offered the option of using this editor along with whatever other apps
+you have installed that can show or edit a text file. Files will
+initially be opened read only, long touch on the display or touch the
+edit item in the toolbar to enable editing.</p>
+
+    </div>
+</section>
+
+    
+            
+                <section class="page" id="features">
+    
+    <h3>
+        <a href="#features">Features</a>
+    </h3>
+    
+    <div class="content">
+        <ul>
+<li>File chooser</li>
+<li>Default file</li>
+<li>View markdown in browser or html viewer</li>
+<li>Regular expression text search</li>
+<li>Optional syntax highlighting</li>
+<li>Open recent files from menu</li>
+<li>Optionally view files</li>
+<li>Optional auto save</li>
+<li>Optional Word wrap</li>
+<li>Light/Dark/Retro themes</li>
+<li>Small/Medium/Large font size</li>
+<li>Monospace/Proportional font faces</li>
+</ul>
+
+    </div>
+</section>
+
+            
+    
+
+
+
+        
+            
+    <section class="page" id="using">
+    
+    <h1>
+        <a href="#using">Using</a>
+    </h1>
+    
+    <div class="content">
+        <p><img src="images/Editor-landscape.png" alt="Toolbar"></p>
+
+    </div>
+</section>
+
+    
+            
+                <section class="page" id="toolbar">
+    
+    <h3>
+        <a href="#toolbar">Toolbar</a>
+    </h3>
+    
+    <div class="content">
+        <p>There are five toolbar items which may appear:</p>
+<ul>
+<li><strong>Edit</strong> – Edit the current read only file</li>
+<li><strong>View</strong> – View the current file read only</li>
+<li><strong>Save</strong> – Save the current file if modified</li>
+<li><strong>New</strong> – Start a new empty file</li>
+<li><strong>Open</strong> – Open a text file using a chooser</li>
+</ul>
+<p>And on the menu:</p>
+<ul>
+<li><strong>Open recent</strong> – Pop up a list of recent files
+<ul>
+<li><strong>Clear list</strong> – Clear list of recent files</li>
+</ul>
+</li>
+<li><strong>Save as</strong> – Save the current file with a new name</li>
+<li><strong>Search</strong> – Interactive search of text using a regular
+expression</li>
+<li><strong>View markdown</strong> – View markdown in browser or html viewer</li>
+<li><strong>View files</strong> – Open files read only for viewing</li>
+<li><strong>Auto save</strong> – Save the current file on app pause</li>
+<li><strong>Word wrap</strong> – Limit text width to screen width and word wrap</li>
+<li><strong>Suggestions</strong> – Text input and spelling suggestions</li>
+<li><strong>Highlight syntax</strong> – Highlight programming language syntax</li>
+<li><strong>Theme</strong> – Choose theme
+<ul>
+<li><strong>Light</strong></li>
+<li><strong>Dark</strong></li>
+<li><strong>Retro</strong></li>
+</ul>
+</li>
+<li><strong>Text size</strong> – Choose text size
+<ul>
+<li><strong>Small</strong></li>
+<li><strong>Medium</strong></li>
+<li><strong>Large</strong></li>
+</ul>
+</li>
+<li><strong>Typeface</strong> – Choose typeface
+<ul>
+<li><strong>Monospace</strong></li>
+<li><strong>Proportional</strong></li>
+</ul>
+</li>
+<li><strong>About</strong> – Show version, copyright and licence</li>
+</ul>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="open">
+    
+    <h3>
+        <a href="#open">Open</a>
+    </h3>
+    
+    <div class="content">
+        <p>Choose a file to open from the chooser dialog that pops up. The parent
+folder will be the first in the list. The file will initially be
+read-only. Touch the Edit toolbar item to enable editing.</p>
+<p>The chooser shows a list of files with icons. Files which appear to be
+media files, or are too large will be disabled and not
+selectable. Touch a folder to change folder, or a file to open a
+file. Hidden files beginning with a &lsquo;.&rsquo; will not appear.</p>
+<p>The parent folder, if it exists, will appear first in the list. Touch
+that folder to move up the directory tree. If a folder is not
+accessible, the chooser will show the parent folder, if it exists, and
+the external storage folder (<code>/storage/emulated/0</code>).</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="open-recent">
+    
+    <h3>
+        <a href="#open-recent">Open Recent</a>
+    </h3>
+    
+    <div class="content">
+        <p>Choose a file from the list that pops up. As above the file will
+initially be read only. The last entry, <strong>Clear list</strong>, will clear the
+list.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="save-as">
+    
+    <h3>
+        <a href="#save-as">Save As</a>
+    </h3>
+    
+    <div class="content">
+        <p>Enter a new file name in the dialog that pops up. Absolute names
+starting with a slash &lsquo;/&rsquo; will be saved in that exact path. Names
+without a starting slash will be saved relative to the main public
+folder, <code>/sdcard/</code>, or <code>/storage/emulated/0/</code>.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="search">
+    
+    <h3>
+        <a href="#search">Search</a>
+    </h3>
+    
+    <div class="content">
+        <p><img src="images/Editor-search.png" alt="Search"></p>
+<p>Enter search text in the field that pops up in the toolbar. The first
+matching item will be highlighted. Use the search button in the
+keyboard for find next. The exact regular expression syntax used is in
+the android documentation for <a href="https://developer.android.com/reference/java/util/regex/Pattern#sum">Pattern</a>.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="view-markdown">
+    
+    <h3>
+        <a href="#view-markdown">View Markdown</a>
+    </h3>
+    
+    <div class="content">
+        <p>You will be prompted to choose a viewer for an html file containing
+the encoded markdown from the current open file. If the text contains
+no markdown the result will be the same text.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="highlight-syntax">
+    
+    <h3>
+        <a href="#highlight-syntax">Highlight Syntax</a>
+    </h3>
+    
+    <div class="content">
+        <p><img src="images/Editor-syntax.png" alt="Syntax"></p>
+<p>If the current open file is a C, C++, Objective C, Go, Java,
+Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file,
+the keywords, classes comments, strings, etc will be highlighted.</p>
+<h3 id="selection">Selection</h3>
+<p>The type of highlighting is selected by file extension. Files with
+<code>.c</code>, <code>.cc</code>, <code>.c++</code>, <code>.cxx</code>, <code>.m</code>, <code>.h</code>, <code>.go</code>, <code>.js</code>, <code>.java</code>, <code>.py</code>,
+<code>.sh</code>, <code>.swift</code> extensions will be highlighted with &lsquo;C&rsquo; style
+highlighting. Files with <code>.htm</code>, <code>.html</code> extensions will be
+highlighted as HTML. Files with <code>.cs</code>, <code>.css</code> extensions will be
+highlighted as CSS. Files with <code>.md</code> extensions will be highlighted as
+markdown.</p>
+<h3 id="parsing">Parsing</h3>
+<p>The algorithm makes no attempt at parsing. The text is scanned for
+relevent keywords, classes, constants, strings and comments and
+highlighted accordingly. Therefore it will not be exactly correct, but
+good enough for a simple text editor. See <a href="https://billthefarmer.github.io/blog/post/source-code-highlighting" title="https://billthefarmer.github.io/blog/post/source-code-highlighting">Source Code Syntax
+Highlighting</a>.</p>
+<h4 id="c-type">C type</h4>
+<p>Keywords and types are matched from lists of C/C++/Objective
+C/Go/Java/Javascript/Python/Shell/Swift keywords and types. Classes
+are capitalised words. Constants are all caps words. Strings are in
+double quotes. Single quotes are ignored because apostrophes break the
+algorithm. Both <code>/* */</code> and <code>// </code> C style comments and <code># </code> Shell
+script style comments are recognised.</p>
+<h4 id="html">HTML</h4>
+<p>HTML keywords are matched from a list. Double quoted arguments are
+highlighted. As above, single quotes are ignored. HTML comments <code>&lt;!-- --&gt;</code> are recognised.</p>
+<h4 id="css">CSS</h4>
+<p>CSS style names are matched from a list. Double quoted arguments are
+highlighted. As above, single quotes are ignored. C style comments are
+recognised.</p>
+<h4 id="markdown">Markdown</h4>
+<p>Markdown headers, links, emphasis and code will be highlighted.</p>
+<h4 id="default">Default</h4>
+<p>Files with unrecognised extensions which are not plain text files
+will be highlighted with default highlighting, similar to C type
+highlighting. Comments will not be highlighted as there is little
+consistency with comment delimiters outside C type languages.</p>
+<h3 id="limitations">Limitations</h3>
+<p>Because scanning and highlighting a large file can be quite slow,
+making the app unresponsive, only the text currently in view is
+scanned and highlighted. Therefore as the text is edited or scrolled,
+the new region in view will be scanned and highlighted after a short
+delay to allow for user typing without the highlighting running
+constantly.</p>
+<h4 id="scrolling">Scrolling</h4>
+<p>After the text is highlighted, the android view system will re-layout
+the views whether they need it or not. That causes the current cursor
+position to be scrolled back into view, which can be extremely
+annoying. So the cursor is moved if necessary to keep it within the
+visible region.</p>
+<h4 id="horizontal-scrolling">Horizontal scrolling</h4>
+<p>On devices running android versions less than Marshmallow M (6),
+horizontal scrolling will scroll back again. Make the text size
+smaller or rotate the device to avoid this. Or turn the highlighting
+off.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="mode-line">
+    
+    <h3>
+        <a href="#mode-line">Mode Line</a>
+    </h3>
+    
+    <div class="content">
+        <p>If a line of text is found within the first or last two or three lines
+of the file which matches the mode line pattern, the mode of the
+editor will be changed after the file is loaded.  The pattern is one
+or more text or punctuation characters, white space, the text <code>ed:</code>
+followed by one or more option patterns separated by white space.</p>
+<pre><code># ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
+</code></pre>
+<p>The initial text or punctuation characters are intended to be used to
+hide the mode line from compilers and interpreters by commenting it
+out.</p>
+<p>The option patterns are:</p>
+<ul>
+<li><strong>[no]vw</strong> – View files read only</li>
+<li><strong>[no]ww</strong> – Word wrap</li>
+<li><strong>[no]sg</strong> – Suggestions</li>
+<li><strong>[no]hs</strong> – Syntax highlighting</li>
+<li><strong>th:l|d|r</strong> – Theme – light, dark or retro</li>
+<li><strong>ts:l|m|s</strong> – Text size – large, medium or small</li>
+<li><strong>tf:m|p</strong> – Typeface – monospace or proportional</li>
+</ul>
+<p>The mode line is read after the file is loaded and will change
+immediately, except in Android 6, Marshmallow due to an obscure
+bug. Rotate the device to change mode.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="extended-selection">
+    
+    <h3>
+        <a href="#extended-selection">Extended Selection</a>
+    </h3>
+    
+    <div class="content">
+        <p>If the file being edited is not a plain text file, selections created
+by double tapping or long touching on the text will be extended to
+enclosing delimiters (brackets, quotes) on the same text line.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="unsaved-file">
+    
+    <h3>
+        <a href="#unsaved-file">Unsaved File</a>
+    </h3>
+    
+    <div class="content">
+        <p>If you touch the new, back or open button, and the current file has
+been modified, you will be prompted whether you want to save it, else
+the editor will just exit or open a file chooser. The current file may
+be saved on app pause using the menu option. The scroll position and
+name will be remembered for the last 10 files opened.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="changed-file">
+    
+    <h3>
+        <a href="#changed-file">Changed File</a>
+    </h3>
+    
+    <div class="content">
+        <p>If a file has changed in storage while it was open in the editor, if
+you attempt to save it, or the app is resumed, you will be prompted
+whether to overwrite or reload the file.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="default-file">
+    
+    <h3>
+        <a href="#default-file">Default File</a>
+    </h3>
+    
+    <div class="content">
+        <p>If there is no open file any text entered will by default be saved in
+<code>Documents/Editor.txt</code>. This file will be loaded on start if it
+exists. Use the <strong>Save as</strong> menu item to save it elsewhere.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="shared-file">
+    
+    <h3>
+        <a href="#shared-file">Shared File</a>
+    </h3>
+    
+    <div class="content">
+        <p>Text files opened or shared by another app may be viewed and
+edited. Some apps may share files or text using a <code>content</code> URI that
+is not resolvable to a path to a file in storage. In that case the
+editor will read the file into the default file. The default file in
+storage will not be overwritten unless the file is saved. Use the
+<strong>Save as</strong> menu item to save the file elsewhere.</p>
+
+    </div>
+</section>
+
+            
+    
+
+
+
+        
+    
+</div>
+</body>
+</html>
+
