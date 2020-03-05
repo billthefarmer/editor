@@ -692,8 +692,7 @@ public class Editor extends Activity
         file = new File(path);
         final Uri uri = Uri.fromFile(file);
 
-        String title = uri.getLastPathSegment();
-        setTitle(title);
+        setTitle(uri.getLastPathSegment());
 
         checkHighlight();
 
@@ -772,16 +771,6 @@ public class Editor extends Activity
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
 
-        searchItem = menu.findItem(R.id.search);
-        searchView = (SearchView) searchItem.getActionView();
-
-        if (searchView != null)
-        {
-            searchView.setSubmitButtonEnabled(true);
-            searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
-            searchView.setOnQueryTextListener(new QueryTextListener());
-        }
-
         return true;
     }
 
@@ -789,6 +778,18 @@ public class Editor extends Activity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        // Set up search view
+        searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) searchItem.getActionView();
+
+        // Set up search view options and listener
+        if (searchView != null)
+        {
+            searchView.setSubmitButtonEnabled(true);
+            searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
+            searchView.setOnQueryTextListener(new QueryTextListener());
+        }
+
         menu.findItem(R.id.edit).setVisible(!edit);
         menu.findItem(R.id.view).setVisible(edit);
 
