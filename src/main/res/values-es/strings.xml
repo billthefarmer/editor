@@ -3,7 +3,6 @@
 
   <string name="appName">Editor</string>
 
-  <string name="search">Buscar…</string>
   <string name="neu">Nuevo</string>
   <string name="edit">Editar</string>
   <string name="view">Ver</string>
@@ -11,6 +10,8 @@
   <string name="save">Guardar</string>
   <string name="openRecent">Abierto por última vez</string>
   <string name="clearList">Limpiar lista</string>
+  <string name="search">Buscar…</string>
+  <string name="findAll">Encuentra todos…</string>
   <string name="saveAs">Guardar como…</string>
   <string name="viewMarkdown">Ver markdown…</string>
   <string name="viewFile">Mostrar archivo</string>

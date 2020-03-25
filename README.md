@@ -10,13 +10,13 @@ and [here](https://github.com/billthefarmer/editor/releases)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-syntax.png)
 
-This is a very simple generic text editor which may be used standalone
-or to show or edit any sort of text file from another app. If you
-select a text file in a file manager or similar app you will be
-offered the option of using this editor along with whatever other apps
-you have installed that can show or edit a text file. Files will
-initially be opened read only, long touch on the display or touch the
-edit item in the toolbar to enable editing.
+This is a fairly simple generic text editor which may be used
+standalone or to show or edit any sort of text file from another
+app. If you select a text file in a file manager or similar app you
+will be offered the option of using this editor along with whatever
+other apps you have installed that can show or edit a text file. Files
+will initially be opened read only, long touch on the display or touch
+the edit item in the toolbar to enable editing.
 
 There are five toolbar items which may appear:
 * **Edit** &ndash; Edit the current read only file
@@ -75,9 +75,9 @@ list.
 
 ### Save as
 Enter a new file name in the dialog that pops up. Absolute names
-starting with a slash '/' will be saved in that exact path. Names
-without a starting slash will be saved relative to the main public
-folder, `/sdcard/`, or `/storage/emulated/0/`.
+starting with a slash '/' will be saved in that exact path if
+possible. Names without a starting slash will be saved relative to the
+main public folder, `/sdcard/`, or `/storage/emulated/0/`.
 
 ### Search
 Enter search text in the field that pops up in the toolbar. The first
@@ -85,6 +85,8 @@ matching item will be highlighted. Use the search button in the
 keyboard for find next. The exact regular expression syntax used is in
 the android documentation for
 [Pattern](https://developer.android.com/reference/java/util/regex/Pattern#sum).
+
+### Find next
 
 ### View markdown
 You will be prompted to choose a viewer for an html file containing

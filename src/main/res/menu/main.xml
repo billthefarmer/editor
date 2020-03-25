@@ -41,14 +41,18 @@
     </menu>
   </item>
   <item
-      android:id="@+id/saveAs"
-      android:showAsAction="never"
-      android:title="@string/saveAs" />
-  <item
       android:id="@+id/search"
       android:actionViewClass="android.widget.SearchView"
       android:showAsAction="never|collapseActionView"
       android:title="@string/search" />
+  <item
+      android:id="@+id/findAll"
+      android:showAsAction="never"
+      android:title="@string/findAll" />
+  <item
+      android:id="@+id/saveAs"
+      android:showAsAction="never"
+      android:title="@string/saveAs" />
   <item
       android:id="@+id/viewMarkdown"
       android:showAsAction="never"

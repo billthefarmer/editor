@@ -69,6 +69,7 @@ import org.markdownj.MarkdownProcessor;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -316,6 +317,7 @@ public class Editor extends Activity
     private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
+    private final static int FIND_DELAY = 128;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -790,6 +792,12 @@ public class Editor extends Activity
             searchView.setOnQueryTextListener(new QueryTextListener());
         }
 
+        // Show find all item
+        if (menu.findItem(R.id.search).isActionViewExpanded())
+            menu.findItem(R.id.findAll).setVisible(true);
+        else
+            menu.findItem(R.id.findAll).setVisible(false);
+
         menu.findItem(R.id.edit).setVisible(!edit);
         menu.findItem(R.id.view).setVisible(edit);
 
@@ -914,6 +922,9 @@ public class Editor extends Activity
             break;
         case R.id.clearList:
             clearList();
+            break;
+        case R.id.findAll:
+            findAll();
             break;
         case R.id.viewMarkdown:
             viewMarkdown();
@@ -1310,6 +1321,16 @@ public class Editor extends Activity
             removeList.add(path);
 
         pathMap.clear();
+    }
+
+    // findAll
+    public void findAll()
+    {
+        // Get search string
+        String search = searchView.getQuery().toString();
+
+        FindTask findTask = new FindTask(this);
+        findTask.execute(search);
     }
 
     // viewMarkdown
@@ -2700,6 +2721,7 @@ public class Editor extends Activity
                 editable.setSpan(span, matcher.start(), matcher.end(),
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
+
             else
             {
                 matcher.reset();
@@ -2707,6 +2729,137 @@ public class Editor extends Activity
             }
 
             return true;
+        }
+    }
+
+    // readFile
+    private static CharSequence readFile(File file)
+    {
+        StringBuilder text = new StringBuilder();
+        // Open file
+        try (BufferedReader reader = new
+             BufferedReader(new FileReader(file)))
+        {
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                text.append(line);
+                text.append(System.getProperty("line.separator"));
+            }
+
+            return text;
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return text;
+    }
+
+    // FindTask
+    private static class FindTask
+            extends AsyncTask<String, Void, List<File>>
+    {
+        private WeakReference<Editor> editorWeakReference;
+        private Pattern pattern;
+        private String search;
+
+        // FindTask
+        public FindTask(Editor editor)
+        {
+            editorWeakReference = new WeakReference<>(editor);
+        }
+
+        // doInBackground
+        @Override
+        protected List<File> doInBackground(String... params)
+        {
+            // Create a list of matches
+            List<File> matchList = new ArrayList<>();
+            final Editor editor = editorWeakReference.get();
+            if (editor == null)
+                return matchList;
+
+            search = params[0];
+            // Check pattern
+            try
+            {
+                pattern = Pattern.compile(search, Pattern.MULTILINE);
+            }
+
+            catch (Exception e)
+            {
+                return matchList;
+            }
+
+            // Get entry list
+            List<File> entries = new ArrayList<>();
+            for (String path : editor.pathMap.keySet())
+            {
+                File entry = new File(path);
+                entries.add(entry);
+            }
+ 
+            // Check the entries
+            for (File file : entries)
+            {
+                CharSequence content = readFile(file);
+                Matcher matcher = pattern.matcher(content);
+                if (matcher.find())
+                    matchList.add(file);
+            }
+
+            return matchList;
+        }
+
+        // onPostExecute
+        @Override
+        protected void onPostExecute(List<File> matchList)
+        {
+            final Editor editor = editorWeakReference.get();
+            if (editor == null)
+                return;
+
+            // Build dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(editor);
+            builder.setTitle(R.string.findAll);
+
+            // If found populate dialog
+            if (!matchList.isEmpty())
+            {
+                List<String> choiceList = new ArrayList<>();
+                for (File file : matchList)
+                {
+                    // Remove path prefix
+                    String path = file.getPath();
+                    String name =
+                        path.replaceFirst(Environment
+                                          .getExternalStorageDirectory()
+                                          .getPath() + File.separator, "");
+
+                    choiceList.add(name);
+                }
+
+                String[] choices = choiceList.toArray(new String[0]);
+                builder.setItems(choices, (dialog, which) ->
+                {
+                    File file = matchList.get(which);
+                    Uri uri = Uri.fromFile(file);
+                    // Open the entry chosen
+                    editor.readFile(uri);
+
+                    // Put the search text back - why it
+                    // disappears I have no idea or why I have to
+                    // do it after a delay
+                    editor.searchView.postDelayed(() ->
+                      editor.searchView.setQuery(search, false), FIND_DELAY);
+                });
+            }
+
+            builder.setNegativeButton(android.R.string.cancel, null);
+            builder.show();
         }
     }
 

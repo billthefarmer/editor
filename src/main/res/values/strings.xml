@@ -4,6 +4,7 @@
   <string name="appName">Editor</string>
 
   <string name="search">Search…</string>
+  <string name="findAll">Find all…</string>
   <string name="neu">New</string>
   <string name="edit">Edit</string>
   <string name="view">View</string>
