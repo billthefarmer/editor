@@ -314,7 +314,6 @@ public class Editor extends Activity
 
     private final static int LAST_SIZE = 256;
     private final static int FIRST_SIZE = 256;
-    private final static int BUFFER_SIZE = 1024;
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
     private final static int FIND_DELAY = 128;
@@ -495,13 +494,10 @@ public class Editor extends Activity
     // setListeners
     private void setListeners()
     {
-
         if (textView != null)
         {
             textView.addTextChangedListener(new TextWatcher()
             {
-                CharSequence query = null;
-
                 // afterTextChanged
                 @Override
                 public void afterTextChanged(Editable s)
@@ -529,7 +525,7 @@ public class Editor extends Activity
                     if (searchItem != null &&
                         searchItem.isActionViewExpanded())
                     {
-                        query = searchView.getQuery();
+                        final CharSequence query = searchView.getQuery();
 
                         textView.postDelayed(() ->
                         {
@@ -977,7 +973,8 @@ public class Editor extends Activity
         }
 
         // Close text search
-        if (searchItem != null && searchItem.isActionViewExpanded())
+        if (searchItem != null && searchItem.isActionViewExpanded() &&
+                item.getItemId() != R.id.findAll)
             searchItem.collapseActionView();
 
         return true;

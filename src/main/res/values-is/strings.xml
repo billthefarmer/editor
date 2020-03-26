@@ -3,7 +3,6 @@
 
   <string name="appName">Ritill</string>
 
-  <string name="search">Leita…</string>
   <string name="neu">Nýtt</string>
   <string name="edit">Breyta</string>
   <string name="view">Skoða</string>
@@ -11,6 +10,8 @@
   <string name="save">Vista</string>
   <string name="openRecent">Opna nýlegt</string>
   <string name="clearList">Hreinsa lista</string>
+  <string name="search">Leita…</string>
+  <string name="findAll">Finndu alla…</string>
   <string name="saveAs">Vista sem…</string>
   <string name="viewMarkdown">Skoða markdown-kóða…</string>
   <string name="viewFile">Skoða skrár</string>

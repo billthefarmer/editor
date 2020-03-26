@@ -3,7 +3,6 @@
 
   <string name="appName">Düzenleyici</string>
 
-  <string name="search">Ara…</string>
   <string name="neu">Yeni</string>
   <string name="edit">Düzenle</string>
   <string name="view">Görünüm</string>
@@ -11,6 +10,8 @@
   <string name="save">Kaydet</string>
   <string name="openRecent">Son kullanılanı aç</string>
   <string name="clearList">Listeyi temizle</string>
+  <string name="search">Ara…</string>
+  <string name="findAll">Hepsini bul…</string>
   <string name="saveAs">Farklı kaydet…</string>
   <string name="viewMarkdown">Markdown görünümü…</string>
   <string name="viewFile">Dosyaları görüntüle</string>

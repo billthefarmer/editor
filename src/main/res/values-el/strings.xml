@@ -3,7 +3,6 @@
 
   <string name="appName">Επεξεργαστής</string>
 
-  <string name="search">Αναζήτηση…</string>
   <string name="neu">Νέος</string>
   <string name="edit">Επεξεργασία</string>
   <string name="view">Προβολή</string>
@@ -11,6 +10,8 @@
   <string name="save">Αποθήκευση</string>
   <string name="openRecent">Άνοιγμα πρόσφατου</string>
   <string name="clearList">Σαφή κατάλογο</string>
+  <string name="search">Αναζήτηση…</string>
+  <string name="findAll">Βρείτε όλα…</string>
   <string name="saveAs">Αποθήκευση ως…</string>
   <string name="viewMarkdown">Προβολή της Markdown…</string>
   <string name="viewFile">Προβολή αρχείων</string>

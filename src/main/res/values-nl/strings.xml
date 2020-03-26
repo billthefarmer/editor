@@ -3,7 +3,6 @@
 
   <string name="appName">Tekstbewerker</string>
 
-  <string name="search">Zoeken…</string>
   <string name="neu">Nieuw</string>
   <string name="edit">Bewerken</string>
   <string name="view">Tonen</string>
@@ -11,6 +10,8 @@
   <string name="save">Opslaan</string>
   <string name="openRecent">Recent bestand openen</string>
   <string name="clearList">Duidelijke lijst</string>
+  <string name="search">Zoeken…</string>
+  <string name="findAll">Alles zoeken…</string>
   <string name="saveAs">Opslaan als…</string>
   <string name="viewMarkdown">Markdown tonen…</string>
   <string name="viewFile">Bekijk bestanden</string>

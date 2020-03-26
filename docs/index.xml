@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Copyright &amp;copy; 2020 Bill Farmer</copyright>
-    <lastBuildDate>Wed, 04 Mar 2020 19:41:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2020 09:56:27 +0000</lastBuildDate>
     
 	<atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
     
@@ -67,6 +67,15 @@ The chooser shows a list of files with icons. Files which appear to be media fil
       
       <guid>https://billthefarmer.github.io/editor/using/search/</guid>
       <description>Enter search text in the field that pops up in the toolbar. The first matching item will be highlighted. Use the search button in the keyboard for find next. The exact regular expression syntax used is in the android documentation for Pattern.</description>
+    </item>
+    
+    <item>
+      <title>Findall</title>
+      <link>https://billthefarmer.github.io/editor/using/findall/</link>
+      <pubDate>Thu, 26 Mar 2020 09:56:27 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/findall/</guid>
+      <description>You may find all recent files that contain the current search text. This menu item will only appear while the search widget is active. A dialog will pop up with a list of matching files. Touch an entry to open that file. You may repeat this or refine the search text to find the desired file.</description>
     </item>
     
     <item>

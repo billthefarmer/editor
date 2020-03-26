@@ -28,9 +28,10 @@ There are five toolbar items which may appear:
 And on the menu:
 * **Open recent** &ndash; Pop up a list of recent files
   * **Clear list** &ndash; Clear list of recent files
-* **Save as** &ndash; Save the current file with a new name
 * **Search** &ndash; Interactive search of text using a regular
     expression
+* **Find all** &ndash; Find all recent files containing search text
+* **Save as** &ndash; Save the current file with a new name
 * **View markdown** &ndash; View markdown in browser or html viewer
 * **View files** &ndash; Open files read only for viewing
 * **Auto save** &ndash; Save the current file on app pause
@@ -86,7 +87,12 @@ keyboard for find next. The exact regular expression syntax used is in
 the android documentation for
 [Pattern](https://developer.android.com/reference/java/util/regex/Pattern#sum).
 
-### Find next
+### Find all
+You may find all recent files that contain the current search
+text. This menu item will only appear while the search widget is
+active. A dialog will pop up with a list of matching files. Touch an
+entry to open that file. You may repeat this or refine the search text
+to find the desired file.
 
 ### View markdown
 You will be prompted to choose a viewer for an html file containing

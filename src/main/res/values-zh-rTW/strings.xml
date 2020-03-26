@@ -3,7 +3,6 @@
 
   <string name="appName">編輯器</string>
 
-  <string name="search">搜尋…</string>
   <string name="neu">新</string>
   <string name="edit">編輯</string>
   <string name="view">檢視</string>
@@ -11,6 +10,8 @@
   <string name="save">儲存</string>
   <string name="openRecent">最近開啟</string>
   <string name="clearList">清除列表</string>
+  <string name="search">搜尋…</string>
+  <string name="findAll">全局搜索…</string>
   <string name="saveAs">儲存為…</string>
   <string name="viewMarkdown">檢視 markdown…</string>
   <string name="viewFile">查看文件</string>

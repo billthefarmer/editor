@@ -3,7 +3,6 @@
 
   <string name="appName">Redaktors</string>
 
-  <string name="search">Meklēt…</string>
   <string name="neu">Jauns</string>
   <string name="edit">Rediģēt</string>
   <string name="view">Skatīt</string>
@@ -11,6 +10,8 @@
   <string name="save">Saglabāt</string>
   <string name="openRecent">Atvērt neseno</string>
   <string name="clearList">Notīrīt sarakstu</string>
+  <string name="search">Meklēt…</string>
+  <string name="findAll">Atrodi visu…</string>
   <string name="saveAs">Saglabāt kā…</string>
   <string name="viewMarkdown">Skatīt markdown…</string>
   <string name="viewFile">Skatīt failus</string>
