@@ -1533,7 +1533,7 @@ public class Editor extends Activity
     private void aboutClicked()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.about);
+        builder.setTitle(R.string.appName);
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         SpannableStringBuilder spannable =
