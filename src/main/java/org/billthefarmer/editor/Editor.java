@@ -1530,6 +1530,7 @@ public class Editor extends Activity
     }
 
     // aboutClicked
+    @SuppressWarnings("deprecation")
     private void aboutClicked()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -1558,7 +1559,11 @@ public class Editor extends Activity
         // Set movement method
         TextView text = dialog.findViewById(android.R.id.message);
         if (text != null)
+        {
+            text.setTextAppearance(builder.getContext(),
+                                   android.R.style.TextAppearance_Small);
             text.setMovementMethod(LinkMovementMethod.getInstance());
+        }
     }
 
     // openFile
