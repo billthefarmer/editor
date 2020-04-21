@@ -32,8 +32,11 @@
   <string name="normal">Proporciónal</string>
   <string name="about">Acerca de</string>
 
-  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">Version %s</a>\nBuild
-  %s\nCopyright \u00A9 2019 Bill Farmer \nTraducción al Español por <a href="https://github.com/foxneo">Miguel Caceres</a>\nLicencia <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuild
+  %s\n\nCopyright \u00A9 2019 Bill Farmer\n\nTraducción al Español por
+  <a href="https://github.com/foxneo">Miguel Caceres</a>\n\nLicencia
+  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Ingresa el nombre del archivo.</string>

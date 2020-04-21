@@ -32,10 +32,12 @@
   <string name="normal">Proportioneel</string>
   <string name="about">Over</string>
 
-  <string name="version" formatted="false">Editor - <a href="https://github.com/billthefarmer/editor/releases/latest">versie %s</a>\nGebouwd
-  op %s\nCopyright \u00A9 2017 Bill Farmer\nNederlandse vertaling door
-  <a href="https://github.com/Vistaus">Heimen Stoffels
-  (vistaus)</a>\nLicentie <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nGebouwd
+  op %s\n\nCopyright \u00A9 2017 Bill Farmer\n\nNederlandse vertaling
+  door <a href="https://github.com/Vistaus">Heimen Stoffels
+  (vistaus)</a>\n\nLicentie <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Kies een bestandsnaam</string>

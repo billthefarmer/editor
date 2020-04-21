@@ -32,9 +32,12 @@
   <string name="normal">Αναλογική</string>
   <string name="about">Σχετικά με…</string>
 
-  <string name="version" formatted="false">Έκδοση του <a href="https://github.com/billthefarmer/editor/releases/latest">Επεξεργαστή
-  %s</a>\nΣύνθεση %s\nΠνευματικά δικαιώματα \u00A9 2017 Bill
-  Farmer\nΕλληνική μετάφραση από <a href="https://github.com/nikoss">nikoss</a>\nΆδεια <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nΣύνθεση
+  %s\n\nΠνευματικά δικαιώματα \u00A9 2017 Bill Farmer\n\nΕλληνική
+  μετάφραση από <a
+  href="https://github.com/nikoss">nikoss</a>\n\nΆδεια <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
   <string name="choose">Επέλεξε ένα όνομα αρχείου</string>
   <string name="loading">Φορτώνει…</string>

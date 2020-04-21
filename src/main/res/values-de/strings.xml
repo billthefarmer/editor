@@ -32,8 +32,11 @@
   <string name="normal">Proportional</string>
   <string name="about">Über</string>
 
-  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">Version %s</a>\nBuild
-  %s\nCopyright \u00A9 2017 Bill Farmer\nDeutsche Übersetzung von <a href="https://github.com/Markus00000">Markus Weimar</a>\nLizenz <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuild
+  %s\n\nCopyright \u00A9 2017 Bill Farmer\n\nDeutsche Übersetzung von
+  <a href="https://github.com/Markus00000">Markus Weimar</a>\n\nLizenz
+  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Geben Sie einen Dateinamen ein.</string>

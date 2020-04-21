@@ -32,10 +32,11 @@
   <string name="normal">Proporcionāls</string>
   <string name="about">Par</string>
 
-  <string name="version" formatted="false">Redaktora <a href="https://github.com/billthefarmer/editor/releases/latest">versija
-  %s</a>\nBūvēts %s\nAutortiesības \u00A9 2017 Bill Farmer\nNo latviešu
-  valodas tulkojis <a href="https://github.com/rhssk">Rihards Skuja
-  </a>\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBūvēts
+  %s\n\nAutortiesības \u00A9 2017 Bill Farmer\n\nNo latviešu valodas
+  tulkojis <a href="https://github.com/rhssk">Rihards Skuja
+  </a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU
   GPLv3</a>
   </string>
 

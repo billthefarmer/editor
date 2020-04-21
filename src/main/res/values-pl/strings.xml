@@ -32,9 +32,11 @@
   <string name="normal">Proporcjonalny</string>
   <string name="about">O programie</string>
 
-  <string name="version" formatted="false">Wersja <a href="https://github.com/billthefarmer/editor/releases/latest">Editor %s</a>\nData
-  kompilacji %s\nCopyright \u00A9 2017 Bill Farmer\nPolskie
-  tłumaczenie <a href="https://github.com/evo16">Evo</a>\nLicencja <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nData
+  kompilacji %s\n\nCopyright \u00A9 2017 Bill Farmer\n\nPolskie
+  tłumaczenie <a href="https://github.com/evo16">Evo</a>\n\nLicencja
+  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Wybierz nazwę pliku</string>

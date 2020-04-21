@@ -39,9 +39,13 @@
       credit here.
   -->
 
-  <string name="version" formatted="false">Düzenleyici <a href="https://github.com/billthefarmer/editor/releases/latest">%s sürümü</a>\n%s tarihinde
-  oluşturuldu\nTelif Hakkı \u00A9 2017 Bill Farmer\nTürkçe çeviri <a href="https://github.com/yasarciv67">Yaşar Çiv</a> tarafından yapıldı\nLisans
-  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\n%s
+  tarihinde oluşturuldu\n\nTelif Hakkı \u00A9 2017 Bill
+  Farmer\n\nTürkçe çeviri <a
+  href="https://github.com/yasarciv67">Yaşar Çiv</a> tarafından
+  yapıldı\n\nLisans <a href="https://www.gnu.org/licenses/gpl.txt">GNU
+  GPLv3</a>
   </string>
 
   <string name="choose">Bir dosya adı seçin</string>

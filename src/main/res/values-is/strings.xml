@@ -32,9 +32,12 @@
   <string name="normal">Hlutfallslegt</string>
   <string name="about">Um hugbúnaðinn</string>
 
-  <string name="version" formatted="false">Editor <a href="https://github.com/billthefarmer/editor/releases/latest">útgáfa %s</a>\nByggt
-  %s\nHöfundarréttur \u00A9 2017 Bill Farmer\nÍslensk þýðing: <a href="https://github.com/sveinki">Sveinn í Felli</a>\nNotkunarleyfi
-  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nByggt
+  %s\n\nHöfundarréttur \u00A9 2017 Bill Farmer\n\nÍslensk þýðing: <a
+  href="https://github.com/sveinki">Sveinn í
+  Felli</a>\n\nNotkunarleyfi <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Veldu skráarheiti</string>
