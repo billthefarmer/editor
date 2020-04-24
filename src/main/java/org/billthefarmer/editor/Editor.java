@@ -1396,6 +1396,7 @@ public class Editor extends Activity
         else
         {
             Intent intent = new Intent(this, Editor.class);
+            intent.setAction(getIntent().getAction());
             startActivity(intent);
             finish();
         }
@@ -1421,6 +1422,7 @@ public class Editor extends Activity
         else
         {
             Intent intent = new Intent(this, Editor.class);
+            intent.setAction(getIntent().getAction());
             startActivity(intent);
             finish();
         }
@@ -1447,6 +1449,7 @@ public class Editor extends Activity
         else
         {
             Intent intent = new Intent(this, Editor.class);
+            intent.setAction(getIntent().getAction());
             startActivity(intent);
             finish();
         }
@@ -1464,6 +1467,7 @@ public class Editor extends Activity
         else
         {
             Intent intent = new Intent(this, Editor.class);
+            intent.setAction(getIntent().getAction());
             startActivity(intent);
             finish();
         }
@@ -1481,6 +1485,7 @@ public class Editor extends Activity
         else
         {
             Intent intent = new Intent(this, Editor.class);
+            intent.setAction(getIntent().getAction());
             startActivity(intent);
             finish();
         }
@@ -2601,6 +2606,7 @@ public class Editor extends Activity
             else
             {
                 Intent intent = new Intent(this, Editor.class);
+                intent.setAction(getIntent().getAction());
                 startActivity(intent);
                 finish();
             }
