@@ -1392,6 +1392,13 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
+
+        else
+        {
+            Intent intent = new Intent(this, Editor.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // suggestClicked
@@ -1410,6 +1417,13 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
+
+        else
+        {
+            Intent intent = new Intent(this, Editor.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // highlightClicked
@@ -1429,6 +1443,13 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
+
+        else
+        {
+            Intent intent = new Intent(this, Editor.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // darkClicked
@@ -1439,6 +1460,13 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
+
+        else
+        {
+            Intent intent = new Intent(this, Editor.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // retroClicked
@@ -1449,6 +1477,13 @@ public class Editor extends Activity
 
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
+
+        else
+        {
+            Intent intent = new Intent(this, Editor.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // smallClicked
@@ -2558,8 +2593,18 @@ public class Editor extends Activity
             }
         }
 
-        if (change && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-            recreate();
+        if (change)
+        {
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+                recreate();
+
+            else
+            {
+                Intent intent = new Intent(this, Editor.class);
+                startActivity(intent);
+                finish();
+            }
+        }
     }
 
     // loadText
