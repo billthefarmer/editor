@@ -1389,17 +1389,7 @@ public class Editor extends Activity
     {
         wrap = !wrap;
         item.setChecked(wrap);
-
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-            recreate();
-
-        else
-        {
-            Intent intent = new Intent(this, Editor.class);
-            intent.setAction(getIntent().getAction());
-            startActivity(intent);
-            finish();
-        }
+	recreate(this);
     }
 
     // suggestClicked
@@ -1415,17 +1405,7 @@ public class Editor extends Activity
             textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
                                      InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                      InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-            recreate();
-
-        else
-        {
-            Intent intent = new Intent(this, Editor.class);
-            intent.setAction(getIntent().getAction());
-            startActivity(intent);
-            finish();
-        }
+	recreate(this);
     }
 
     // highlightClicked
@@ -1442,17 +1422,7 @@ public class Editor extends Activity
     {
         theme = LIGHT;
         item.setChecked(true);
-
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-            recreate();
-
-        else
-        {
-            Intent intent = new Intent(this, Editor.class);
-            intent.setAction(getIntent().getAction());
-            startActivity(intent);
-            finish();
-        }
+	recreate(this);
     }
 
     // darkClicked
@@ -1460,17 +1430,7 @@ public class Editor extends Activity
     {
         theme = DARK;
         item.setChecked(true);
-
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-            recreate();
-
-        else
-        {
-            Intent intent = new Intent(this, Editor.class);
-            intent.setAction(getIntent().getAction());
-            startActivity(intent);
-            finish();
-        }
+	recreate(this);
     }
 
     // retroClicked
@@ -1478,17 +1438,7 @@ public class Editor extends Activity
     {
         theme = RETRO;
         item.setChecked(true);
-
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-            recreate();
-
-        else
-        {
-            Intent intent = new Intent(this, Editor.class);
-            intent.setAction(getIntent().getAction());
-            startActivity(intent);
-            finish();
-        }
+	recreate(this);
     }
 
     // smallClicked
@@ -1604,6 +1554,13 @@ public class Editor extends Activity
                                    android.R.style.TextAppearance_Small);
             text.setMovementMethod(LinkMovementMethod.getInstance());
         }
+    }
+
+    // recreate
+    private void recreate(Context context)
+    {
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+            recreate();
     }
 
     // openFile
