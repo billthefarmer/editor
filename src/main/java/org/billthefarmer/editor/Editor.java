@@ -2442,7 +2442,7 @@ public class Editor extends Activity
                         }
                     }
 
-                    if ("ww".equals(matcher.group(3)))
+                    else if ("ww".equals(matcher.group(3)))
                     {
                         if (wrap == no)
                         {
@@ -2556,18 +2556,7 @@ public class Editor extends Activity
         }
 
         if (change)
-        {
-            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
-                recreate();
-
-            else
-            {
-                Intent intent = new Intent(this, Editor.class);
-                intent.setAction(getIntent().getAction());
-                startActivity(intent);
-                finish();
-            }
-        }
+            recreate(this);
     }
 
     // loadText
