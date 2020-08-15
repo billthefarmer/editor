@@ -38,32 +38,7 @@
       for your translation and the licence. Also add your translation
       credit here.
   -->
-
-  <string name="version" formatted="false"><a
-  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt
-  %s\n\nCopyright \u00A9 2017 <a
-  href="https://github.com/billthefarmer">Bill Farmer</a>\n\nFrench
-  translation by <a href="https://github.com/milouse">Étienne
-  Deparis</a>, German translation by <a
-  href="https://github.com/Markus00000">Markus Weimar</a>, Italian
-  translation by <a href="https://github.com/airon90">Michael
-  Moroni</a>, Polish translation by <a
-  href="https://github.com/evo16">Evo</a>, Greek translation by <a
-  href="https://github.com/nikoss">nikoss</a>, Spanish translation by
-  <a href="https://github.com/foxneo">Miguel Caceres</a>, Simplified
-  Chinese translation by <a href="https://github.com/ludoux">Lu Chang
-  (ludoux)</a>, Dutch translation by <a
-  href="https://github.com/Vistaus">Heimen Stoffels (vistaus)</a>,
-  Russian translation by <a href="https://github.com/bboa">Igor
-  Nedoboy</a>, Latvian translation by <a
-  href="https://github.com/rhssk">Rihards Skuja</a>, Icelandic
-  translation by <a href="">Sveinn í Felli</a>, Portuguese translation
-  by <a href="https://github.com/Andre-Gloria" >André Glória</a>,
-  Chinese (Taiwan) translation by <a
-  href="https://github.com/cges30901">cges30901</a>, Turkish
-  translation by <a href="https://github.com/yasarciv67">Yaşar
-  Çiv</a>\n\nLicence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nFrench translation by <a href="https://github.com/milouse">Étienne Deparis</a>, German translation by <a href="https://github.com/Markus00000">Markus Weimar</a>, Italian translation by <a href="https://github.com/airon90">Michael Moroni</a>, Polish translation by <a href="https://github.com/evo16">Evo</a>, Greek translation by <a href="https://github.com/nikoss">nikoss</a>, Spanish translation by <a href="https://github.com/foxneo">Miguel Caceres</a>, Simplified Chinese translation by <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>, Dutch translation by <a href="https://github.com/Vistaus">Heimen Stoffels (vistaus)</a>, Russian translation by <a href="https://github.com/bboa">Igor Nedoboy</a>, Latvian translation by <a href="https://github.com/rhssk">Rihards Skuja</a>, Icelandic translation by <a href="">Sveinn í Felli</a>, Portuguese translation by <a href="https://github.com/Andre-Gloria" >André Glória</a>, Chinese (Taiwan) translation by <a href="https://github.com/cges30901">cges30901</a>, Turkish translation by <a href="https://github.com/yasarciv67">Yaşar Çiv</a>, Brazilian Portuguese translation by <a href="https://github.com/aevw">aevw</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Choose a file name</string>

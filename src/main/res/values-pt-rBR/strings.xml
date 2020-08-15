@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Editor</string>
+
+  <string name="neu">Novo</string>
+  <string name="edit">Editar</string>
+  <string name="view">Ver</string>
+  <string name="open">Abrir arquivo…</string>
+  <string name="save">Salvar</string>
+  <string name="openRecent">Abrir recente</string>
+  <string name="clearList">Limpar lista</string>
+  <string name="search">Procurar…</string>
+  <string name="findAll">Encontre todos…</string>
+  <string name="saveAs">Salvar como…</string>
+  <string name="viewMarkdown">Ver markdown…</string>
+  <string name="viewFile">Ver arquivos</string>
+  <string name="autoSave">Auto Salvar</string>
+  <string name="wrap">Quebra as linhas</string>
+  <string name="suggest">Sugestões</string>
+  <string name="highlight">Destacar a sintaxe</string>
+  <string name="theme">Tema</string>
+  <string name="light">Claro</string>
+  <string name="dark">Escuro</string>
+  <string name="retro">Retro</string>
+  <string name="size">Tamanho do texto</string>
+  <string name="small">Pequeno</string>
+  <string name="medium">Médio</string>
+  <string name="large">Grande</string>
+  <string name="typeface">Tipo da fonte</string>
+  <string name="mono">Monospace</string>
+  <string name="normal">Proportional</string>
+  <string name="about">Sobre</string>
+
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit for
+      your translation and the licence. Also add your translation credit
+      here.
+  -->
+
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nBrazilian Portuguese translation by <a href="https://github.com/aevw">aevw</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="choose">Digite um nome de arquivo</string>
+  <string name="loading">Abrindo…</string>
+
+  <string name="modified">
+    Tem alterações não salvas. Você quer salvar?
+  </string>
+
+  <string name="changedReload">
+    Este arquivo foi modificado, quer atualizar?
+  </string>
+
+  <string name="changedOverwrite">
+    Este arquivo foi modificado, você quer substituí-lo (perderá alterações)?
+  </string>
+
+  <string name="ok">OK</string>
+  <string name="reload">Recarregar</string>
+  <string name="overwrite">Substituir</string>
+  <string name="discard">Descartar</string>
+  <string name="cancel">Cancelar</string>
+
+</resources>
