@@ -7,3 +7,4 @@ data/
 *.orig
 *~
 *.apk
+.DS_Store
