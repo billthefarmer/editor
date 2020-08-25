@@ -11,25 +11,25 @@
   <string name="openRecent">Abrir recente</string>
   <string name="clearList">Limpar lista</string>
   <string name="search">Procurar…</string>
-  <string name="findAll">Encontre todos…</string>
+  <string name="findAll">Encontrar todos…</string>
   <string name="saveAs">Salvar como…</string>
   <string name="viewMarkdown">Ver markdown…</string>
   <string name="viewFile">Ver arquivos</string>
-  <string name="autoSave">Auto Salvar</string>
+  <string name="autoSave">Auto salvar</string>
   <string name="wrap">Quebra as linhas</string>
   <string name="suggest">Sugestões</string>
   <string name="highlight">Destacar a sintaxe</string>
   <string name="theme">Tema</string>
   <string name="light">Claro</string>
   <string name="dark">Escuro</string>
-  <string name="retro">Retro</string>
+  <string name="retro">Retrô</string>
   <string name="size">Tamanho do texto</string>
   <string name="small">Pequeno</string>
   <string name="medium">Médio</string>
   <string name="large">Grande</string>
   <string name="typeface">Tipo da fonte</string>
   <string name="mono">Monospace</string>
-  <string name="normal">Proportional</string>
+  <string name="normal">Proporcional</string>
   <string name="about">Sobre</string>
 
   <!--
@@ -39,7 +39,7 @@
       here.
   -->
 
-  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nBrazilian Portuguese translation by <a href="https://github.com/aevw">aevw</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nCompilado %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nTradução para português brasileiro por <a href="https://github.com/aevw">aevw</a>\n\nLicença <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="choose">Digite um nome de arquivo</string>
