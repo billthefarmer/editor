@@ -5,20 +5,20 @@
 
   <string name="neu">Neu</string>
   <string name="edit">Bearbeiten</string>
-  <string name="view">Sehen</string>
+  <string name="view">Betrachten</string>
   <string name="open">Datei öffnen…</string>
   <string name="save">Speichern</string>
   <string name="openRecent">Zuletzt geöffnet</string>
   <string name="clearList">Liste leeren</string>
   <string name="search">Suchen…</string>
-  <string name="findAll">Finde alle…</string>
+  <string name="findAll">Alle finden…</string>
   <string name="saveAs">Speichern unter…</string>
-  <string name="viewMarkdown">Abschlag markdown…</string>
+  <string name="viewMarkdown">Markdown betrachten…</string>
   <string name="viewFile">Dateien anzeigen</string>
   <string name="autoSave">Automatisch speichern</string>
   <string name="wrap">Zeilenumbruch</string>
   <string name="suggest">Vorschläge</string>
-  <string name="highlight">Markieren Sie die Syntax</string>
+  <string name="highlight">Syntax hervorheben</string>
   <string name="theme">Thema</string>
   <string name="light">Hell</string>
   <string name="dark">Dunkel</string>
@@ -35,7 +35,8 @@
   <string name="version" formatted="false"><a
   href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuild
   %s\n\nCopyright \u00A9 2017 Bill Farmer\n\nDeutsche Übersetzung von
-  <a href="https://github.com/Markus00000">Markus Weimar</a>\n\nLizenz
+  <a href="https://github.com/Markus00000">Markus Weimar</a> und
+  <a href="https://github.com/AlexanderRitter02">Alexander Ritter</a>\n\nLizenz
   <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
