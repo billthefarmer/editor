@@ -20,14 +20,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '29.0.3'
+    buildToolsVersion '30.0.2'
 
     defaultConfig {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 14
         targetSdkVersion 28
-        versionName "1.49"
-        versionCode 149
+        versionName "1.50"
+        versionCode 150
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
