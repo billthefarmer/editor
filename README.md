@@ -144,3 +144,9 @@ editor will read the file into the default file. The default file in
 storage will not be overwritten. The **Save** item will save the file
 in the original location if possible. Use the **Save as** menu item to
 save the file elsewhere.
+
+## SD cards
+Android allows removable SD cards to be used like a USB stick or as
+part of the device storage. Editing files on a removable SD card not
+part of the device storage may work on some devices, but is not
+supported.
