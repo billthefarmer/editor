@@ -9,26 +9,26 @@
   <string name="open">Bestand openen…</string>
   <string name="save">Opslaan</string>
   <string name="openRecent">Recent bestand openen</string>
-  <string name="clearList">Duidelijke lijst</string>
+  <string name="clearList">Lijst wissen</string>
   <string name="search">Zoeken…</string>
   <string name="findAll">Alles zoeken…</string>
   <string name="saveAs">Opslaan als…</string>
   <string name="viewMarkdown">Markdown tonen…</string>
-  <string name="viewFile">Bekijk bestanden</string>
+  <string name="viewFile">Bestanden tonen</string>
   <string name="autoSave">Automatisch opslaan</string>
   <string name="wrap">Tekstomloop</string>
   <string name="suggest">Suggesties</string>
-  <string name="highlight">Markeer syntaxis</string>
+  <string name="highlight">Syntaxis markeren</string>
   <string name="theme">Thema</string>
   <string name="light">Licht</string>
   <string name="dark">Donker</string>
   <string name="retro">Retro</string>
-  <string name="size">Tekstgrootte</string>
+  <string name="size">Lettergrootte</string>
   <string name="small">Klein</string>
   <string name="medium">Normaal</string>
   <string name="large">Groot</string>
   <string name="typeface">Lettertype</string>
-  <string name="mono">Monospace</string>
+  <string name="mono">Vaste breedte</string>
   <string name="normal">Proportioneel</string>
   <string name="about">Over</string>
 
@@ -44,7 +44,7 @@
   <string name="loading">Bezig met laden…</string>
 
   <string name="modified">
-    Je hebt niet-opgeslagen wijzigingen. Wil je je wijzigingen opslaan?
+    Je hebt niet-opgeslagen wijzigingen. Wil je deze opslaan?
   </string>
 
   <string name="changedReload">
