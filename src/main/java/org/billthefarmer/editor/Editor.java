@@ -408,6 +408,10 @@ public class Editor extends Activity
 
         switch (theme)
         {
+        case LIGHT:
+            setTheme(R.style.AppTheme);
+            break;
+
         case DARK:
             setTheme(R.style.AppDarkTheme);
             break;
