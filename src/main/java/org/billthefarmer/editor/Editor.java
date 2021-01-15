@@ -917,7 +917,7 @@ public class Editor extends Activity
             openFile();
             break;
         case R.id.save:
-            saveFile();
+            save();
             break;
         case R.id.saveAs:
             saveAs();
@@ -1815,6 +1815,17 @@ public class Editor extends Activity
         }
 
         return uri;
+    }
+
+    // save
+    private void save()
+    {
+        Uri uri = Uri.fromFile(file);
+        if (NEW_FILE.equals(uri.getLastPathSegment()))
+            saveAs();
+
+        else
+            saveFile();
     }
 
     // saveFile
