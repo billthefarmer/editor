@@ -65,7 +65,9 @@ import android.widget.TextView;
 
 import android.support.v4.content.FileProvider;
 
-import org.markdownj.MarkdownProcessor;
+import org.commonmark.node.*;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -1337,9 +1339,14 @@ public class Editor extends Activity
     // viewMarkdown
     private void viewMarkdown()
     {
-        MarkdownProcessor mark = new MarkdownProcessor();
         String text = textView.getText().toString();
-        String html = mark.markdown(text);
+
+        // Use commonmark
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(text);
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+
+        String html = renderer.render(document);
 
         File file = new File(getCacheDir(), HTML_FILE);
         file.deleteOnExit();
