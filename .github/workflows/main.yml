@@ -1,0 +1,18 @@
+# Build on push and PR events
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: "actions/checkout@v2"
+
+      - name: Build with Gradle
+        run: ./gradlew build
