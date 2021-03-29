@@ -22,6 +22,7 @@
 package org.billthefarmer.editor;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -79,6 +80,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import java.lang.ref.WeakReference;
+
+import java.text.BreakIterator;
 import java.text.DateFormat;
 
 import java.util.ArrayList;
@@ -352,10 +355,12 @@ public class Editor extends Activity
     private Uri readUri;
     private String append;
     private EditText textView;
+    private TextView customView;
     private MenuItem searchItem;
     private SearchView searchView;
     private ScrollView scrollView;
     private Runnable updateHighlight;
+    private Runnable updateWordCount;
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
@@ -431,6 +436,12 @@ public class Editor extends Activity
 
         textView = findViewById(R.id.text);
         scrollView = findViewById(R.id.vscroll);
+
+        getActionBar().setCustomView(R.layout.custom);
+        getActionBar().setDisplayShowCustomEnabled(true);
+        customView = (TextView) getActionBar().getCustomView();
+
+        updateWordCount = () -> wordcountText();
 
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
@@ -518,6 +529,12 @@ public class Editor extends Activity
                     {
                         textView.removeCallbacks(updateHighlight);
                         textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                    }
+
+                    if (updateWordCount != null)
+                    {
+                        textView.removeCallbacks(updateWordCount);
+                        textView.postDelayed(updateWordCount, UPDATE_DELAY);
                     }
                 }
 
@@ -723,6 +740,7 @@ public class Editor extends Activity
 
         // Stop highlighting
         textView.removeCallbacks(updateHighlight);
+        textView.removeCallbacks(updateWordCount);
 
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
@@ -2362,6 +2380,43 @@ public class Editor extends Activity
                                  Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             break;
+        }
+    }
+
+    // isWord
+    private boolean isWord(String word)
+    {
+        if (word.length() == 1)
+            return Character.isLetterOrDigit(word.charAt(0));
+
+        return "" != word.trim();
+    }
+
+    // wordcountText
+    private void wordcountText()
+    {
+        BreakIterator iterator = BreakIterator.getWordInstance();
+        String text = textView.getText().toString();
+        iterator.setText(text);
+
+        int count = 0;
+        int start = 0;
+        int end = iterator.first();
+        while (end != BreakIterator.DONE)
+        {
+            String word = text.substring(start, end);
+            if (isWord(word))
+                count++;
+
+            start = end;
+            end = iterator.next();
+        }
+
+        if (customView != null)
+        {
+            String string = String.format(Locale.getDefault(), "%d\n%d",
+                                          count - 1, text.length());
+            customView.setText(string);
         }
     }
 
