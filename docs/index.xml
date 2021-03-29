@@ -6,12 +6,8 @@
     <description>Recent content on Editor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <copyright>Copyright &amp;copy; 2020 Bill Farmer</copyright>
-    <lastBuildDate>Thu, 26 Mar 2020 09:56:27 +0000</lastBuildDate>
-    
-	<atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Copyright &amp;copy; 2021 Bill Farmer</copyright>
+    <lastBuildDate>Mon, 29 Mar 2021 18:47:58 +0100</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Features</title>
       <link>https://billthefarmer.github.io/editor/introduction/features/</link>
@@ -105,6 +101,15 @@ Selection The type of highlighting is selected by file extension. Files with .c,
       <guid>https://billthefarmer.github.io/editor/using/mode-line/</guid>
       <description>If a line of text is found within the first or last two or three lines of the file which matches the mode line pattern, the mode of the editor will be changed after the file is loaded. The pattern is one or more text or punctuation characters, white space, the text ed: followed by one or more option patterns separated by white space.
 # ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]  The initial text or punctuation characters are intended to be used to hide the mode line from compilers and interpreters by commenting it out.</description>
+    </item>
+    
+    <item>
+      <title>Word Count</title>
+      <link>https://billthefarmer.github.io/editor/using/word-count/</link>
+      <pubDate>Mon, 29 Mar 2021 18:47:58 +0100</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/word-count/</guid>
+      <description>The file word count and character count are shown in the title bar.</description>
     </item>
     
     <item>

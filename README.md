@@ -114,6 +114,9 @@ line](Mode.md).
 # ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
 ```
 
+### Word count
+The file word count and character count are shown in the title bar.
+
 ### Extended selection
 If the file being edited is not a plain text file, selections created
 by double tapping or long touching on the text will be extended to

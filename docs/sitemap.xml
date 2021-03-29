@@ -1,103 +1,66 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://billthefarmer.github.io/editor/introduction/</loc>
     <lastmod>2020-03-04T15:38:25+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/introduction/features/</loc>
     <lastmod>2020-03-04T15:40:25+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/</loc>
     <lastmod>2020-03-04T16:05:59+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/toolbar/</loc>
     <lastmod>2020-03-04T16:06:10+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/open/</loc>
     <lastmod>2020-03-04T19:32:49+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/open-recent/</loc>
     <lastmod>2020-03-04T19:32:37+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/save-as/</loc>
     <lastmod>2020-03-04T19:33:09+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/search/</loc>
     <lastmod>2020-03-04T19:38:08+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/findall/</loc>
     <lastmod>2020-03-26T09:56:27+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/view-markdown/</loc>
     <lastmod>2020-03-04T19:40:02+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/highlight-syntax/</loc>
     <lastmod>2020-03-04T19:41:14+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/mode-line/</loc>
     <lastmod>2020-03-04T17:41:40+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://billthefarmer.github.io/editor/using/word-count/</loc>
+    <lastmod>2021-03-29T18:47:58+01:00</lastmod>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/extended-selection/</loc>
     <lastmod>2020-03-04T17:42:02+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/unsaved-file/</loc>
     <lastmod>2020-03-04T17:42:32+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/changed-file/</loc>
     <lastmod>2020-03-04T17:42:49+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/default-file/</loc>
     <lastmod>2020-03-04T17:43:09+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/using/shared-file/</loc>
     <lastmod>2020-03-04T17:43:39+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/</loc>
-    <lastmod>2020-03-26T09:56:27+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-29T18:47:58+01:00</lastmod>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://billthefarmer.github.io/editor/tags/</loc>
   </url>
-  
 </urlset>
