@@ -109,7 +109,7 @@ Selection The type of highlighting is selected by file extension. Files with .c,
       <pubDate>Mon, 29 Mar 2021 18:47:58 +0100</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/using/word-count/</guid>
-      <description>The file word count and character count are shown in the title bar.</description>
+      <description>The file word count and character count are shown in the toolbar.</description>
     </item>
     
     <item>
