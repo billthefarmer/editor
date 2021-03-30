@@ -22,7 +22,6 @@
 package org.billthefarmer.editor;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -81,7 +80,6 @@ import java.io.OutputStreamWriter;
 
 import java.lang.ref.WeakReference;
 
-import java.text.BreakIterator;
 import java.text.DateFormat;
 
 import java.util.ArrayList;
@@ -314,6 +312,8 @@ public class Editor extends Activity
         ("^\\S+\\s+ed:(.+)$", Pattern.MULTILINE);
     public final static Pattern OPTION_PATTERN = Pattern.compile
         ("(\\s+(no)?(vw|ww|sg|hs|th|ts|tf)(:\\w)?)", Pattern.MULTILINE);
+    public final static Pattern WORD_PATTERN = Pattern.compile
+        ("\\w+", Pattern.MULTILINE);
 
     private final static double KEYBOARD_RATIO = 0.25;
 
@@ -2383,39 +2383,20 @@ public class Editor extends Activity
         }
     }
 
-    // isWord
-    private boolean isWord(String word)
-    {
-        if (word.length() == 1)
-            return Character.isLetterOrDigit(word.charAt(0));
-
-        return "" != word.trim();
-    }
-
     // wordcountText
     private void wordcountText()
     {
-        BreakIterator iterator = BreakIterator.getWordInstance();
-        String text = textView.getText().toString();
-        iterator.setText(text);
-
-        int count = 0;
-        int start = 0;
-        int end = iterator.first();
-        while (end != BreakIterator.DONE)
+        int words = 0;
+        Matcher matcher = WORD_PATTERN.matcher(textView.getText());
+        while (matcher.find())
         {
-            String word = text.substring(start, end);
-            if (isWord(word))
-                count++;
-
-            start = end;
-            end = iterator.next();
+            words++;
         }
 
         if (customView != null)
         {
             String string = String.format(Locale.getDefault(), "%d\n%d",
-                                          count - 1, text.length());
+                                          words, textView.length());
             customView.setText(string);
         }
     }
