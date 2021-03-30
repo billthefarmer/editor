@@ -115,7 +115,7 @@ line](Mode.md).
 ```
 
 ### Word count
-The file word count and character count are shown in the title bar.
+The file word count and character count are shown in the toolbar.
 
 ### Extended selection
 If the file being edited is not a plain text file, selections created
