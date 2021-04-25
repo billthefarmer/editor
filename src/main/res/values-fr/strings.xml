@@ -22,6 +22,7 @@
   <string name="theme">Thème</string>
   <string name="light">Clair</string>
   <string name="dark">Foncé</string>
+  <string name="black">Noir</string>
   <string name="retro">Rétro</string>
   <string name="size">Taille de la police</string>
   <string name="small">Petite</string>

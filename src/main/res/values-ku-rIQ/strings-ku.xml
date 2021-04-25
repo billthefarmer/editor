@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="appName">دەستکاریکەر</string>
+  <string name="appName">دەستکاریکەر</string>
 
-    <string name="neu">نوێ</string>
-    <string name="edit">دەستکاریکردن</string>
-    <string name="view">پیشاندان</string>
-    <string name="open">فایل بکەرەوە</string>
-    <string name="save">پاشەکەوتکردن</string>
-    <string name="openRecent">کردنەوەی نوێترین</string>
-    <string name="clearList">لیستەکە پاکەرەوە</string>
-    <string name="search">گەڕان..،</string>
-    <string name="findAll">هەموو بدۆزەرەوە</string>
-    <string name="saveAs">پاشەکەوتکردن وەک</string>
-    <string name="viewMarkdown">مارکداون پیشانبدە</string>
-    <string name="viewFile">فایلەکان پیشانبدە</string>
-    <string name="autoSave">پاشەکەتکردنی ئۆتۆماتیک</string>
-    <string name="wrap">پێچانەوەی ووشە</string>
-    <string name="suggest">پێشنیازەکان</string>
-    <string name="highlight">بەرچاوکردنی ڕستەنووسی</string>
-    <string name="theme">ڕووکار</string>
-    <string name="light">کاڵ</string>
-    <string name="dark">تۆخ</string>
-    <string name="retro">ریترۆ</string>
-    <string name="size">قەبارەی دەق</string>
-    <string name="small">بچووک</string>
-    <string name="medium">مام ناوەند</string>
-    <string name="large">گەورە</string>
-    <string name="typeface">تایپفەیس</string>
-    <string name="mono">مۆنۆسپایس</string>
-    <string name="normal">هاوڕێژە</string>
-    <string name="about">سەبارەت</string>
+  <string name="neu">نوێ</string>
+  <string name="edit">دەستکاریکردن</string>
+  <string name="view">پیشاندان</string>
+  <string name="open">فایل بکەرەوە</string>
+  <string name="save">پاشەکەوتکردن</string>
+  <string name="openRecent">کردنەوەی نوێترین</string>
+  <string name="clearList">لیستەکە پاکەرەوە</string>
+  <string name="search">گەڕان..،</string>
+  <string name="findAll">هەموو بدۆزەرەوە</string>
+  <string name="saveAs">پاشەکەوتکردن وەک</string>
+  <string name="viewMarkdown">مارکداون پیشانبدە</string>
+  <string name="viewFile">فایلەکان پیشانبدە</string>
+  <string name="autoSave">پاشەکەتکردنی ئۆتۆماتیک</string>
+  <string name="wrap">پێچانەوەی ووشە</string>
+  <string name="suggest">پێشنیازەکان</string>
+  <string name="highlight">بەرچاوکردنی ڕستەنووسی</string>
+  <string name="theme">ڕووکار</string>
+  <string name="light">کاڵ</string>
+  <string name="dark">تۆخ</string>
+  <string name="black">ڕهش</string>
+  <string name="retro">ریترۆ</string>
+  <string name="size">قەبارەی دەق</string>
+  <string name="small">بچووک</string>
+  <string name="medium">مام ناوەند</string>
+  <string name="large">گەورە</string>
+  <string name="typeface">تایپفەیس</string>
+  <string name="mono">مۆنۆسپایس</string>
+  <string name="normal">هاوڕێژە</string>
+  <string name="about">سەبارەت</string>
 
-    <!--
-        Note for translators: You don't need to translate all these
-        translation credits below. Just the version, copyright, credit
-        for your translation and the licence. Also add your translation
-        credit here.
-    -->
-    <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 Bill Farmer\n\nSorani Kurdish translation by <a href="https://github.com/rawandsaeed">Rawand Saeed</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
-    </string>
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 Bill Farmer\n\nSorani Kurdish translation by <a href="https://github.com/rawandsaeed">Rawand Saeed</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
 
-    <string name="choose">ناوی فایل هەڵبژێرە</string>
-    <string name="loading">لۆدین…</string>
+  <string name="choose">ناوی فایل هەڵبژێرە</string>
+  <string name="loading">لۆدین…</string>
 
-    <string name="modified">
+  <string name="modified">
     گۆڕانی پاشەکەتکردنت هەیە. دەتەوێت گۆڕانەکانت پاشەکەت بکەیت؟
   </string>
 
-    <string name="changedReload">
+  <string name="changedReload">
     فایلەکە گۆڕاوە، دەتەوێت باریبکەیتەوە؟
   </string>
 
-    <string name="changedOverwrite">
+  <string name="changedOverwrite">
     فایلەکە گۆڕاوە، دەتەوێث لەسەری بنووسیتەوە؟
   </string>
 
-    <string name="ok">OK</string>
-    <string name="reload">بارکردنەوە</string>
-    <string name="overwrite">نووسینەوەلەسەری</string>
-    <string name="discard">لابردن</string>
-    <string name="cancel">هەڵوەشاندنەوە</string>
+  <string name="ok">OK</string>
+  <string name="reload">بارکردنەوە</string>
+  <string name="overwrite">نووسینەوەلەسەری</string>
+  <string name="discard">لابردن</string>
+  <string name="cancel">هەڵوەشاندنەوە</string>
 
 </resources>

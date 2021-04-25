@@ -332,7 +332,8 @@ public class Editor extends Activity
 
     private final static int LIGHT = 1;
     private final static int DARK  = 2;
-    private final static int RETRO = 3;
+    private final static int BLACK = 3;
+    private final static int RETRO = 4;
 
     private final static int SMALL  = 12;
     private final static int MEDIUM = 18;
@@ -421,6 +422,10 @@ public class Editor extends Activity
 
         case DARK:
             setTheme(R.style.AppDarkTheme);
+            break;
+
+        case BLACK:
+            setTheme(R.style.AppBlackTheme);
             break;
 
         case RETRO:
@@ -841,6 +846,10 @@ public class Editor extends Activity
             menu.findItem(R.id.dark).setChecked(true);
             break;
 
+        case BLACK:
+            menu.findItem(R.id.black).setChecked(true);
+            break;
+
         case RETRO:
             menu.findItem(R.id.retro).setChecked(true);
             break;
@@ -969,6 +978,9 @@ public class Editor extends Activity
             break;
         case R.id.dark:
             darkClicked(item);
+            break;
+        case R.id.black:
+            blackClicked(item);
             break;
         case R.id.retro:
             retroClicked(item);
@@ -1458,6 +1470,14 @@ public class Editor extends Activity
     private void darkClicked(MenuItem item)
     {
         theme = DARK;
+        item.setChecked(true);
+	recreate(this);
+    }
+
+    // blackClicked
+    private void blackClicked(MenuItem item)
+    {
+        theme = BLACK;
         item.setChecked(true);
 	recreate(this);
     }
@@ -2544,6 +2564,15 @@ public class Editor extends Activity
                             if (theme != DARK)
                             {
                                 theme = DARK;
+                                change = true;
+                            }
+                        }
+
+                        else if (":b".equals(matcher.group(4)))
+                        {
+                            if (theme != BLACK)
+                            {
+                                theme = BLACK;
                                 change = true;
                             }
                         }

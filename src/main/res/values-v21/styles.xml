@@ -14,6 +14,10 @@
     <!-- API 21 theme customizations can go here. -->
   </style>
 
+  <style name="AppBlackBaseTheme" parent="android:Theme.Material">
+    <!-- API 21 theme customizations can go here. -->
+  </style>
+
   <style name="AppRetroBaseTheme" parent="android:Theme.Material">
     <!-- API 21 theme customizations can go here. -->
   </style>

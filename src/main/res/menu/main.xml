@@ -100,6 +100,10 @@
             android:showAsAction="never"
             android:title="@string/dark" />
         <item
+            android:id="@+id/black"
+            android:showAsAction="never"
+            android:title="@string/black" />
+        <item
             android:id="@+id/retro"
             android:showAsAction="never"
             android:title="@string/retro" />

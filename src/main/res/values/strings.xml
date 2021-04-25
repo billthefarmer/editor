@@ -22,6 +22,7 @@
   <string name="theme">Theme</string>
   <string name="light">Light</string>
   <string name="dark">Dark</string>
+  <string name="black">Black</string>
   <string name="retro">Retro</string>
   <string name="size">Text size</string>
   <string name="small">Small</string>
