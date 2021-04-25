@@ -14,7 +14,7 @@
       <pubDate>Wed, 04 Mar 2020 15:40:25 +0000</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/introduction/features/</guid>
-      <description> File chooser Default file View markdown in browser or html viewer Regular expression text search Optional syntax highlighting Open recent files from menu Optionally view files Optional auto save Optional Word wrap Light/Dark/Retro themes Small/Medium/Large font size Monospace/Proportional font faces  </description>
+      <description> File chooser Default file View markdown in browser or html viewer Regular expression text search Optional syntax highlighting Open recent files from menu Optionally view files Optional auto save Optional Word wrap Light/Dark/Black/Retro themes Small/Medium/Large font size Monospace/Proportional font faces  </description>
     </item>
     
     <item>
@@ -25,7 +25,7 @@
       <guid>https://billthefarmer.github.io/editor/using/toolbar/</guid>
       <description>There are five toolbar items which may appear:
  Edit – Edit the current read only file View – View the current file read only Save – Save the current file if modified New – Start a new empty file Open – Open a text file using a chooser  And on the menu:
- Open recent – Pop up a list of recent files  Clear list – Clear list of recent files   Save as – Save the current file with a new name Search – Interactive search of text using a regular expression View markdown – View markdown in browser or html viewer View files – Open files read only for viewing Auto save – Save the current file on app pause Word wrap – Limit text width to screen width and word wrap Suggestions – Text input and spelling suggestions Highlight syntax – Highlight programming language syntax Theme – Choose theme  Light Dark Retro   Text size – Choose text size  Small Medium Large   Typeface – Choose typeface  Monospace Proportional   About – Show version, copyright and licence  </description>
+ Open recent – Pop up a list of recent files  Clear list – Clear list of recent files   Save as – Save the current file with a new name Search – Interactive search of text using a regular expression View markdown – View markdown in browser or html viewer View files – Open files read only for viewing Auto save – Save the current file on app pause Word wrap – Limit text width to screen width and word wrap Suggestions – Text input and spelling suggestions Highlight syntax – Highlight programming language syntax Theme – Choose theme  Light Dark Black Retro   Text size – Choose text size  Small Medium Large   Typeface – Choose typeface  Monospace Proportional   About – Show version, copyright and licence  </description>
     </item>
     
     <item>
@@ -100,7 +100,7 @@ Selection The type of highlighting is selected by file extension. Files with .c,
       
       <guid>https://billthefarmer.github.io/editor/using/mode-line/</guid>
       <description>If a line of text is found within the first or last two or three lines of the file which matches the mode line pattern, the mode of the editor will be changed after the file is loaded. The pattern is one or more text or punctuation characters, white space, the text ed: followed by one or more option patterns separated by white space.
-# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]  The initial text or punctuation characters are intended to be used to hide the mode line from compilers and interpreters by commenting it out.</description>
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|b|r] [ts:l|m|s] [tf:m|p]  The initial text or punctuation characters are intended to be used to hide the mode line from compilers and interpreters by commenting it out.</description>
     </item>
     
     <item>

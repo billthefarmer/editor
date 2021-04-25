@@ -7,7 +7,7 @@ more text or punctuation characters, white space, the text `ed:`
 followed by one or more option patterns separated by white space.
 
 ```
-# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|r] [ts:l|m|s] [tf:m|p]
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|b|r] [ts:l|m|s] [tf:m|p]
 ```
 
 The initial text or punctuation characters are intended to be used to
@@ -20,7 +20,7 @@ The option patterns are:
  * **[no]ww** &ndash; Word wrap
  * **[no]sg** &ndash; Suggestions
  * **[no]hs** &ndash; Syntax highlighting
- * **th:l|d|r** &ndash; Theme &ndash; light, dark or retro
+ * **th:l|d|b|r** &ndash; Theme &ndash; light, dark, black or retro
  * **ts:l|m|s** &ndash; Text size &ndash; large, medium or small
  * **tf:m|p** &ndash; Typeface &ndash; monospace or proportional
 
