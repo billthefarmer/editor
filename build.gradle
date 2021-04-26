@@ -27,8 +27,8 @@ android {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 14
         targetSdkVersion 28
-        versionName "1.53"
-        versionCode 153
+        versionName "1.54"
+        versionCode 154
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
@@ -46,5 +46,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.atlassian.commonmark:commonmark:0.16.1'
+    implementation 'org.commonmark:commonmark:0.17.1'
 }
