@@ -330,6 +330,9 @@ public class Editor extends Activity
     private final static int REQUEST_SAVE = 2;
     private final static int REQUEST_OPEN = 3;
 
+    private final static int OPEN_DOCUMENT   = 1;
+    private final static int CREATE_DOCUMENT = 2;
+
     private final static int LIGHT = 1;
     private final static int DARK  = 2;
     private final static int BLACK = 3;
@@ -1041,6 +1044,26 @@ public class Editor extends Activity
             finish();
     }
 
+    // onActivityResult
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data)
+    {
+        if (resultCode == RESULT_CANCELED)
+            return;
+
+        switch (requestCode)
+        {
+        case OPEN_DOCUMENT:
+            break;
+
+        case CREATE_DOCUMENT:
+            content = data.getData();
+            saveFile();
+            break;
+        }
+    }
+
     // editClicked
     private void editClicked(MenuItem item)
     {
@@ -1286,6 +1309,18 @@ public class Editor extends Activity
     // saveAs
     private void saveAs()
     {
+        if (BuildConfig.DEBUG)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            {
+                Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                intent.setType(TEXT_PLAIN);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent, CREATE_DOCUMENT);
+                return;
+            }
+        }
+
         // Remove path prefix
         String name =
             path.replaceFirst(Environment
