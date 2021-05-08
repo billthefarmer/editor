@@ -11,3 +11,8 @@ The parent folder, if it exists, will appear first in the list. Touch
 that folder to move up the directory tree. If a folder is not
 accessible, the chooser will show the parent folder, if it exists, and
 the external storage folder (`/storage/emulated/0`).
+
+Use the **Storage** button to open files using the android file
+manager. This should ensure that files on removeable SD cards can be
+saved using the **Save** button. The file manager may refuse to open
+some types of text files not recognised by android.

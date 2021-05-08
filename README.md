@@ -153,6 +153,8 @@ save the file elsewhere.
 
 ## SD cards
 Android allows removable SD cards to be used like a USB stick or as
-part of the device storage. Editing files on a removable SD card not
-part of the device storage may work on some devices, but is not
-supported.
+part of the device storage. Files opened using the file chooser on a
+removable SD card may not save successfully using the save button. Use
+the **Save as** menu item. Alternatively use the **Storage** button on
+the file chooser dialog to open the file using the android file
+manager. See [File Chooser](Chooser.md).
