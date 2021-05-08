@@ -76,10 +76,7 @@ initially be read only. The last entry, **Clear list**, will clear the
 list.
 
 ### Save as
-Enter a new file name in the dialog that pops up. Absolute names
-starting with a slash '/' will be saved in that exact path if
-possible. Names without a starting slash will be saved relative to the
-main public folder, `/sdcard/`, or `/storage/emulated/0/`.
+Use the android file manager to save the file.
 
 ### Search
 Enter search text in the field that pops up in the toolbar. The first
