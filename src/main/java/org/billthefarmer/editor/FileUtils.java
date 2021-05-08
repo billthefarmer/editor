@@ -29,6 +29,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
@@ -315,6 +316,48 @@ public class FileUtils
     }
 
     /**
+     * Get the display name for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the
+     *                      query.
+     * @return The display name of the file referred to by the Uri
+     * @author Bill Farmer
+     */
+    public static String getDisplayName(Context context, Uri uri,
+                                        String selection,
+                                        String[] selectionArgs)
+    {
+        final String column = OpenableColumns.DISPLAY_NAME;
+        final String[] projection =
+            {
+                column
+            };
+
+        try (Cursor cursor = context.getContentResolver()
+             .query(uri, projection, selection, selectionArgs, null))
+        {
+            if (cursor != null && cursor.moveToFirst())
+            {
+                if (BuildConfig.DEBUG)
+                    DatabaseUtils.dumpCursor(cursor);
+
+                final int column_index = cursor.getColumnIndex(column);
+                if (column_index >= 0)
+                    return cursor.getString(column_index);
+            }
+        }
+        catch (Exception e)
+        {
+        }
+
+        return null;
+    }
+
+    /**
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
@@ -331,7 +374,6 @@ public class FileUtils
                                        String selection,
                                        String[] selectionArgs)
     {
-
         final String column = "_data";
         final String[] projection =
         {
@@ -339,7 +381,7 @@ public class FileUtils
         };
 
         try (Cursor cursor = context.getContentResolver()
-                                 .query(uri, projection, selection, selectionArgs, null))
+             .query(uri, projection, selection, selectionArgs, null))
         {
             if (cursor != null && cursor.moveToFirst())
             {

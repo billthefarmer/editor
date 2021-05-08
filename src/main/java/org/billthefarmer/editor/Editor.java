@@ -125,6 +125,7 @@ public class Editor extends Activity
 
     public final static String TEXT_HTML = "text/html";
     public final static String TEXT_PLAIN = "text/plain";
+    public final static String TEXT_WILD = "text/*";
 
     public final static Pattern PATTERN_CHARS =
         Pattern.compile("[\\(\\)\\[\\]\\{\\}\\<\\>\"'`]");
@@ -330,6 +331,9 @@ public class Editor extends Activity
     private final static int REQUEST_SAVE = 2;
     private final static int REQUEST_OPEN = 3;
 
+    private final static int OPEN_DOCUMENT   = 1;
+    private final static int CREATE_DOCUMENT = 2;
+
     private final static int LIGHT = 1;
     private final static int DARK  = 2;
     private final static int BLACK = 3;
@@ -350,10 +354,10 @@ public class Editor extends Activity
     private final static int SH_SYNTAX   = 5;
     private final static int DEF_SYNTAX  = 6;
 
+    private Uri uri;
     private File file;
     private String path;
     private Uri content;
-    private Uri readUri;
     private String append;
     private EditText textView;
     private TextView customView;
@@ -375,7 +379,6 @@ public class Editor extends Activity
     private boolean wrap = false;
     private boolean suggest = true;
 
-    private boolean isApp = false;
     private boolean changed = false;
 
     private long modified;
@@ -483,6 +486,7 @@ public class Editor extends Activity
 
             getActionBar().setDisplayHomeAsUpEnabled(true);
             break;
+
         case Intent.ACTION_SEND:
             if (savedInstanceState == null)
             {
@@ -499,14 +503,11 @@ public class Editor extends Activity
                 if (uri != null)
                     readFile(uri);
             }
-
-            isApp = true;
             break;
+
         case Intent.ACTION_MAIN:
             if (savedInstanceState == null)
                 defaultFile(null);
-
-            isApp = true;
             break;
         }
 
@@ -716,9 +717,13 @@ public class Editor extends Activity
         invalidateOptionsMenu();
 
         file = new File(path);
-        final Uri uri = Uri.fromFile(file);
+        uri = Uri.fromFile(file);
 
-        setTitle(uri.getLastPathSegment());
+        if (content != null)
+            setTitle(FileUtils.getDisplayName(this, content, null, null));
+
+        else
+            setTitle(uri.getLastPathSegment());
 
         checkHighlight();
 
@@ -827,8 +832,6 @@ public class Editor extends Activity
         menu.findItem(R.id.view).setVisible(edit);
 
         menu.findItem(R.id.save).setVisible(changed);
-        menu.findItem(R.id.open).setVisible(isApp);
-        menu.findItem(R.id.openRecent).setVisible(isApp);
 
         menu.findItem(R.id.viewFile).setChecked(view);
         menu.findItem(R.id.autoSave).setChecked(save);
@@ -1041,6 +1044,28 @@ public class Editor extends Activity
             finish();
     }
 
+    // onActivityResult
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data)
+    {
+        if (resultCode == RESULT_CANCELED)
+            return;
+
+        switch (requestCode)
+        {
+        case OPEN_DOCUMENT:
+            content = data.getData();
+            readFile(content);
+            break;
+
+        case CREATE_DOCUMENT:
+            content = data.getData();
+            saveFile();
+            break;
+        }
+    }
+
     // editClicked
     private void editClicked(MenuItem item)
     {
@@ -1133,7 +1158,7 @@ public class Editor extends Activity
         changed = false;
 
         file = getNewFile();
-        Uri uri = Uri.fromFile(file);
+        uri = Uri.fromFile(file);
         path = uri.getPath();
 
         setTitle(uri.getLastPathSegment());
@@ -1160,7 +1185,7 @@ public class Editor extends Activity
     {
         file = getDefaultFile();
 
-        Uri uri = Uri.fromFile(file);
+        uri = Uri.fromFile(file);
         path = uri.getPath();
 
         if (file.exists())
@@ -1174,8 +1199,7 @@ public class Editor extends Activity
             if (text != null)
                 textView.append(text);
 
-            String title = uri.getLastPathSegment();
-            setTitle(title);
+            setTitle(uri.getLastPathSegment());
         }
     }
 
@@ -1259,7 +1283,7 @@ public class Editor extends Activity
         // Check it exists
         if (file.exists())
         {
-            final Uri uri = Uri.fromFile(file);
+            Uri uri = Uri.fromFile(file);
 
             if (changed)
                 alertDialog(R.string.openRecent, R.string.modified,
@@ -1286,6 +1310,15 @@ public class Editor extends Activity
     // saveAs
     private void saveAs()
     {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
+            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+            intent.setType(TEXT_WILD);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(intent, CREATE_DOCUMENT);
+            return;
+        }
+
         // Remove path prefix
         String name =
             path.replaceFirst(Environment
@@ -1313,7 +1346,7 @@ public class Editor extends Activity
                         File(Environment.getExternalStorageDirectory(), string);
 
                 // Set interface title
-                Uri uri = Uri.fromFile(file);
+                uri = Uri.fromFile(file);
                 String title = uri.getLastPathSegment();
                 setTitle(title);
 
@@ -1671,14 +1704,24 @@ public class Editor extends Activity
         // Pop up dialog
         String title = FOLDER + dir.getPath();
         openDialog(title, list, (dialog, which) ->
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
+                DialogInterface.BUTTON_NEUTRAL == which)
             {
-                File selection = list.get(which);
-                if (selection.isDirectory())
-                    getFile(selection);
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setType(TEXT_WILD);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent, OPEN_DOCUMENT);
+                return;
+            }
 
-                else
-                    readFile(Uri.fromFile(selection));
-            });
+            File selection = list.get(which);
+            if (selection.isDirectory())
+                getFile(selection);
+
+            else
+                readFile(Uri.fromFile(selection));
+        });
     }
 
     // getList
@@ -1692,7 +1735,6 @@ public class Editor extends Activity
             // Create a list with just the parent folder and the
             // external storage folder
             list = new ArrayList<File>();
-
             if (dir.getParentFile() == null)
                 list.add(dir);
 
@@ -1700,6 +1742,7 @@ public class Editor extends Activity
                 list.add(dir.getParentFile());
 
             list.add(Environment.getExternalStorageDirectory());
+
             return list;
         }
 
@@ -1737,7 +1780,10 @@ public class Editor extends Activity
         FileAdapter adapter = new FileAdapter(builder.getContext(), list);
         builder.setAdapter(adapter, listener);
 
-        // Add the button
+        // Add storage button
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            builder.setNeutralButton(R.string.storage, listener);
+        // Add cancel button
         builder.setNegativeButton(R.string.cancel, null);
 
         // Create the Dialog
@@ -1768,7 +1814,7 @@ public class Editor extends Activity
                                           .READ_EXTERNAL_STORAGE) &&
                     grantResults[i] == PackageManager.PERMISSION_GRANTED)
                     // Granted, read file
-                    readFile(readUri);
+                    readFile(uri);
             break;
 
         case REQUEST_OPEN:
@@ -1796,37 +1842,39 @@ public class Editor extends Activity
                 requestPermissions(new String[]
                     {Manifest.permission.WRITE_EXTERNAL_STORAGE,
                      Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ);
-                readUri = uri;
+                this.uri = uri;
                 return;
             }
         }
 
-        content = null;
-
         // Attempt to resolve content uri
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
+        {
+            content = uri;
             uri = resolveContent(uri);
+        }
+
+        else
+            content = null;
 
         // Read into default file if unresolved
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
         {
-            content = uri;
             file = getDefaultFile();
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
 
-            String title = uri.getLastPathSegment();
-            setTitle(title);
+            setTitle(FileUtils.getDisplayName(this, content, null, null));
         }
 
         // Read file
         else
         {
+            this.uri = uri;
             path = uri.getPath();
             file = new File(path);
 
-            String title = uri.getLastPathSegment();
-            setTitle(title);
+            setTitle(uri.getLastPathSegment());
         }
 
         textView.setText(R.string.loading);
@@ -1858,9 +1906,9 @@ public class Editor extends Activity
     // saveCheck
     private void saveCheck()
     {
-        Uri uri = Uri.fromFile(file);
-        Uri nuw = Uri.fromFile(getNewFile());
-        if (nuw.getPath().equals(uri.getPath()))
+        uri = Uri.fromFile(file);
+        Uri newUri = Uri.fromFile(getNewFile());
+        if (newUri.getPath().equals(uri.getPath()))
             saveAs();
 
         else
@@ -1900,7 +1948,10 @@ public class Editor extends Activity
                 saveFile(file);
 
             else
+            {
                 saveFile(content);
+                content = null;
+            }
         }
     }
 
