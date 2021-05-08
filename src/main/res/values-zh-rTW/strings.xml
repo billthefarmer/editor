@@ -8,6 +8,7 @@
   <string name="view">檢視</string>
   <string name="open">開啟檔案…</string>
   <string name="save">儲存</string>
+  <string name="storage">存取裝置中的相片</string>
   <string name="openRecent">最近開啟</string>
   <string name="clearList">清除列表</string>
   <string name="search">搜尋…</string>

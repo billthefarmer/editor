@@ -8,6 +8,7 @@
   <string name="view">View</string>
   <string name="open">Open file…</string>
   <string name="save">Save</string>
+  <string name="storage">Storage</string>
   <string name="openRecent">Open recent</string>
   <string name="clearList">Clear list</string>
   <string name="search">Search…</string>

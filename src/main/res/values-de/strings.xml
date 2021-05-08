@@ -8,6 +8,7 @@
   <string name="view">Betrachten</string>
   <string name="open">Datei öffnen…</string>
   <string name="save">Speichern</string>
+  <string name="storage">Speicher</string>
   <string name="openRecent">Zuletzt geöffnet</string>
   <string name="clearList">Liste leeren</string>
   <string name="search">Suchen…</string>

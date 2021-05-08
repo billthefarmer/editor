@@ -1,18 +1,17 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath 'com.android.tools.build:gradle:4.2.0'
     }
 }
 
 allprojects {
     repositories {
         mavenCentral()
-        jcenter()
         google()
     }
 }
@@ -21,7 +20,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '29.0.3'
 
     defaultConfig {
         applicationId "org.billthefarmer.editor"
@@ -40,11 +38,11 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ContentDescription', 'OldTargetApi',
-            'NonConstantResourceId'
-        // abortOnError false
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion'
+        abortOnError false
     }
 }
 
 dependencies {
-    implementation 'com.atlassian.commonmark:commonmark:0.16.1'
+    implementation 'org.commonmark:commonmark:0.17.1'
 }

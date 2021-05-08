@@ -151,10 +151,6 @@ public class FileAdapter extends BaseAdapter
                 if (position == 0)
                     name.setCompoundDrawablesWithIntrinsicBounds(parentId,
                                                                  0, 0, 0);
-
-                else if (file.equals(Environment.getExternalStorageDirectory()))
-                    name.setCompoundDrawablesWithIntrinsicBounds(externalId,
-                                                                 0, 0, 0);
                 else
                     name.setCompoundDrawablesWithIntrinsicBounds(folderId,
                                                                  0, 0, 0);

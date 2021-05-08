@@ -8,6 +8,7 @@
   <string name="view">查看</string>
   <string name="open">打开文件…</string>
   <string name="save">保存</string>
+  <string name="storage">存储空间</string>
   <string name="openRecent">打开最近文本</string>
   <string name="clearList">清除列表</string>
   <string name="search">查找…</string>
