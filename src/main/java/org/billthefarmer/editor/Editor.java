@@ -1370,7 +1370,7 @@ public class Editor extends Activity
         builder.setPositiveButton(R.string.save, listener);
         builder.setNegativeButton(R.string.cancel, listener);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            builder.setNeutralButton(R.string.cancel, listener);
+            builder.setNeutralButton(R.string.storage, listener);
 
         // Create edit text
         Context context = builder.getContext();
