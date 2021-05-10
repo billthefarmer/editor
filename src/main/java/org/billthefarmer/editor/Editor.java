@@ -1310,15 +1310,6 @@ public class Editor extends Activity
     // saveAs
     private void saveAs()
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-        {
-            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-            intent.setType(TEXT_WILD);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            startActivityForResult(intent, CREATE_DOCUMENT);
-            return;
-        }
-
         // Remove path prefix
         String name =
             path.replaceFirst(Environment
@@ -1352,6 +1343,17 @@ public class Editor extends Activity
 
                 path = file.getPath();
                 saveFile();
+                break;
+
+            case DialogInterface.BUTTON_NEUTRAL:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                {
+                    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                    intent.setType(TEXT_WILD);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    startActivityForResult(intent, CREATE_DOCUMENT);
+                }
+                break;
             }
         });
     }
@@ -1367,6 +1369,8 @@ public class Editor extends Activity
         // Add the buttons
         builder.setPositiveButton(R.string.save, listener);
         builder.setNegativeButton(R.string.cancel, listener);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            builder.setNeutralButton(R.string.cancel, listener);
 
         // Create edit text
         Context context = builder.getContext();
@@ -1906,7 +1910,7 @@ public class Editor extends Activity
     // saveCheck
     private void saveCheck()
     {
-        uri = Uri.fromFile(file);
+        Uri uri = Uri.fromFile(file);
         Uri newUri = Uri.fromFile(getNewFile());
         if (newUri.getPath().equals(uri.getPath()))
             saveAs();

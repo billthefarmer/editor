@@ -419,7 +419,7 @@ public class FileUtils
     {
 
         if (BuildConfig.DEBUG)
-            Log.d(TAG + " File",
+            Log.d(TAG, "File: " +
                   "Authority: " + uri.getAuthority() +
                   ", Fragment: " + uri.getFragment() +
                   ", Port: " + uri.getPort() +

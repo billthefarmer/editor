@@ -76,7 +76,8 @@ initially be read only. The last entry, **Clear list**, will clear the
 list.
 
 ### Save as
-Use the android file manager to save the file.
+Use the dialog and the **Save** button or the **Storage** button to
+use the android file manager to save the file.
 
 ### Search
 Enter search text in the field that pops up in the toolbar. The first
