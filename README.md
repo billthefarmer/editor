@@ -153,6 +153,7 @@ save the file elsewhere.
 Android allows removable SD cards to be used like a USB stick or as
 part of the device storage. Files opened using the file chooser on a
 removable SD card may not save successfully using the save button. Use
-the **Save as** menu item. Alternatively use the **Storage** button on
+the **Save as** menu item and the **Storage** button to save it using
+the android file manager. Alternatively use the **Storage** button on
 the file chooser dialog to open the file using the android file
 manager. See [File Chooser](Chooser.md).
