@@ -1061,6 +1061,7 @@ public class Editor extends Activity
 
         case CREATE_DOCUMENT:
             content = data.getData();
+            setTitle(FileUtils.getDisplayName(this, content, null, null));
             saveFile();
             break;
         }
