@@ -55,6 +55,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -1794,6 +1795,15 @@ public class Editor extends Activity
         // Create the Dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        View v = dialog.findViewById(android.R.id.content);
+        while (v instanceof ViewGroup)
+            v = ((ViewGroup)v).getChildAt(0);
+        ViewGroup p = (ViewGroup) v.getParent();
+        p.removeAllViews();
+        p.addView(new View(builder.getContext()));
+
+        Log.d(TAG, "View: " + v + ", " + (v instanceof ViewGroup));
     }
 
     // onRequestPermissionsResult
