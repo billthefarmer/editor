@@ -50,6 +50,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,7 +60,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -1703,17 +1707,22 @@ public class Editor extends Activity
     private void getFile(File dir)
     {
         // Get list of files
-        List<File> list = getList(dir);
-        if (list == null)
+        List<File> fileList = getList(dir);
+        if (fileList == null)
             return;
 
+        // Get list of folders
+        List<String> dirList = new ArrayList<String>();
+        dirList.add(File.separator);
+        dirList.addAll(Uri.fromFile(dir).getPathSegments());
+
         // Pop up dialog
-        String title = FOLDER + dir.getPath();
-        openDialog(title, list, (dialog, which) ->
+        openDialog(dirList, fileList, (dialog, which) ->
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
                 DialogInterface.BUTTON_NEUTRAL == which)
             {
+                // Use storage
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.setType(TEXT_WILD);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -1721,12 +1730,20 @@ public class Editor extends Activity
                 return;
             }
 
-            File selection = list.get(which);
+            File selection = fileList.get(which);
             if (selection.isDirectory())
                 getFile(selection);
 
             else
                 readFile(Uri.fromFile(selection));
+        }, (v) ->
+        {
+            int index = v.getId();
+            File file = new File(File.separator);
+            for (int i = 0; i <= index; i++)
+                file = new File(file, dirList.get(i));
+            if (file.isDirectory())
+                getFile(file);
         });
     }
 
@@ -1776,19 +1793,20 @@ public class Editor extends Activity
     }
 
     // openDialog
-    private void openDialog(String title, List<File> list,
-                            DialogInterface.OnClickListener listener)
+    private void openDialog(List<String> dirList, List<File> fileList,
+                            DialogInterface.OnClickListener fileListen,
+                            View.OnClickListener dirListen)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title);
+        builder.setTitle("Test");
 
         // Add the adapter
-        FileAdapter adapter = new FileAdapter(builder.getContext(), list);
-        builder.setAdapter(adapter, listener);
+        FileAdapter adapter = new FileAdapter(builder.getContext(), fileList);
+        builder.setAdapter(adapter, fileListen);
 
         // Add storage button
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            builder.setNeutralButton(R.string.storage, listener);
+            builder.setNeutralButton(R.string.storage, fileListen);
         // Add cancel button
         builder.setNegativeButton(R.string.cancel, null);
 
@@ -1796,14 +1814,38 @@ public class Editor extends Activity
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        View v = dialog.findViewById(android.R.id.content);
-        while (v instanceof ViewGroup)
-            v = ((ViewGroup)v).getChildAt(0);
-        ViewGroup p = (ViewGroup) v.getParent();
-        p.removeAllViews();
-        p.addView(new View(builder.getContext()));
-
-        Log.d(TAG, "View: " + v + ", " + (v instanceof ViewGroup));
+        // Find the content view
+        View view = dialog.findViewById(android.R.id.content);
+        // Find the title view
+        while (view instanceof ViewGroup)
+            view = ((ViewGroup)view).getChildAt(0);
+        // Get the parent view
+        ViewGroup parent = (ViewGroup) view.getParent();
+        // Replace content with scroll view
+        parent.removeAllViews();
+        HorizontalScrollView scroll = new
+            HorizontalScrollView(dialog.getContext());
+        parent.addView(scroll);
+        // Add a row of folder buttons
+        LinearLayout layout = new LinearLayout(dialog.getContext());
+        scroll.addView(layout);
+        for (String dir: dirList)
+        {
+            Button button = new Button(dialog.getContext());
+            button.setId(dirList.indexOf(dir));
+            button.setText(dir);
+            button.setOnClickListener((v) ->
+            {
+                dialog.dismiss();
+                dirListen.onClick(v);
+            });
+            layout.addView(button);
+        }
+        // Scroll to the end
+        scroll.postDelayed(() ->
+        {
+            scroll.fullScroll(View.FOCUS_RIGHT);
+        }, POSITION_DELAY);
     }
 
     // onRequestPermissionsResult
