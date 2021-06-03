@@ -1796,7 +1796,7 @@ public class Editor extends Activity
                             View.OnClickListener dirListen)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Test");
+        builder.setTitle(FOLDER);
 
         // Add the adapter
         FileAdapter adapter = new FileAdapter(builder.getContext(), fileList);
