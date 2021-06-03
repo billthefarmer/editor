@@ -259,17 +259,22 @@ expression</li>
     </h3>
     
     <div class="content">
-        <p>Choose a file to open from the chooser dialog that pops up. The parent
-folder will be the first in the list. The file will initially be
-read-only. Touch the Edit toolbar item to enable editing.</p>
-<p>The chooser shows a list of files with icons. Files which appear to be
-media files, or are too large will be disabled and not
-selectable. Touch a folder to change folder, or a file to open a
-file. Hidden files beginning with a &lsquo;.&rsquo; will not appear.</p>
+        <p>Choose a file to open from the chooser dialog that pops up. The file
+will initially be read-only. Touch the Edit toolbar item to enable
+editing.</p>
+<p>The chooser shows a scrollable row of folder buttons and list of files
+with icons. Files which appear to be media files, or are too large
+will be disabled and not selectable. Touch a folder button or a folder
+to change folder, or a file to open a file. Hidden files beginning
+with a &lsquo;.&rsquo; will not appear.</p>
 <p>The parent folder, if it exists, will appear first in the list. Touch
 that folder to move up the directory tree. If a folder is not
 accessible, the chooser will show the parent folder, if it exists, and
 the external storage folder (<code>/storage/emulated/0</code>).</p>
+<p>Use the <strong>Storage</strong> button to open files using the android file
+manager. This should ensure that files on removeable SD cards can be
+saved using the <strong>Save</strong> button. The file manager may refuse to open
+some types of text files not recognised by android.</p>
 
     </div>
 </section>
@@ -300,7 +305,8 @@ list.</p>
         <p>Enter a new file name in the dialog that pops up. Absolute names
 starting with a slash &lsquo;/&rsquo; will be saved in that exact path. Names
 without a starting slash will be saved relative to the main public
-folder, <code>/sdcard/</code>, or <code>/storage/emulated/0/</code>.</p>
+folder, <code>/sdcard/</code>, or <code>/storage/emulated/0/</code>. Touch the <strong>Storage</strong>
+button to use the android file manager to save the file.</p>
 
     </div>
 </section>

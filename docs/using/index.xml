@@ -25,8 +25,8 @@
       <pubDate>Wed, 04 Mar 2020 19:32:49 +0000</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/using/open/</guid>
-      <description>Choose a file to open from the chooser dialog that pops up. The parent folder will be the first in the list. The file will initially be read-only. Touch the Edit toolbar item to enable editing.
-The chooser shows a list of files with icons. Files which appear to be media files, or are too large will be disabled and not selectable. Touch a folder to change folder, or a file to open a file.</description>
+      <description>Choose a file to open from the chooser dialog that pops up. The file will initially be read-only. Touch the Edit toolbar item to enable editing.
+The chooser shows a scrollable row of folder buttons and list of files with icons. Files which appear to be media files, or are too large will be disabled and not selectable. Touch a folder button or a folder to change folder, or a file to open a file.</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@ The chooser shows a list of files with icons. Files which appear to be media fil
       <pubDate>Wed, 04 Mar 2020 19:33:09 +0000</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/using/save-as/</guid>
-      <description>Enter a new file name in the dialog that pops up. Absolute names starting with a slash &amp;lsquo;/&amp;rsquo; will be saved in that exact path. Names without a starting slash will be saved relative to the main public folder, /sdcard/, or /storage/emulated/0/.</description>
+      <description>Enter a new file name in the dialog that pops up. Absolute names starting with a slash &amp;lsquo;/&amp;rsquo; will be saved in that exact path. Names without a starting slash will be saved relative to the main public folder, /sdcard/, or /storage/emulated/0/. Touch the Storage button to use the android file manager to save the file.</description>
     </item>
     
     <item>
