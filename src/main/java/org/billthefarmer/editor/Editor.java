@@ -49,8 +49,6 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ActionMode;
-import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -361,7 +359,7 @@ public class Editor extends Activity
 
     private Uri uri;
     private File file;
-    private String path;
+    private String path;
     private Uri content;
     private String append;
     private EditText textView;
