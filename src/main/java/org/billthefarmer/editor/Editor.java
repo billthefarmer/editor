@@ -323,6 +323,7 @@ public class Editor extends Activity
 
     private final static int LAST_SIZE = 256;
     private final static int FIRST_SIZE = 256;
+    private final static int FOLDER_OFFSET = 0x7d000000;
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
     private final static int FIND_DELAY = 128;
@@ -1728,20 +1729,22 @@ public class Editor extends Activity
                 return;
             }
 
+            if (FOLDER_OFFSET <= which)
+            {
+                File file = new File(File.separator);
+                for (int i = 0; i <= which - FOLDER_OFFSET; i++)
+                    file = new File(file, dirList.get(i));
+                if (file.isDirectory())
+                    getFile(file);
+                return;
+            }
+
             File selection = fileList.get(which);
             if (selection.isDirectory())
                 getFile(selection);
 
             else
                 readFile(Uri.fromFile(selection));
-        }, (v) ->
-        {
-            int index = v.getId();
-            File file = new File(File.separator);
-            for (int i = 0; i <= index; i++)
-                file = new File(file, dirList.get(i));
-            if (file.isDirectory())
-                getFile(file);
         });
     }
 
@@ -1792,19 +1795,18 @@ public class Editor extends Activity
 
     // openDialog
     private void openDialog(List<String> dirList, List<File> fileList,
-                            DialogInterface.OnClickListener fileListen,
-                            View.OnClickListener dirListen)
+                            DialogInterface.OnClickListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(FOLDER);
 
         // Add the adapter
         FileAdapter adapter = new FileAdapter(builder.getContext(), fileList);
-        builder.setAdapter(adapter, fileListen);
+        builder.setAdapter(adapter, listener);
 
         // Add storage button
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            builder.setNeutralButton(R.string.storage, fileListen);
+            builder.setNeutralButton(R.string.storage, listener);
         // Add cancel button
         builder.setNegativeButton(R.string.cancel, null);
 
@@ -1830,12 +1832,12 @@ public class Editor extends Activity
         for (String dir: dirList)
         {
             Button button = new Button(dialog.getContext());
-            button.setId(dirList.indexOf(dir));
+            button.setId(dirList.indexOf(dir) + FOLDER_OFFSET);
             button.setText(dir);
             button.setOnClickListener((v) ->
             {
+                listener.onClick(dialog, v.getId());
                 dialog.dismiss();
-                dirListen.onClick(v);
             });
             layout.addView(button);
         }
