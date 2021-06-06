@@ -3,26 +3,27 @@
 
   <string name="appName">編輯器</string>
 
-  <string name="neu">新</string>
+  <string name="neu">新增</string>
   <string name="edit">編輯</string>
   <string name="view">檢視</string>
   <string name="open">開啟檔案…</string>
   <string name="save">儲存</string>
-  <string name="storage">存取裝置中的相片</string>
+  <string name="storage">儲存空間</string>
   <string name="openRecent">最近開啟</string>
-  <string name="clearList">清除列表</string>
+  <string name="clearList">清除清單</string>
   <string name="search">搜尋…</string>
-  <string name="findAll">全局搜索…</string>
+  <string name="findAll">尋找全部…</string>
   <string name="saveAs">儲存為…</string>
   <string name="viewMarkdown">檢視 markdown…</string>
-  <string name="viewFile">查看文件</string>
+  <string name="viewFile">檢視檔案</string>
   <string name="autoSave">自動儲存</string>
   <string name="wrap">文字換列</string>
   <string name="suggest">建議</string>
-  <string name="highlight">突出顯示語法</string>
+  <string name="highlight">突顯語法</string>
   <string name="theme">主題</string>
-  <string name="light">亮</string>
-  <string name="dark">暗</string>
+  <string name="light">亮色</string>
+  <string name="dark">暗色</string>
+  <string name="black">黑色</string>
   <string name="retro">復古</string>
   <string name="size">文字大小</string>
   <string name="small">小</string>
@@ -65,7 +66,7 @@
   <string name="ok">確定</string>
   <string name="reload">重新載入</string>
   <string name="overwrite">覆寫</string>
-  <string name="discard">放棄</string>
+  <string name="discard">捨棄</string>
   <string name="cancel">取消</string>
 
 </resources>
