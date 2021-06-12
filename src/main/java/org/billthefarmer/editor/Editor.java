@@ -195,6 +195,9 @@ public class Editor extends Activity
         ("\\b(([A-Z][A-Z0-9_]+)|(k[A-Z][A-Za-z0-9]+))\\b",
          Pattern.MULTILINE);
 
+    public final static Pattern OPERATOR = Pattern.compile
+        ("[+-=:;<>|!%^&*/?]+", Pattern.MULTILINE);
+
     public final static Pattern NUMBER = Pattern.compile
         ("\\b\\d+(\\.\\d*)?(e(\\+|\\-)?\\d+)?\\b",
          Pattern.MULTILINE);
@@ -2245,6 +2248,17 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.LTGRAY);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(OPERATOR);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
