@@ -143,7 +143,7 @@ public class Editor extends Activity
         "org.billthefarmer.editor.fileprovider";
 
     public final static String CC_EXT =
-        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|m|py|swift)";
+        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|kt|m|py|swift)";
 
     public final static String HTML_EXT =
         "\\.html?";
