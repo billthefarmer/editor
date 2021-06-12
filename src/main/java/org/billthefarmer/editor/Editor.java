@@ -164,7 +164,7 @@ public class Editor extends Activity
          "de(bugger|f|fault|fer|in|init|l|lete)|didset|do(ne)?|dynamic" +
          "(type)?|el(if|se)|enum|esac|eval|ex(cept|ec|plicit|port|" +
          "tends|tension|tern)|fal(lthrough|se)|fi(nal|nally)?|for|" +
-         "friend|from|func(tion)?|get|global|go(to)?|if|" +
+         "friend|from|fun(c(tion)?)?|get|global|go(to)?|if|" +
          "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
          "ternal)?|is|lambda|lazy|left|let|local|map|mut(able|ating)|" +
          "namespace|native|new|nil|none|nonmutating|not|null|" +
@@ -174,7 +174,7 @@ public class Editor extends Activity
          "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
          "switch|synchronized|template|th(en|is|rows?)|transient|" +
          "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
-         "using|var|virtual|void|volatile|weak|wh(ere|ile)|willset|" +
+         "using|va(l|r)|virtual|void|volatile|weak|wh(en|ere|ile)|willset|" +
          "with|yield)\\b", Pattern.MULTILINE);
 
     public final static Pattern TYPES = Pattern.compile
