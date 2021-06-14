@@ -1323,7 +1323,6 @@ public class Editor extends Activity
             path.replaceFirst(Environment
                               .getExternalStorageDirectory()
                               .getPath() + File.separator, "");
-
         // Open dialog
         saveAsDialog(name, (dialog, id) ->
         {
@@ -1350,6 +1349,7 @@ public class Editor extends Activity
                 setTitle(title);
 
                 path = file.getPath();
+                content = null;
                 saveFile();
                 break;
 
@@ -3108,9 +3108,9 @@ public class Editor extends Activity
             catch (Exception e)
             {
                 editor.runOnUiThread(() ->
-                                     editor.alertDialog(R.string.appName,
-                                                        e.getMessage(),
-                                                        R.string.ok));
+                    editor.alertDialog(R.string.appName,
+                                       e.getMessage(),
+                                       R.string.ok));
                 e.printStackTrace();
             }
 

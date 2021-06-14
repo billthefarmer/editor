@@ -266,9 +266,6 @@ public class FileUtils
      */
     public static String fileProviderPath(Uri uri)
     {
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "Path " + uri.getPath());
-
         StringBuilder path = new StringBuilder();
         List<String> list = uri.getPathSegments();
         if (list.contains("storage") &&
@@ -283,9 +280,6 @@ public class FileUtils
                 path.append(File.separator);
                 path.append(segment);
             }
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Path " + path.toString());
 
             File file = new File(path.toString());
             if (file.isFile())
@@ -303,9 +297,6 @@ public class FileUtils
                 path.append(File.separator);
                 path.append(segment);
             }
-
-            if (BuildConfig.DEBUG)
-                Log.d(TAG, "Path " + path.toString());
 
             File file = new File(path.toString());
             if (file.isFile())
@@ -350,9 +341,8 @@ public class FileUtils
                     return cursor.getString(column_index);
             }
         }
-        catch (Exception e)
-        {
-        }
+
+        catch (Exception e) {}
 
         return null;
     }
@@ -393,9 +383,8 @@ public class FileUtils
                     return cursor.getString(column_index);
             }
         }
-        catch (Exception e)
-        {
-        }
+
+        catch (Exception e) {}
 
         return null;
     }
