@@ -52,6 +52,8 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -346,9 +348,11 @@ public class Editor extends Activity
     private final static int BLACK = 3;
     private final static int RETRO = 4;
 
+    private final static int TINY   = 8;
     private final static int SMALL  = 12;
     private final static int MEDIUM = 18;
     private final static int LARGE  = 24;
+    private final static int HUGE  =  32;
 
     private final static int NORMAL = 1;
     private final static int MONO   = 2;
@@ -373,6 +377,8 @@ public class Editor extends Activity
     private ScrollView scrollView;
     private Runnable updateHighlight;
     private Runnable updateWordCount;
+
+    private ScaleGestureDetector scaleDetector;
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
@@ -524,6 +530,9 @@ public class Editor extends Activity
     // setListeners
     private void setListeners()
     {
+        scaleDetector =
+            new ScaleGestureDetector(this, new ScaleListener());
+
         if (textView != null)
         {
             textView.addTextChangedListener(new TextWatcher()
@@ -1072,6 +1081,14 @@ public class Editor extends Activity
             saveFile();
             break;
         }
+    }
+
+    // dispatchTouchEvent
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event)
+    {
+        scaleDetector.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 
     // editClicked
@@ -2965,6 +2982,22 @@ public class Editor extends Activity
         }
 
         return text;
+    }
+
+    // ScaleListener
+    private class ScaleListener
+        extends ScaleGestureDetector.SimpleOnScaleGestureListener
+    {
+        // onScale
+        @Override
+        public boolean onScale(ScaleGestureDetector detector)
+        {
+            size *= detector.getScaleFactor();
+            size = Math.max(TINY, Math.min(size, HUGE));
+            textView.setTextSize(size);
+
+            return true;
+        }
     }
 
     // FindTask
