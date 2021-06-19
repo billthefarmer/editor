@@ -125,8 +125,8 @@ enclosing delimiters (brackets, quotes) on the same text line.
 
 ### Text size
 Text size may be changed from the menu or by pinch or expand gestures
-on the text. The response to gestures on large files may be slow or
-delayed.
+on the text or by doubletap and swipe. The response to gestures on
+large files may be slow or delayed.
 
 ### Unsaved file
 If you touch the new, back or open button, and the current file has been

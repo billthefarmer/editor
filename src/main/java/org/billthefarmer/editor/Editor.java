@@ -1600,20 +1600,6 @@ public class Editor extends Activity
     // setSizeAndTypeface
     private void setSizeAndTypeface(int size, int type)
     {
-        // Update size
-        switch (size)
-        {
-        case SMALL:
-        case MEDIUM:
-        case LARGE:
-            break;
-
-        default:
-            size = MEDIUM;
-            invalidateOptionsMenu();
-            break;
-        }
-
         // Set size
         textView.setTextSize(size);
 
@@ -1926,17 +1912,12 @@ public class Editor extends Activity
 
         // Attempt to resolve content uri
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
-        {
-            content = uri;
             uri = resolveContent(uri);
-        }
-
-        else
-            content = null;
 
         // Read into default file if unresolved
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
         {
+            content = uri;
             file = getDefaultFile();
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
@@ -1947,6 +1928,7 @@ public class Editor extends Activity
         // Read file
         else
         {
+            content = null;
             this.uri = uri;
             path = uri.getPath();
             file = new File(path);
@@ -2995,6 +2977,7 @@ public class Editor extends Activity
             size *= detector.getScaleFactor();
             size = Math.max(TINY, Math.min(size, HUGE));
             textView.setTextSize(size);
+            invalidateOptionsMenu();
 
             return true;
         }
