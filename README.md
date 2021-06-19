@@ -123,6 +123,11 @@ If the file being edited is not a plain text file, selections created
 by double tapping or long touching on the text will be extended to
 enclosing delimiters (brackets, quotes) on the same text line.
 
+### Text size
+Text size may be changed from the menu or by pinch or expand gestures
+on the text. The response to gestures on large files may be slow or
+delayed.
+
 ### Unsaved file
 If you touch the new, back or open button, and the current file has been
 modified, you will be prompted whether you want to save it, else the
