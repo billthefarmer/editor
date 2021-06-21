@@ -1910,14 +1910,25 @@ public class Editor extends Activity
             }
         }
 
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Uri: " + uri);
+
         // Attempt to resolve content uri
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
+        {
+            content = uri;
             uri = resolveContent(uri);
+        }
+
+        else
+            content = null;
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Uri: " + uri);
 
         // Read into default file if unresolved
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
         {
-            content = uri;
             file = getDefaultFile();
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
@@ -1928,7 +1939,6 @@ public class Editor extends Activity
         // Read file
         else
         {
-            content = null;
             this.uri = uri;
             path = uri.getPath();
             file = new File(path);

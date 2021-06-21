@@ -181,7 +181,7 @@ public class FileUtils
                 // Construct path without file name.
                 String pathwithoutname = filepath.substring(0,
                                          filepath.length() - filename.length());
-                if (pathwithoutname.endsWith("/"))
+                if (pathwithoutname.endsWith(File.separator))
                 {
                     pathwithoutname = pathwithoutname
                                       .substring(0, pathwithoutname.length() - 1);
@@ -267,13 +267,20 @@ public class FileUtils
     public static String fileProviderPath(Uri uri)
     {
         StringBuilder path = new StringBuilder();
-        List<String> list = uri.getPathSegments();
-        if (list.contains("storage") &&
-                list.contains("emulated") &&
-                list.contains("0"))
+        Uri storage = Uri.fromFile(Environment.getExternalStorageDirectory());
+        List<String> storageList = storage.getPathSegments();
+        List<String> uriList = uri.getPathSegments();
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Uri: " + uri);
         {
+            for (String segment: uriList)
+                if (!uriList.contains(segment))
+                    break;
+
             List<String> segments =
-                list.subList(list.indexOf("storage"), list.size());
+                uriList.subList(uriList.indexOf(storageList.get(0)),
+                                uriList.size());
 
             for (String segment : segments)
             {
@@ -281,15 +288,18 @@ public class FileUtils
                 path.append(segment);
             }
 
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Path: " + path);
+
             File file = new File(path.toString());
             if (file.isFile())
                 return path.toString();
         }
 
-        if (list.size() > 1)
+        if (uriList.size() > 1)
         {
             List<String> segments =
-                list.subList(1, list.size());
+                uriList.subList(1, uriList.size());
 
             path.append(Environment.getExternalStorageDirectory());
             for (String segment : segments)
@@ -297,6 +307,9 @@ public class FileUtils
                 path.append(File.separator);
                 path.append(segment);
             }
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Path: " + path);
 
             File file = new File(path.toString());
             if (file.isFile())
@@ -364,7 +377,7 @@ public class FileUtils
                                        String selection,
                                        String[] selectionArgs)
     {
-        final String column = "_data";
+        final String column = MediaStore.MediaColumns.DATA;
         final String[] projection =
         {
             column
@@ -418,11 +431,9 @@ public class FileUtils
                   ", Segments: " + uri.getPathSegments().toString()
                  );
 
-        final boolean isKitKat =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
+            DocumentsContract.isDocumentUri(context, uri))
         {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri))
@@ -431,22 +442,37 @@ public class FileUtils
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
+                final String id = split[1];
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "Segments: " + segments);
+
+                if (BuildConfig.DEBUG)
+                    Log.d(TAG, "DocId: " + docId);
 
                 if ("primary".equalsIgnoreCase(type))
                 {
-                    return Environment
-                           .getExternalStorageDirectory() + "/" + split[1];
+                    return Environment.getExternalStorageDirectory() +
+                        File.separator + id;
                 }
                 else if ("home".equalsIgnoreCase(type))
                 {
-                    return Environment
-                           .getExternalStorageDirectory() + "/Documents/" +
-                           split[1];
+                    return Environment .getExternalStorageDirectory() +
+                        "/Documents/" + id;
+                }
+                else if (type != null && type.matches("[0-9A-Z]{4}-[0-9A-Z]{4}"))
+                {
+                    List<String> storage =
+                        Uri.fromFile(Environment.getExternalStorageDirectory())
+                        .getPathSegments();
+
+                    return File.separator + storage.get(0) + File.separator +
+                        type + File.separator + id;
                 }
                 else if ("document".equalsIgnoreCase(segments.get(0)))
                 {
-                    return Environment
-                           .getExternalStorageDirectory() + "/" + split[1];
+                    return Environment .getExternalStorageDirectory() +
+                        File.separator + id;
                 }
 
                 // TODO handle non-primary volumes
@@ -479,6 +505,7 @@ public class FileUtils
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
+                final String id = split[1];
 
                 Uri contentUri = null;
                 if ("image".equals(type))
@@ -500,7 +527,7 @@ public class FileUtils
                 final String selection = "_id=?";
                 final String[] selectionArgs = new String[]
                 {
-                    split[1]
+                    id
                 };
 
                 return getDataColumn(context, contentUri,
