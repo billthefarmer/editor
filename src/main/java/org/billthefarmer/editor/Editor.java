@@ -1999,6 +1999,10 @@ public class Editor extends Activity
             }
         }
 
+        // Stop highlighting
+        textView.removeCallbacks(updateHighlight);
+        textView.removeCallbacks(updateWordCount);
+
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedOverwrite,
                         R.string.overwrite, R.string.cancel, (dialog, id) ->
