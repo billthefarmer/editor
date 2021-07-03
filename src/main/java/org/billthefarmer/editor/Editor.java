@@ -1910,6 +1910,10 @@ public class Editor extends Activity
             }
         }
 
+        // Stop highlighting
+        textView.removeCallbacks(updateHighlight);
+        textView.removeCallbacks(updateWordCount);
+
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Uri: " + uri);
 
