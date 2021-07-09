@@ -39,10 +39,10 @@ android {
     lintOptions {
         disable 'IconDensities', 'ContentDescription', 'OldTargetApi',
             'NonConstantResourceId', 'ExpiredTargetSdkVersion'
-        abortOnError false
+        // abortOnError false
     }
 }
 
 dependencies {
-    implementation 'org.commonmark:commonmark:0.17.2'
+    implementation 'org.commonmark:commonmark:0.18.0'
 }
