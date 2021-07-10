@@ -75,6 +75,7 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -2061,9 +2062,10 @@ public class Editor extends Activity
     private void write(CharSequence text, File file)
     {
         file.getParentFile().mkdirs();
-        try (FileWriter fileWriter = new FileWriter(file))
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
         {
-            fileWriter.append(text);
+            writer.append(text);
+            writer.flush();
         }
 
         catch (Exception e)
@@ -2082,9 +2084,11 @@ public class Editor extends Activity
     // write
     private void write(CharSequence text, OutputStream os)
     {
-        try (OutputStreamWriter writer = new OutputStreamWriter(os))
+        try (BufferedWriter writer =
+             new BufferedWriter(new OutputStreamWriter(os)))
         {
             writer.append(text);
+            writer.flush();
         }
 
         catch (Exception e)
