@@ -2045,7 +2045,7 @@ public class Editor extends Activity
     {
         CharSequence text = textView.getText();
         try (OutputStream outputStream =
-             getContentResolver().openOutputStream(uri))
+             getContentResolver().openOutputStream(uri, "rwt"))
         {
             write(text, outputStream);
         }
