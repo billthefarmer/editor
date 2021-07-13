@@ -3130,10 +3130,9 @@ public class Editor extends Activity
             if (editor == null)
                 return stringBuilder;
 
-            try (InputStream inputStream = editor.getContentResolver()
-                 .openInputStream(uris[0]);
-                 BufferedReader reader = new BufferedReader
-                 (new InputStreamReader(inputStream)))
+            try (BufferedReader reader = new BufferedReader
+                 (new InputStreamReader(editor.getContentResolver()
+                                        .openInputStream(uris[0]))))
             {
                 String line;
                 while ((line = reader.readLine()) != null)
