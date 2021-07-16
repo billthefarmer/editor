@@ -113,6 +113,15 @@ Selection The type of highlighting is selected by file extension. Files with .c,
     </item>
     
     <item>
+      <title>Text Size</title>
+      <link>https://billthefarmer.github.io/editor/using/text-size/</link>
+      <pubDate>Fri, 16 Jul 2021 09:14:58 +0100</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/text-size/</guid>
+      <description>Text size may be changed from the menu or by pinch or expand gestures on the text or by doubletap and swipe. The response to gestures on large files may be slow or delayed.</description>
+    </item>
+    
+    <item>
       <title>Unsaved File</title>
       <link>https://billthefarmer.github.io/editor/using/unsaved-file/</link>
       <pubDate>Wed, 04 Mar 2020 17:42:32 +0000</pubDate>

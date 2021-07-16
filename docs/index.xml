@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Copyright &amp;copy; 2021 Bill Farmer</copyright>
-    <lastBuildDate>Mon, 29 Mar 2021 18:47:58 +0100</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Jul 2021 09:14:58 +0100</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Features</title>
       <link>https://billthefarmer.github.io/editor/introduction/features/</link>
@@ -119,6 +119,15 @@ Selection The type of highlighting is selected by file extension. Files with .c,
       
       <guid>https://billthefarmer.github.io/editor/using/extended-selection/</guid>
       <description>If the file being edited is not a plain text file, selections created by double tapping or long touching on the text will be extended to enclosing delimiters (brackets, quotes) on the same text line.</description>
+    </item>
+    
+    <item>
+      <title>Text Size</title>
+      <link>https://billthefarmer.github.io/editor/using/text-size/</link>
+      <pubDate>Fri, 16 Jul 2021 09:14:58 +0100</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/text-size/</guid>
+      <description>Text size may be changed from the menu or by pinch or expand gestures on the text or by doubletap and swipe. The response to gestures on large files may be slow or delayed.</description>
     </item>
     
     <item>
