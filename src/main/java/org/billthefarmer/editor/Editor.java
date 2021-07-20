@@ -49,6 +49,7 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ActionMode;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -1090,6 +1091,50 @@ public class Editor extends Activity
     {
         scaleDetector.onTouchEvent(event);
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Key: " + keyCode);
+
+        // Check Ctrl key
+        if (event.isCtrlPressed())
+        {
+            switch (keyCode)
+            {
+            case KeyEvent.KEYCODE_E:
+                editClicked(null);
+                break;
+
+            case KeyEvent.KEYCODE_N:
+                freshFile();
+                break;
+
+            case KeyEvent.KEYCODE_O:
+                openFile();
+                break;
+
+            case KeyEvent.KEYCODE_S:
+                if (event.isShiftPressed())
+                    saveAs();
+                else
+                    saveCheck();
+                break;
+
+            case KeyEvent.KEYCODE_V:
+                viewClicked(null);
+                break;
+
+            default:
+                return super.onKeyDown(keyCode, event);
+            }
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     // editClicked
