@@ -161,7 +161,7 @@ implemented:
  * Ctrl+N &ndash; New file
  * Ctrl+O &ndash; Open file
  * Ctrl+S &ndash; Save file
- * Ctrl+Shift+S &ndash; Edit
+ * Ctrl+Shift+S &ndash; Save as
  * Ctrl+V &ndash; View mode
 
 ## SD cards
