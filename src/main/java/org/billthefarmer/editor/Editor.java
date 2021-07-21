@@ -1096,33 +1096,31 @@ public class Editor extends Activity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "Key: " + keyCode);
-
         // Check Ctrl key
         if (event.isCtrlPressed())
         {
             switch (keyCode)
             {
+                // Edit
             case KeyEvent.KEYCODE_E:
                 editClicked(null);
                 break;
-
+                // New
             case KeyEvent.KEYCODE_N:
                 freshFile();
                 break;
-
+                // Open
             case KeyEvent.KEYCODE_O:
                 openFile();
                 break;
-
+                // Save, Save as
             case KeyEvent.KEYCODE_S:
                 if (event.isShiftPressed())
                     saveAs();
                 else
                     saveCheck();
                 break;
-
+                // View
             case KeyEvent.KEYCODE_V:
                 viewClicked(null);
                 break;

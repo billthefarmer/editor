@@ -157,5 +157,15 @@ Selection The type of highlighting is selected by file extension. Files with .c,
       <description>Text files opened or shared by another app may be viewed and edited. Some apps may share files or text using a content URI that is not resolvable to a path to a file in storage. In that case the editor will read the file into the default file. The default file in storage will not be overwritten unless the file is saved. Use the Save as menu item to save the file elsewhere.</description>
     </item>
     
+    <item>
+      <title>Keyboard Shortcuts</title>
+      <link>https://billthefarmer.github.io/editor/using/keyboard-shortcuts/</link>
+      <pubDate>Wed, 21 Jul 2021 19:22:29 +0100</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/keyboard-shortcuts/</guid>
+      <description>When using an external keyboard, some keyboard shortcuts are implemented:
+ Ctrl+E – Edit mode Ctrl+N – New file Ctrl+O – Open file Ctrl+S – Save file Ctrl+Shift+S – Edit Ctrl+V – View mode  </description>
+    </item>
+    
   </channel>
 </rss>

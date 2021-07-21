@@ -154,6 +154,16 @@ storage will not be overwritten. The **Save** item will save the file
 in the original location if possible. Use the **Save as** menu item to
 save the file elsewhere.
 
+## Keyboard shortcuts
+When using an external keyboard, some keyboard shortcuts are
+implemented:
+ * Ctrl+E &ndash; Edit mode
+ * Ctrl+N &ndash; New file
+ * Ctrl+O &ndash; Open file
+ * Ctrl+S &ndash; Save file
+ * Ctrl+Shift+S &ndash; Edit
+ * Ctrl+V &ndash; View mode
+
 ## SD cards
 Android allows removable SD cards to be used like a USB stick or as
 part of the device storage. Files opened using the file chooser on a
