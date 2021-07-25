@@ -369,9 +369,8 @@ public class Editor extends Activity
 
     private Uri uri;
     private File file;
-    private String path;
+    private String path;
     private Uri content;
-    private String append;
     private EditText textView;
     private TextView customView;
     private MenuItem searchItem;
@@ -509,7 +508,7 @@ public class Editor extends Activity
                 String text = intent.getStringExtra(Intent.EXTRA_TEXT);
                 if (text != null)
                 {
-                    defaultFile(text);
+                    newFile(text);
                     changed = true;
                 }
 
@@ -522,7 +521,7 @@ public class Editor extends Activity
 
         case Intent.ACTION_MAIN:
             if (savedInstanceState == null)
-                defaultFile(null);
+                defaultFile();
             break;
         }
 
@@ -1203,11 +1202,11 @@ public class Editor extends Activity
             {
             case DialogInterface.BUTTON_POSITIVE:
                 saveFile();
-                newFile();
+                newFile(null);
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                newFile();
+                newFile(null);
                 break;
             }
 
@@ -1215,16 +1214,22 @@ public class Editor extends Activity
         });
 
         else
-            newFile();
+            newFile(null);
 
         invalidateOptionsMenu();
     }
 
     // newFile
-    private void newFile()
+    private void newFile(String text)
     {
-        textView.setText("");
-        changed = false;
+        if (text != null)
+            textView.setText(text);
+
+        else
+        {
+            textView.setText("");
+            changed = false;
+        }
 
         file = getNewFile();
         uri = Uri.fromFile(file);
@@ -1250,7 +1255,7 @@ public class Editor extends Activity
     }
 
     // defaultFile
-    private void defaultFile(String text)
+    private void defaultFile()
     {
         file = getDefaultFile();
 
@@ -1258,18 +1263,10 @@ public class Editor extends Activity
         path = uri.getPath();
 
         if (file.exists())
-        {
             readFile(uri);
-            append = text;
-        }
 
         else
-        {
-            if (text != null)
-                textView.append(text);
-
             setTitle(uri.getLastPathSegment());
-        }
     }
 
     // alertDialog
@@ -2839,15 +2836,7 @@ public class Editor extends Activity
         if (textView != null)
             textView.setText(text);
 
-        if (append != null)
-        {
-            textView.append(append);
-            append = null;
-            changed = true;
-        }
-
-        else
-            changed = false;
+        changed = false;
 
         // Check for saved position
         if (pathMap.containsKey(path))
