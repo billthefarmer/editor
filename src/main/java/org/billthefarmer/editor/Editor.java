@@ -952,7 +952,7 @@ public class Editor extends Activity
             onBackPressed();
             break;
         case R.id.neu:
-            freshFile();
+            newFile();
             break;
         case R.id.edit:
             editClicked(item);
@@ -1106,7 +1106,7 @@ public class Editor extends Activity
                 break;
                 // New
             case KeyEvent.KEYCODE_N:
-                freshFile();
+                newFile();
                 break;
                 // Open
             case KeyEvent.KEYCODE_O:
@@ -1190,8 +1190,8 @@ public class Editor extends Activity
         invalidateOptionsMenu();
     }
 
-    // freshFile
-    private void freshFile()
+    // newFile
+    private void newFile()
     {
         // Check if file changed
         if (changed)
