@@ -504,18 +504,21 @@ public class Editor extends Activity
         case Intent.ACTION_SEND:
             if (savedInstanceState == null)
             {
+                // Get uri
+                uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
                 // Get text
                 String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-                if (text != null)
+                if (uri != null)
+                    readFile(uri);
+
+                else if (text != null)
                 {
                     newFile(text);
                     changed = true;
                 }
 
-                // Get uri
-                uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-                if (uri != null)
-                    readFile(uri);
+                else
+                    defaultFile();
             }
             break;
 
