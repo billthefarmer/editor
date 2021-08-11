@@ -194,7 +194,8 @@ public class FileUtils
     public static String getMimeType(File file)
     {
 
-        String extension = getExtension(file.getName());
+        String extension =
+            getExtension(file.getName()).toLowerCase(Locale.getDefault());
 
         if (extension.length() > 0)
             return MimeTypeMap.getSingleton()
@@ -271,7 +272,7 @@ public class FileUtils
             Log.d(TAG, "Uri: " + uri);
         {
             for (String segment: uriList)
-                if (!uriList.contains(segment))
+                if (!storageList.contains(segment))
                     break;
 
             List<String> segments =

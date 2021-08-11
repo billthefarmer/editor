@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.0.0'
     }
 }
 
@@ -38,7 +38,7 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ContentDescription', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion'
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'MediaCapabilities'
         // abortOnError false
     }
 }

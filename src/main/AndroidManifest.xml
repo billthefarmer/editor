@@ -16,14 +16,15 @@
       tools:ignore="AllowBackup">
 
     <activity
-        android:name="Editor"
+	android:name="Editor"
+	android:exported="true"
         android:windowSoftInputMode="stateHidden|adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
-      <intent-filter android:scheme="http"
-                     tools:ignore="AppLinkUrlError">
+      <intent-filter
+          android:scheme="http" tools:ignore="AppLinkUrlError">
         <action android:name="android.intent.action.EDIT" />
         <action android:name="android.intent.action.SEND" />
         <action android:name="android.intent.action.VIEW" />
