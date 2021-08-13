@@ -263,7 +263,6 @@ public class FileUtils
      */
     public static String fileProviderPath(Uri uri)
     {
-        StringBuilder path = new StringBuilder();
         List<String> uriList = uri.getPathSegments();
 
         if (BuildConfig.DEBUG)
@@ -272,11 +271,31 @@ public class FileUtils
             Log.d(TAG, "Path: " + uriList);
         }
 
+        List<String> segments =
+            uriList.subList(1, uriList.size());
+
+        // Try root path
+        if (uriList.size() > 3)
+        {
+            StringBuilder path = new StringBuilder();
+            for (String segment : segments)
+            {
+                path.append(File.separator);
+                path.append(segment);
+            }
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Path: " + path);
+
+            File file = new File(path.toString());
+            if (file.isFile())
+                return path.toString();
+        }
+
+        // Try external storage path
         if (uriList.size() > 1)
         {
-            List<String> segments =
-                uriList.subList(1, uriList.size());
-
+            StringBuilder path = new StringBuilder();
             path.append(Environment.getExternalStorageDirectory());
             for (String segment : segments)
             {
