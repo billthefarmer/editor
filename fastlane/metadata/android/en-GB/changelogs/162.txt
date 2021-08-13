@@ -1,0 +1,2 @@
+* Update file provider URI resolution
+* Update build scripts
