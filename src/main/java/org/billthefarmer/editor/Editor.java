@@ -71,13 +71,18 @@ import android.widget.TextView;
 
 import android.support.v4.content.FileProvider;
 
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
+
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
@@ -3002,9 +3007,20 @@ public class Editor extends Activity
     {
         StringBuilder text = new StringBuilder();
         // Open file
-        try (BufferedReader reader = new
-             BufferedReader(new FileReader(file)))
+        try (FileInputStream in = new FileInputStream(file))
         {
+            BufferedReader reader = new
+                BufferedReader(new InputStreamReader(in));
+
+            byte buffer[] = new byte[(int) file.length()];
+            DataInputStream di = new DataInputStream(in);
+            di.readFully(buffer);
+
+            CharsetMatch match = new
+                CharsetDetector().setText(buffer).detect();
+            if (match != null)
+                reader = new BufferedReader(match.getReader());
+
             String line;
             while ((line = reader.readLine()) != null)
             {
@@ -3165,10 +3181,28 @@ public class Editor extends Activity
             if (editor == null)
                 return stringBuilder;
 
-            try (BufferedReader reader = new BufferedReader
-                 (new InputStreamReader(editor.getContentResolver()
-                                        .openInputStream(uris[0]))))
+            try (InputStream in =
+                 editor.getContentResolver().openInputStream(uris[0]))
             {
+                BufferedReader reader = new
+                    BufferedReader(new InputStreamReader(in));
+
+                int size = FileUtils.getSize(editor, uris[0], null, null);
+                if (!CONTENT.equalsIgnoreCase(uris[0].getScheme()))
+                    size = (int) new File(uris[0].getPath()).length();
+
+                DataInputStream di = new DataInputStream(in);
+                byte buffer[] = new byte[size];
+                di.readFully(buffer);
+
+                CharsetMatch match = new
+                    CharsetDetector().setText(buffer).detect();
+                if (match != null)
+                    reader = new BufferedReader(match.getReader());
+
+                if (BuildConfig.DEBUG && match != null)
+                    Log.d(TAG, "Charset " + match.getName());
+
                 String line;
                 while ((line = reader.readLine()) != null)
                 {
