@@ -339,6 +339,7 @@ public class Editor extends Activity
     private final static int LAST_SIZE = 256;
     private final static int FIRST_SIZE = 256;
     private final static int FOLDER_OFFSET = 0x7d000000;
+    private final static int FILE_OFFSET = 0x7b000000;
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
     private final static int FIND_DELAY = 128;
@@ -914,6 +915,16 @@ public class Editor extends Activity
             break;
         }
 
+        // Get the charsets
+        String charsets[] = CharsetDetector.getAllDetectableCharsets();
+        // Get the submenu
+        MenuItem item = menu.findItem(R.id.charset);
+        item.setTitle(match);
+        SubMenu sub = item.getSubMenu();
+        sub.clear();
+        for (String charset: charsets)
+            sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, charset);
+
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
@@ -932,8 +943,8 @@ public class Editor extends Activity
         Collections.reverse(list);
 
         // Get the submenu
-        MenuItem item = menu.findItem(R.id.openRecent);
-        SubMenu sub = item.getSubMenu();
+        item = menu.findItem(R.id.openRecent);
+        sub = item.getSubMenu();
         sub.clear();
 
         // Add the recent files
@@ -946,7 +957,7 @@ public class Editor extends Activity
                 path.replaceFirst(Environment
                                   .getExternalStorageDirectory()
                                   .getPath() + File.separator, "");
-            sub.add(name);
+            sub.add(Menu.NONE, R.id.fileItem, Menu.NONE, name);
         }
 
         // Add clear list item
@@ -1036,8 +1047,11 @@ public class Editor extends Activity
         case R.id.about:
             aboutClicked();
             break;
-        default:
+        case R.id.fileItem:
             openRecent(item);
+            break;
+        case R.id.charsetItem:
+            setCharset(item);
             break;
         }
 
@@ -1288,6 +1302,13 @@ public class Editor extends Activity
         }
     }
 
+    // setCharset
+    private void setCharset(MenuItem item)
+    {
+        match = item.getTitle().toString();
+        getActionBar().setSubtitle(match);
+    }
+
     // alertDialog
     private void alertDialog(int title, int message,
                              int positiveButton, int negativeButton,
@@ -1439,10 +1460,6 @@ public class Editor extends Activity
                     startActivityForResult(intent, CREATE_DOCUMENT);
                 }
                 break;
-
-            case R.id.charset:
-                getCharset();
-                break;
             }
         });
     }
@@ -1471,45 +1488,6 @@ public class Editor extends Activity
         AlertDialog dialog = builder.show();
         TextView text = dialog.findViewById(R.id.pathText);
         text.setText(path);
-        Button button = dialog.findViewById(R.id.charset);
-        button.setText(match);
-        button.setOnClickListener((v) ->
-        {
-            listener.onClick(dialog, v.getId());
-            dialog.dismiss();
-        });
-    }
-
-    // getCharset
-    private void getCharset()
-    {
-        String charsets[] = CharsetDetector.getAllDetectableCharsets();
-        charsetDialog(match, charsets, (dialog, id) ->
-        {
-            switch (id)
-            {
-            case DialogInterface.BUTTON_NEGATIVE:
-                break;
-
-            default:
-                match = charsets[id];
-                getActionBar().setSubtitle(match);
-                break;
-            }
-
-            saveAs();
-        });
-    }
-        
-    // charsetDialog
-    private void charsetDialog(String charset, String items[],
-                               DialogInterface.OnClickListener listener)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(charset);
-        builder.setItems(items, listener);
-        builder.setNegativeButton(R.string.cancel, listener);
-        builder.show();
     }
 
     // clearList

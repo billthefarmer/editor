@@ -32,6 +32,7 @@ And on the menu:
     expression
 * **Find all** &ndash; Find all recent files containing search text
 * **Save as** &ndash; Save the current file with a new name
+* **Charset** &ndash; Change the current character set, shows current set
 * **View markdown** &ndash; View markdown in browser or html viewer
 * **View files** &ndash; Open files read only for viewing
 * **Auto save** &ndash; Save the current file on app pause
@@ -77,9 +78,7 @@ list.
 
 ### Save as
 Use the dialog and the **Save** button or the **Storage** button to
-use the android file manager to save the file. Use the **Charset**
-button to change the character set. It shows the current set, default
-`UTF-8`.
+use the android file manager to save the file.
 
 ### Search
 Enter search text in the field that pops up in the toolbar. The first
@@ -103,9 +102,8 @@ no markdown the result will be the same text.
 ## Character set
 The current character set is displayed under the current file
 name. The character set is detected when a new file is read. It may be
-changed in the **Save as** dialog by using the **Charset** button
-which shows the current character set. See [Character
-set](Charset.md).
+changed in the by selecting the **Charset** item in the menu, which
+shows the current character set. See [Character set](Charset.md).
 
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,

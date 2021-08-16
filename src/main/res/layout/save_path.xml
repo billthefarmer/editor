@@ -19,13 +19,4 @@
       android:textAppearance="?android:attr/textAppearanceMedium"
       tools:ignore="Autofill" />
 
-  <Button
-      android:id="@+id/charset"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="16dp"
-      android:layout_marginRight="16dp"
-      android:gravity="center"
-      style="?android:attr/buttonBarButtonStyle" />
-
 </LinearLayout>
