@@ -116,6 +116,7 @@ public class Editor extends Activity
 
     public final static String PATH = "path";
     public final static String EDIT = "edit";
+    public final static String MATCH = "match";
     public final static String CHANGED = "changed";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
@@ -743,6 +744,7 @@ public class Editor extends Activity
         path = savedInstanceState.getString(PATH);
         edit = savedInstanceState.getBoolean(EDIT);
         changed = savedInstanceState.getBoolean(CHANGED);
+        match = savedInstanceState.getString(MATCH);
         modified = savedInstanceState.getLong(MODIFIED);
         content = savedInstanceState.getParcelable(CONTENT);
         invalidateOptionsMenu();
@@ -823,6 +825,7 @@ public class Editor extends Activity
         outState.putParcelable(CONTENT, content);
         outState.putLong(MODIFIED, modified);
         outState.putBoolean(CHANGED, changed);
+        outState.putString(MATCH, match);
         outState.putBoolean(EDIT, edit);
         outState.putString(PATH, path);
     }
