@@ -50,6 +50,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -61,6 +62,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -78,11 +80,12 @@ import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
@@ -376,6 +379,7 @@ public class Editor extends Activity
     private File file;
     private String path;
     private Uri content;
+    private String match;
     private EditText textView;
     private TextView customView;
     private MenuItem searchItem;
@@ -464,6 +468,7 @@ public class Editor extends Activity
         textView = findViewById(R.id.text);
         scrollView = findViewById(R.id.vscroll);
 
+        getActionBar().setSubtitle(match);
         getActionBar().setCustomView(R.layout.custom);
         getActionBar().setDisplayShowCustomEnabled(true);
         customView = (TextView) getActionBar().getCustomView();
@@ -1244,6 +1249,8 @@ public class Editor extends Activity
         path = uri.getPath();
 
         setTitle(uri.getLastPathSegment());
+        match = "UTF-8";
+        getActionBar().setSubtitle(match);
     }
 
     // getNewFile
@@ -1274,7 +1281,11 @@ public class Editor extends Activity
             readFile(uri);
 
         else
+        {
             setTitle(uri.getLastPathSegment());
+            match = "UTF-8";
+            getActionBar().setSubtitle(match);
+        }
     }
 
     // alertDialog
@@ -1395,7 +1406,7 @@ public class Editor extends Activity
             switch (id)
             {
             case DialogInterface.BUTTON_POSITIVE:
-                EditText text = ((Dialog) dialog).findViewById(R.id.path_text);
+                EditText text = ((Dialog) dialog).findViewById(R.id.pathText);
                 String string = text.getText().toString();
 
                 // Ignore empty string
@@ -1428,6 +1439,10 @@ public class Editor extends Activity
                     startActivityForResult(intent, CREATE_DOCUMENT);
                 }
                 break;
+
+            case R.id.charset:
+                getCharset();
+                break;
             }
         });
     }
@@ -1447,15 +1462,54 @@ public class Editor extends Activity
             builder.setNeutralButton(R.string.storage, listener);
 
         // Create edit text
-        Context context = builder.getContext();
-        EditText text = new EditText(context);
-        text.setId(R.id.path_text);
-        text.setText(path);
+        LayoutInflater inflater = (LayoutInflater)builder.getContext()
+            .getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.save_path, null);
+        builder.setView(view);
 
         // Create the AlertDialog
-        AlertDialog dialog = builder.create();
-        dialog.setView(text, 40, 0, 40, 0);
-        dialog.show();
+        AlertDialog dialog = builder.show();
+        TextView text = dialog.findViewById(R.id.pathText);
+        text.setText(path);
+        Button button = dialog.findViewById(R.id.charset);
+        button.setText(match);
+        button.setOnClickListener((v) ->
+        {
+            listener.onClick(dialog, v.getId());
+            dialog.dismiss();
+        });
+    }
+
+    // getCharset
+    private void getCharset()
+    {
+        String charsets[] = CharsetDetector.getAllDetectableCharsets();
+        charsetDialog(match, charsets, (dialog, id) ->
+        {
+            switch (id)
+            {
+            case DialogInterface.BUTTON_NEGATIVE:
+                break;
+
+            default:
+                match = charsets[id];
+                getActionBar().setSubtitle(match);
+                break;
+            }
+
+            saveAs();
+        });
+    }
+        
+    // charsetDialog
+    private void charsetDialog(String charset, String items[],
+                               DialogInterface.OnClickListener listener)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(charset);
+        builder.setItems(items, listener);
+        builder.setNegativeButton(R.string.cancel, listener);
+        builder.show();
     }
 
     // clearList
@@ -2110,7 +2164,13 @@ public class Editor extends Activity
     private void write(CharSequence text, File file)
     {
         file.getParentFile().mkdirs();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
+
+        String charset = "UTF-8";
+        if (match != null)
+            charset = match;
+
+        try (BufferedWriter writer = new BufferedWriter
+             (new OutputStreamWriter(new FileOutputStream(file), charset)))
         {
             writer.append(text);
             writer.flush();
@@ -2132,8 +2192,12 @@ public class Editor extends Activity
     // write
     private void write(CharSequence text, OutputStream os)
     {
+        String charset = "UTF-8";
+        if (match != null)
+            charset = match;
+
         try (BufferedWriter writer =
-             new BufferedWriter(new OutputStreamWriter(os)))
+             new BufferedWriter(new OutputStreamWriter(os, charset)))
         {
             writer.append(text);
             writer.flush();
@@ -3007,17 +3071,14 @@ public class Editor extends Activity
     {
         StringBuilder text = new StringBuilder();
         // Open file
-        try (FileInputStream in = new FileInputStream(file))
+        try (BufferedInputStream in = new
+             BufferedInputStream(new FileInputStream(file)))
         {
             BufferedReader reader = new
                 BufferedReader(new InputStreamReader(in));
 
-            byte buffer[] = new byte[(int) file.length()];
-            DataInputStream di = new DataInputStream(in);
-            di.readFully(buffer);
-
             CharsetMatch match = new
-                CharsetDetector().setText(buffer).detect();
+                CharsetDetector().setText(in).detect();
             if (match != null)
                 reader = new BufferedReader(match.getReader());
 
@@ -3181,24 +3242,21 @@ public class Editor extends Activity
             if (editor == null)
                 return stringBuilder;
 
-            try (InputStream in =
-                 editor.getContentResolver().openInputStream(uris[0]))
+            try (BufferedInputStream in = new BufferedInputStream
+                 (editor.getContentResolver().openInputStream(uris[0])))
             {
                 BufferedReader reader = new
                     BufferedReader(new InputStreamReader(in));
 
-                int size = FileUtils.getSize(editor, uris[0], null, null);
-                if (!CONTENT.equalsIgnoreCase(uris[0].getScheme()))
-                    size = (int) new File(uris[0].getPath()).length();
+                CharsetMatch match = new CharsetDetector().setText(in).detect();
 
-                DataInputStream di = new DataInputStream(in);
-                byte buffer[] = new byte[size];
-                di.readFully(buffer);
-
-                CharsetMatch match = new
-                    CharsetDetector().setText(buffer).detect();
                 if (match != null)
+                {
+                    editor.match = match.getName();
+                    editor.runOnUiThread(() ->
+                        editor.getActionBar().setSubtitle(editor.match));
                     reader = new BufferedReader(match.getReader());
+                }
 
                 if (BuildConfig.DEBUG && match != null)
                     Log.d(TAG, "Charset " + match.getName());

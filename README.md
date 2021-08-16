@@ -77,7 +77,9 @@ list.
 
 ### Save as
 Use the dialog and the **Save** button or the **Storage** button to
-use the android file manager to save the file.
+use the android file manager to save the file. Use the **Charset**
+button to change the character set. It shows the current set, default
+`UTF-8`.
 
 ### Search
 Enter search text in the field that pops up in the toolbar. The first
@@ -97,6 +99,13 @@ to find the desired file.
 You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
+
+## Character set
+The current character set is displayed under the current file
+name. The character set is detected when a new file is read. It may be
+changed in the **Save as** dialog by using the **Charset** button
+which shows the current character set. See [Character
+set](Charset.md).
 
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,
