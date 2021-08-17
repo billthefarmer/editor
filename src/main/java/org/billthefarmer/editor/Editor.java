@@ -943,6 +943,8 @@ public class Editor extends Activity
             }
         }
 
+        sub.setGroupCheckable(group, true, true);
+
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
