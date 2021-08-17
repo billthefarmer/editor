@@ -333,7 +333,7 @@ public class Editor extends Activity
     public final static Pattern MODE_PATTERN = Pattern.compile
         ("^\\S+\\s+ed:(.+)$", Pattern.MULTILINE);
     public final static Pattern OPTION_PATTERN = Pattern.compile
-        ("(\\s+(no)?(vw|ww|sg|hs|th|ts|tf)(:\\w)?)", Pattern.MULTILINE);
+        ("(\\s+(no)?(vw|ww|sg|cs|hs|th|ts|tf)(:\\w)?)", Pattern.MULTILINE);
     public final static Pattern WORD_PATTERN = Pattern.compile
         ("\\w+", Pattern.MULTILINE);
 
@@ -929,6 +929,7 @@ public class Editor extends Activity
         MenuItem item = menu.findItem(R.id.charset);
         item.setTitle(match);
         SubMenu sub = item.getSubMenu();
+        // Get the group id
         item = sub.findItem(R.id.charsetItem);
         int group = item.getGroupId();
         sub.clear();
@@ -938,11 +939,11 @@ public class Editor extends Activity
             if (keySet.contains(charset))
             {
                 item = sub.add(group, R.id.charsetItem, Menu.NONE, charset);
-                item.setCheckable(true);
                 item.setChecked(charset.equals(match));
             }
         }
 
+        // Set the group checkable, exclusive
         sub.setGroupCheckable(group, true, true);
 
         // Get a list of recent files
@@ -2890,6 +2891,15 @@ public class Editor extends Activity
                                 textView.setTypeface
                                     (Typeface.DEFAULT, Typeface.NORMAL);
                             }
+                        }
+                    }
+
+                    else if ("cs".equals(matcher.group(3)))
+                    {
+                        if (":u".equals(matcher.group(4)))
+                        {
+                            match = "UTF-8";
+                            getActionBar().setSubtitle(match);
                         }
                     }
                 }

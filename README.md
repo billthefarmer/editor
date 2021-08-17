@@ -117,7 +117,7 @@ of the file which matches the mode line pattern, the mode of the
 editor will be changed after the file is loaded. See [Mode
 line](Mode.md).
 ```
-# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [th:l|d|b|r] [ts:l|m|s] [tf:m|p]
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [cs:u] [th:l|d|b|r] [ts:l|m|s] [tf:m|p]
 ```
 
 ### Word count

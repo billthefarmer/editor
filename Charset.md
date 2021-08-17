@@ -20,3 +20,12 @@ Files will be saved using the current character set. To change it, use
 the **Charset** item in the menu, which shows the current set. If you
 add accented characters or symbols to the text, make sure to check the
 current set before you save it.
+
+## Mode line
+The character set may be set to UFT-8 by using a mode line in the text.
+
+```
+# ed: cs:u
+```
+
+See [Mode line](Mode.md) for details.
