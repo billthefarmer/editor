@@ -929,11 +929,19 @@ public class Editor extends Activity
         MenuItem item = menu.findItem(R.id.charset);
         item.setTitle(match);
         SubMenu sub = item.getSubMenu();
+        item = sub.findItem(R.id.charsetItem);
+        int group = item.getGroupId();
         sub.clear();
         // Add charsets contained in both sets
         for (String charset: charsets)
+        {
             if (keySet.contains(charset))
-                sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, charset);
+            {
+                item = sub.add(group, R.id.charsetItem, Menu.NONE, charset);
+                item.setCheckable(true);
+                item.setChecked(charset.equals(match));
+            }
+        }
 
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
