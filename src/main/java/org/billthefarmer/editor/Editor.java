@@ -93,6 +93,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import java.nio.charset.Charset;
+
 import java.lang.ref.WeakReference;
 
 import java.text.DateFormat;
@@ -758,6 +760,8 @@ public class Editor extends Activity
         else
             setTitle(uri.getLastPathSegment());
 
+        getActionBar().setSubtitle(match);
+
         checkHighlight();
 
         if (file.lastModified() > modified)
@@ -919,14 +923,17 @@ public class Editor extends Activity
         }
 
         // Get the charsets
+        Set<String> keySet = Charset.availableCharsets().keySet();
         String charsets[] = CharsetDetector.getAllDetectableCharsets();
         // Get the submenu
         MenuItem item = menu.findItem(R.id.charset);
         item.setTitle(match);
         SubMenu sub = item.getSubMenu();
         sub.clear();
+        // Add charsets contained in both sets
         for (String charset: charsets)
-            sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, charset);
+            if (keySet.contains(charset))
+                sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, charset);
 
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
