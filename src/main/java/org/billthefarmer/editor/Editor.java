@@ -341,6 +341,7 @@ public class Editor extends Activity
 
     private final static int LAST_SIZE = 256;
     private final static int FIRST_SIZE = 256;
+    private final static int TOO_LARGE = 524288;
     private final static int FOLDER_OFFSET = 0x7d000000;
     private final static int FILE_OFFSET = 0x7b000000;
     private final static int POSITION_DELAY = 128;
@@ -1148,9 +1149,12 @@ public class Editor extends Activity
         {
             switch (keyCode)
             {
-                // Edit
+                // Edit, View
             case KeyEvent.KEYCODE_E:
-                editClicked(null);
+                if (event.isShiftPressed())
+                    viewClicked(null);
+                else
+                    editClicked(null);
                 break;
                 // New
             case KeyEvent.KEYCODE_N:
@@ -1166,10 +1170,6 @@ public class Editor extends Activity
                     saveAs();
                 else
                     saveCheck();
-                break;
-                // View
-            case KeyEvent.KEYCODE_V:
-                viewClicked(null);
                 break;
 
             default:
@@ -2010,6 +2010,27 @@ public class Editor extends Activity
                 this.uri = uri;
                 return;
             }
+        }
+
+        int size = 0;
+        if (CONTENT.equalsIgnoreCase(uri.getScheme()))
+            size = FileUtils.getSize(this, uri, null, null);
+
+        else
+        {
+            File file = new File(uri.getPath());
+            size = (int) file.length();
+        }
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Size " + size);
+
+        if (size > TOO_LARGE)
+        {
+            String large = getString(R.string.tooLarge);
+            large = String.format(large, FileUtils.getReadableFileSize(size));
+            alertDialog(R.string.appName, large, R.string.ok);
+            return;
         }
 
         // Stop highlighting
