@@ -17,9 +17,10 @@ detection algorithm something to work on it may not get it right.
 
 ## Saving
 Files will be saved using the current character set. To change it, use
-the **Charset** item in the menu, which shows the current set. If you
-add accented characters or symbols to the text, make sure to check the
-current set before you save it.
+the **Charset** item in the menu, which shows the current set.
+
+**Caution** &ndash; If you add accented characters or symbols to the
+text, make sure to check the current character set before you save it.
 
 ## Mode line
 The character set may be set to UFT-8 by using a mode line in the text.
