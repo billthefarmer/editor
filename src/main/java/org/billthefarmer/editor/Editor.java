@@ -2053,10 +2053,10 @@ public class Editor extends Activity
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Uri: " + uri);
 
-        // Read into default file if unresolved
+        // Read into new file if unresolved
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
         {
-            file = getDefaultFile();
+            file = getNewFile();
             Uri defaultUri = Uri.fromFile(file);
             path = defaultUri.getPath();
 

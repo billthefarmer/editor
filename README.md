@@ -156,9 +156,8 @@ exists. Use the `Save as` menu item to save it elsewhere.
 Text files opened or shared by another app may be viewed and
 edited. Some apps may share files or text using a `content` URI that
 is not resolvable to a path to a file in storage. In that case the
-editor will read the file into the default file. The default file in
-storage will not be overwritten. The **Save** item will save the file
-in the original location if possible.
+editor will read the file into a new file. The **Save** item will save
+the file in the original location if possible.
 
 **Note** &ndash; Apps that share files will usually only give another app read
 permission. Use the **Save as** menu item to save the file elsewhere.
