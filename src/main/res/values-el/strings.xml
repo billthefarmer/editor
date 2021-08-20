@@ -41,6 +41,7 @@
   href="https://github.com/nikoss">nikoss</a>\n\nΆδεια <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
+  <string name="tooLarge">Πολύ μεγάλο %s</string>
   <string name="choose">Επέλεξε ένα όνομα αρχείου</string>
   <string name="loading">Φορτώνει…</string>
 

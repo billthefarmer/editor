@@ -367,7 +367,7 @@ public class FileUtils
      * @return The size of the file referred to by the Uri
      * @author Bill Farmer
      */
-    public static int getSize(Context context, Uri uri,
+    public static long getSize(Context context, Uri uri,
                               String selection,
                               String[] selectionArgs)
     {
@@ -387,7 +387,7 @@ public class FileUtils
 
                 final int column_index = cursor.getColumnIndex(column);
                 if (column_index >= 0)
-                    return cursor.getInt(column_index);
+                    return cursor.getLong(column_index);
             }
         }
 
@@ -623,7 +623,7 @@ public class FileUtils
      * @return
      * @author paulburke
      */
-    public static String getReadableFileSize(int size)
+    public static String getReadableFileSize(long size)
     {
         final int BYTES_IN_KILOBYTES = 1024;
         final DecimalFormat dec = new DecimalFormat("###.#");

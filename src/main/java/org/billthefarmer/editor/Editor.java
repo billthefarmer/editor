@@ -2012,14 +2012,14 @@ public class Editor extends Activity
             }
         }
 
-        int size = 0;
+        long size = 0;
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
             size = FileUtils.getSize(this, uri, null, null);
 
         else
         {
             File file = new File(uri.getPath());
-            size = (int) file.length();
+            size = file.length();
         }
 
         if (BuildConfig.DEBUG)

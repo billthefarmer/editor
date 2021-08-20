@@ -42,6 +42,7 @@
   GPLv3</a>
   </string>
 
+  <string name="tooLarge">Pārāk liels %s</string>
   <string name="choose">Izvēlies faila nosaukumu</string>
   <string name="loading">Atver…</string>
 

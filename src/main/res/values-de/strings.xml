@@ -42,6 +42,7 @@
   <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
+  <string name="tooLarge">Zu groß %s</string>
   <string name="choose">Geben Sie einen Dateinamen ein.</string>
   <string name="loading">Laden…</string>
 

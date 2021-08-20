@@ -50,6 +50,7 @@
   GPLv3</a>
   </string>
 
+  <string name="tooLarge">Çok büyük %s</string>
   <string name="choose">Bir dosya adı seçin</string>
   <string name="loading">Yükleniyor…</string>
 
