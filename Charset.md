@@ -23,7 +23,7 @@ the **Charset** item in the menu, which shows the current set.
 text, make sure to check the current character set before you save it.
 
 ## Mode line
-The character set may be set to UFT-8 by using a mode line in the text.
+The character set may be set to `UTF-8` by using a mode line in the text.
 
 ```
 # ed: cs:u
