@@ -1,0 +1,2 @@
+* Character set detection and selection
+* File size check on loading

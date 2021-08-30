@@ -6,6 +6,7 @@ This is a very simple generic text editor which may be used standalone or to sho
  * Optional word wrap
  * Optional suggestions
  * Optional syntax highlighting
+ * Character set detection and selection
  * Light/Dark/Black/Retro themes
  * Small/Medium/Large text size
  * Monospace/Proportional typefaces
