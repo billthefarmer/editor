@@ -40,7 +40,7 @@
       <item
           android:id="@+id/fileItem"
           android:showAsAction="never"
-          android:title="@string/clearList" />
+          android:title="" />
       <item
           android:id="@+id/clearList"
           android:showAsAction="never"
