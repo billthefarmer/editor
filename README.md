@@ -102,7 +102,7 @@ no markdown the result will be the same text.
 ## Character set
 The current character set is displayed under the current file
 name. The character set is detected when a new file is read. It may be
-changed in the by selecting the **Charset** item in the menu, which
+changed by selecting the **Charset** item in the menu, which
 shows the current character set. See [Character set](Charset.md).
 
 ### Highlight syntax
