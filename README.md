@@ -4,6 +4,9 @@ Android simple generic text editor. The app is available from
 [F-Droid](https://f-droid.org/packages/org.billthefarmer.editor)
 and [here](https://github.com/billthefarmer/editor/releases)
 
+## Issues
+There have been a number of issues raised on this app where users have obviously not read this README, or looked at old closed issues. Please read the README, and look at the old issues before raising another one, you can search the issues from the box at the top.
+
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-chooser.png)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-landscape.png)
