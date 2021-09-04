@@ -11,27 +11,27 @@
   <string name="storage">Armazenamento</string>
   <string name="openRecent">Abrir recente</string>
   <string name="clearList">Limpar lista</string>
-  <string name="search">Procurar…</string>
-  <string name="findAll">Encontrar tudo…</string>
+  <string name="search">Pesquisar…</string>
+  <string name="findAll">Pesquisar tudo…</string>
   <string name="saveAs">Guardar como…</string>
   <string name="viewMarkdown">Ver markdown…</string>
-  <string name="viewFile">Ver arquivos</string>
-  <string name="autoSave">Auto Guardar</string>
-  <string name="wrap">Quebra de linha</string>
-  <string name="suggest">Sugestões</string>
-  <string name="highlight">Destaque a sintaxe</string>
+  <string name="viewFile">Ver ficheiros</string>
+  <string name="autoSave">Guardar automático</string>
+  <string name="wrap">Quebras de linha</string>
+  <string name="suggest">Mostrar sugestões</string>
+  <string name="highlight">Destacar sintaxe</string>
   <string name="theme">Tema</string>
   <string name="light">Claro</string>
   <string name="dark">Escuro</string>
   <string name="black">Preto</string>
   <string name="retro">Retro</string>
-  <string name="size">Tamanho do texto</string>
+  <string name="size">Tamanho das letras</string>
   <string name="small">Pequeno</string>
-  <string name="medium">Média</string>
+  <string name="medium">Médio</string>
   <string name="large">Grande</string>
-  <string name="typeface">Tipo de letra</string>
-  <string name="mono">Espaçamento fixo</string>
-  <string name="normal">Espaçamento proporcional</string>
+  <string name="typeface">Espaçamento</string>
+  <string name="mono">Monoespaçado</string>
+  <string name="normal">Proporcional</string>
   <string name="about">Sobre</string>
 
   <!--
@@ -40,32 +40,31 @@
       for your translation and the licence. Also add your translation
       credit here.
   -->
-
   <string name="version" formatted="false"><a
   href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nCompilado
-  a %s\n\nCopyright \\00A9 2017 Bill Farmer\n\nTradução Portuguesa por
+  a %s\n\nDireitos de autor \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nTradução Portuguesa por
   <a href="https://github.com/Andre-Gloria" >André
-  Glória</a>\n\nLicença <a href="https://www.gnu.org/licenses/gpl.txt"
+  Glória</a> e <a href="https://github.com/laralem">laralem</a>\n\nLicença <a href="https://www.gnu.org/licenses/gpl.txt"
   >GNU GPLv3</a></string>
-
-  <string name="tooLarge">Muito grande %s</string>
+  
+  <string name="tooLarge">Demasiado grande %s</string>
   <string name="choose">Escolha um nome de ficheiro</string>
   <string name="loading">A carregar…</string>
 
   <string name="modified">
-    Tem modificações não salvas. Pretende guardá-las?
+    Tem alterações por guardar. Quer guardá-las?
   </string>
 
   <string name="changedReload">
-    Este ficheiro foi modificado, deseja relê-lo?
+    Este ficheiro foi alterado, quer tornar a abri-lo?
   </string>
 
   <string name="changedOverwrite">
-    Este ficheiro foi modificado, deseja substituí-lo (perderá alterações)?
+    Este ficheiro foi alterado, quer substituí-lo (perderá as alterações)?
   </string>
 
   <string name="ok">OK</string>
-  <string name="reload">Reler</string>
+  <string name="reload">Reabrir</string>
   <string name="overwrite">Substituir</string>
   <string name="discard">Descartar</string>
   <string name="cancel">Cancelar</string>
