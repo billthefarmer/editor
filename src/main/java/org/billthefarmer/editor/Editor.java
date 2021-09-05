@@ -92,9 +92,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import java.nio.charset.Charset;
-
 import java.lang.ref.WeakReference;
+
+import java.nio.charset.Charset;
 
 import java.text.DateFormat;
 
@@ -1363,6 +1363,9 @@ public class Editor extends Activity
     // savePath
     private void savePath(String path)
     {
+        if (path == null)
+            return;
+
         // Save the current position
         pathMap.put(path, scrollView.getScrollY());
 
