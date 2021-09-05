@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
 <head>
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.88.0" />
 
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -78,6 +78,8 @@
                     <li><a href="#findall">Findall</a></li>
                 
                     <li><a href="#view-markdown">View Markdown</a></li>
+                
+                    <li><a href="#regular-expressions">Regular Expressions</a></li>
                 
                     <li><a href="#highlight-syntax">Highlight Syntax</a></li>
                 
@@ -361,6 +363,29 @@ to find the desired file.</p>
         <p>You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.</p>
+
+    </div>
+</section>
+
+            
+                <section class="page" id="regular-expressions">
+    
+    <h3>
+        <a href="#regular-expressions">Regular Expressions</a>
+    </h3>
+    
+    <div class="content">
+        <p>Explaining <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a> used in the text search is beyond
+the scope of these docs. There is at least one <a href="https://www.oreilly.com/library/view/mastering-regular-expressions/0596528124/">book</a> (of many)
+devoted to the subject. Use <code>(?i)</code> for case insensitive search, <code>.</code>
+matches any character once, <code>.?</code> matches any character once or not at
+all, <code>.+</code> matches any character one or more times, <code>.*</code> matches any
+character any times or not at all. Use <code>.+?</code> or <code>.*?</code> for reluctant
+versions. Use <code>\b</code> for a word boundary, <code>\d</code> for a digit, <code>\s</code> for a
+white space character, <code>\w</code> for a word character, so <code>\w+</code> matches
+words. Use <code>[abc]</code> to match a set of characters, or <code>[a-z]</code> for a
+range, so <code>\w*[aeiou]+\w*</code> should match any word with at least one
+vowel in it.</p>
 
     </div>
 </section>

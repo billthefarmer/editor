@@ -4,8 +4,14 @@ Android simple generic text editor. The app is available from
 [F-Droid](https://f-droid.org/packages/org.billthefarmer.editor)
 and [here](https://github.com/billthefarmer/editor/releases)
 
-## Issues
-There have been a number of issues raised on this app where users have obviously not read this README, or looked at old closed issues. Please read the README, and look at the old issues before raising another one, you can search the issues from the box at the top.
+### Issues
+There have been a number of issues raised on this app where users have
+obviously not read this README, looked at the
+[documentation](https://billthefarmer.github.io/editor/), or looked at
+old closed issues. Please read the README, read the
+[docs](https://billthefarmer.github.io/editor/), and look at the old
+issues before raising another one, you can search the issues from the
+box at the top.
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-chooser.png)
 
@@ -102,6 +108,14 @@ You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
 
+## Regular expressions
+Explaining [regular
+expressions](https://en.wikipedia.org/wiki/Regular_expression) used in
+the text search is beyond the scope of this README. There is at least
+one
+[book](https://www.oreilly.com/library/view/mastering-regular-expressions/0596528124/)
+devoted to the subject. Use `(?i)` for case insensitive search.
+
 ## Character set
 The current character set is displayed under the current file
 name. The character set is detected when a new file is read. It may be
@@ -165,7 +179,7 @@ the file in the original location if possible.
 **Note** &ndash; Apps that share files will usually only give another app read
 permission. Use the **Save as** menu item to save the file elsewhere.
 
-## Keyboard shortcuts
+### Keyboard shortcuts
 When using an external keyboard, some keyboard shortcuts are
 implemented:
  * Ctrl+E &ndash; Edit mode

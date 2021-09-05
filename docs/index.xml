@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Copyright &amp;copy; 2021 Bill Farmer</copyright>
-    <lastBuildDate>Wed, 21 Jul 2021 19:22:29 +0100</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Sep 2021 09:48:08 +0100</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Features</title>
       <link>https://billthefarmer.github.io/editor/introduction/features/</link>
@@ -81,6 +81,15 @@ The chooser shows a scrollable row of folder buttons and list of files with icon
       
       <guid>https://billthefarmer.github.io/editor/using/view-markdown/</guid>
       <description>You will be prompted to choose a viewer for an html file containing the encoded markdown from the current open file. If the text contains no markdown the result will be the same text.</description>
+    </item>
+    
+    <item>
+      <title>Regular Expressions</title>
+      <link>https://billthefarmer.github.io/editor/using/regular-expressions/</link>
+      <pubDate>Sun, 05 Sep 2021 09:48:08 +0100</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/regular-expressions/</guid>
+      <description>Explaining regular expressions used in the text search is beyond the scope of these docs. There is at least one book (of many) devoted to the subject. Use (?i) for case insensitive search, . matches any character once, .? matches any character once or not at all, .+ matches any character one or more times, .* matches any character any times or not at all. Use .+? or .*? for reluctant versions.</description>
     </item>
     
     <item>

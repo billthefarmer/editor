@@ -75,6 +75,15 @@ The chooser shows a scrollable row of folder buttons and list of files with icon
     </item>
     
     <item>
+      <title>Regular Expressions</title>
+      <link>https://billthefarmer.github.io/editor/using/regular-expressions/</link>
+      <pubDate>Sun, 05 Sep 2021 09:48:08 +0100</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/regular-expressions/</guid>
+      <description>Explaining regular expressions used in the text search is beyond the scope of these docs. There is at least one book (of many) devoted to the subject. Use (?i) for case insensitive search, . matches any character once, .? matches any character once or not at all, .+ matches any character one or more times, .* matches any character any times or not at all. Use .+? or .*? for reluctant versions.</description>
+    </item>
+    
+    <item>
       <title>Highlight Syntax</title>
       <link>https://billthefarmer.github.io/editor/using/highlight-syntax/</link>
       <pubDate>Wed, 04 Mar 2020 19:41:14 +0000</pubDate>
