@@ -108,7 +108,7 @@ You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
 
-## Regular expressions
+### Regular expressions
 Explaining [regular
 expressions](https://en.wikipedia.org/wiki/Regular_expression) used in
 the text search is beyond the scope of this README. There is at least
@@ -116,7 +116,7 @@ one
 [book](https://www.oreilly.com/library/view/mastering-regular-expressions/0596528124/)
 devoted to the subject. Use `(?i)` for case insensitive search.
 
-## Character set
+### Character set
 The current character set is displayed under the current file
 name. The character set is detected when a new file is read. It may be
 changed by selecting the **Charset** item in the menu, which
@@ -189,7 +189,7 @@ implemented:
  * Ctrl+S &ndash; Save file
  * Ctrl+Shift+S &ndash; Save as
 
-## SD cards
+### SD cards
 Android allows removable SD cards to be used like a USB stick or as
 part of the device storage. Files opened using the file chooser on a
 removable SD card may not save successfully using the save button. Use
