@@ -12,7 +12,7 @@
   <string name="openRecent">Fichiers récents</string>
   <string name="clearList">Effacer la liste</string>
   <string name="search">Chercher…</string>
-  <string name="findAll">Trouver tout…</string>
+  <string name="findAll">Chercher partout…</string>
   <string name="saveAs">Enregistrer sous…</string>
   <string name="viewMarkdown">Compiler markdown…</string>
   <string name="viewFile">Afficher les fichiers</string>
@@ -34,14 +34,17 @@
   <string name="normal">Proportionnelle</string>
   <string name="about">À propos</string>
 
-  <string name="version" formatted="false"><a
-  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nCompilée
-  le %s\n\nCopyright © 2017 Bill Farmer\n\nTraduction française par <a
-  href="https://github.com/milouse">Étienne Deparis</a>\n\nLicence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nCompilée le %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nTraduction française par <a href="https://github.com/milouse">Étienne Deparis</a>, German translation by <a href="https://github.com/Markus00000">Markus Weimar</a> and <a href="https://github.com/AlexanderRitter02">Alexander Ritter</a>, Italian translation by <a href="https://github.com/airon90">Michael Moroni</a>, Polish translation by <a href="https://github.com/evo16">Evo</a>, Greek translation by <a href="https://github.com/nikoss">nikoss</a>, Spanish translation by <a href="https://github.com/foxneo">Miguel Caceres</a>, Simplified Chinese translation by <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>, Dutch translation by <a href="https://github.com/Vistaus">Heimen Stoffels (vistaus)</a>, Russian translation by <a href="https://github.com/bboa">Igor Nedoboy</a>, Latvian translation by <a href="https://github.com/rhssk">Rihards Skuja</a>, Icelandic translation by <a href="">Sveinn í Felli</a>, Portuguese translation by <a href="https://github.com/Andre-Gloria" >André Glória</a>, Chinese (Taiwan) translation by <a href="https://github.com/cges30901">cges30901</a>, Turkish translation by <a href="https://github.com/yasarciv67">Yaşar Çiv</a>, Brazilian Portuguese translation by <a href="https://github.com/aevw">aevw</a>, Sorani Kurdish translation by <a href="https://github.com/rawandsaeed">Rawand Saeed</a>, Persian (Farsi) translation by <a href="https://github.com/eshagh79">Eshagh</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
 
-  <string name="tooLarge">Trop grande %s</string>
-  <string name="choose">Donnez le chemin complet d\'accès au fichier</string>
+  <string name="tooLarge">Trop volumineux %s</string>
+  <string name="choose">Entrez le chemin complet d\'accès au fichier</string>
   <string name="loading">Chargement…</string>
 
   <string name="modified">
@@ -49,11 +52,11 @@
   </string>
 
   <string name="changedReload">
-    Ce fichier a changé, voulez-vous le recharger ?
+    Ce fichier a changé, souhaitez-vous le recharger ?
   </string>
 
   <string name="changedOverwrite">
-    Ce fichier a changé, voulez-vous l\'écraser ?
+    Ce fichier a changé, souhaitez-vous l\'écraser ?
   </string>
 
   <string name="ok">Ok</string>
