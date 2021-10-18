@@ -17,6 +17,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
+//  Bill Farmer	 william j farmer [at] yahoo [dot] co [dot] uk.
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 package org.billthefarmer.editor;
@@ -931,20 +933,11 @@ public class Editor extends Activity
         SubMenu sub = item.getSubMenu();
         // Get the group id
         item = sub.findItem(R.id.charsetItem);
-        int group = item.getGroupId();
         sub.clear();
         // Add charsets contained in both sets
         for (String charset: charsets)
-        {
             if (keySet.contains(charset))
-            {
-                item = sub.add(group, R.id.charsetItem, Menu.NONE, charset);
-                item.setChecked(charset.equals(match));
-            }
-        }
-
-        // Set the group checkable, exclusive
-        sub.setGroupCheckable(group, true, true);
+                sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, charset);
 
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
