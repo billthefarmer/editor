@@ -61,12 +61,10 @@
       android:showAsAction="never"
       android:title="">
     <menu>
-      <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/charsetItem"
-            android:showAsAction="never"
-            android:title="" />
-      </group>
+      <item
+          android:id="@+id/charsetItem"
+          android:showAsAction="never"
+          android:title="" />
     </menu>
   </item>
   <item
