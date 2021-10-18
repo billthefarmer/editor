@@ -1,0 +1,2 @@
+* Update French translation
+* Remove menu radio buttons
