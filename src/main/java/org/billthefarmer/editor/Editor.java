@@ -661,8 +661,10 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-                // Change typeface temporarily as workaround for yet
+                // Change size and typeface temporarily as workaround for yet
                 // another obscure feature of some versions of android
+                textView.setTextSize((size == TINY)? HUGE: TINY);
+                textView.setTextSize(size);
                 textView.setTypeface((type == NORMAL)?
                                      Typeface.MONOSPACE:
                                      Typeface.DEFAULT, Typeface.NORMAL);
