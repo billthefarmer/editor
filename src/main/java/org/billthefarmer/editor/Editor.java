@@ -674,8 +674,8 @@ public class Editor extends Activity
                 // Update boolean
                 edit = true;
 
-                // Update menu
-                invalidateOptionsMenu();
+                // Restart
+                recreate(this);
 
                 return false;
             });
@@ -1216,8 +1216,8 @@ public class Editor extends Activity
         // Update boolean
         edit = true;
 
-        // Update menu
-        invalidateOptionsMenu();
+        // Recreate
+        recreate(this);
     }
 
     // viewClicked
