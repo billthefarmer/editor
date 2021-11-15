@@ -45,6 +45,8 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
@@ -973,7 +975,8 @@ public class Editor extends Activity
                 path.replaceFirst(Environment
                                   .getExternalStorageDirectory()
                                   .getPath() + File.separator, "");
-            sub.add(Menu.NONE, R.id.fileItem, Menu.NONE, name);
+            sub.add(Menu.NONE, R.id.fileItem, Menu.NONE, TextUtils.ellipsize
+                    (name, new TextPaint(), 192, TextUtils.TruncateAt.MIDDLE));
         }
 
         // Add clear list item
