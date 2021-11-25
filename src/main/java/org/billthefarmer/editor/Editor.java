@@ -971,12 +971,16 @@ public class Editor extends Activity
             String path = map.get(date);
 
             // Remove path prefix
-            String name =
+            CharSequence name =
                 path.replaceFirst(Environment
                                   .getExternalStorageDirectory()
                                   .getPath() + File.separator, "");
+            // Create item
             sub.add(Menu.NONE, R.id.fileItem, Menu.NONE, TextUtils.ellipsize
-                    (name, new TextPaint(), 192, TextUtils.TruncateAt.MIDDLE));
+                    (name, new TextPaint(), 192, TextUtils.TruncateAt.MIDDLE))
+                // Use condensed title to save path as API doesn't
+                // work as documented
+                .setTitleCondensed(name);
         }
 
         // Add clear list item
@@ -1402,7 +1406,8 @@ public class Editor extends Activity
     // openRecent
     private void openRecent(MenuItem item)
     {
-        String name = item.getTitle().toString();
+        // Get path from condensed title
+        String name = item.getTitleCondensed().toString();
         File file = new File(name);
 
         // Check absolute file
