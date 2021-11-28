@@ -343,6 +343,7 @@ public class Editor extends Activity
     private final static double KEYBOARD_RATIO = 0.25;
 
     private final static int LAST_SIZE = 256;
+    private final static int MENU_SIZE = 192;
     private final static int FIRST_SIZE = 256;
     private final static int TOO_LARGE = 524288;
     private final static int FOLDER_OFFSET = 0x7d000000;
@@ -977,7 +978,8 @@ public class Editor extends Activity
                                   .getPath() + File.separator, "");
             // Create item
             sub.add(Menu.NONE, R.id.fileItem, Menu.NONE, TextUtils.ellipsize
-                    (name, new TextPaint(), 192, TextUtils.TruncateAt.MIDDLE))
+                    (name, new TextPaint(), MENU_SIZE,
+                     TextUtils.TruncateAt.MIDDLE))
                 // Use condensed title to save path as API doesn't
                 // work as documented
                 .setTitleCondensed(name);
