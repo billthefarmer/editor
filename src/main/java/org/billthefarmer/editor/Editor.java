@@ -347,7 +347,6 @@ public class Editor extends Activity
     private final static int FIRST_SIZE = 256;
     private final static int TOO_LARGE = 524288;
     private final static int FOLDER_OFFSET = 0x7d000000;
-    private final static int FILE_OFFSET = 0x7b000000;
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
     private final static int FIND_DELAY = 128;
@@ -1414,8 +1413,7 @@ public class Editor extends Activity
 
         // Check absolute file
         if (!file.isAbsolute())
-            file = new File(Environment.getExternalStorageDirectory(),
-                            File.separator + name);
+            file = new File(Environment.getExternalStorageDirectory(), name);
         // Check it exists
         if (file.exists())
         {
