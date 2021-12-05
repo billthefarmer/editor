@@ -481,7 +481,7 @@ public class Editor extends Activity
         getActionBar().setDisplayShowCustomEnabled(true);
         customView = (TextView) getActionBar().getCustomView();
 
-        updateWordCount = () -> wordcountText();
+        updateWordCount = () -> wordCountText();
 
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
@@ -2685,8 +2685,8 @@ public class Editor extends Activity
         }
     }
 
-    // wordcountText
-    private void wordcountText()
+    // wordCountText
+    private void wordCountText()
     {
         int words = 0;
         Matcher matcher = WORD_PATTERN.matcher(textView.getText());
