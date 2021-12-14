@@ -95,6 +95,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 
 import java.lang.ref.WeakReference;
 
@@ -3103,20 +3104,26 @@ public class Editor extends Activity
     }
 
     // readFile
-    private static CharSequence readFile(File file)
+    private CharSequence readFile(File file)
     {
         StringBuilder text = new StringBuilder();
         // Open file
         try (BufferedInputStream in = new
              BufferedInputStream(new FileInputStream(file)))
         {
+            // Create reader
             BufferedReader reader = new
                 BufferedReader(new InputStreamReader(in));
 
-            CharsetMatch match = new
-                CharsetDetector().setText(in).detect();
+            // Default UTF-8 charset
+            String charset = "UTF-8";
             if (match != null)
-                reader = new BufferedReader(match.getReader());
+                charset = match;
+
+            // Detect charset, using hint
+            Reader detect = new CharsetDetector().getReader(in, charset);
+            if (detect != null)
+                reader = new BufferedReader(detect);
 
             String line;
             while ((line = reader.readLine()) != null)
@@ -3200,7 +3207,7 @@ public class Editor extends Activity
             // Check the entries
             for (File file : entries)
             {
-                CharSequence content = readFile(file);
+                CharSequence content = editor.readFile(file);
                 Matcher matcher = pattern.matcher(content);
                 if (matcher.find())
                     matchList.add(file);
@@ -3281,10 +3288,19 @@ public class Editor extends Activity
             try (BufferedInputStream in = new BufferedInputStream
                  (editor.getContentResolver().openInputStream(uris[0])))
             {
+                // Create reader
                 BufferedReader reader = new
                     BufferedReader(new InputStreamReader(in));
 
-                CharsetMatch match = new CharsetDetector().setText(in).detect();
+                // Default UTF-8 charset
+                String charset = "UTF-8";
+                if (editor.match != null)
+                    charset = editor.match;
+
+                // Detect charset, using hint
+                CharsetMatch match = new
+                    CharsetDetector().setDeclaredEncoding(charset)
+                    .setText(in).detect();
 
                 if (match != null)
                 {
