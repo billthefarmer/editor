@@ -38,12 +38,13 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ContentDescription', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'MediaCapabilities',
-            'FindViewByIdCast', 'WrongViewCast'
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion',
+            'MediaCapabilities', 'FindViewByIdCast', 'WrongViewCast'
         // abortOnError false
     }
 }
 
 dependencies {
     implementation 'org.commonmark:commonmark:0.18.0'
+    implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
 }
