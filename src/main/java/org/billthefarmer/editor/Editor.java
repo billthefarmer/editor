@@ -75,10 +75,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import android.support.v4.content.FileProvider;
-/*
-import com.ibm.icu.text.CharsetDetector;
-import com.ibm.icu.text.CharsetMatch;
-*/
+
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -3110,23 +3107,10 @@ public class Editor extends Activity
     {
         StringBuilder text = new StringBuilder();
         // Open file
-        try (BufferedInputStream in = new
-             BufferedInputStream(new FileInputStream(file)))
+        try (BufferedReader reader = new BufferedReader
+             (new InputStreamReader
+              (new BufferedInputStream(new FileInputStream(file)))))
         {
-            // Create reader
-            BufferedReader reader = new
-                BufferedReader(new InputStreamReader(in));
-
-            // Default UTF-8 charset
-            Charset charset = Charset.forName("UTF-8");
-            if (match != null)
-                charset = Charset.forName(match);
-
-            // Detect charset, using hint
-            Reader detect = CharsetDetector.createBufferedReader(in, charset);
-            if (detect != null)
-                reader = new BufferedReader(detect);
-
             String line;
             while ((line = reader.readLine()) != null)
             {
@@ -3293,20 +3277,9 @@ public class Editor extends Activity
                 // Create reader
                 BufferedReader reader = new
                     BufferedReader(new InputStreamReader(in));
-/*
-                // Default UTF-8 charset
-                String charset = "UTF-8";
-                if (editor.match != null)
-                    charset = editor.match;
 
-                // Detect charset, using hint
-                CharsetMatch match = new
-                    CharsetDetector().setDeclaredEncoding(charset)
-                    .setText(in).detect();
-*/
-                int size = (int) FileUtils.getSize(editor, uris[0], null, null);
-                in.mark (size);
-                String match = CharsetDetector.detectCharset(in);
+                String match = CharsetDetector.detectCharset
+                    (editor.getContentResolver().openInputStream(uris[0]));
 
                 if (match != null)
                 {
@@ -3315,7 +3288,6 @@ public class Editor extends Activity
                         editor.getActionBar().setSubtitle(editor.match));
                     reader = new BufferedReader
                         (new InputStreamReader(in, match));
-                    // match.getReader());
                 }
 
                 if (BuildConfig.DEBUG && match != null)

@@ -79,9 +79,7 @@ public class CharsetDetector
     public static String detectCharset(InputStream inputStream)
         throws IOException
     {
-        String encoding = UniversalDetector.detectCharset(inputStream);
-        inputStream.reset();
-        return encoding;
+        return UniversalDetector.detectCharset(inputStream);
     }
 
     /**
@@ -89,7 +87,7 @@ public class CharsetDetector
      * @param inputStream The stream to read from
      * @param defaultCharset defaultCharset to use if can't be determined
      * @return BufferedReader for the file with the correct encoding
-     * @throws java.io.IOException if some I/O error ocurrs
+     * @throws java.io.IOException if some I/O error occurs
      */
     public static BufferedReader createBufferedReader(InputStream inputStream,
                                                       Charset defaultCharset)
