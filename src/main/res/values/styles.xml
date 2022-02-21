@@ -14,23 +14,7 @@
     -->
   </style>
 
-  <style name="AppBlackBaseTheme" parent="android:Theme.Holo">
-    <!--
-        Theme customizations available in newer API levels can go in
-        res/values-vXX/styles.xml, while customizations related to
-        backward-compatibility can go here.
-    -->
-  </style>
-
   <style name="AppDarkBaseTheme" parent="android:Theme.Holo">
-    <!--
-        Theme customizations available in newer API levels can go in
-        res/values-vXX/styles.xml, while customizations related to
-        backward-compatibility can go here.
-    -->
-  </style>
-
-  <style name="AppRetroBaseTheme" parent="android:Theme.Holo">
     <!--
         Theme customizations available in newer API levels can go in
         res/values-vXX/styles.xml, while customizations related to
@@ -75,7 +59,7 @@
   </style>
 
   <!-- Application theme. -->
-  <style name="AppBlackTheme" parent="AppBlackBaseTheme">
+  <style name="AppBlackTheme" parent="AppDarkBaseTheme">
     <!--
         All customizations that are NOT specific to a particular
         API-level can go here.
@@ -90,12 +74,13 @@
     <item name="parent">@drawable/ic_action_reply_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
 
-    <item name="BackgroundColour">@color/colorBlackBackground</item>
+    <item name="android:editTextBackground">@drawable/edit_text_background</item>
+    <item name="background">@color/colorBlackBackground</item>
 
   </style>
 
   <!-- Application theme. -->
-  <style name="AppRetroTheme" parent="AppRetroBaseTheme">
+  <style name="AppRetroTheme" parent="AppDarkBaseTheme">
     <!--
         All customizations that are NOT specific to a particular
         API-level can go here.
@@ -110,7 +95,8 @@
     <item name="parent">@drawable/ic_action_reply_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
 
-    <item name="BackgroundColour">@color/colorRetroBackground</item>
+    <item name="android:editTextBackground">@drawable/edit_text_background</item>
+    <item name="background">@color/colorRetroBackground</item>
 
     <item name="android:textColorPrimary">@color/text_color_retro</item>
     <item name="android:textColorSecondary">@color/text_color_retro</item>

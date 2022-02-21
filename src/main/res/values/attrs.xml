@@ -3,7 +3,7 @@
 
   <declare-styleable name="Editor">
 
-    <attr name="BackgroundColour" format="reference" />
+    <attr name="background" format="reference" />
 
     <attr name="application" format="reference" />
     <attr name="external" format="reference" />
