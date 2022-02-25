@@ -3,7 +3,7 @@
 
   <string name="appName">ویرایشگر</string>
 
-  <string name="neu">جدید</string>
+  <string name="newFile">جدید</string>
   <string name="edit">ویرایش</string>
   <string name="view">نمایش</string>
   <string name="open">باز کردن پرونده…</string>

@@ -3,7 +3,7 @@
 
   <string name="appName">Editor</string>
 
-  <string name="neu">Nuevo</string>
+  <string name="newFile">Nuevo</string>
   <string name="edit">Editar</string>
   <string name="view">Ver</string>
   <string name="open">Abrir archivo…</string>

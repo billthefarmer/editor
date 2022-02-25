@@ -158,6 +158,8 @@ public class Editor extends Activity
     public final static String HTML_TAIL = "\n</body>\n</html>\n";
     public final static String FILE_PROVIDER =
         "org.billthefarmer.editor.fileprovider";
+    public final static String OPEN_NEW =
+        "org.billthefarmer.editor.OPEN_NEW";
 
     public final static String CC_EXT =
         "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|kt|m|py|swift)";
@@ -529,6 +531,14 @@ public class Editor extends Activity
             }
             break;
 
+        case OPEN_NEW:
+            if (savedInstanceState == null)
+            {
+                newFile();
+                textView.postDelayed(() -> editClicked(null), UPDATE_DELAY);
+            }
+            break;
+
         case Intent.ACTION_MAIN:
             if (savedInstanceState == null)
                 defaultFile();
@@ -607,10 +617,10 @@ public class Editor extends Activity
             textView.setOnFocusChangeListener((v, hasFocus) ->
             {
                 // Hide keyboard
-                InputMethodManager imm = (InputMethodManager)
+                InputMethodManager manager = (InputMethodManager)
                     getSystemService(INPUT_METHOD_SERVICE);
                 if (!hasFocus)
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                 if (updateHighlight != null)
                 {
@@ -988,7 +998,7 @@ public class Editor extends Activity
         case android.R.id.home:
             onBackPressed();
             break;
-        case R.id.neu:
+        case R.id.newFile:
             newFile();
             break;
         case R.id.edit:
@@ -1236,7 +1246,7 @@ public class Editor extends Activity
     {
         // Check if file changed
         if (changed)
-            alertDialog(R.string.neu, R.string.modified,
+            alertDialog(R.string.newFile, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
             switch (id)
@@ -1945,6 +1955,7 @@ public class Editor extends Activity
             });
             layout.addView(button);
         }
+
         // Scroll to the end
         scroll.postDelayed(() ->
         {

@@ -3,7 +3,7 @@
 
   <string name="appName">Tekstbewerker</string>
 
-  <string name="neu">Nieuw</string>
+  <string name="newFile">Nieuw</string>
   <string name="edit">Bewerken</string>
   <string name="view">Tonen</string>
   <string name="open">Bestand openen…</string>

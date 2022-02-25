@@ -3,7 +3,7 @@
 
   <string name="appName">Redaktors</string>
 
-  <string name="neu">Jauns</string>
+  <string name="newFile">Jauns</string>
   <string name="edit">Rediģēt</string>
   <string name="view">Skatīt</string>
   <string name="open">Atvērt failu…</string>

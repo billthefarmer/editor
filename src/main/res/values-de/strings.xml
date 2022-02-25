@@ -3,7 +3,7 @@
 
   <string name="appName">Editor</string>
 
-  <string name="neu">Neu</string>
+  <string name="newFile">Neu</string>
   <string name="edit">Bearbeiten</string>
   <string name="view">Betrachten</string>
   <string name="open">Datei öffnen…</string>
@@ -51,7 +51,7 @@
   </string>
 
   <string name="changedReload">
-    Die Datei wurde geändert. Möchten Sie sie neu laden?
+    Die Datei wurde geändert. Möchten Sie sie newFile laden?
   </string>
 
   <string name="changedOverwrite">

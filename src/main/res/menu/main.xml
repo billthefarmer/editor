@@ -23,10 +23,10 @@
       android:showAsAction="ifRoom"
       android:title="@string/save" />
   <item
-      android:id="@+id/neu"
+      android:id="@+id/newFile"
       android:icon="@drawable/ic_action_new_dark"
       android:showAsAction="ifRoom"
-      android:title="@string/neu" />
+      android:title="@string/newFile" />
   <item
       android:id="@+id/open"
       android:icon="@drawable/ic_action_collection_dark"
