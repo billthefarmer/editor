@@ -23,7 +23,6 @@
 
 package org.billthefarmer.editor;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
