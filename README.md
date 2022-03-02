@@ -109,6 +109,10 @@ You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
 
+### Shortcut
+You may create a **New file** shortcut in the launcher which will open
+a new file in Editor.
+
 ### Regular expressions
 Explaining [regular
 expressions](https://en.wikipedia.org/wiki/Regular_expression) used in

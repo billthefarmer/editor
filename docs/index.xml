@@ -7,14 +7,14 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Copyright &amp;copy; 2021 Bill Farmer</copyright>
-    <lastBuildDate>Wed, 03 Nov 2021 21:12:12 +0000</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Mar 2022 09:34:09 +0000</lastBuildDate><atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Features</title>
       <link>https://billthefarmer.github.io/editor/introduction/features/</link>
       <pubDate>Wed, 04 Mar 2020 15:40:25 +0000</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/introduction/features/</guid>
-      <description> File chooser Default file View markdown in browser or html viewer Regular expression text search Character set detection and selection Optional syntax highlighting Open recent files from menu Optionally view files Optional auto save Optional Word wrap Light/Dark/Black/Retro themes Small/Medium/Large font size Monospace/Proportional font faces  </description>
+      <description> File chooser Default file View markdown in browser or html viewer Regular expression text search Character set detection and selection Optional syntax highlighting Open recent files from menu Optionally view files Optional auto save Optional Word wrap New file shortcut Light/Dark/Black/Retro themes Small/Medium/Large font size Monospace/Proportional font faces  </description>
     </item>
     
     <item>
@@ -100,6 +100,15 @@ Default The default character set is set to UTF-8 on selecting New from the tool
       
       <guid>https://billthefarmer.github.io/editor/using/regular-expressions/</guid>
       <description>Explaining regular expressions used in the text search is beyond the scope of these docs. There is at least one book (of many) devoted to the subject. Use (?i) for case insensitive search, . matches any character once, .? matches any character once or not at all, .+ matches any character one or more times, .* matches any character any times or not at all. Use .+? or .*? for reluctant versions.</description>
+    </item>
+    
+    <item>
+      <title>Shortcut</title>
+      <link>https://billthefarmer.github.io/editor/using/shortcut/</link>
+      <pubDate>Wed, 02 Mar 2022 09:34:09 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/shortcut/</guid>
+      <description>You may create a New file shortcut in the launcher which will open a new file in Editor.</description>
     </item>
     
     <item>
