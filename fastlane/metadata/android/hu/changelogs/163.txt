@@ -1,0 +1,2 @@
+* Karakterkészlet felismerése és kiválasztása
+* Fájlméret ellenőrzése betöltéskor

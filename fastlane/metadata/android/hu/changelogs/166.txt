@@ -1,0 +1,1 @@
+* Javítás hozzáadása OxygenOS és Android 11 rendszerekhez

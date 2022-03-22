@@ -1,0 +1,1 @@
+* Legutóbbi megnyitása menü hármasponttal ellátásának javítása

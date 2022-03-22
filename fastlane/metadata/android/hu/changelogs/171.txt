@@ -1,0 +1,1 @@
+ * Új fájl hozzáadása gyorsbillentyű

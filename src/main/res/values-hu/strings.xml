@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Szerkesztő</string>
+
+  <string name="newFile">Új fájl</string>
+  <string name="edit">Szerkesztés</string>
+  <string name="view">Nézet</string>
+  <string name="open">Fájl megnyitása…</string>
+  <string name="save">Mentés</string>
+  <string name="storage">Tároló</string>
+  <string name="openRecent">Legutóbbi megnyitása</string>
+  <string name="clearList">Lista törlése</string>
+  <string name="search">Keresés…</string>
+  <string name="findAll">Összes keresése…</string>
+  <string name="saveAs">Mentés másként…</string>
+  <string name="viewMarkdown">Markdown megtekintése…</string>
+  <string name="viewFile">Fájlok megtekintése</string>
+  <string name="autoSave">Automatikus mentés</string>
+  <string name="wrap">Szövegtördelés</string>
+  <string name="suggest">Javaslatok</string>
+  <string name="highlight">Szintaxiskiemelés</string>
+  <string name="theme">Téma</string>
+  <string name="light">Világos</string>
+  <string name="dark">Sötét</string>
+  <string name="black">Fekete</string>
+  <string name="retro">Retró</string>
+  <string name="size">Szövegméret</string>
+  <string name="small">Kicsi</string>
+  <string name="medium">Közepes</string>
+  <string name="large">Nagy</string>
+  <string name="typeface">Betűkészlet</string>
+  <string name="mono">Rögzített szélességű</string>
+  <string name="normal">Arányos</string>
+  <string name="about">Névjegy</string>
+
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nÖsszeállítás: %s\n\nCopyright \u00A9 2017-2022 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nMagyar fordítás: <a href="https://github.com/urbalazs">Úr Balázs</a>\n\nLicenc: <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="tooLarge">Túl nagy: %s</string>
+  <string name="choose">Válasszon fájlnevet</string>
+  <string name="loading">Betöltés…</string>
+
+  <string name="modified">
+    Mentetlen változtatásai vannak. Szeretné menteni a változtatásokat?
+  </string>
+
+  <string name="changedReload">
+    Ez a fájl megváltozott, szeretné újratölteni?
+  </string>
+
+  <string name="changedOverwrite">
+    Ez a fájl megváltozott, szeretné felülírni?
+  </string>
+
+  <string name="ok">Rendben</string>
+  <string name="reload">Újratöltés</string>
+  <string name="overwrite">Felülírás</string>
+  <string name="discard">Elvetés</string>
+  <string name="cancel">Mégse</string>
+
+</resources>
