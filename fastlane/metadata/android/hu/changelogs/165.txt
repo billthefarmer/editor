@@ -1,0 +1,2 @@
+* Francia fordítás frissítése
+* Menü választógombjainak eltávolítása

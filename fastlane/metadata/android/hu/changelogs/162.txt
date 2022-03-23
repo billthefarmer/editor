@@ -1,0 +1,2 @@
+* Fájlszolgáltató URI feloldásának frissítése
+* Összeállítási parancsfájlok frissítése

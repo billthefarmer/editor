@@ -1,0 +1,1 @@
+* Karakterkészlet-felismerő megváltoztatása a Mozilla UniversalChardet megoldására

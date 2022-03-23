@@ -1,0 +1,12 @@
+Ez egy nagyon egyszerű, általános szövegszerkesztő, amely önállóan is, vagy bármilyen szöveges fájl egy másik alkalmazásból történő megjelenítésére vagy szerkesztésére is használható. Ha egy fájlkezelőben vagy hasonló alkalmazásban kiválaszt egy szöveges fájlt, akkor felajánlja a lehetőséget, hogy ezt a szerkesztőt bármilyen más, szöveges fájl megjelenítésére vagy szerkesztésére alkalmas telepített alkalmazással együtt használja. A fájlok kezdetben csak olvasásra lesznek megnyitva, a szerkesztés engedélyezéséhez érintse meg hosszan a kijelzőt vagy érintse meg az eszköztáron lévő szerkesztés elemet.
+
+ * Szövegkeresés reguláris kifejezéssel
+ * Markdown megtekintése a böngészőben vagy a HTML-megjelenítőben
+ * Választható automatikus mentés
+ * Választható szövegtördelés
+ * Választható javaslatok
+ * Választható szintaxiskiemelés
+ * Karakterkészlet felismerése és kiválasztása
+ * Világos, sötét, fekete vagy retró témák
+ * Kicsi, közepes vagy nagy szövegméret
+ * Rögzített szélességű vagy arányos betűkészletek
