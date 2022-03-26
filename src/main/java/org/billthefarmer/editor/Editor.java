@@ -1506,7 +1506,7 @@ public class Editor extends Activity
             builder.setNeutralButton(R.string.storage, listener);
 
         // Create edit text
-        LayoutInflater inflater = (LayoutInflater)builder.getContext()
+        LayoutInflater inflater = (LayoutInflater) builder.getContext()
             .getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.save_path, null);
         builder.setView(view);
