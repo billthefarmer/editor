@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
 
   <string name="appName">Editor</string>
 
@@ -14,6 +17,7 @@
   <string name="search">Search…</string>
   <string name="findAll">Find all…</string>
   <string name="saveAs">Save as…</string>
+  <string name="detect">Detect</string>
   <string name="viewMarkdown">View markdown…</string>
   <string name="viewFile">View files</string>
   <string name="autoSave">Auto save</string>

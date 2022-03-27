@@ -75,11 +75,12 @@ import android.widget.TextView;
 
 import android.support.v4.content.FileProvider;
 
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
+
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
-
-import org.mozilla.universalchardet.CharsetDetector;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -765,6 +766,8 @@ public class Editor extends Activity
         else
             setTitle(uri.getLastPathSegment());
 
+        if (match == null)
+            match = "UTF-8";
         getActionBar().setSubtitle(match);
 
         checkHighlight();
@@ -929,18 +932,16 @@ public class Editor extends Activity
 
         // Get the charsets
         Set<String> keySet = Charset.availableCharsets().keySet();
-        String charsets[] = CharsetDetector.CHARSETS;
         // Get the submenu
         MenuItem item = menu.findItem(R.id.charset);
         item.setTitle(match);
         SubMenu sub = item.getSubMenu();
-        // Get the group id
-        item = sub.findItem(R.id.charsetItem);
         sub.clear();
         // Add charsets contained in both sets
-        for (String charset: charsets)
-            if (keySet.contains(charset))
-                sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, charset);
+        sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, R.string.detect);
+        Iterator<String> iterator = keySet.iterator();
+        while (iterator.hasNext())
+            sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, iterator.next());
 
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
@@ -2193,7 +2194,7 @@ public class Editor extends Activity
         file.getParentFile().mkdirs();
 
         String charset = "UTF-8";
-        if (match != null)
+        if (match != null && !match.equals(getString(R.string.detect)))
             charset = match;
 
         try (BufferedWriter writer = new BufferedWriter
@@ -2220,7 +2221,7 @@ public class Editor extends Activity
     private void write(CharSequence text, OutputStream os)
     {
         String charset = "UTF-8";
-        if (match != null)
+        if (match != null && !match.equals(getString(R.string.detect)))
             charset = match;
 
         try (BufferedWriter writer =
@@ -3271,27 +3272,45 @@ public class Editor extends Activity
             if (editor == null)
                 return stringBuilder;
 
+            // Default UTF-8
+            if (editor.match == null)
+            {
+                editor.match = "UTF-8";
+                editor.runOnUiThread(() ->
+                    editor.getActionBar().setSubtitle(editor.match));
+            }
+
             try (BufferedInputStream in = new BufferedInputStream
                  (editor.getContentResolver().openInputStream(uris[0])))
             {
                 // Create reader
-                BufferedReader reader = new
-                    BufferedReader(new InputStreamReader(in));
-
-                String match = CharsetDetector.detectCharset
-                    (editor.getContentResolver().openInputStream(uris[0]));
-
-                if (match != null)
+                BufferedReader reader = null;
+                if (editor.match.equals(editor.getString(R.string.detect)))
                 {
-                    editor.match = match;
-                    editor.runOnUiThread(() ->
-                        editor.getActionBar().setSubtitle(editor.match));
-                    reader = new BufferedReader
-                        (new InputStreamReader(in, match));
+                    // Detect charset, using UTF-8 hint
+                    CharsetMatch match = new
+                        CharsetDetector().setDeclaredEncoding("UTF-8")
+                        .setText(in).detect();
+
+                    if (match != null)
+                    {
+                        editor.match = match.getName();
+                        editor.runOnUiThread(() ->
+                            editor.getActionBar().setSubtitle(editor.match));
+                        reader = new BufferedReader(match.getReader());
+                    }
+
+                    else
+                        reader = new BufferedReader
+                            (new InputStreamReader(in));
+
+                    if (BuildConfig.DEBUG && match != null)
+                        Log.d(TAG, "Charset " + editor.match);
                 }
 
-                if (BuildConfig.DEBUG && match != null)
-                    Log.d(TAG, "Charset " + match);
+                else
+                     reader = new BufferedReader
+                         (new InputStreamReader(in, editor.match));
 
                 String line;
                 while ((line = reader.readLine()) != null)
