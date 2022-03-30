@@ -14,6 +14,7 @@
   <string name="search">Szukaj…</string>
   <string name="findAll">Znajdź wszystkie…</string>
   <string name="saveAs">Zapisz jako…</string>
+  <string name="detect">Wykryć</string>
   <string name="viewMarkdown">Wyświetl markdown…</string>
   <string name="viewFile">Pokaż pliki</string>
   <string name="autoSave">Autozapis</string>

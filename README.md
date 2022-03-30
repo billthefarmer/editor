@@ -123,9 +123,10 @@ devoted to the subject. Use `(?i)` for case insensitive search.
 
 ### Character set
 The current character set is displayed under the current file
-name. The character set is detected when a new file is read. It may be
-changed by selecting the **Charset** item in the menu, which
-shows the current character set. See [Character set](Charset.md).
+name. The character set is optionally detected when a new file is
+read. It may be changed by selecting the **Charset** item in the menu,
+which shows the current character set. See [Character
+set](Charset.md).
 
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,

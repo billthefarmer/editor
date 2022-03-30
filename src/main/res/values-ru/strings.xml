@@ -14,6 +14,7 @@
   <string name="openRecent">Недавние</string>
   <string name="clearList">Очистить список</string>
   <string name="saveAs">Сохранить как…</string>
+  <string name="detect">Обнаруживать</string>
   <string name="viewMarkdown">Просмотр Markdown…</string>
   <string name="viewFile">Просмотр файлов</string>
   <string name="autoSave">Автосохранение</string>

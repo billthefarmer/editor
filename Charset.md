@@ -9,9 +9,9 @@ the toolbar. It may be changed in the menu. Android defaults to
 doing.
 
 ## Detection
-The current character set is detected on reading a file by the
-detection code from [International Components for
-Unicode](https://unicode-org.github.io/icu/userguide/icu4j/). If there
+The current character set is optionally detected on reading a file by
+the detection code from [International Components for
+Unicode](https://unicode-org.github.io/icu/userguide/icu4j). If there
 are no accented characters or symbols in the text to give the
 detection algorithm something to work on it may not get it right.
 

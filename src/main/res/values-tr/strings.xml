@@ -14,6 +14,7 @@
   <string name="search">Ara…</string>
   <string name="findAll">Hepsini bul…</string>
   <string name="saveAs">Farklı kaydet…</string>
+  <string name="detect">Algılamak</string>
   <string name="viewMarkdown">Markdown görünümü…</string>
   <string name="viewFile">Dosyaları görüntüle</string>
   <string name="autoSave">Otomatik kaydet</string>

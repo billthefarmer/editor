@@ -13,6 +13,7 @@
   <string name="clearList">Lijst wissen</string>
   <string name="search">Zoeken…</string>
   <string name="findAll">Alles zoeken…</string>
+  <string name="detect">Detecteren</string>
   <string name="saveAs">Opslaan als…</string>
   <string name="viewMarkdown">Markdown tonen…</string>
   <string name="viewFile">Bestanden tonen</string>

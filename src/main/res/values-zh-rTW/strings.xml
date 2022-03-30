@@ -14,6 +14,7 @@
   <string name="search">搜尋…</string>
   <string name="findAll">尋找全部…</string>
   <string name="saveAs">儲存為…</string>
+  <string name="detect">检测</string>
   <string name="viewMarkdown">檢視 markdown…</string>
   <string name="viewFile">檢視檔案</string>
   <string name="autoSave">自動儲存</string>
