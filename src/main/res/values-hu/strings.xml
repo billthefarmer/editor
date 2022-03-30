@@ -5,7 +5,7 @@
 
   <string name="newFile">Új fájl</string>
   <string name="edit">Szerkesztés</string>
-  <string name="view">Nézet</string>
+  <string name="view">Megtekintés</string>
   <string name="open">Fájl megnyitása…</string>
   <string name="save">Mentés</string>
   <string name="storage">Tároló</string>
@@ -14,6 +14,7 @@
   <string name="search">Keresés…</string>
   <string name="findAll">Összes keresése…</string>
   <string name="saveAs">Mentés másként…</string>
+  <string name="detect">Felismerés</string>
   <string name="viewMarkdown">Markdown megtekintése…</string>
   <string name="viewFile">Fájlok megtekintése</string>
   <string name="autoSave">Automatikus mentés</string>
