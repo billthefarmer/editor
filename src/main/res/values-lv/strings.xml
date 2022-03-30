@@ -14,6 +14,7 @@
   <string name="search">Meklēt…</string>
   <string name="findAll">Atrodi visu…</string>
   <string name="saveAs">Saglabāt kā…</string>
+  <string name="detect">Atklāt</string>
   <string name="viewMarkdown">Skatīt markdown…</string>
   <string name="viewFile">Skatīt failus</string>
   <string name="autoSave">Automātiska saglabāšana</string>

@@ -14,6 +14,7 @@
   <string name="search">گەڕان..،</string>
   <string name="findAll">هەموو بدۆزەرەوە</string>
   <string name="saveAs">پاشەکەوتکردن وەک</string>
+  <string name="detect">دۆزینەوە</string>
   <string name="viewMarkdown">مارکداون پیشانبدە</string>
   <string name="viewFile">فایلەکان پیشانبدە</string>
   <string name="autoSave">پاشەکەتکردنی ئۆتۆماتیک</string>
