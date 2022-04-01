@@ -171,6 +171,9 @@ public class Editor extends Activity
     public final static String CSS_EXT =
         "\\.css?";
 
+    public final static String ORG_EXT =
+        "\\.org";
+
     public final static String MD_EXT =
         "\\.md";
 
@@ -318,6 +321,19 @@ public class Editor extends Activity
     public final static Pattern CSS_HEX = Pattern.compile
         ("#\\b[A-Fa-f0-9]+\\b", Pattern.MULTILINE);
 
+    public final static Pattern ORG_HEADER = Pattern.compile
+        ("(^\\*+ +.+$)|(^#\\+.+$)", Pattern.MULTILINE);
+
+    public final static Pattern ORG_LINK = Pattern.compile
+        ("\\[\\[.*?\\]\\]", Pattern.MULTILINE);
+
+    public final static Pattern ORG_EMPH = Pattern.compile
+        ("(([*~/_+=]+)\\b(\\w| )+?\\b\\2)",
+         Pattern.MULTILINE);
+
+    public final static Pattern ORG_COMMENT = Pattern.compile
+        ("(^# .*$)|(@@.*?@@)", Pattern.MULTILINE);
+
     public final static Pattern MD_HEADER = Pattern.compile
         ("(^.+\\s+-+$)|(^.+\\s+=+$)|(^#+ +.+$)", Pattern.MULTILINE);
 
@@ -381,9 +397,10 @@ public class Editor extends Activity
     private final static int CC_SYNTAX   = 1;
     private final static int HTML_SYNTAX = 2;
     private final static int CSS_SYNTAX  = 3;
-    private final static int MD_SYNTAX   = 4;
-    private final static int SH_SYNTAX   = 5;
-    private final static int DEF_SYNTAX  = 6;
+    private final static int ORG_SYNTAX  = 4;
+    private final static int MD_SYNTAX   = 5;
+    private final static int SH_SYNTAX   = 6;
+    private final static int DEF_SYNTAX  = 7;
 
     private Uri uri;
     private File file;
@@ -2265,6 +2282,9 @@ public class Editor extends Activity
                 else if (ext.matches(CSS_EXT))
                     syntax = CSS_SYNTAX;
 
+                else if (ext.matches(ORG_EXT))
+                    syntax = ORG_SYNTAX;
+
                 else if (ext.matches(MD_EXT))
                     syntax = MD_SYNTAX;
 
@@ -2510,6 +2530,54 @@ public class Editor extends Activity
             }
 
             matcher.region(start, end).usePattern(CC_COMMENT);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            break;
+
+        case ORG_SYNTAX:
+            matcher = ORG_HEADER.matcher(editable);
+            matcher.region(start, end);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.BLUE);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+
+            matcher.region(start, end).usePattern(ORG_EMPH);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(ORG_LINK);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(ORG_COMMENT);
             while (matcher.find())
             {
                 ForegroundColorSpan span = new
