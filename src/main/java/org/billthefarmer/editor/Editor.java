@@ -328,7 +328,7 @@ public class Editor extends Activity
         ("\\[\\[.*?\\]\\]", Pattern.MULTILINE);
 
     public final static Pattern ORG_EMPH = Pattern.compile
-        ("(([*~/_+=]+)\\b(\\w| )+?\\b\\2)",
+        ("(([*~/+=]+)\\b(\\w| )+?\\b\\2)|(\\b(_{1,2})(\\w| )+?\\5\\b)",
          Pattern.MULTILINE);
 
     public final static Pattern ORG_COMMENT = Pattern.compile
