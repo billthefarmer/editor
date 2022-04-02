@@ -130,9 +130,9 @@ set](Charset.md).
 
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,
-Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file,
-the keywords, classes comments, strings, etc will be highlighted. See
-[Syntax Highlighting](Syntax.md).
+Javascript, Python, Shell script, Swift, CSS, HTML, Org or Markdown
+file, the keywords, classes comments, strings, etc will be
+highlighted. See [Syntax Highlighting](Syntax.md).
 
 ### Mode line
 If a line of text is found within the first or last two or three lines

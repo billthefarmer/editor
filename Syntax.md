@@ -6,7 +6,8 @@ The type of highlighting is selected by file extension. Files with
 `.sh`, `.swift` extensions will be highlighted with 'C' style
 highlighting. Files with `.htm`, `.html` extensions will be
 highlighted as HTML. Files with `.cs`, `.css` extensions will be
-highlighted as CSS. Files with `.md` extensions will be highlighted as
+highlighted as CSS. Files with `.org` extension will be highlighted as
+Emacs Org. Files with `.md` extensions will be highlighted as
 markdown.
 
 ## Parsing
@@ -33,6 +34,9 @@ highlighted. As above, single quotes are ignored. HTML comments `<!--
 CSS style names are matched from a list. Double quoted arguments are
 highlighted. As above, single quotes are ignored. C style comments are
 recognised.
+
+### Emacs Org
+Metadata, headers, links, emphasis and inline code will be highlighted.
 
 ### Markdown
 Markdown headers, links, emphasis and code will be highlighted.
