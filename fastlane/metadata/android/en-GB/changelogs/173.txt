@@ -1,0 +1,2 @@
+ * Add Emacs Org syntax highlighting
+ * Update shell script syntax highlighting

@@ -348,6 +348,9 @@ public class Editor extends Activity
     public final static Pattern MD_CODE = Pattern.compile
         ("(^ {4,}.+$)|(`.+?`)", Pattern.MULTILINE);
 
+    public final static Pattern SH_VAR = Pattern.compile
+        ("(\\$\\b\\w+\\b)|(\\$\\{.+?\\})|(\\$\\(.+?\\))", Pattern.MULTILINE);
+
     public final static Pattern SH_COMMENT = Pattern.compile
         ("#.*$", Pattern.MULTILINE);
 
@@ -2665,6 +2668,39 @@ public class Editor extends Activity
             {
                 ForegroundColorSpan span = new
                     ForegroundColorSpan(Color.LTGRAY);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(SH_VAR);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.MAGENTA);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(OPERATOR);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.CYAN);
+
+                // Highlight it
+                editable.setSpan(span, matcher.start(), matcher.end(),
+                                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            matcher.region(start, end).usePattern(QUOTED);
+            while (matcher.find())
+            {
+                ForegroundColorSpan span = new
+                    ForegroundColorSpan(Color.RED);
 
                 // Highlight it
                 editable.setSpan(span, matcher.start(), matcher.end(),
