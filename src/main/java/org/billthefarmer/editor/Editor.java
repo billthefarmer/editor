@@ -1505,6 +1505,7 @@ public class Editor extends Activity
                     Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
                     intent.setType(TEXT_WILD);
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.putExtra(Intent.EXTRA_TITLE, uri.getLastPathSegment());
                     startActivityForResult(intent, CREATE_DOCUMENT);
                 }
                 break;
