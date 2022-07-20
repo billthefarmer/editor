@@ -4,39 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="">
 
-  <string name="appName">Editor</string>
+  <string name="appName">エディター</string>
 
-  <string name="newFile">New file</string>
-  <string name="edit">Edit</string>
-  <string name="view">View</string>
-  <string name="open">Open file…</string>
-  <string name="save">Save</string>
-  <string name="storage">Storage</string>
-  <string name="openRecent">Open recent</string>
-  <string name="clearList">Clear list</string>
-  <string name="search">Search…</string>
-  <string name="findAll">Find all…</string>
-  <string name="saveAs">Save as…</string>
-  <string name="detect">Detect</string>
-  <string name="viewMarkdown">View markdown…</string>
-  <string name="viewFile">View files</string>
-  <string name="autoSave">Auto save</string>
-  <string name="wrap">Word wrap</string>
-  <string name="suggest">Suggestions</string>
-  <string name="highlight">Highlight syntax</string>
-  <string name="theme">Theme</string>
-  <string name="light">Light</string>
-  <string name="dark">Dark</string>
-  <string name="black">Black</string>
-  <string name="retro">Retro</string>
-  <string name="size">Text size</string>
-  <string name="small">Small</string>
-  <string name="medium">Medium</string>
-  <string name="large">Large</string>
-  <string name="typeface">Typeface</string>
+  <string name="newFile">新規ファイル</string>
+  <string name="edit">編集</string>
+  <string name="view">閲覧</string>
+  <string name="open">ファイルを開く…</string>
+  <string name="save">保存</string>
+  <string name="storage">ストレージ</string>
+  <string name="openRecent">最近のファイル</string>
+  <string name="clearList">リストをクリア</string>
+  <string name="search">検索…</string>
+  <string name="findAll">すべて検索</string>
+  <string name="saveAs">名前をつけて保存…</string>
+  <string name="detect">検出</string>
+  <string name="viewMarkdown">マークダウンを閲覧…</string>
+  <string name="viewFile">ファイル閲覧</string>
+  <string name="autoSave">自動保存</string>
+  <string name="wrap">画面端で折り返す</string>
+  <string name="suggest">提案</string>
+  <string name="highlight">シンタックスハイライト</string>
+  <string name="theme">テーマ</string>
+  <string name="light">ライト</string>
+  <string name="dark">ダーク</string>
+  <string name="black">ブラック</string>
+  <string name="retro">レトロ</string>
+  <string name="size">文字サイズ</string>
+  <string name="small">小</string>
+  <string name="medium">中</string>
+  <string name="large">大</string>
+  <string name="typeface">書体</string>
   <string name="mono">Monospace</string>
   <string name="normal">Proportional</string>
-  <string name="about">About</string>
+  <string name="about">このアプリについて</string>
 
   <!--
       Note for translators: You don't need to translate all these
@@ -47,26 +47,26 @@
   <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nFrench translation by <a href="https://github.com/milouse">Étienne Deparis</a>, German translation by <a href="https://github.com/Markus00000">Markus Weimar</a> and <a href="https://github.com/AlexanderRitter02">Alexander Ritter</a>, Italian translation by <a href="https://github.com/airon90">Michael Moroni</a>, Polish translation by <a href="https://github.com/evo16">Evo</a>, Greek translation by <a href="https://github.com/nikoss">nikoss</a>, Spanish translation by <a href="https://github.com/foxneo">Miguel Caceres</a>, Simplified Chinese translation by <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>, Dutch translation by <a href="https://github.com/Vistaus">Heimen Stoffels (vistaus)</a>, Russian translation by <a href="https://github.com/bboa">Igor Nedoboy</a>, Latvian translation by <a href="https://github.com/rhssk">Rihards Skuja</a>, Icelandic translation by <a href="">Sveinn í Felli</a>, Portuguese translation by <a href="https://github.com/Andre-Gloria" >André Glória</a>, Chinese (Taiwan) translation by <a href="https://github.com/cges30901">cges30901</a>, Turkish translation by <a href="https://github.com/yasarciv67">Yaşar Çiv</a>, Brazilian Portuguese translation by <a href="https://github.com/aevw">aevw</a>, Sorani Kurdish translation by <a href="https://github.com/rawandsaeed">Rawand Saeed</a>, Persian (Farsi) translation by <a href="https://github.com/eshagh79">Eshagh</a>, Hungarian translation by <a href="https://github.com/urbalazs">Balázs Úr</a>, Japanese translation by <a href="https://gitlab.com/dokutoku">dokutoku</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="tooLarge">Too large %s</string>
-  <string name="choose">Choose a file name</string>
-  <string name="loading">Loading…</string>
+  <string name="tooLarge">%sのサイズが大きすぎます</string>
+  <string name="choose">ファイル名を選択してください</string>
+  <string name="loading">読み込み中…</string>
 
   <string name="modified">
-    You have unsaved changes. Do you want to save your changes?
+    未保存の変更があります。変更を保存しますか？
   </string>
 
   <string name="changedReload">
-    This file has changed, do you want to reload it?
+   このファイルは変更されましたが、再読み込みしますか？
   </string>
 
   <string name="changedOverwrite">
-    This file has changed, do you want to overwrite it?
+    このファイルは変更されましたが、上書きしますか？
   </string>
 
-  <string name="ok">OK</string>
-  <string name="reload">Reload</string>
-  <string name="overwrite">Overwrite</string>
-  <string name="discard">Discard</string>
-  <string name="cancel">Cancel</string>
+  <string name="ok">はい</string>
+  <string name="reload">再読み込み</string>
+  <string name="overwrite">上書き</string>
+  <string name="discard">破棄</string>
+  <string name="cancel">キャンセル</string>
 
 </resources>

@@ -1,0 +1,1 @@
+* 文字コード検出器をMozilla UniversalChardetに変更する。
