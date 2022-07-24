@@ -139,6 +139,7 @@ public class Editor extends Activity
 
     public final static String DOCUMENTS = "Documents";
     public final static String FOLDER = "Folder:  ";
+    public final static String UTF_8 = "UTF-8";
 
     public final static String NEW_FILE = "Untitled.txt";
     public final static String EDIT_FILE = "Editor.txt";
@@ -787,7 +788,7 @@ public class Editor extends Activity
             setTitle(uri.getLastPathSegment());
 
         if (match == null)
-            match = "UTF-8";
+            match = UTF_8;
         getActionBar().setSubtitle(match);
 
         checkHighlight();
@@ -1308,7 +1309,7 @@ public class Editor extends Activity
         path = uri.getPath();
 
         setTitle(uri.getLastPathSegment());
-        match = "UTF-8";
+        match = UTF_8;
         getActionBar().setSubtitle(match);
     }
 
@@ -1342,7 +1343,7 @@ public class Editor extends Activity
         else
         {
             setTitle(uri.getLastPathSegment());
-            match = "UTF-8";
+            match = UTF_8;
             getActionBar().setSubtitle(match);
         }
     }
@@ -2214,7 +2215,7 @@ public class Editor extends Activity
     {
         file.getParentFile().mkdirs();
 
-        String charset = "UTF-8";
+        String charset = UTF_8;
         if (match != null && !match.equals(getString(R.string.detect)))
             charset = match;
 
@@ -2241,7 +2242,7 @@ public class Editor extends Activity
     // write
     private void write(CharSequence text, OutputStream os)
     {
-        String charset = "UTF-8";
+        String charset = UTF_8;
         if (match != null && !match.equals(getString(R.string.detect)))
             charset = match;
 
@@ -3032,7 +3033,7 @@ public class Editor extends Activity
                     {
                         if (":u".equals(matcher.group(4)))
                         {
-                            match = "UTF-8";
+                            match = UTF_8;
                             getActionBar().setSubtitle(match);
                         }
                     }
@@ -3380,7 +3381,7 @@ public class Editor extends Activity
             // Default UTF-8
             if (editor.match == null)
             {
-                editor.match = "UTF-8";
+                editor.match = UTF_8;
                 editor.runOnUiThread(() ->
                     editor.getActionBar().setSubtitle(editor.match));
             }
@@ -3394,7 +3395,7 @@ public class Editor extends Activity
                 {
                     // Detect charset, using UTF-8 hint
                     CharsetMatch match = new
-                        CharsetDetector().setDeclaredEncoding("UTF-8")
+                        CharsetDetector().setDeclaredEncoding(UTF_8)
                         .setText(in).detect();
 
                     if (match != null)
