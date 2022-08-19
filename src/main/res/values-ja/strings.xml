@@ -44,7 +44,7 @@
       for your translation and the licence. Also add your translation
       credit here.
   -->
-  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nによる日本語翻 <a href="https://gitlab.com/dokutoku">dokutoku</a>\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nCopyright \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\n<a href="https://gitlab.com/dokutoku">dokutoku</a>による日本語訳\n\nLicence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="tooLarge">%sのサイズが大きすぎます</string>
