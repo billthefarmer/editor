@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
 <head>
-  <meta name="generator" content="Hugo 0.101.0" />
+  <meta name="generator" content="Hugo 0.102.0" />
 
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -13,7 +13,13 @@
   <link rel="stylesheet" href="https://billthefarmer.github.io/editor/css/styles.css">
   <link rel="stylesheet" href="https://billthefarmer.github.io/editor/css/custom.css">
   <link href="" rel="alternate" type="application/rss+xml" title="Editor" />
-
+  <script type="text/javascript">
+    window.onload = function() {
+        let p = document.getElementById("version");
+        let d = new Date().getFullYear();
+        p.innerHTML = p.innerHTML.replace(/\d{4}/, d);
+    }
+  </script>
 </head>
 <body>
 
