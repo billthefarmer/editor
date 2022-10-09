@@ -1,0 +1,2 @@
+ * Fix Japanese grammar
+ * Fix save check
