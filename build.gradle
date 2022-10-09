@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.android.tools.build:gradle:7.3.0'
     }
 }
 
@@ -20,6 +20,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    namespace "org.billthefarmer.editor"
 
     defaultConfig {
         applicationId "org.billthefarmer.editor"

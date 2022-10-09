@@ -17,7 +17,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-//  Bill Farmer	 william j farmer [at] yahoo [dot] co [dot] uk.
+//  Bill Farmer  william j farmer [at] yahoo [dot] co [dot] uk.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1623,7 +1623,7 @@ public class Editor extends Activity
     {
         wrap = !wrap;
         item.setChecked(wrap);
-	recreate(this);
+        recreate(this);
     }
 
     // suggestClicked
@@ -1639,7 +1639,7 @@ public class Editor extends Activity
             textView.setRawInputType(InputType.TYPE_CLASS_TEXT |
                                      InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                      InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-	recreate(this);
+        recreate(this);
     }
 
     // highlightClicked
@@ -1656,7 +1656,7 @@ public class Editor extends Activity
     {
         theme = LIGHT;
         item.setChecked(true);
-	recreate(this);
+        recreate(this);
     }
 
     // darkClicked
@@ -1664,7 +1664,7 @@ public class Editor extends Activity
     {
         theme = DARK;
         item.setChecked(true);
-	recreate(this);
+        recreate(this);
     }
 
     // blackClicked
@@ -1672,7 +1672,7 @@ public class Editor extends Activity
     {
         theme = BLACK;
         item.setChecked(true);
-	recreate(this);
+        recreate(this);
     }
 
     // retroClicked
@@ -1680,7 +1680,7 @@ public class Editor extends Activity
     {
         theme = RETRO;
         item.setChecked(true);
-	recreate(this);
+        recreate(this);
     }
 
     // smallClicked
@@ -2134,7 +2134,7 @@ public class Editor extends Activity
     {
         Uri uri = Uri.fromFile(file);
         Uri newUri = Uri.fromFile(getNewFile());
-        if (newUri.getPath().equals(uri.getPath()))
+        if (content == null && newUri.getPath().equals(uri.getPath()))
             saveAs();
 
         else
