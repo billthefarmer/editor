@@ -14,6 +14,12 @@ old closed issues. Please read the README, read the
 issues before raising another one, you can search the issues from the
 box at the top.
 
+### Large files
+Editor loads the whole of file to be edited into memory. It will not
+load large files which would cause performance issues or cause the app
+to crash. Please do not raise issues about the **Too large** dialog
+shown when attempting to load a large file.
+
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor.png) ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-chooser.png)
 
 ![Editor](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Editor-landscape.png)
