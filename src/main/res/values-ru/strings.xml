@@ -15,7 +15,9 @@
   <string name="clearList">Очистить список</string>
   <string name="saveAs">Сохранить как…</string>
   <string name="detect">Обнаруживать</string>
+  <string name="goTo">Перейти к…</string>
   <string name="viewMarkdown">Просмотр Markdown…</string>
+  <string name="options">Параметры</string>
   <string name="viewFile">Просмотр файлов</string>
   <string name="autoSave">Автосохранение</string>
   <string name="wrap">Перенос строк</string>

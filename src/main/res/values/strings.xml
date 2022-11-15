@@ -18,7 +18,9 @@
   <string name="findAll">Find all…</string>
   <string name="saveAs">Save as…</string>
   <string name="detect">Detect</string>
+  <string name="goTo">Go to…</string>
   <string name="viewMarkdown">View markdown…</string>
+  <string name="options">Options</string>
   <string name="viewFile">View files</string>
   <string name="autoSave">Auto save</string>
   <string name="wrap">Word wrap</string>

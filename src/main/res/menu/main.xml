@@ -57,6 +57,10 @@
       android:showAsAction="never"
       android:title="@string/saveAs" />
   <item
+      android:id="@+id/goTo"
+      android:showAsAction="never"
+      android:title="@string/goTo" />
+  <item
       android:id="@+id/charset"
       android:showAsAction="never"
       android:title="">
@@ -72,33 +76,40 @@
       android:showAsAction="never"
       android:title="@string/viewMarkdown" />
   <item
-      android:id="@+id/viewFile"
-      android:checkable="true"
-      android:checked="true"
+      android:id="@+id/options"
       android:showAsAction="never"
-      android:title="@string/viewFile" />
-  <item
-      android:id="@+id/autoSave"
-      android:checkable="true"
-      android:showAsAction="never"
-      android:title="@string/autoSave" />
-  <item
-      android:id="@+id/wrap"
-      android:checkable="true"
-      android:showAsAction="never"
-      android:title="@string/wrap" />
-  <item
-      android:id="@+id/suggest"
-      android:checkable="true"
-      android:checked="true"
-      android:showAsAction="never"
-      android:title="@string/suggest" />
-  <item
-      android:id="@+id/highlight"
-      android:checkable="true"
-      android:checked="false"
-      android:showAsAction="never"
-      android:title="@string/highlight" />
+      android:title="@string/options">
+    <menu>
+      <item
+          android:id="@+id/viewFile"
+          android:checkable="true"
+          android:checked="true"
+          android:showAsAction="never"
+          android:title="@string/viewFile" />
+      <item
+          android:id="@+id/autoSave"
+          android:checkable="true"
+          android:showAsAction="never"
+          android:title="@string/autoSave" />
+      <item
+          android:id="@+id/wrap"
+          android:checkable="true"
+          android:showAsAction="never"
+          android:title="@string/wrap" />
+      <item
+          android:id="@+id/suggest"
+          android:checkable="true"
+          android:checked="true"
+          android:showAsAction="never"
+          android:title="@string/suggest" />
+      <item
+          android:id="@+id/highlight"
+          android:checkable="true"
+          android:checked="false"
+          android:showAsAction="never"
+          android:title="@string/highlight" />
+    </menu>
+  </item>
   <item
       android:id="@+id/theme"
       android:showAsAction="never"

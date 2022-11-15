@@ -14,8 +14,10 @@
   <string name="search">Zoeken…</string>
   <string name="findAll">Alles zoeken…</string>
   <string name="detect">Detecteren</string>
+  <string name="goTo">Ga naar…</string>
   <string name="saveAs">Opslaan als…</string>
   <string name="viewMarkdown">Markdown tonen…</string>
+  <string name="options">Opties</string>
   <string name="viewFile">Bestanden tonen</string>
   <string name="autoSave">Automatisch opslaan</string>
   <string name="wrap">Tekstomloop</string>

@@ -15,7 +15,9 @@
   <string name="findAll">Összes keresése…</string>
   <string name="saveAs">Mentés másként…</string>
   <string name="detect">Felismerés</string>
+  <string name="goTo">Odamegy…</string>
   <string name="viewMarkdown">Markdown megtekintése…</string>
+  <string name="options">Beállítások</string>
   <string name="viewFile">Fájlok megtekintése</string>
   <string name="autoSave">Automatikus mentés</string>
   <string name="wrap">Szövegtördelés</string>

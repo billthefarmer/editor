@@ -15,7 +15,9 @@
   <string name="findAll">Chercher partout…</string>
   <string name="saveAs">Enregistrer sous…</string>
   <string name="detect">Détecter</string>
+  <string name="goTo">Atteindre…</string>
   <string name="viewMarkdown">Compiler markdown…</string>
+  <string name="options">Options</string>
   <string name="viewFile">Afficher les fichiers</string>
   <string name="autoSave">Enregistrement auto</string>
   <string name="wrap">Retour à la ligne auto</string>

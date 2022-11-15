@@ -47,7 +47,7 @@ public class FileAdapter extends BaseAdapter
 
     private final static String APPLICATION = "application";
 
-    private final static long LARGE = 262144;
+    private final static long TOO_LARGE = 524288;
 
     private LayoutInflater inflater;
     private List<File> files;
@@ -194,7 +194,7 @@ public class FileAdapter extends BaseAdapter
             }
 
             // Too large
-            if (file.length() > LARGE)
+            if (file.length() > TOO_LARGE)
             {
                 name.setEnabled(false);
                 name.setClickable(true);

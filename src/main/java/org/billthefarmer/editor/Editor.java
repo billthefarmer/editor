@@ -71,6 +71,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import android.support.v4.content.FileProvider;
@@ -372,6 +373,7 @@ public class Editor extends Activity
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
     private final static int FIND_DELAY = 128;
+    private final static int MAX_PROGRESS = 100;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -1044,6 +1046,9 @@ public class Editor extends Activity
         case R.id.findAll:
             findAll();
             break;
+        case R.id.goTo:
+            goTo();
+            break;
         case R.id.viewMarkdown:
             viewMarkdown();
             break;
@@ -1557,6 +1562,49 @@ public class Editor extends Activity
 
         FindTask findTask = new FindTask(this);
         findTask.execute(search);
+    }
+
+    // goTo
+    public void goTo()
+    {
+        gotoDialog((dialog, id) ->
+        {
+            switch (id)
+            {
+            case DialogInterface.BUTTON_POSITIVE:
+                SeekBar seek = ((Dialog) dialog).findViewById(R.id.seekBar);
+                int progress = seek.getProgress();
+                int height = textView.getHeight();
+                int pos = progress * height / MAX_PROGRESS;
+
+                // Scroll to it
+                scrollView.smoothScrollTo(0, pos);
+            }
+        });
+    }
+
+    // GotoDialog
+    private void gotoDialog(DialogInterface.OnClickListener listener)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.goTo);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.ok, listener);
+        builder.setNegativeButton(R.string.cancel, listener);
+
+        // Create seek bar
+        LayoutInflater inflater = (LayoutInflater) builder.getContext()
+            .getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.seek_bar, null);
+        builder.setView(view);
+
+        // Create the AlertDialog
+        AlertDialog dialog = builder.show();
+        SeekBar seek = ((Dialog) dialog).findViewById(R.id.seekBar);
+        int height = textView.getHeight();
+        int progress = scrollView.getScrollY() * MAX_PROGRESS / height;
+        seek.setProgress(progress);
     }
 
     // viewMarkdown

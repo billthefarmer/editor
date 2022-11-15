@@ -15,7 +15,9 @@
   <string name="findAll">Encontrar todos…</string>
   <string name="saveAs">Salvar como…</string>
   <string name="detect">Detectar</string>
+  <string name="goTo">Ir para…</string>
   <string name="viewMarkdown">Ver markdown…</string>
+  <string name="options">Opções</string>
   <string name="viewFile">Ver arquivos</string>
   <string name="autoSave">Auto salvar</string>
   <string name="wrap">Quebra as linhas</string>
