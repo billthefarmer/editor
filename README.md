@@ -48,13 +48,15 @@ And on the menu:
     expression
 * **Find all** &ndash; Find all recent files containing search text
 * **Save as** &ndash; Save the current file with a new name
+* **Go to** &ndash; Scroll to selected position in file
 * **Charset** &ndash; Change the current character set, shows current set
 * **View markdown** &ndash; View markdown in browser or html viewer
-* **View files** &ndash; Open files read only for viewing
-* **Auto save** &ndash; Save the current file on app pause
-* **Word wrap** &ndash; Limit text width to screen width and word wrap
-* **Suggestions** &ndash; Text input and spelling suggestions
-* **Highlight syntax** &ndash; Highlight programming language syntax
+* **Options** &ndash; Select options
+  * **View files** &ndash; Open files read only for viewing
+  * **Auto save** &ndash; Save the current file on app pause
+  * **Word wrap** &ndash; Limit text width to screen width and word wrap
+  * **Suggestions** &ndash; Text input and spelling suggestions
+  * **Highlight syntax** &ndash; Highlight programming language syntax
 * **Theme** &ndash; Choose theme
   * **Light**
   * **Dark**
@@ -109,6 +111,10 @@ text. This menu item will only appear while the search widget is
 active. A dialog will pop up with a list of matching files. Touch an
 entry to open that file. You may repeat this or refine the search text
 to find the desired file.
+
+### Go to
+Select position in the current file on the horizontal seek bar in the
+dialog which will pop up.
 
 ### View markdown
 You will be prompted to choose a viewer for an html file containing
