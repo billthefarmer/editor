@@ -1580,6 +1580,7 @@ public class Editor extends Activity
         });
     }
 
+    // GotoListener
     public interface GotoListener
     {
         abstract void onGoto(Dialog dialog, SeekBar seekBar,
@@ -1603,7 +1604,7 @@ public class Editor extends Activity
 
         // Create the AlertDialog
         AlertDialog dialog = builder.show();
-        SeekBar seekBar = ((Dialog) dialog).findViewById(R.id.seekBar);
+        SeekBar seekBar = dialog.findViewById(R.id.seekBar);
         int height = textView.getHeight();
         int progress = scrollView.getScrollY() * seekBar.getMax() / height;
         seekBar.setProgress(progress);
