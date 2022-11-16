@@ -373,7 +373,6 @@ public class Editor extends Activity
     private final static int POSITION_DELAY = 128;
     private final static int UPDATE_DELAY = 128;
     private final static int FIND_DELAY = 128;
-    private final static int MAX_PROGRESS = 100;
     private final static int MAX_PATHS = 10;
 
     private final static int GET_TEXT = 0;
@@ -1567,31 +1566,34 @@ public class Editor extends Activity
     // goTo
     public void goTo()
     {
-        gotoDialog((dialog, id) ->
+        gotoDialog((dialog, seekBar, progress, fromUser) ->
         {
-            switch (id)
+            if (fromUser)
             {
-            case DialogInterface.BUTTON_POSITIVE:
-                SeekBar seek = ((Dialog) dialog).findViewById(R.id.seekBar);
-                int progress = seek.getProgress();
                 int height = textView.getHeight();
-                int pos = progress * height / MAX_PROGRESS;
+                int pos = progress * height / seekBar.getMax();
 
                 // Scroll to it
                 scrollView.smoothScrollTo(0, pos);
+                dialog.dismiss();
             }
         });
     }
 
+    public interface GotoListener
+    {
+        abstract void onGoto(Dialog dialog, SeekBar seekBar,
+                             int progress, boolean fromUser);
+    }
+
     // GotoDialog
-    private void gotoDialog(DialogInterface.OnClickListener listener)
+    private void gotoDialog(GotoListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.goTo);
 
         // Add the buttons
-        builder.setPositiveButton(R.string.ok, listener);
-        builder.setNegativeButton(R.string.cancel, listener);
+        builder.setNegativeButton(R.string.cancel, null);
 
         // Create seek bar
         LayoutInflater inflater = (LayoutInflater) builder.getContext()
@@ -1601,10 +1603,26 @@ public class Editor extends Activity
 
         // Create the AlertDialog
         AlertDialog dialog = builder.show();
-        SeekBar seek = ((Dialog) dialog).findViewById(R.id.seekBar);
+        SeekBar seekBar = ((Dialog) dialog).findViewById(R.id.seekBar);
         int height = textView.getHeight();
-        int progress = scrollView.getScrollY() * MAX_PROGRESS / height;
-        seek.setProgress(progress);
+        int progress = scrollView.getScrollY() * seekBar.getMax() / height;
+        seekBar.setProgress(progress);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            @Override
+            public void onProgressChanged(SeekBar seekBar,
+                                          int progress,
+                                          boolean fromUser)
+            {
+                listener.onGoto(dialog, seekBar, progress, fromUser);
+            }
+
+            @Override
+            public void onStartTrackingTouch (SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch (SeekBar seekBar) {}
+        });
     }
 
     // viewMarkdown
