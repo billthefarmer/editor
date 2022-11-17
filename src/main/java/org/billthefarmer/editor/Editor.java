@@ -1581,14 +1581,14 @@ public class Editor extends Activity
     }
 
     // GotoListener
-    public interface GotoListener
+    public interface OnSeekBarChangeListener
     {
-        abstract void onGoto(Dialog dialog, SeekBar seekBar,
-                             int progress, boolean fromUser);
+        abstract void onProgressChanged(Dialog dialog, SeekBar seekBar,
+                                        int progress, boolean fromUser);
     }
 
     // GotoDialog
-    private void gotoDialog(GotoListener listener)
+    private void gotoDialog(OnSeekBarChangeListener listener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.goTo);
@@ -1615,7 +1615,7 @@ public class Editor extends Activity
                                           int progress,
                                           boolean fromUser)
             {
-                listener.onGoto(dialog, seekBar, progress, fromUser);
+                listener.onProgressChanged(dialog, seekBar, progress, fromUser);
             }
 
             @Override
