@@ -2035,7 +2035,8 @@ public class Editor extends Activity
         scroll.addView(layout);
         for (String dir: dirList)
         {
-            Button button = new Button(dialog.getContext());
+            Button button = new Button(dialog.getContext(), null,
+                                       android.R.attr.buttonStyleSmall);
             button.setId(dirList.indexOf(dir) + FOLDER_OFFSET);
             button.setText(dir);
             button.setOnClickListener((v) ->
