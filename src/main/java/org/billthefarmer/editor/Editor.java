@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 //  Editor - Text editor for Android
 //
@@ -1580,7 +1580,7 @@ public class Editor extends Activity
         });
     }
 
-    // GotoListener
+    // OnSeekBarChangeListener
     public interface OnSeekBarChangeListener
     {
         abstract void onProgressChanged(Dialog dialog, SeekBar seekBar,
