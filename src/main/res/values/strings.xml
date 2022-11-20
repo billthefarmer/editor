@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="">
+<resources>
 
   <string name="appName">Editor</string>
 
@@ -19,6 +16,7 @@
   <string name="saveAs">Save as…</string>
   <string name="detect">Detect</string>
   <string name="goTo">Go to…</string>
+  <string name="print">Print…</string>
   <string name="viewMarkdown">View markdown…</string>
   <string name="options">Options</string>
   <string name="viewFile">View files</string>
