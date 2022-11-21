@@ -40,7 +40,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -65,6 +69,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -900,6 +906,8 @@ public class Editor extends Activity
         menu.findItem(R.id.view).setVisible(edit);
 
         menu.findItem(R.id.save).setVisible(changed);
+        menu.findItem(R.id.print)
+            .setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
 
         menu.findItem(R.id.viewFile).setChecked(view);
         menu.findItem(R.id.autoSave).setChecked(save);
@@ -1047,6 +1055,9 @@ public class Editor extends Activity
             break;
         case R.id.goTo:
             goTo();
+            break;
+        case R.id.print:
+            print();
             break;
         case R.id.viewMarkdown:
             viewMarkdown();
@@ -1624,6 +1635,52 @@ public class Editor extends Activity
             @Override
             public void onStopTrackingTouch (SeekBar seekBar) {}
         });
+    }
+
+    // print
+    @SuppressWarnings("deprecation")
+    private void print()
+    {
+        WebView webView = new WebView(this);
+
+        webView.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url)
+            {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+                    return;
+
+                // Get a PrintManager instance
+                PrintManager printManager = (PrintManager)
+                    getSystemService(PRINT_SERVICE);
+
+                String jobName = getString(R.string.appName) + " Document";
+
+                // Get a print adapter instance
+                PrintDocumentAdapter printAdapter =
+                    view.createPrintDocumentAdapter(jobName);
+
+                // Create a print job with name and adapter instance
+                printManager
+                    .print(jobName, printAdapter,
+                           new PrintAttributes.Builder()
+                           .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+                           .build());
+            }
+        });
+
+        String ext = FileUtils.getExtension(file.getName());
+
+        String htmlDocument = 
+            HTML_HEAD + Html.toHtml(textView.getText()) + HTML_TAIL;
+        webView.loadData(htmlDocument, TEXT_HTML, UTF_8);
     }
 
     // viewMarkdown

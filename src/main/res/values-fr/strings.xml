@@ -16,6 +16,7 @@
   <string name="saveAs">Enregistrer sous…</string>
   <string name="detect">Détecter</string>
   <string name="goTo">Atteindre…</string>
+  <string name="print">Imprimer…</string>
   <string name="viewMarkdown">Compiler markdown…</string>
   <string name="options">Options</string>
   <string name="viewFile">Afficher les fichiers</string>

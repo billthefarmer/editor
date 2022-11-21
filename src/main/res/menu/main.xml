@@ -72,6 +72,10 @@
     </menu>
   </item>
   <item
+      android:id="@+id/print"
+      android:showAsAction="never"
+      android:title="@string/print" />
+  <item
       android:id="@+id/viewMarkdown"
       android:showAsAction="never"
       android:title="@string/viewMarkdown" />
