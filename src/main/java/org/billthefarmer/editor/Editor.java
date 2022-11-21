@@ -906,6 +906,8 @@ public class Editor extends Activity
         menu.findItem(R.id.view).setVisible(edit);
 
         menu.findItem(R.id.save).setVisible(changed);
+        menu.findItem(R.id.print)
+            .setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
 
         menu.findItem(R.id.viewFile).setChecked(view);
         menu.findItem(R.id.autoSave).setChecked(save);
@@ -1639,9 +1641,6 @@ public class Editor extends Activity
     @SuppressWarnings("deprecation")
     private void print()
     {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-            return;
-
         WebView webView = new WebView(this);
 
         webView.setWebViewClient(new WebViewClient()

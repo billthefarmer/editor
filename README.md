@@ -50,6 +50,7 @@ And on the menu:
 * **Save as** &ndash; Save the current file with a new name
 * **Go to** &ndash; Scroll to selected position in file
 * **Charset** &ndash; Change the current character set, shows current set
+* **Print** &ndash; Print current file
 * **View markdown** &ndash; View markdown in browser or html viewer
 * **Options** &ndash; Select options
   * **View files** &ndash; Open files read only for viewing
@@ -115,6 +116,13 @@ to find the desired file.
 ### Go to
 Select position in the current file on the horizontal seek bar in the
 dialog which will pop up.
+
+### Print
+Print the current file. If you would like the output highlighted, you
+will need to scroll slowly through the whole file to give the app a
+chance to highlight it. **Caution** &ndash; Attempting to print a
+large file on an older device with limited resources may cause the app
+to stop responding.
 
 ### View markdown
 You will be prompted to choose a viewer for an html file containing

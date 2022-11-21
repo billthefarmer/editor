@@ -19,6 +19,7 @@
   <string name="saveAs">名前をつけて保存…</string>
   <string name="detect">検出</string>
   <string name="goTo">行きます…</string>
+  <string name="print">印刷…</string>
   <string name="viewMarkdown">マークダウンを閲覧…</string>
   <string name="options">オプション</string>
   <string name="viewFile">ファイル閲覧</string>
