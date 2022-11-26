@@ -75,6 +75,15 @@ The chooser shows a scrollable row of folder buttons and list of files with icon
     </item>
     
     <item>
+      <title>Print</title>
+      <link>https://billthefarmer.github.io/editor/using/print/</link>
+      <pubDate>Sat, 26 Nov 2022 09:54:15 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/editor/using/print/</guid>
+      <description>Print the current file. If you would like the output highlighted, you will need to scroll slowly through the whole file to give the app a chance to highlight it. Caution – Attempting to print a large file on an older device with limited resources may cause the app to stop responding.</description>
+    </item>
+    
+    <item>
       <title>View Markdown</title>
       <link>https://billthefarmer.github.io/editor/using/view-markdown/</link>
       <pubDate>Wed, 04 Mar 2020 19:40:02 +0000</pubDate>

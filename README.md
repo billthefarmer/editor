@@ -49,9 +49,9 @@ And on the menu:
 * **Find all** &ndash; Find all recent files containing search text
 * **Save as** &ndash; Save the current file with a new name
 * **Go to** &ndash; Scroll to selected position in file
-* **Charset** &ndash; Change the current character set, shows current set
 * **Print** &ndash; Print current file
 * **View markdown** &ndash; View markdown in browser or html viewer
+* **Charset** &ndash; Change the current character set, shows current set
 * **Options** &ndash; Select options
   * **View files** &ndash; Open files read only for viewing
   * **Auto save** &ndash; Save the current file on app pause
