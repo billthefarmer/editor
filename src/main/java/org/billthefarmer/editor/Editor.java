@@ -1463,17 +1463,22 @@ public class Editor extends Activity
                 {
                 case DialogInterface.BUTTON_POSITIVE:
                     saveFile();
-                    readFile(uri);
+                    startActivity(new Intent(Intent.ACTION_EDIT, uri,
+                                             this, Editor.class));
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
                     changed = false;
-                    readFile(uri);
+                    startActivity(new Intent(Intent.ACTION_EDIT, uri,
+                                             this, Editor.class));
                     break;
                 }
             });
+
             else
-                readFile(uri);
+                // New instance
+                startActivity(new Intent(Intent.ACTION_EDIT, uri,
+                                         this, Editor.class));
         }
     }
 
@@ -2035,14 +2040,6 @@ public class Editor extends Activity
         Arrays.sort(files);
         // Create a list
         list = new ArrayList<File>(Arrays.asList(files));
-        // Remove hidden files
-        Iterator<File> iterator = list.iterator();
-        while (iterator.hasNext())
-        {
-            File item = iterator.next();
-            if (item.getName().startsWith("."))
-                iterator.remove();
-        }
 
         // Add parent folder
         if (dir.getParentFile() == null)
