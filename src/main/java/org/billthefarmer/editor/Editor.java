@@ -1310,18 +1310,15 @@ public class Editor extends Activity
     // newFile
     private void newFile(String text)
     {
-        if (text != null)
-            textView.setText(text);
-
-        else
-        {
-            textView.setText("");
-            changed = false;
-        }
+        textView.setText("");
+        changed = false;
 
         file = getNewFile();
         uri = Uri.fromFile(file);
         path = uri.getPath();
+
+        if (text != null)
+            textView.append(text);
 
         setTitle(uri.getLastPathSegment());
         match = UTF_8;
@@ -1468,7 +1465,7 @@ public class Editor extends Activity
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    changed = false;
+                    // changed = false;
                     startActivity(new Intent(Intent.ACTION_EDIT, uri,
                                              this, Editor.class));
                     break;
@@ -1510,14 +1507,39 @@ public class Editor extends Activity
                     file = new
                         File(Environment.getExternalStorageDirectory(), string);
 
-                // Set interface title
+                // Check uri
                 uri = Uri.fromFile(file);
-                String title = uri.getLastPathSegment();
-                setTitle(title);
+                Uri newUri = Uri.fromFile(getNewFile());
+                if (newUri.getPath().equals(uri.getPath()))
+                {
+                    saveAs();
+                    return;
+                }
 
-                path = file.getPath();
-                content = null;
-                saveFile();
+                // Check exists
+                if (file.exists())
+                    alertDialog(R.string.appName, R.string.changedOverwrite,
+                                R.string.overwrite, R.string.cancel, (dg, b) ->
+                    {
+                        switch (b)
+                        {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            // Set interface title
+                            setTitle(uri.getLastPathSegment());
+                            path = file.getPath();
+                            saveFile();
+                            break;
+                        }
+                    });
+
+                else
+                {
+                    // Set interface title
+                    setTitle(uri.getLastPathSegment());
+                    path = file.getPath();
+                    content = null;
+                    saveFile();
+                }
                 break;
 
             case DialogInterface.BUTTON_NEUTRAL:
