@@ -1465,7 +1465,6 @@ public class Editor extends Activity
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    // changed = false;
                     startActivity(new Intent(Intent.ACTION_EDIT, uri,
                                              this, Editor.class));
                     break;
@@ -1604,25 +1603,20 @@ public class Editor extends Activity
     // goTo
     public void goTo()
     {
-        gotoDialog((dialog, seekBar, progress, fromUser) ->
+        gotoDialog((seekBar, progress) ->
         {
-            if (fromUser)
-            {
-                int height = textView.getHeight();
-                int pos = progress * height / seekBar.getMax();
+            int height = textView.getHeight();
+            int pos = progress * height / seekBar.getMax();
 
-                // Scroll to it
-                scrollView.smoothScrollTo(0, pos);
-                dialog.dismiss();
-            }
+            // Scroll to it
+            scrollView.smoothScrollTo(0, pos);
         });
     }
 
     // OnSeekBarChangeListener
     public interface OnSeekBarChangeListener
     {
-        abstract void onProgressChanged(Dialog dialog, SeekBar seekBar,
-                                        int progress, boolean fromUser);
+        abstract void onProgressChanged(SeekBar seekBar, int progress);
     }
 
     // GotoDialog
@@ -1653,14 +1647,18 @@ public class Editor extends Activity
                                           int progress,
                                           boolean fromUser)
             {
-                listener.onProgressChanged(dialog, seekBar, progress, fromUser);
+                if (fromUser)
+                    listener.onProgressChanged(seekBar, progress);
             }
 
             @Override
             public void onStartTrackingTouch (SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch (SeekBar seekBar) {}
+            public void onStopTrackingTouch (SeekBar seekBar)
+            {
+                dialog.dismiss();
+            }
         });
     }
 
