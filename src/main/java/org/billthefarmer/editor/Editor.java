@@ -2320,10 +2320,7 @@ public class Editor extends Activity
                 saveFile(file);
 
             else
-            {
                 saveFile(content);
-                content = null;
-            }
         }
     }
 
