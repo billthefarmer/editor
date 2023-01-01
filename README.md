@@ -1,4 +1,4 @@
-# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Editor ![.github/workflows/main.yml](https://github.com/billthefarmer/editor/workflows/.github/workflows/main.yml/badge.svg) [![Release](https://img.shields.io/github/release/billthefarmer/editor.svg?logo=github)](https://github.com/billthefarmer/editor/releases)
+# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Editor ![.github/workflows/build.yml](https://github.com/billthefarmer/editor/workflows/.github/workflows/build.yml/badge.svg) [![Release](https://img.shields.io/github/release/billthefarmer/editor.svg?logo=github)](https://github.com/billthefarmer/editor/releases)
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.svg" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/org.billthefarmer.editor)
 
 Android simple generic text editor. The app is available from
