@@ -41,6 +41,8 @@ public class FileAdapter extends BaseAdapter
 
     private final static String ROOT = "/";
 
+    private final static String IMAGE_SVG = "image/svg";
+
     private final static String IMAGE = "image";
     private final static String AUDIO = "audio";
     private final static String VIDEO = "video";
@@ -160,7 +162,11 @@ public class FileAdapter extends BaseAdapter
             {
                 // Get the mime type
                 String type = FileUtils.getMimeType(file);
-                if (type != null && type.startsWith(IMAGE))
+                if (type != null && type.startsWith(IMAGE_SVG))
+                    name.setCompoundDrawablesWithIntrinsicBounds(imageId,
+                                                                 0, 0, 0);
+
+                else if (type != null && type.startsWith(IMAGE))
                 {
                     name.setEnabled(false);
                     name.setClickable(true);
