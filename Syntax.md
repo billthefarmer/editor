@@ -47,6 +47,9 @@ will be highlighted with default highlighting, similar to C type
 highlighting. Comments will not be highlighted as there is little
 consistency with comment delimiters outside C type languages.
 
+**Caution** Files with strings of symbols may defeat the
+regex processing and cause the app to stop responding.
+
 ## Limitations
 Because scanning and highlighting a large file can be quite slow,
 making the app unresponsive, only the text currently in view is

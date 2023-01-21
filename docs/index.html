@@ -496,8 +496,9 @@ a new file in Editor.</p>
     <div class="content">
         <p><img src="images/Editor-syntax.png" alt="Syntax"></p>
 <p>If the current open file is a C, C++, Objective C, Go, Java,
-Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file,
-the keywords, classes comments, strings, etc will be highlighted.</p>
+Javascript, Python, Shell script, Swift, CSS, HTML, <a href="https://orgmode.org" title="https://orgmode.org">Emacs Org</a> or
+Markdown file, the keywords, classes comments, strings, etc will be
+highlighted.</p>
 <h3 id="selection">Selection</h3>
 <p>The type of highlighting is selected by file extension. Files with
 <code>.c</code>, <code>.cc</code>, <code>.c++</code>, <code>.cxx</code>, <code>.m</code>, <code>.h</code>, <code>.go</code>, <code>.js</code>, <code>.java</code>, <code>.py</code>,
@@ -505,7 +506,8 @@ the keywords, classes comments, strings, etc will be highlighted.</p>
 highlighting. Files with <code>.htm</code>, <code>.html</code> extensions will be
 highlighted as HTML. Files with <code>.cs</code>, <code>.css</code> extensions will be
 highlighted as CSS. Files with <code>.md</code> extensions will be highlighted as
-markdown.</p>
+markdown. Files with <code>.org</code> extensions will be highlighted as Emacs
+Org.</p>
 <h3 id="parsing">Parsing</h3>
 <p>The algorithm makes no attempt at parsing. The text is scanned for
 relevent keywords, classes, constants, strings and comments and
@@ -528,12 +530,16 @@ highlighted. As above, single quotes are ignored. C style comments are
 recognised.</p>
 <h4 id="markdown">Markdown</h4>
 <p>Markdown headers, links, emphasis and code will be highlighted.</p>
+<h4 id="emacs-org">Emacs Org</h4>
+<p>Metadata, headers, links, emphasis and inline code will be highlighted.</p>
 <h4 id="default">Default</h4>
-<p>Files with unrecognised extensions which are not plain text files
-will be highlighted with default highlighting, similar to C type
+<p>Files with unrecognised extensions which are not plain text files will
+be highlighted with default highlighting, similar to C type
 highlighting. Comments will not be highlighted as there is little
 consistency with comment delimiters outside C type languages.</p>
-<h3 id="limitations">Limitations</h3>
+<p><strong>Caution</strong> Files with strings of symbols may defeat the
+regex processing and cause the app to stop responding.</p>
+<h4 id="limitations">Limitations</h4>
 <p>Because scanning and highlighting a large file can be quite slow,
 making the app unresponsive, only the text currently in view is
 scanned and highlighted. Therefore as the text is edited or scrolled,

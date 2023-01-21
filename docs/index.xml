@@ -135,8 +135,8 @@ Default The default character set is set to UTF-8 on selecting New from the tool
       <pubDate>Wed, 04 Mar 2020 19:41:14 +0000</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/using/highlight-syntax/</guid>
-      <description>If the current open file is a C, C++, Objective C, Go, Java, Javascript, Python, Shell script, Swift, CSS, HTML or Markdown file, the keywords, classes comments, strings, etc will be highlighted.
-Selection The type of highlighting is selected by file extension. Files with .c, .cc, .c++, .cxx, .m, .h, .go, .js, .java, .py, .sh, .swift extensions will be highlighted with &amp;lsquo;C&amp;rsquo; style highlighting. Files with .htm, .html extensions will be highlighted as HTML.</description>
+      <description>If the current open file is a C, C++, Objective C, Go, Java, Javascript, Python, Shell script, Swift, CSS, HTML, Emacs Org or Markdown file, the keywords, classes comments, strings, etc will be highlighted.
+Selection The type of highlighting is selected by file extension. Files with .c, .cc, .c++, .cxx, .m, .h, .go, .js, .java, .py, .sh, .swift extensions will be highlighted with &amp;lsquo;C&amp;rsquo; style highlighting. Files with .htm, .</description>
     </item>
     
     <item>
