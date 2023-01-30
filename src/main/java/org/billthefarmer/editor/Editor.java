@@ -517,7 +517,10 @@ public class Editor extends Activity
             edit = savedInstanceState.getBoolean(EDIT);
 
         if (!edit)
+        {
             textView.setRawInputType(InputType.TYPE_NULL);
+            textView.setTextIsSelectable(true);
+        }
 
         else if (!suggest)
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
@@ -1269,6 +1272,7 @@ public class Editor extends Activity
     {
         // Set read only
         textView.setRawInputType(InputType.TYPE_NULL);
+        textView.setTextIsSelectable(true);
         textView.clearFocus();
 
         // Update boolean
@@ -3212,6 +3216,7 @@ public class Editor extends Activity
         if (view)
         {
             textView.setRawInputType(InputType.TYPE_NULL);
+            textView.setTextIsSelectable(true);
 
             // Update boolean
             edit = false;
