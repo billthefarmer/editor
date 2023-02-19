@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute">
+  <shortcut
+      android:shortcutId="newFile"
+      android:enabled="true"
+      android:icon="@drawable/ic_launcher"
+      android:shortcutShortLabel="@string/newFile">
+    <intent
+        android:action="org.billthefarmer.editor.OPEN_NEW"
+        android:targetPackage="org.billthefarmer.editor"
+        android:targetClass="org.billthefarmer.editor.Editor" />
+  </shortcut>
+</shortcuts>
