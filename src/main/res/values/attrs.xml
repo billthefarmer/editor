@@ -14,6 +14,12 @@
     <attr name="video" format="reference" />
     <attr name="file" format="reference" />
 
+    <attr name="edit" format="reference" />
+    <attr name="open" format="reference" />
+    <attr name="save" format="reference" />
+    <attr name="view" format="reference" />
+    <attr name="newFile" format="reference" />
+
   </declare-styleable>
 
 </resources>

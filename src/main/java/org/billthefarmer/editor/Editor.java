@@ -392,8 +392,9 @@ public class Editor extends Activity
 
     private final static int LIGHT = 1;
     private final static int DARK  = 2;
-    private final static int BLACK = 3;
-    private final static int RETRO = 4;
+    private final static int WHITE = 3;
+    private final static int BLACK = 4;
+    private final static int RETRO = 5;
 
     private final static int TINY   = 8;
     private final static int SMALL  = 12;
@@ -486,6 +487,10 @@ public class Editor extends Activity
 
         case DARK:
             setTheme(R.style.AppDarkTheme);
+            break;
+
+        case WHITE:
+            setTheme(R.style.AppWhiteTheme);
             break;
 
         case BLACK:
@@ -928,6 +933,10 @@ public class Editor extends Activity
             menu.findItem(R.id.dark).setChecked(true);
             break;
 
+        case WHITE:
+            menu.findItem(R.id.white).setChecked(true);
+            break;
+
         case BLACK:
             menu.findItem(R.id.black).setChecked(true);
             break;
@@ -1085,6 +1094,9 @@ public class Editor extends Activity
             break;
         case R.id.dark:
             darkClicked(item);
+            break;
+        case R.id.white:
+            whiteClicked(item);
             break;
         case R.id.black:
             blackClicked(item);
@@ -1816,6 +1828,14 @@ public class Editor extends Activity
     private void darkClicked(MenuItem item)
     {
         theme = DARK;
+        item.setChecked(true);
+        recreate(this);
+    }
+
+    // whiteClicked
+    private void whiteClicked(MenuItem item)
+    {
+        theme = WHITE;
         item.setChecked(true);
         recreate(this);
     }
@@ -3096,6 +3116,15 @@ public class Editor extends Activity
                             if (theme != DARK)
                             {
                                 theme = DARK;
+                                change = true;
+                            }
+                        }
+
+                        else if (":w".equals(matcher.group(4)))
+                        {
+                            if (theme != WHITE)
+                            {
+                                theme = WHITE;
                                 change = true;
                             }
                         }

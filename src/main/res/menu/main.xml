@@ -9,27 +9,27 @@
       android:title="@string/findAll" />
   <item
       android:id="@+id/edit"
-      android:icon="@drawable/ic_action_edit_dark"
+      android:icon="?attr/edit"
       android:showAsAction="ifRoom"
       android:title="@string/edit" />
   <item
       android:id="@+id/view"
-      android:icon="@drawable/ic_action_view_as_list_dark"
+      android:icon="?attr/view"
       android:showAsAction="ifRoom"
       android:title="@string/view" />
   <item
       android:id="@+id/save"
-      android:icon="@drawable/ic_action_save_dark"
+      android:icon="?attr/save"
       android:showAsAction="ifRoom"
       android:title="@string/save" />
   <item
       android:id="@+id/newFile"
-      android:icon="@drawable/ic_action_new_dark"
+      android:icon="?attr/newFile"
       android:showAsAction="ifRoom"
       android:title="@string/newFile" />
   <item
       android:id="@+id/open"
-      android:icon="@drawable/ic_action_collection_dark"
+      android:icon="?attr/open"
       android:showAsAction="ifRoom"
       android:title="@string/open" />
   <item
@@ -128,6 +128,10 @@
             android:id="@+id/dark"
             android:showAsAction="never"
             android:title="@string/dark" />
+        <item
+            android:id="@+id/white"
+            android:showAsAction="never"
+            android:title="@string/white" />
         <item
             android:id="@+id/black"
             android:showAsAction="never"

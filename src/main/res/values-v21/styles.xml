@@ -14,4 +14,8 @@
     <!-- API 21 theme customizations can go here. -->
   </style>
 
+  <style name="AppLightBaseTheme" parent="android:Theme.Material.Light">
+    <!-- API 21 theme customizations can go here. -->
+  </style>
+
 </resources>

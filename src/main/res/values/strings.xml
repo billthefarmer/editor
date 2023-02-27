@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
 
   <string name="appName">Editor</string>
 
@@ -27,6 +30,7 @@
   <string name="theme">Theme</string>
   <string name="light">Light</string>
   <string name="dark">Dark</string>
+  <string name="white">White</string>
   <string name="black">Black</string>
   <string name="retro">Retro</string>
   <string name="size">Text size</string>

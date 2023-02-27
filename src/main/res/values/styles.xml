@@ -22,6 +22,14 @@
     -->
   </style>
 
+  <style name="AppLightBaseTheme" parent="android:Theme.Holo.Light">
+    <!--
+        Theme customizations available in newer API levels can go in
+        res/values-vXX/styles.xml, while customizations related to
+        backward-compatibility can go here.
+    -->
+  </style>
+
   <!-- Application theme. -->
   <style name="AppTheme" parent="AppBaseTheme">
     <!--
@@ -37,6 +45,12 @@
     <item name="image">@drawable/ic_action_picture</item>
     <item name="parent">@drawable/ic_action_reply</item>
     <item name="video">@drawable/ic_action_video</item>
+
+    <item name="edit">@drawable/ic_action_edit_dark</item>
+    <item name="open">@drawable/ic_action_collection_dark</item>
+    <item name="save">@drawable/ic_action_save_dark</item>
+    <item name="view">@drawable/ic_action_view_as_list_dark</item>
+    <item name="newFile">@drawable/ic_action_new_dark</item>
 
   </style>
 
@@ -56,6 +70,12 @@
     <item name="parent">@drawable/ic_action_reply_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
 
+    <item name="edit">@drawable/ic_action_edit_dark</item>
+    <item name="open">@drawable/ic_action_collection_dark</item>
+    <item name="save">@drawable/ic_action_save_dark</item>
+    <item name="view">@drawable/ic_action_view_as_list_dark</item>
+    <item name="newFile">@drawable/ic_action_new_dark</item>
+
   </style>
 
   <!-- Application theme. -->
@@ -74,8 +94,38 @@
     <item name="parent">@drawable/ic_action_reply_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
 
+    <item name="edit">@drawable/ic_action_edit_dark</item>
+    <item name="open">@drawable/ic_action_collection_dark</item>
+    <item name="save">@drawable/ic_action_save_dark</item>
+    <item name="view">@drawable/ic_action_view_as_list_dark</item>
+    <item name="newFile">@drawable/ic_action_new_dark</item>
+
     <item name="android:editTextBackground">@drawable/edit_text_background</item>
     <item name="background">@color/colorBlackBackground</item>
+
+  </style>
+
+  <!-- Application theme. -->
+  <style name="AppWhiteTheme" parent="AppLightBaseTheme">
+    <!--
+        All customizations that are NOT specific to a particular
+        API-level can go here.
+    -->
+
+    <item name="application">@drawable/ic_action_stop</item>
+    <item name="external">@drawable/ic_action_sd_storage</item>
+    <item name="file">@drawable/ic_action_view_as_list</item>
+    <item name="folder">@drawable/ic_action_collection</item>
+    <item name="audio">@drawable/ic_action_volume_on</item>
+    <item name="image">@drawable/ic_action_picture</item>
+    <item name="parent">@drawable/ic_action_reply</item>
+    <item name="video">@drawable/ic_action_video</item>
+
+    <item name="edit">@drawable/ic_action_edit_light</item>
+    <item name="open">@drawable/ic_action_collection</item>
+    <item name="save">@drawable/ic_action_save_light</item>
+    <item name="view">@drawable/ic_action_view_as_list</item>
+    <item name="newFile">@drawable/ic_action_new_light</item>
 
   </style>
 
@@ -94,6 +144,12 @@
     <item name="image">@drawable/ic_action_picture_dark</item>
     <item name="parent">@drawable/ic_action_reply_dark</item>
     <item name="video">@drawable/ic_action_video_dark</item>
+
+    <item name="edit">@drawable/ic_action_edit_dark</item>
+    <item name="open">@drawable/ic_action_collection_dark</item>
+    <item name="save">@drawable/ic_action_save_dark</item>
+    <item name="view">@drawable/ic_action_view_as_list_dark</item>
+    <item name="newFile">@drawable/ic_action_new_dark</item>
 
     <item name="android:editTextBackground">@drawable/edit_text_background</item>
     <item name="background">@color/colorRetroBackground</item>
