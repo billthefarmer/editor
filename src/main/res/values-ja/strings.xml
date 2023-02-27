@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="">
+<resources>
 
   <string name="appName">エディター</string>
 
@@ -30,6 +27,7 @@
   <string name="theme">テーマ</string>
   <string name="light">ライト</string>
   <string name="dark">ダーク</string>
+  <string name="white">白い</string>
   <string name="black">ブラック</string>
   <string name="retro">レトロ</string>
   <string name="size">文字サイズ</string>

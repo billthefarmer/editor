@@ -27,6 +27,7 @@
   <string name="theme">Тема</string>
   <string name="light">Светлая</string>
   <string name="dark">Тёмная</string>
+  <string name="white">Белый</string>
   <string name="black">Чернить</string>
   <string name="retro">Ретро</string>
   <string name="size">Размер шрифта</string>

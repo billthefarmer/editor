@@ -27,6 +27,7 @@
   <string name="theme">Thema</string>
   <string name="light">Licht</string>
   <string name="dark">Donker</string>
+  <string name="white">Wit</string>
   <string name="black">Zwart</string>
   <string name="retro">Retro</string>
   <string name="size">Lettergrootte</string>

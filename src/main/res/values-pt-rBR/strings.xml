@@ -26,6 +26,7 @@
   <string name="highlight">Destacar a sintaxe</string>
   <string name="theme">Tema</string>
   <string name="light">Claro</string>
+  <string name="white">Branco</string>
   <string name="dark">Escuro</string>
   <string name="retro">Retrô</string>
   <string name="size">Tamanho do texto</string>

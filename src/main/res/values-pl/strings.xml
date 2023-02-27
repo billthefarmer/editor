@@ -27,6 +27,7 @@
   <string name="theme">Motyw</string>
   <string name="light">Jasny</string>
   <string name="dark">Ciemny</string>
+  <string name="white">Biały</string>
   <string name="black">Czarny</string>
   <string name="retro">Retro</string>
   <string name="size">Rozmiar tekstu</string>
