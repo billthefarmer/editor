@@ -100,8 +100,7 @@
     <item name="view">@drawable/ic_action_view_as_list_dark</item>
     <item name="newFile">@drawable/ic_action_new_dark</item>
 
-    <item name="android:editTextBackground">@drawable/edit_text_background</item>
-    <item name="background">@color/colorBlackBackground</item>
+    <item name="android:colorBackground">@android:color/black</item>
 
   </style>
 
@@ -151,8 +150,7 @@
     <item name="view">@drawable/ic_action_view_as_list_dark</item>
     <item name="newFile">@drawable/ic_action_new_dark</item>
 
-    <item name="android:editTextBackground">@drawable/edit_text_background</item>
-    <item name="background">@color/colorRetroBackground</item>
+    <item name="android:colorBackground">@android:color/black</item>
 
     <item name="android:textColorPrimary">@color/text_color_retro</item>
     <item name="android:textColorSecondary">@color/text_color_retro</item>
