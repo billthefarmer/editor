@@ -369,8 +369,6 @@ public class Editor extends Activity
     public final static Pattern WORD_PATTERN = Pattern.compile
         ("\\w+", Pattern.MULTILINE);
 
-    private final static double KEYBOARD_RATIO = 0.25;
-
     private final static int LAST_SIZE = 256;
     private final static int MENU_SIZE = 192;
     private final static int FIRST_SIZE = 256;
@@ -721,32 +719,15 @@ public class Editor extends Activity
             textView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener()
             {
-                private boolean keyboard;
-
                 // onGlobalLayout
                 @Override
                 public void onGlobalLayout()
                 {
                     if (updateHighlight != null)
                     {
-                        int rootHeight = scrollView.getRootView().getHeight();
-                        int height = scrollView.getHeight();
-
-                        boolean shown = (((rootHeight - height) /
-                                         (double) rootHeight) >
-                                         KEYBOARD_RATIO);
-
-                        if (shown != keyboard)
-                        {
-                            if (!shown)
-                            {
-                                textView.removeCallbacks(updateHighlight);
-                                textView.postDelayed(updateHighlight,
-                                                     UPDATE_DELAY);
-                            }
-
-                            keyboard = shown;
-                        }
+                        textView.removeCallbacks(updateHighlight);
+                        textView.postDelayed(updateHighlight,
+                                             UPDATE_DELAY);
                     }
                 }
             });
