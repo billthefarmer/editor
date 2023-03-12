@@ -716,47 +716,27 @@ public class Editor extends Activity
                 return false;
             });
 
-            textView.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener()
+            textView.getViewTreeObserver().addOnGlobalLayoutListener(() ->
             {
-                // onGlobalLayout
-                @Override
-                public void onGlobalLayout()
+                if (updateHighlight != null)
                 {
-                    if (updateHighlight != null)
-                    {
-                        textView.removeCallbacks(updateHighlight);
-                        textView.postDelayed(updateHighlight,
-                                             UPDATE_DELAY);
-                    }
+                    textView.removeCallbacks(updateHighlight);
+                    textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
             });
         }
 
         if (scrollView != null)
         {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                // onScrollChange
-                scrollView.setOnScrollChangeListener((v, x, y, oldX, oldY) ->
+            // onScrollChange
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
+            {
+                if (updateHighlight != null)
                 {
-                    if (updateHighlight != null)
-                    {
-                        textView.removeCallbacks(updateHighlight);
-                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
-                    }
-                });
-
-            else
-                // onScrollChange
-                scrollView.getViewTreeObserver()
-                    .addOnScrollChangedListener(() ->
-                {
-                    if (updateHighlight != null)
-                    {
-                        textView.removeCallbacks(updateHighlight);
-                        textView.postDelayed(updateHighlight, UPDATE_DELAY);
-                    }
-                });
+                    textView.removeCallbacks(updateHighlight);
+                    textView.postDelayed(updateHighlight, UPDATE_DELAY);
+                }
+            });
         }
     }
 
