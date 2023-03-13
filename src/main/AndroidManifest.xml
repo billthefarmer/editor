@@ -18,8 +18,7 @@
 	android:name="Editor"
 	android:exported="true"
         tools:ignore="UnusedAttribute"
-        android:documentLaunchMode="always"
-        android:windowSoftInputMode="stateHidden|adjustResize">
+        android:documentLaunchMode="always">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
