@@ -1116,27 +1116,9 @@ public class Editor extends Activity
 
     // onBackPressed
     @Override
-    public void onBackPressed()
-    {
-        if (changed)
-            alertDialog(R.string.appName, R.string.modified,
-                        R.string.save, R.string.discard, (dialog, id) ->
-        {
-            switch (id)
-            {
-            case DialogInterface.BUTTON_POSITIVE:
-                saveFile();
-                finish();
-                break;
-            case DialogInterface.BUTTON_NEGATIVE:
-                changed = false;
-                finish();
-                break;
-            }
-        });
-
-        else
-            finish();
+    public void onBackPressed() {
+        savePrompt();
+        finish();
     }
 
     // onActivityResult
@@ -1271,31 +1253,10 @@ public class Editor extends Activity
     }
 
     // newFile
-    private void newFile()
-    {
-        // Check if file changed
-        if (changed)
-            alertDialog(R.string.newFile, R.string.modified,
-                        R.string.save, R.string.discard, (dialog, id) ->
-        {
-            switch (id)
-            {
-            case DialogInterface.BUTTON_POSITIVE:
-                saveFile();
-                newFile(null);
-                break;
+    private void newFile() {
+        savePrompt();
 
-            case DialogInterface.BUTTON_NEGATIVE:
-                newFile(null);
-                break;
-            }
-
-            invalidateOptionsMenu();
-        });
-
-        else
-            newFile(null);
-
+        newFile(null);
         invalidateOptionsMenu();
     }
 
@@ -1471,29 +1432,10 @@ public class Editor extends Activity
         {
             Uri uri = Uri.fromFile(file);
 
-            if (changed)
-                alertDialog(R.string.openRecent, R.string.modified,
-                            R.string.save, R.string.discard, (dialog, id) ->
-            {
-                switch (id)
-                {
-                case DialogInterface.BUTTON_POSITIVE:
-                    saveFile();
-                    startActivity(new Intent(Intent.ACTION_EDIT, uri,
-                                             this, Editor.class));
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    startActivity(new Intent(Intent.ACTION_EDIT, uri,
-                                             this, Editor.class));
-                    break;
-                }
-            });
-
-            else
-                // New instance
-                startActivity(new Intent(Intent.ACTION_EDIT, uri,
-                                         this, Editor.class));
+            savePrompt();
+            // New instance
+            startActivity(new Intent(Intent.ACTION_EDIT, uri,
+                    this, Editor.class));
         }
     }
 
@@ -1975,29 +1917,9 @@ public class Editor extends Activity
     }
 
     // openFile
-    private void openFile()
-    {
-        // Check if file changed
-        if (changed)
-            alertDialog(R.string.open, R.string.modified,
-                        R.string.save, R.string.discard, (dialog, id) ->
-        {
-            switch (id)
-            {
-            case DialogInterface.BUTTON_POSITIVE:
-                saveFile();
-                getFile();
-                break;
-
-            case DialogInterface.BUTTON_NEGATIVE:
-                changed = false;
-                getFile();
-                break;
-            }
-        });
-
-        else
-            getFile();
+    private void openFile() {
+        savePrompt();
+        getFile();
 
     }
 
@@ -2317,6 +2239,28 @@ public class Editor extends Activity
             saveFile();
     }
 
+    /**
+     * Saves the current file either automatically by preference
+     * or triggered by user interaction
+     *
+     * @author pitcherseven
+     */
+    private void savePrompt() {
+        if (!changed)
+            return;
+
+        if (save) {
+            saveFile();
+        } else {
+            alertDialog(R.string.appName, R.string.modified,
+                    R.string.save, R.string.discard, (dialog, id) -> {
+                        if (id == DialogInterface.BUTTON_POSITIVE)
+                            saveFile();
+                    });
+        }
+        changed = false;
+    }
+
     // saveFile
     private void saveFile()
     {
@@ -2338,15 +2282,14 @@ public class Editor extends Activity
 
         if (file.lastModified() > modified)
             alertDialog(R.string.appName, R.string.changedOverwrite,
-                        R.string.overwrite, R.string.cancel, (dialog, id) ->
-        {
-            switch (id)
-            {
-            case DialogInterface.BUTTON_POSITIVE:
-                saveFile(file);
-                break;
-            }
-        });
+                    R.string.overwrite, R.string.cancel, (dialog, id) ->
+                    {
+                        switch (id) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                saveFile(file);
+                                break;
+                        }
+                    });
 
         else
         {
