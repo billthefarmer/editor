@@ -54,6 +54,7 @@ And on the menu:
 * **Charset** &ndash; Change the current character set, shows current set
 * **Options** &ndash; Select options
   * **View files** &ndash; Open files read only for viewing
+  * **Open last** &ndash; Open last opened file on startup
   * **Auto save** &ndash; Save the current file on app pause
   * **Word wrap** &ndash; Limit text width to screen width and word wrap
   * **Suggestions** &ndash; Text input and spelling suggestions

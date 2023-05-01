@@ -20,6 +20,7 @@
   <string name="viewMarkdown">Markdown görünümü…</string>
   <string name="options">Seçenekler</string>
   <string name="viewFile">Dosyaları görüntüle</string>
+  <string name="openLast">En son aç</string>
   <string name="autoSave">Otomatik kaydet</string>
   <string name="wrap">Sözcük kaydırma</string>
   <string name="suggest">Öneriler</string>

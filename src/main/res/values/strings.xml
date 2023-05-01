@@ -22,6 +22,7 @@
   <string name="viewMarkdown">View markdown…</string>
   <string name="options">Options</string>
   <string name="viewFile">View files</string>
+  <string name="openLast">Open last</string>
   <string name="autoSave">Auto save</string>
   <string name="wrap">Word wrap</string>
   <string name="suggest">Suggestions</string>

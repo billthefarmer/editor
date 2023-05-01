@@ -113,7 +113,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -134,9 +133,10 @@ public class Editor extends Activity
     public final static String MODIFIED = "modified";
 
     public final static String PREF_FILE = "pref_file";
-    public final static String PREF_HIGHLIGHT = "pref_highlight";
+    public final static String PREF_HIGH = "pref_high";
     public final static String PREF_PATHS = "pref_paths";
     public final static String PREF_SAVE = "pref_save";
+    public final static String PREF_LAST = "pref_last";
     public final static String PREF_VIEW = "pref_view";
     public final static String PREF_SIZE = "pref_size";
     public final static String PREF_SUGGEST = "pref_suggest";
@@ -432,6 +432,7 @@ public class Editor extends Activity
 
     private boolean highlight = false;
 
+    private boolean last = false;
     private boolean save = false;
     private boolean edit = false;
     private boolean view = false;
@@ -460,9 +461,10 @@ public class Editor extends Activity
 
         save = preferences.getBoolean(PREF_SAVE, false);
         view = preferences.getBoolean(PREF_VIEW, true);
+        last = preferences.getBoolean(PREF_LAST, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
-        highlight = preferences.getBoolean(PREF_HIGHLIGHT, false);
+        highlight = preferences.getBoolean(PREF_HIGH, false);
 
         theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
@@ -576,7 +578,13 @@ public class Editor extends Activity
 
         case Intent.ACTION_MAIN:
             if (savedInstanceState == null)
-                defaultFile();
+            {
+                if (last)
+                    lastFile();
+
+                else
+                    defaultFile();
+            }
             break;
         }
 
@@ -800,12 +808,16 @@ public class Editor extends Activity
 
         editor.putBoolean(PREF_SAVE, save);
         editor.putBoolean(PREF_VIEW, view);
+        editor.putBoolean(PREF_LAST, last);
         editor.putBoolean(PREF_WRAP, wrap);
         editor.putBoolean(PREF_SUGGEST, suggest);
-        editor.putBoolean(PREF_HIGHLIGHT, highlight);
+        editor.putBoolean(PREF_HIGH, highlight);
+
         editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
         editor.putInt(PREF_TYPE, type);
+
+        editor.putString(PREF_FILE, path);
 
         // Add the set of recent files
         editor.putStringSet(PREF_PATHS, pathMap.keySet());
@@ -879,6 +891,7 @@ public class Editor extends Activity
             .setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
 
         menu.findItem(R.id.viewFile).setChecked(view);
+        menu.findItem(R.id.openLast).setChecked(last);
         menu.findItem(R.id.autoSave).setChecked(save);
         menu.findItem(R.id.wrap).setChecked(wrap);
         menu.findItem(R.id.suggest).setChecked(suggest);
@@ -942,16 +955,15 @@ public class Editor extends Activity
         sub.clear();
         // Add charsets contained in both sets
         sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, R.string.detect);
-        Iterator<String> iterator = keySet.iterator();
-        while (iterator.hasNext())
-            sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, iterator.next());
+        for (String key: keySet)
+            sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, key);
 
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
 
         // Get the last modified dates
-        for (String path : pathMap.keySet())
+        for (String path: pathMap.keySet())
         {
             File file = new File(path);
             long last = file.lastModified();
@@ -1037,6 +1049,9 @@ public class Editor extends Activity
             break;
         case R.id.viewFile:
             viewFileClicked(item);
+            break;
+        case R.id.openLast:
+            openLastClicked(item);
             break;
         case R.id.autoSave:
             autoSaveClicked(item);
@@ -1322,7 +1337,34 @@ public class Editor extends Activity
     private void defaultFile()
     {
         file = getDefaultFile();
+        uri = Uri.fromFile(file);
+        path = uri.getPath();
 
+        if (file.exists())
+            readFile(uri);
+
+        else
+        {
+            setTitle(uri.getLastPathSegment());
+            match = UTF_8;
+            getActionBar().setSubtitle(match);
+        }
+    }
+
+    // lastFile
+    private void lastFile()
+    {
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
+
+        String path = preferences.getString(PREF_FILE, "");
+        if (path.isEmpty())
+        {
+            defaultFile();
+            return;
+        }
+
+        file = new File(path);
         uri = Uri.fromFile(file);
         path = uri.getPath();
 
@@ -1735,6 +1777,13 @@ public class Editor extends Activity
     {
         view = !view;
         item.setChecked(view);
+    }
+
+    // openLastClicked
+    private void openLastClicked(MenuItem item)
+    {
+        last = !last;
+        item.setChecked(last);
     }
 
     // autoSaveClicked

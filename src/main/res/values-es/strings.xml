@@ -20,6 +20,7 @@
   <string name="viewMarkdown">Ver markdown…</string>
   <string name="options">Opciones</string>
   <string name="viewFile">Mostrar archivo</string>
+  <string name="openLast">Abrir último</string>
   <string name="autoSave">Guardado automático</string>
   <string name="wrap">Salto de línea</string>
   <string name="suggest">Recomendaciones</string>

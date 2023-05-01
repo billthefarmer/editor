@@ -20,6 +20,7 @@
   <string name="viewMarkdown">Переглянути markdown…</string>
   <string name="options">Параметри</string>
   <string name="viewFile">Переглянути файли</string>
+  <string name="openLast">Відкрити останню</string>
   <string name="autoSave">Автозбереження</string>
   <string name="wrap">Перенесення слів</string>
   <string name="suggest">Пропозиції</string>

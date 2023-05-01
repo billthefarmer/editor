@@ -39,7 +39,7 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ContentDescription', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion',
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'AndroidGradlePluginVersion',
             'MediaCapabilities', 'FindViewByIdCast', 'WrongViewCast'
         // abortOnError false
     }

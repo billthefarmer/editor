@@ -20,6 +20,7 @@
   <string name="viewMarkdown">Skatīt markdown…</string>
   <string name="options">Opcijas</string>
   <string name="viewFile">Skatīt failus</string>
+  <string name="openLast">Atvērt pēdējo</string>
   <string name="autoSave">Automātiska saglabāšana</string>
   <string name="wrap">Vārdu aplaušana</string>
   <string name="suggest">Ieteikumi</string>

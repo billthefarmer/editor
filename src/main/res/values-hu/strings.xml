@@ -20,6 +20,7 @@
   <string name="viewMarkdown">Markdown megtekintése…</string>
   <string name="options">Beállítások</string>
   <string name="viewFile">Fájlok megtekintése</string>
+  <string name="openLast">Utolsó megnyitása</string>
   <string name="autoSave">Automatikus mentés</string>
   <string name="wrap">Szövegtördelés</string>
   <string name="suggest">Javaslatok</string>

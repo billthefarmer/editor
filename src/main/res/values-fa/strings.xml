@@ -20,6 +20,7 @@
   <string name="viewMarkdown">نمایش مارک‌داون…</string>
   <string name="options">گزینه</string>
   <string name="viewFile">نمایش پرونده‌ها</string>
+  <string name="openLast">باز کردن اخرین</string>
   <string name="autoSave">ذخیره خودکار</string>
   <string name="wrap">پیچیدن کلمات</string>
   <string name="suggest">پیشنهادات</string>

@@ -20,6 +20,7 @@
   <string name="viewMarkdown">Προβολή της Markdown…</string>
   <string name="options">Επιλογές</string>
   <string name="viewFile">Προβολή αρχείων</string>
+  <string name="openLast">Ανοιχτό τελευταίο</string>
   <string name="autoSave">Αυτόματη αποθήκευση</string>
   <string name="wrap">Αναδίπλωση λέξεων</string>
   <string name="suggest">Προτάσεις</string>

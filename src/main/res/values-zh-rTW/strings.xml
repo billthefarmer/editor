@@ -20,6 +20,7 @@
   <string name="viewMarkdown">檢視 markdown…</string>
   <string name="options">选项</string>
   <string name="viewFile">檢視檔案</string>
+  <string name="openLast">最后打开</string>
   <string name="autoSave">自動儲存</string>
   <string name="wrap">文字換列</string>
   <string name="suggest">建議</string>

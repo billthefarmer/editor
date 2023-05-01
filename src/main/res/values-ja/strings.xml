@@ -20,6 +20,7 @@
   <string name="viewMarkdown">マークダウンを閲覧…</string>
   <string name="options">オプション</string>
   <string name="viewFile">ファイル閲覧</string>
+  <string name="openLast">最後に開く</string>
   <string name="autoSave">自動保存</string>
   <string name="wrap">画面端で折り返す</string>
   <string name="suggest">提案</string>
