@@ -7,7 +7,7 @@ more text or punctuation characters, white space, the text `ed:`
 followed by one or more option patterns separated by white space.
 
 ```
-# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [cs:u] [th:l|d|w|b|r] [ts:l|m|s] [tf:m|p]
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [cs:u] [th:l|d|s|w|b|r] [ts:l|m|s] [tf:m|p]
 ```
 
 The initial text or punctuation characters are intended to be used to
