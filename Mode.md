@@ -21,7 +21,7 @@ The option patterns are:
  * **[no]sg** &ndash; Suggestions
  * **[no]hs** &ndash; Syntax highlighting
  * **cs:u** &ndash; Character set &ndash; UTF-8
- * **th:l|d|w|b|r** &ndash; Theme &ndash; light, dark, white, black or retro
+ * **th:l|d|s|w|b|r** &ndash; Theme &ndash; light, dark, system, white, black or retro
  * **ts:l|m|s** &ndash; Text size &ndash; large, medium or small
  * **tf:m|p** &ndash; Typeface &ndash; monospace or proportional
 

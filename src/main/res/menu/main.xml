@@ -134,6 +134,10 @@
             android:showAsAction="never"
             android:title="@string/dark" />
         <item
+            android:id="@+id/system"
+            android:showAsAction="never"
+            android:title="@string/system" />
+        <item
             android:id="@+id/white"
             android:showAsAction="never"
             android:title="@string/white" />

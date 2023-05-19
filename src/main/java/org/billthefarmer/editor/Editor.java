@@ -32,6 +32,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -388,11 +389,12 @@ public class Editor extends Activity
     private final static int OPEN_DOCUMENT   = 1;
     private final static int CREATE_DOCUMENT = 2;
 
-    private final static int LIGHT = 1;
-    private final static int DARK  = 2;
-    private final static int WHITE = 3;
-    private final static int BLACK = 4;
-    private final static int RETRO = 5;
+    private final static int LIGHT  = 1;
+    private final static int DARK   = 2;
+    private final static int SYSTEM = 3;
+    private final static int WHITE  = 4;
+    private final static int BLACK  = 5;
+    private final static int RETRO  = 6;
 
     private final static int TINY   = 8;
     private final static int SMALL  = 12;
@@ -479,6 +481,9 @@ public class Editor extends Activity
 
         removeList = new ArrayList<>();
 
+        Configuration config = getResources().getConfiguration();
+        int night = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
         switch (theme)
         {
         case LIGHT:
@@ -487,6 +492,19 @@ public class Editor extends Activity
 
         case DARK:
             setTheme(R.style.AppDarkTheme);
+            break;
+
+        case SYSTEM:
+            switch (night)
+            {
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.AppTheme);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.AppDarkTheme);
+                break;
+            }
             break;
 
         case WHITE:
@@ -907,6 +925,10 @@ public class Editor extends Activity
             menu.findItem(R.id.dark).setChecked(true);
             break;
 
+        case SYSTEM:
+            menu.findItem(R.id.system).setChecked(true);
+            break;
+
         case WHITE:
             menu.findItem(R.id.white).setChecked(true);
             break;
@@ -1070,6 +1092,9 @@ public class Editor extends Activity
             break;
         case R.id.dark:
             darkClicked(item);
+            break;
+        case R.id.system:
+            systemClicked(item);
             break;
         case R.id.white:
             whiteClicked(item);
@@ -1838,6 +1863,14 @@ public class Editor extends Activity
     private void darkClicked(MenuItem item)
     {
         theme = DARK;
+        item.setChecked(true);
+        recreate(this);
+    }
+
+    // systemClicked
+    private void systemClicked(MenuItem item)
+    {
+        theme = SYSTEM;
         item.setChecked(true);
         recreate(this);
     }
@@ -3126,6 +3159,15 @@ public class Editor extends Activity
                             if (theme != DARK)
                             {
                                 theme = DARK;
+                                change = true;
+                            }
+                        }
+
+                        else if (":s".equals(matcher.group(4)))
+                        {
+                            if (theme != SYSTEM)
+                            {
+                                theme = SYSTEM;
                                 change = true;
                             }
                         }
