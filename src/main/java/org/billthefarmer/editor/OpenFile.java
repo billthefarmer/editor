@@ -241,7 +241,8 @@ public class OpenFile extends Activity
             uri = data.getData();
             path = uri.getPath();
             pathView.setText(path);
-            nameView.setText(uri.getLastPathSegment());
+            nameView.setText(FileUtils.getDisplayName(this, uri,
+                                                      null, null));
             break;
         }
     }
