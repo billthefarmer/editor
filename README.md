@@ -132,9 +132,16 @@ You will be prompted to choose a viewer for an html file containing
 the encoded markdown from the current open file. If the text contains
 no markdown the result will be the same text.
 
-### Shortcut
-You may create a **New file** shortcut in the launcher which will open
-a new file in Editor.
+### Shortcuts
+You may create a **New file** or an **Open file** shortcut in the
+launcher. The **New file** widget will create an shortcut to open a
+new file in Editor. The **Open file** widget will pop up a dialog
+showing the file chooser. You may choose a file or use the **Storage**
+button. You may cancel and fill in the name and path fields, or edit
+the name or path fields after choosing a file. Use the **Create**
+button to create the shortcut. **Note** &ndash; content URIs returned
+by the android file picker will not be resolved. you may want to edit
+the name field.
 
 ### Regular expressions
 Explaining [regular

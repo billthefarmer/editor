@@ -146,7 +146,7 @@ public class Editor extends Activity
     public final static String PREF_WRAP = "pref_wrap";
 
     public final static String DOCUMENTS = "Documents";
-    public final static String FOLDER = "Folder:  ";
+    public final static String FOLDER = "Folder";
     public final static String UTF_8 = "UTF-8";
 
     public final static String NEW_FILE = "Untitled.txt";
@@ -370,31 +370,31 @@ public class Editor extends Activity
     public final static Pattern WORD_PATTERN = Pattern.compile
         ("\\w+", Pattern.MULTILINE);
 
-    private final static int LAST_SIZE = 256;
-    private final static int MENU_SIZE = 192;
-    private final static int FIRST_SIZE = 256;
-    private final static int TOO_LARGE = 524288;
-    private final static int FOLDER_OFFSET = 0x7d000000;
-    private final static int POSITION_DELAY = 128;
-    private final static int UPDATE_DELAY = 128;
-    private final static int FIND_DELAY = 128;
-    private final static int MAX_PATHS = 10;
+    public final static int LAST_SIZE = 256;
+    public final static int MENU_SIZE = 192;
+    public final static int FIRST_SIZE = 256;
+    public final static int TOO_LARGE = 524288;
+    public final static int FOLDER_OFFSET = 0x7d000000;
+    public final static int POSITION_DELAY = 128;
+    public final static int UPDATE_DELAY = 128;
+    public final static int FIND_DELAY = 128;
+    public final static int MAX_PATHS = 10;
 
-    private final static int GET_TEXT = 0;
+    public final static int GET_TEXT = 0;
 
-    private final static int REQUEST_READ = 1;
-    private final static int REQUEST_SAVE = 2;
-    private final static int REQUEST_OPEN = 3;
+    public final static int REQUEST_READ = 1;
+    public final static int REQUEST_SAVE = 2;
+    public final static int REQUEST_OPEN = 3;
 
-    private final static int OPEN_DOCUMENT   = 1;
-    private final static int CREATE_DOCUMENT = 2;
+    public final static int OPEN_DOCUMENT   = 1;
+    public final static int CREATE_DOCUMENT = 2;
 
-    private final static int LIGHT  = 1;
-    private final static int DARK   = 2;
-    private final static int SYSTEM = 3;
-    private final static int WHITE  = 4;
-    private final static int BLACK  = 5;
-    private final static int RETRO  = 6;
+    public final static int LIGHT  = 1;
+    public final static int DARK   = 2;
+    public final static int SYSTEM = 3;
+    public final static int WHITE  = 4;
+    public final static int BLACK  = 5;
+    public final static int RETRO  = 6;
 
     private final static int TINY   = 8;
     private final static int SMALL  = 12;
@@ -1343,7 +1343,7 @@ public class Editor extends Activity
     }
 
     // getNewFile
-    private File getNewFile()
+    private static File getNewFile()
     {
         File documents = new
             File(Environment.getExternalStorageDirectory(), DOCUMENTS);
@@ -1351,7 +1351,7 @@ public class Editor extends Activity
     }
 
     // getDefaultFile
-    private File getDefaultFile()
+    private static File getDefaultFile()
     {
         File documents = new
             File(Environment.getExternalStorageDirectory(), DOCUMENTS);

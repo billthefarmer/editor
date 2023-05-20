@@ -2,11 +2,15 @@
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="">
+    tools:ignore="MissingTranslation">
 
   <string name="appName">Editor</string>
 
   <string name="newFile">New file</string>
+  <string name="openFile">Open file</string>
+  <string name="name">Name</string>
+  <string name="path">Path</string>
+  <string name="create">Create</string>
   <string name="edit">Edit</string>
   <string name="view">View</string>
   <string name="open">Open file…</string>

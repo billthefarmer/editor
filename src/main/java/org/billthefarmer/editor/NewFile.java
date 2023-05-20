@@ -25,13 +25,11 @@ package org.billthefarmer.editor;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
-public class Shortcut extends Activity
+public class NewFile extends Activity
 {
-    public final static String TAG = "Shortcut";
+    public final static String TAG = "NewFile";
 
     // onCreate
     @Override

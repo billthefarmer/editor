@@ -56,10 +56,21 @@
     </activity>
 
     <activity
-        android:name="Shortcut"
+        android:name="NewFile"
         android:exported="true"
         android:label="@string/newFile"
         android:theme="@android:style/Theme.NoDisplay">
+      <intent-filter>
+        <action android:name="android.intent.action.CREATE_SHORTCUT" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+
+    <activity
+        android:name="OpenFile"
+        android:exported="true"
+        android:label="@string/openFile"
+        android:theme="@style/DialogTheme">
       <intent-filter>
         <action android:name="android.intent.action.CREATE_SHORTCUT" />
         <category android:name="android.intent.category.DEFAULT" />
