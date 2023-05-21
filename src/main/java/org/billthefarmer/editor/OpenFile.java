@@ -26,6 +26,7 @@ package org.billthefarmer.editor;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -251,7 +252,7 @@ public class OpenFile extends Activity
     private void getFile(File dir)
     {
         // Get list of files
-        List<File> fileList = getList(dir);
+        List<File> fileList = Editor.getList(dir);
         if (fileList == null)
             return;
 
@@ -261,7 +262,7 @@ public class OpenFile extends Activity
         dirList.addAll(Uri.fromFile(dir).getPathSegments());
 
         // Pop up dialog
-        openDialog(dirList, fileList, (dialog, which) ->
+        Editor.openDialog(this, dirList, fileList, (dialog, which) ->
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
                 DialogInterface.BUTTON_NEUTRAL == which)
@@ -296,99 +297,5 @@ public class OpenFile extends Activity
                 nameView.setText(uri.getLastPathSegment());
             }
         });
-    }
-
-    // getList
-    private List<File> getList(File dir)
-    {
-        List<File> list = null;
-        File[] files = dir.listFiles();
-        // Check files
-        if (files == null)
-        {
-            // Create a list with just the parent folder and the
-            // external storage folder
-            list = new ArrayList<File>();
-            if (dir.getParentFile() == null)
-                list.add(dir);
-
-            else
-                list.add(dir.getParentFile());
-
-            list.add(Environment.getExternalStorageDirectory());
-
-            return list;
-        }
-
-        // Sort the files
-        Arrays.sort(files);
-        // Create a list
-        list = new ArrayList<File>(Arrays.asList(files));
-
-        // Add parent folder
-        if (dir.getParentFile() == null)
-            list.add(0, dir);
-
-        else
-            list.add(0, dir.getParentFile());
-
-        return list;
-    }
-
-    // openDialog
-    private void openDialog(List<String> dirList, List<File> fileList,
-                            DialogInterface.OnClickListener listener)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(Editor.FOLDER);
-
-        // Add the adapter
-        FileAdapter adapter = new FileAdapter(builder.getContext(), fileList);
-        builder.setAdapter(adapter, listener);
-
-        // Add storage button
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            builder.setNeutralButton(R.string.storage, listener);
-        // Add cancel button
-        builder.setNegativeButton(R.string.cancel, null);
-
-        // Create the Dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        // Find the content view
-        View view = dialog.findViewById(android.R.id.content);
-        // Find the title view
-        while (view instanceof ViewGroup)
-            view = ((ViewGroup)view).getChildAt(0);
-        // Get the parent view
-        ViewGroup parent = (ViewGroup) view.getParent();
-        // Replace content with scroll view
-        parent.removeAllViews();
-        HorizontalScrollView scroll = new
-            HorizontalScrollView(dialog.getContext());
-        parent.addView(scroll);
-        // Add a row of folder buttons
-        LinearLayout layout = new LinearLayout(dialog.getContext());
-        scroll.addView(layout);
-        for (String dir: dirList)
-        {
-            Button button = new Button(dialog.getContext(), null,
-                                       android.R.attr.buttonStyleSmall);
-            button.setId(dirList.indexOf(dir) + Editor.FOLDER_OFFSET);
-            button.setText(dir);
-            button.setOnClickListener((v) ->
-            {
-                listener.onClick(dialog, v.getId());
-                dialog.dismiss();
-            });
-            layout.addView(button);
-        }
-
-        // Scroll to the end
-        scroll.postDelayed(() ->
-        {
-            scroll.fullScroll(View.FOCUS_RIGHT);
-        }, Editor.POSITION_DELAY);
     }
 }

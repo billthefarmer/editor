@@ -796,7 +796,7 @@ public class Editor extends Activity
         checkHighlight();
 
         if (file.lastModified() > modified)
-            alertDialog(R.string.appName, R.string.changedReload,
+            alertDialog(this, R.string.appName, R.string.changedReload,
                         R.string.reload, R.string.cancel, (dialog, id) ->
         {
             switch (id)
@@ -1144,7 +1144,7 @@ public class Editor extends Activity
     public void onBackPressed()
     {
         if (changed)
-            alertDialog(R.string.appName, R.string.modified,
+            alertDialog(this, R.string.appName, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
             switch (id)
@@ -1300,7 +1300,7 @@ public class Editor extends Activity
     {
         // Check if file changed
         if (changed)
-            alertDialog(R.string.newFile, R.string.modified,
+            alertDialog(this, R.string.newFile, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
             switch (id)
@@ -1412,11 +1412,11 @@ public class Editor extends Activity
     }
 
     // alertDialog
-    private void alertDialog(int title, int message,
-                             int positiveButton, int negativeButton,
-                             DialogInterface.OnClickListener listener)
+    private static void alertDialog(Context context, int title, int message,
+                                    int positiveButton, int negativeButton,
+                                    DialogInterface.OnClickListener listener)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
 
@@ -1429,9 +1429,10 @@ public class Editor extends Activity
     }
 
     // alertDialog
-    private void alertDialog(int title, String message, int neutralButton)
+    private static void alertDialog(Context context, int title,
+                                    String message, int neutralButton)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
 
@@ -1497,7 +1498,7 @@ public class Editor extends Activity
             Uri uri = Uri.fromFile(file);
 
             if (changed)
-                alertDialog(R.string.openRecent, R.string.modified,
+                alertDialog(this, R.string.openRecent, R.string.modified,
                             R.string.save, R.string.discard, (dialog, id) ->
             {
                 switch (id)
@@ -1531,7 +1532,7 @@ public class Editor extends Activity
                               .getExternalStorageDirectory()
                               .getPath() + File.separator, "");
         // Open dialog
-        saveAsDialog(name, (dialog, id) ->
+        saveAsDialog(this, name, (dialog, id) ->
         {
             switch (id)
             {
@@ -1561,8 +1562,9 @@ public class Editor extends Activity
 
                 // Check exists
                 if (file.exists())
-                    alertDialog(R.string.appName, R.string.changedOverwrite,
-                                R.string.overwrite, R.string.cancel, (dg, b) ->
+                    alertDialog(this, R.string.appName,
+                                R.string.changedOverwrite,
+                                R.string.overwrite, R.string.cancel, (d, b) ->
                     {
                         switch (b)
                         {
@@ -1600,10 +1602,10 @@ public class Editor extends Activity
     }
 
     // saveAsDialog
-    private void saveAsDialog(String path,
-                              DialogInterface.OnClickListener listener)
+    private static void saveAsDialog(Context context, String path,
+                                     DialogInterface.OnClickListener listener)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.save);
         builder.setMessage(R.string.choose);
 
@@ -2012,7 +2014,7 @@ public class Editor extends Activity
     {
         // Check if file changed
         if (changed)
-            alertDialog(R.string.open, R.string.modified,
+            alertDialog(this, R.string.open, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
         {
             switch (id)
@@ -2069,7 +2071,7 @@ public class Editor extends Activity
         dirList.addAll(Uri.fromFile(dir).getPathSegments());
 
         // Pop up dialog
-        openDialog(dirList, fileList, (dialog, which) ->
+        openDialog(this, dirList, fileList, (dialog, which) ->
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
                 DialogInterface.BUTTON_NEUTRAL == which)
@@ -2102,7 +2104,7 @@ public class Editor extends Activity
     }
 
     // getList
-    private List<File> getList(File dir)
+    public static List<File> getList(File dir)
     {
         List<File> list = null;
         File[] files = dir.listFiles();
@@ -2139,10 +2141,11 @@ public class Editor extends Activity
     }
 
     // openDialog
-    private void openDialog(List<String> dirList, List<File> fileList,
-                            DialogInterface.OnClickListener listener)
+    public static void openDialog(Context context, List<String> dirList,
+                                  List<File> fileList,
+                                  DialogInterface.OnClickListener listener)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(FOLDER);
 
         // Add the adapter
@@ -2268,7 +2271,7 @@ public class Editor extends Activity
         {
             String large = getString(R.string.tooLarge);
             large = String.format(large, FileUtils.getReadableFileSize(size));
-            alertDialog(R.string.appName, large, R.string.ok);
+            alertDialog(this, R.string.appName, large, R.string.ok);
             return;
         }
 
@@ -2370,7 +2373,7 @@ public class Editor extends Activity
         textView.removeCallbacks(updateWordCount);
 
         if (file.lastModified() > modified)
-            alertDialog(R.string.appName, R.string.changedOverwrite,
+            alertDialog(this, R.string.appName, R.string.changedOverwrite,
                         R.string.overwrite, R.string.cancel, (dialog, id) ->
         {
             switch (id)
@@ -2410,7 +2413,7 @@ public class Editor extends Activity
 
         catch (Exception e)
         {
-            alertDialog(R.string.appName, e.getMessage(), R.string.ok);
+            alertDialog(this, R.string.appName, e.getMessage(), R.string.ok);
             e.printStackTrace();
             return;
         }
@@ -2434,7 +2437,7 @@ public class Editor extends Activity
 
         catch (Exception e)
         {
-            alertDialog(R.string.appName, e.getMessage(), R.string.ok);
+            alertDialog(this, R.string.appName, e.getMessage(), R.string.ok);
             e.printStackTrace();
             return;
         }
@@ -2461,7 +2464,7 @@ public class Editor extends Activity
 
         catch (Exception e)
         {
-            alertDialog(R.string.appName, e.getMessage(), R.string.ok);
+            alertDialog(this, R.string.appName, e.getMessage(), R.string.ok);
             e.printStackTrace();
             return;
         }
@@ -3654,7 +3657,7 @@ public class Editor extends Activity
             catch (Exception e)
             {
                 editor.runOnUiThread(() ->
-                    editor.alertDialog(R.string.appName,
+                    Editor.alertDialog(editor, R.string.appName,
                                        e.getMessage(),
                                        R.string.ok));
                 e.printStackTrace();
