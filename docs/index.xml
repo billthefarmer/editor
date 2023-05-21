@@ -126,7 +126,7 @@ Default The default character set is set to UTF-8 on selecting New from the tool
       <pubDate>Wed, 02 Mar 2022 09:34:09 +0000</pubDate>
       
       <guid>https://billthefarmer.github.io/editor/using/shortcut/</guid>
-      <description>You may create a New file shortcut in the launcher which will open a new file in Editor.</description>
+      <description>You may create a New file or an Open file shortcut in the launcher. The New file widget will create an shortcut to open a new file in Editor. The Open file widget will pop up a dialog showing the file chooser. You may choose a file or use the Storage button. You may cancel and fill in the name and path fields, or edit the name or path fields after choosing a file.</description>
     </item>
     
     <item>
