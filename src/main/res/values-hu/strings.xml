@@ -4,6 +4,10 @@
   <string name="appName">Szerkesztő</string>
 
   <string name="newFile">Új fájl</string>
+  <string name="openFile">Fájl megnyitása</string>
+  <string name="name">Név</string>
+  <string name="path">Ösvény</string>
+  <string name="create">Alkot</string>
   <string name="edit">Szerkesztés</string>
   <string name="view">Megtekintés</string>
   <string name="open">Fájl megnyitása…</string>

@@ -4,6 +4,10 @@
   <string name="appName">ویرایشگر</string>
 
   <string name="newFile">جدید</string>
+  <string name="openFile">باز کردن پرونده</string>
+  <string name="name">نام</string>
+  <string name="path">مسیر</string>
+  <string name="create">ایجاد</string>
   <string name="edit">ویرایش</string>
   <string name="view">نمایش</string>
   <string name="open">باز کردن پرونده…</string>

@@ -4,6 +4,10 @@
   <string name="appName">Επεξεργαστής</string>
 
   <string name="newFile">Νέος</string>
+  <string name="openFile">Άνοιγμα αρχείου</string>
+  <string name="name">Όνομα</string>
+  <string name="path">Μονοπάτι</string>
+  <string name="create">Δημιουργώ</string>
   <string name="edit">Επεξεργασία</string>
   <string name="view">Προβολή</string>
   <string name="open">Άνοιγμα αρχείου…</string>

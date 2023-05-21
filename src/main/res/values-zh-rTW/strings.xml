@@ -4,6 +4,10 @@
   <string name="appName">編輯器</string>
 
   <string name="newFile">新增</string>
+  <string name="openFile">開啟檔案</string>
+  <string name="name">名字</string>
+  <string name="path">路径</string>
+  <string name="create">创造</string>
   <string name="edit">編輯</string>
   <string name="view">檢視</string>
   <string name="open">開啟檔案…</string>

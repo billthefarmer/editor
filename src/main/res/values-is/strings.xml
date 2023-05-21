@@ -4,6 +4,10 @@
   <string name="appName">Ritill</string>
 
   <string name="newFile">Nýtt</string>
+  <string name="openFile">Opna skrá</string>
+  <string name="name">Nafn</string>
+  <string name="path">Slóð</string>
+  <string name="create">Skapa</string>
   <string name="edit">Breyta</string>
   <string name="view">Skoða</string>
   <string name="open">Opna skrá…</string>

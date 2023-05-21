@@ -4,6 +4,10 @@
   <string name="appName">Редактор</string>
 
   <string name="search">Поиск…</string>
+  <string name="openFile">Открыть файл</string>
+  <string name="name">Имя</string>
+  <string name="path">Путь</string>
+  <string name="create">Создавать</string>
   <string name="findAll">Найти все…</string>
   <string name="newFile">Новый</string>
   <string name="edit">Редактор</string>

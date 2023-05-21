@@ -4,6 +4,10 @@
   <string name="appName">دەستکاریکەر</string>
 
   <string name="newFile">نوێ</string>
+  <string name="openFile">فایل بکەرەوە</string>
+  <string name="name">ناو</string>
+  <string name="path">ڕێڕەو</string>
+  <string name="create">پێکبهێنە</string>
   <string name="edit">دەستکاریکردن</string>
   <string name="view">پیشاندان</string>
   <string name="open">فایل بکەرەوە</string>

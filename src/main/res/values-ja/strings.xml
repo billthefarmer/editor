@@ -4,6 +4,10 @@
   <string name="appName">エディター</string>
 
   <string name="newFile">新規ファイル</string>
+  <string name="openFile">ファイルを開く</string>
+  <string name="name">名前</string>
+  <string name="path">パス</string>
+  <string name="create">創造する</string>
   <string name="edit">編集</string>
   <string name="view">閲覧</string>
   <string name="open">ファイルを開く…</string>

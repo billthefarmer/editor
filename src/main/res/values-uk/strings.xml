@@ -4,6 +4,10 @@
   <string name="appName">Editor</string>
 
   <string name="newFile">Новий файл</string>
+  <string name="openFile">Відкрити файл</string>
+  <string name="name">назва</string>
+  <string name="path">Шлях</string>
+  <string name="create">Творити</string>
   <string name="edit">Змінити</string>
   <string name="view">Переглянути</string>
   <string name="open">Відкрити файл…</string>

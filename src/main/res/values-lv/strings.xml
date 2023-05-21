@@ -4,6 +4,10 @@
   <string name="appName">Redaktors</string>
 
   <string name="newFile">Jauns</string>
+  <string name="openFile">Atvērt failu</string>
+  <string name="name">Vārds</string>
+  <string name="path">Ceļu</string>
+  <string name="create">Radīt</string>
   <string name="edit">Rediģēt</string>
   <string name="view">Skatīt</string>
   <string name="open">Atvērt failu…</string>

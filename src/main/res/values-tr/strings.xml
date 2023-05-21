@@ -4,6 +4,10 @@
   <string name="appName">Düzenleyici</string>
 
   <string name="newFile">Yeni</string>
+  <string name="openFile">Dosya aç</string>
+  <string name="name">Ad</string>
+  <string name="path">Yol</string>
+  <string name="create">Yaratmak</string>
   <string name="edit">Düzenle</string>
   <string name="view">Görünüm</string>
   <string name="open">Dosya aç…</string>

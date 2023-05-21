@@ -4,6 +4,10 @@
   <string name="appName">Editor</string>
 
   <string name="newFile">Nowy</string>
+  <string name="openFile">Otwórz plik</string>
+  <string name="name">Nazwa</string>
+  <string name="path">Ścieżka</string>
+  <string name="create">Tworzyć</string>
   <string name="edit">Edytuj</string>
   <string name="view">Podgląd</string>
   <string name="open">Otwórz plik…</string>

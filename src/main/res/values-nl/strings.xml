@@ -4,6 +4,10 @@
   <string name="appName">Tekstbewerker</string>
 
   <string name="newFile">Nieuw</string>
+  <string name="openFile">Bestand openen</string>
+  <string name="name">Naam</string>
+  <string name="path">Pad</string>
+  <string name="create">Scheppen</string>
   <string name="edit">Bewerken</string>
   <string name="view">Tonen</string>
   <string name="open">Bestand openen…</string>
