@@ -988,6 +988,10 @@ public class Editor extends Activity
         for (String path: pathMap.keySet())
         {
             File file = new File(path);
+            // Check it exists
+            if (!file.exists())
+                continue;
+
             long last = file.lastModified();
             list.add(last);
             map.put(last, path);
