@@ -1462,6 +1462,13 @@ public class Editor extends Activity
         for (String name : pathMap.keySet())
         {
             File file = new File(name);
+            if (!file.exists())
+            {
+                pathMap.remove(name);
+                removeList.add(name);
+                continue;
+            }
+
             list.add(file.lastModified());
             map.put(file.lastModified(), name);
         }
