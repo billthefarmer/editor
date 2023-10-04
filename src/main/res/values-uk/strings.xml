@@ -5,7 +5,7 @@
 
   <string name="newFile">Новий файл</string>
   <string name="openFile">Відкрити файл</string>
-  <string name="name">назва</string>
+  <string name="name">Назва</string>
   <string name="path">Шлях</string>
   <string name="create">Творити</string>
   <string name="edit">Змінити</string>
@@ -33,7 +33,7 @@
   <string name="light">Світла</string>
   <string name="dark">Темна</string>
   <string name="system">Система</string>
-  <string name="white">Білий</string>
+  <string name="white">Біла</string>
   <string name="black">Чорна</string>
   <string name="retro">Ретро</string>
   <string name="size">Розмір тексту</string>
@@ -43,7 +43,7 @@
   <string name="typeface">Шрифт</string>
   <string name="mono">Моноширний</string>
   <string name="normal">Пропорційний</string>
-  <string name="about">Про програму</string>
+  <string name="about">Про застосунок</string>
 
   <!--
       Note for translators: You don't need to translate all these
