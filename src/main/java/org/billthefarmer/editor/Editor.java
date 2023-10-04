@@ -2173,18 +2173,17 @@ public class Editor extends Activity
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // Find the content view
-        View view = dialog.findViewById(android.R.id.content);
         // Find the title view
-        while (view instanceof ViewGroup)
-            view = ((ViewGroup)view).getChildAt(0);
-        // Get the parent view
-        ViewGroup parent = (ViewGroup) view.getParent();
+        ViewGroup title = dialog.findViewById
+            (context.getResources().getIdentifier("title_template",
+                                                  "id", "android"));
         // Replace content with scroll view
-        parent.removeAllViews();
+        title.removeAllViews();
+        // Replace content with scroll view
+        title.removeAllViews();
         HorizontalScrollView scroll = new
             HorizontalScrollView(dialog.getContext());
-        parent.addView(scroll);
+        title.addView(scroll);
         // Add a row of folder buttons
         LinearLayout layout = new LinearLayout(dialog.getContext());
         scroll.addView(layout);

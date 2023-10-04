@@ -35,25 +35,29 @@
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
       android:orientation="horizontal"
-      tools:ignore="ButtonStyle">
+      style="?android:attr/buttonBarStyle">
 
     <Button
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel" />
+        android:text="@string/cancel"
+        style="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:id="@+id/openFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/openFile" />
+        android:text="@string/openFile"
+        style="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create" />
+        android:text="@string/create"
+        style="?android:attr/buttonBarButtonStyle" />
 
   </LinearLayout>
+
 </LinearLayout>
