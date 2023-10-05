@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Рэдактар</string>
+
+  <string name="search">Пошук…</string>
+  <string name="openFile">Адкрыць файл</string>
+  <string name="name">Імя</string>
+  <string name="path">Шлях</string>
+  <string name="create">Ствараць</string>
+  <string name="findAll">Знайсці ўсё…</string>
+  <string name="newFile">Новы</string>
+  <string name="edit">Рэдактар</string>
+  <string name="view">Прагляд</string>
+  <string name="open">Адкрыць файл…</string>
+  <string name="save">Захаваць</string>
+  <string name="storage">Сховішча</string>
+  <string name="openRecent">Нядаўнія</string>
+  <string name="clearList">Ачысціць спіс</string>
+  <string name="saveAs">Захаваць як…</string>
+  <string name="detect">Выяўляць</string>
+  <string name="goTo">Перайсці да…</string>
+  <string name="print">Друкаваць…</string>
+  <string name="viewMarkdown">Прагляд Markdown…</string>
+  <string name="options">Параметры</string>
+  <string name="viewFile">Прагляд файлаў</string>
+  <string name="openLast">Адкрыты апошнім</string>
+  <string name="autoSave">Аўтазахаванне</string>
+  <string name="wrap">Перанос радкоў</string>
+  <string name="suggest">Варыянты слоў</string>
+  <string name="highlight">Вылучыць сінтаксіс</string>
+  <string name="theme">Тэма</string>
+  <string name="light">Светлая</string>
+  <string name="dark">Цёмная</string>
+  <string name="white">Белая</string>
+  <string name="black">Чорная</string>
+  <string name="system">Сістэмная</string>
+  <string name="retro">Рэтра</string>
+  <string name="size">Памер шрыфта</string>
+  <string name="small">Малы</string>
+  <string name="medium">Сярэдні</string>
+  <string name="large">Буйны</string>
+  <string name="typeface">Тып шрыфта</string>
+  <string name="mono">Манашырынны</string>
+  <string name="normal">Прапарцыйны</string>
+  <string name="about">Аб праграме</string>
+
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nЗборка
+  %s\nРаспрацоўка \u00A9 2017 Bill Farmer\n\nБеларускі пераклад \u00A9 <a
+  href="https://github.com/Atrafon">Makar Razin</a>\n\nЛіцэнзія <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="tooLarge">Занадта вялікі %s</string>
+  <string name="choose">Выберыце імя файла</string>
+  <string name="loading">Чытанне…</string>
+
+  <string name="modified">
+    Захаваць змены?
+  </string>
+
+  <string name="changedReload">
+    Файл змяніўся, перачытаць?
+  </string>
+
+  <string name="changedOverwrite">
+    Файл змяніўся, перазапісаць?
+  </string>
+
+  <string name="ok">ОК</string>
+  <string name="reload">Перачытаць</string>
+  <string name="overwrite">Перазапісаць</string>
+  <string name="discard">Не захоўваць</string>
+  <string name="cancel">Адмена</string>
+
+</resources>

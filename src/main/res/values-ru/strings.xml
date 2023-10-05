@@ -32,9 +32,9 @@
   <string name="theme">Тема</string>
   <string name="light">Светлая</string>
   <string name="dark">Тёмная</string>
-  <string name="white">Белый</string>
-  <string name="black">Чернить</string>
-  <string name="system">Система</string>
+  <string name="white">Белая</string>
+  <string name="black">Чёрная</string>
+  <string name="system">Системная</string>
   <string name="retro">Ретро</string>
   <string name="size">Размер шрифта</string>
   <string name="small">Малый</string>
