@@ -2179,8 +2179,6 @@ public class Editor extends Activity
                                                   "id", "android"));
         // Replace content with scroll view
         title.removeAllViews();
-        // Replace content with scroll view
-        title.removeAllViews();
         HorizontalScrollView scroll = new
             HorizontalScrollView(dialog.getContext());
         title.addView(scroll);

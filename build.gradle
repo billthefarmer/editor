@@ -26,8 +26,8 @@ android {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 14
         targetSdkVersion 28
-        versionName "1.87"
-        versionCode 187
+        versionName "1.88"
+        versionCode 188
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
