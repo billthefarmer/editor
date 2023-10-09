@@ -114,6 +114,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1459,12 +1460,14 @@ public class Editor extends Activity
         // Get a list of files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
-        for (String name : pathMap.keySet())
+        for (Iterator<String> iter = pathMap.keySet().iterator();
+             iter.hasNext();)
         {
+            String name = iter.next();
             File file = new File(name);
             if (!file.exists())
             {
-                pathMap.remove(name);
+                iter.remove();
                 removeList.add(name);
                 continue;
             }
