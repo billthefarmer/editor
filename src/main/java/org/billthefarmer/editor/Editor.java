@@ -1460,14 +1460,12 @@ public class Editor extends Activity
         // Get a list of files
         List<Long> list = new ArrayList<>();
         Map<Long, String> map = new HashMap<>();
-        for (Iterator<String> iter = pathMap.keySet().iterator();
-             iter.hasNext();)
+        for (String name: pathMap.keySet())
         {
-            String name = iter.next();
             File file = new File(name);
+            // Add to remove list if non existant
             if (!file.exists())
             {
-                iter.remove();
                 removeList.add(name);
                 continue;
             }
@@ -1475,6 +1473,10 @@ public class Editor extends Activity
             list.add(file.lastModified());
             map.put(file.lastModified(), name);
         }
+
+        // Remove non existant entries
+        for (String name: removeList)
+            pathMap.remove(name);
 
         // Sort in reverse order
         Collections.sort(list);
