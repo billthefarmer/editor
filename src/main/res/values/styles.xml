@@ -37,20 +37,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop</item>
-    <item name="external">@drawable/ic_action_sd_storage</item>
-    <item name="file">@drawable/ic_action_view_as_list</item>
-    <item name="folder">@drawable/ic_action_collection</item>
-    <item name="audio">@drawable/ic_action_volume_on</item>
-    <item name="image">@drawable/ic_action_picture</item>
-    <item name="parent">@drawable/ic_action_reply</item>
-    <item name="video">@drawable/ic_action_video</item>
+    <item name="application">@drawable/ic_stop_black_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_black_24dp</item>
+    <item name="file">@drawable/ic_list_black_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_black_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_black_24dp</item>
+    <item name="image">@drawable/ic_image_black_24dp</item>
+    <item name="parent">@drawable/ic_reply_black_24dp</item>
+    <item name="video">@drawable/ic_videocam_black_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
   </style>
 
@@ -61,20 +61,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop</item>
-    <item name="external">@drawable/ic_action_sd_storage</item>
-    <item name="file">@drawable/ic_action_view_as_list</item>
-    <item name="folder">@drawable/ic_action_collection</item>
-    <item name="audio">@drawable/ic_action_volume_on</item>
-    <item name="image">@drawable/ic_action_picture</item>
-    <item name="parent">@drawable/ic_action_reply</item>
-    <item name="video">@drawable/ic_action_video</item>
+    <item name="application">@drawable/ic_stop_black_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_black_24dp</item>
+    <item name="file">@drawable/ic_list_black_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_black_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_black_24dp</item>
+    <item name="image">@drawable/ic_image_black_24dp</item>
+    <item name="parent">@drawable/ic_reply_black_24dp</item>
+    <item name="video">@drawable/ic_videocam_black_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_light</item>
-    <item name="open">@drawable/ic_action_collection</item>
-    <item name="save">@drawable/ic_action_save_light</item>
-    <item name="view">@drawable/ic_action_view_as_list</item>
-    <item name="newFile">@drawable/ic_action_new_light</item>
+    <item name="edit">@drawable/ic_edit_black_24dp</item>
+    <item name="open">@drawable/ic_folder_open_black_24dp</item>
+    <item name="save">@drawable/ic_save_black_24dp</item>
+    <item name="view">@drawable/ic_list_black_24dp</item>
+    <item name="newFile">@drawable/ic_add_black_24dp</item>
 
     <item name="android:textColorPrimary">@android:color/black</item>
     <item name="android:textColorSecondary">@android:color/black</item>
@@ -89,20 +89,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop_dark</item>
-    <item name="external">@drawable/ic_action_sd_storage_dark</item>
-    <item name="file">@drawable/ic_action_view_as_list_dark</item>
-    <item name="folder">@drawable/ic_action_collection_dark</item>
-    <item name="audio">@drawable/ic_action_volume_on_dark</item>
-    <item name="image">@drawable/ic_action_picture_dark</item>
-    <item name="parent">@drawable/ic_action_reply_dark</item>
-    <item name="video">@drawable/ic_action_video_dark</item>
+    <item name="application">@drawable/ic_stop_white_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_white_24dp</item>
+    <item name="file">@drawable/ic_list_white_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_white_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_white_24dp</item>
+    <item name="image">@drawable/ic_image_white_24dp</item>
+    <item name="parent">@drawable/ic_reply_white_24dp</item>
+    <item name="video">@drawable/ic_videocam_white_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
   </style>
 
@@ -113,20 +113,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop_dark</item>
-    <item name="external">@drawable/ic_action_sd_storage_dark</item>
-    <item name="file">@drawable/ic_action_view_as_list_dark</item>
-    <item name="folder">@drawable/ic_action_collection_dark</item>
-    <item name="audio">@drawable/ic_action_volume_on_dark</item>
-    <item name="image">@drawable/ic_action_picture_dark</item>
-    <item name="parent">@drawable/ic_action_reply_dark</item>
-    <item name="video">@drawable/ic_action_video_dark</item>
+    <item name="application">@drawable/ic_stop_white_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_white_24dp</item>
+    <item name="file">@drawable/ic_list_white_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_white_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_white_24dp</item>
+    <item name="image">@drawable/ic_image_white_24dp</item>
+    <item name="parent">@drawable/ic_reply_white_24dp</item>
+    <item name="video">@drawable/ic_videocam_white_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
     <item name="android:windowBackground">@android:color/black</item>
 
@@ -143,20 +143,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop_dark</item>
-    <item name="external">@drawable/ic_action_sd_storage_dark</item>
-    <item name="file">@drawable/ic_action_view_as_list_dark</item>
-    <item name="folder">@drawable/ic_action_collection_dark</item>
-    <item name="audio">@drawable/ic_action_volume_on_dark</item>
-    <item name="image">@drawable/ic_action_picture_dark</item>
-    <item name="parent">@drawable/ic_action_reply_dark</item>
-    <item name="video">@drawable/ic_action_video_dark</item>
+    <item name="application">@drawable/ic_stop_white_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_white_24dp</item>
+    <item name="file">@drawable/ic_list_white_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_white_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_white_24dp</item>
+    <item name="image">@drawable/ic_image_white_24dp</item>
+    <item name="parent">@drawable/ic_reply_white_24dp</item>
+    <item name="video">@drawable/ic_videocam_white_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
     <item name="android:windowBackground">@android:color/black</item>
 
@@ -188,20 +188,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop</item>
-    <item name="external">@drawable/ic_action_sd_storage</item>
-    <item name="file">@drawable/ic_action_view_as_list</item>
-    <item name="folder">@drawable/ic_action_collection</item>
-    <item name="audio">@drawable/ic_action_volume_on</item>
-    <item name="image">@drawable/ic_action_picture</item>
-    <item name="parent">@drawable/ic_action_reply</item>
-    <item name="video">@drawable/ic_action_video</item>
+    <item name="application">@drawable/ic_stop_black_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_black_24dp</item>
+    <item name="file">@drawable/ic_list_black_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_black_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_black_24dp</item>
+    <item name="image">@drawable/ic_image_black_24dp</item>
+    <item name="parent">@drawable/ic_reply_black_24dp</item>
+    <item name="video">@drawable/ic_videocam_black_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
   </style>
 
@@ -211,20 +211,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop</item>
-    <item name="external">@drawable/ic_action_sd_storage</item>
-    <item name="file">@drawable/ic_action_view_as_list</item>
-    <item name="folder">@drawable/ic_action_collection</item>
-    <item name="audio">@drawable/ic_action_volume_on</item>
-    <item name="image">@drawable/ic_action_picture</item>
-    <item name="parent">@drawable/ic_action_reply</item>
-    <item name="video">@drawable/ic_action_video</item>
+    <item name="application">@drawable/ic_stop_black_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_black_24dp</item>
+    <item name="file">@drawable/ic_list_black_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_black_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_black_24dp</item>
+    <item name="image">@drawable/ic_image_black_24dp</item>
+    <item name="parent">@drawable/ic_reply_black_24dp</item>
+    <item name="video">@drawable/ic_videocam_black_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_black_24dp</item>
+    <item name="open">@drawable/ic_folder_open_black_24dp</item>
+    <item name="save">@drawable/ic_save_black_24dp</item>
+    <item name="view">@drawable/ic_list_black_24dp</item>
+    <item name="newFile">@drawable/ic_add_black_24dp</item>
 
     <item name="android:textColorPrimary">@android:color/black</item>
     <item name="android:textColorSecondary">@android:color/black</item>
@@ -238,20 +238,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop_dark</item>
-    <item name="external">@drawable/ic_action_sd_storage_dark</item>
-    <item name="file">@drawable/ic_action_view_as_list_dark</item>
-    <item name="folder">@drawable/ic_action_collection_dark</item>
-    <item name="audio">@drawable/ic_action_volume_on_dark</item>
-    <item name="image">@drawable/ic_action_picture_dark</item>
-    <item name="parent">@drawable/ic_action_reply_dark</item>
-    <item name="video">@drawable/ic_action_video_dark</item>
+    <item name="application">@drawable/ic_stop_white_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_white_24dp</item>
+    <item name="file">@drawable/ic_list_white_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_white_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_white_24dp</item>
+    <item name="image">@drawable/ic_image_white_24dp</item>
+    <item name="parent">@drawable/ic_reply_white_24dp</item>
+    <item name="video">@drawable/ic_videocam_white_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
   </style>
 
@@ -261,20 +261,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop_dark</item>
-    <item name="external">@drawable/ic_action_sd_storage_dark</item>
-    <item name="file">@drawable/ic_action_view_as_list_dark</item>
-    <item name="folder">@drawable/ic_action_collection_dark</item>
-    <item name="audio">@drawable/ic_action_volume_on_dark</item>
-    <item name="image">@drawable/ic_action_picture_dark</item>
-    <item name="parent">@drawable/ic_action_reply_dark</item>
-    <item name="video">@drawable/ic_action_video_dark</item>
+    <item name="application">@drawable/ic_stop_white_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_white_24dp</item>
+    <item name="file">@drawable/ic_list_white_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_white_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_white_24dp</item>
+    <item name="image">@drawable/ic_image_white_24dp</item>
+    <item name="parent">@drawable/ic_reply_white_24dp</item>
+    <item name="video">@drawable/ic_videocam_white_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
     <item name="android:textColorPrimary">@android:color/white</item>
     <item name="android:textColorSecondary">@android:color/white</item>
@@ -288,20 +288,20 @@
         API-level can go here.
     -->
 
-    <item name="application">@drawable/ic_action_stop_dark</item>
-    <item name="external">@drawable/ic_action_sd_storage_dark</item>
-    <item name="file">@drawable/ic_action_view_as_list_dark</item>
-    <item name="folder">@drawable/ic_action_collection_dark</item>
-    <item name="audio">@drawable/ic_action_volume_on_dark</item>
-    <item name="image">@drawable/ic_action_picture_dark</item>
-    <item name="parent">@drawable/ic_action_reply_dark</item>
-    <item name="video">@drawable/ic_action_video_dark</item>
+    <item name="application">@drawable/ic_stop_white_24dp</item>
+    <item name="external">@drawable/ic_sd_storage_white_24dp</item>
+    <item name="file">@drawable/ic_list_white_24dp</item>
+    <item name="folder">@drawable/ic_folder_open_white_24dp</item>
+    <item name="audio">@drawable/ic_volume_up_white_24dp</item>
+    <item name="image">@drawable/ic_image_white_24dp</item>
+    <item name="parent">@drawable/ic_reply_white_24dp</item>
+    <item name="video">@drawable/ic_videocam_white_24dp</item>
 
-    <item name="edit">@drawable/ic_action_edit_dark</item>
-    <item name="open">@drawable/ic_action_collection_dark</item>
-    <item name="save">@drawable/ic_action_save_dark</item>
-    <item name="view">@drawable/ic_action_view_as_list_dark</item>
-    <item name="newFile">@drawable/ic_action_new_dark</item>
+    <item name="edit">@drawable/ic_edit_white_24dp</item>
+    <item name="open">@drawable/ic_folder_open_white_24dp</item>
+    <item name="save">@drawable/ic_save_white_24dp</item>
+    <item name="view">@drawable/ic_list_white_24dp</item>
+    <item name="newFile">@drawable/ic_add_white_24dp</item>
 
     <item name="android:textColorPrimary">@color/text_color_retro</item>
     <item name="android:textColorSecondary">@color/text_color_retro</item>
