@@ -264,8 +264,7 @@ public class OpenFile extends Activity
         // Pop up dialog
         Editor.openDialog(this, dirList, fileList, (dialog, which) ->
         {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
-                DialogInterface.BUTTON_NEUTRAL == which)
+            if (DialogInterface.BUTTON_NEUTRAL == which)
             {
                 // Use storage
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);

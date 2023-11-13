@@ -16,7 +16,6 @@
 
 package org.billthefarmer.editor;
 
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -452,7 +451,6 @@ public class FileUtils
      * @see #isLocal(String)
      * @see #getFile(Context, Uri)
      */
-    @TargetApi(19)
     public static String getPath(final Context context, final Uri uri)
     {
 
@@ -468,8 +466,7 @@ public class FileUtils
                  );
 
         // DocumentProvider
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
-            DocumentsContract.isDocumentUri(context, uri))
+        if (DocumentsContract.isDocumentUri(context, uri))
         {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri))

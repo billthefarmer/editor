@@ -904,10 +904,7 @@ public class Editor extends Activity
 
         menu.findItem(R.id.edit).setVisible(!edit);
         menu.findItem(R.id.view).setVisible(edit);
-
         menu.findItem(R.id.save).setVisible(changed);
-        menu.findItem(R.id.print)
-            .setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
 
         menu.findItem(R.id.viewFile).setChecked(view);
         menu.findItem(R.id.openLast).setChecked(last);
@@ -1604,14 +1601,11 @@ public class Editor extends Activity
                 break;
 
             case DialogInterface.BUTTON_NEUTRAL:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-                {
-                    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-                    intent.setType(TEXT_WILD);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.putExtra(Intent.EXTRA_TITLE, uri.getLastPathSegment());
-                    startActivityForResult(intent, CREATE_DOCUMENT);
-                }
+                Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                intent.setType(TEXT_WILD);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.putExtra(Intent.EXTRA_TITLE, uri.getLastPathSegment());
+                startActivityForResult(intent, CREATE_DOCUMENT);
                 break;
             }
         });
@@ -1628,8 +1622,7 @@ public class Editor extends Activity
         // Add the buttons
         builder.setPositiveButton(R.string.save, listener);
         builder.setNegativeButton(R.string.cancel, listener);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            builder.setNeutralButton(R.string.storage, listener);
+        builder.setNeutralButton(R.string.storage, listener);
 
         // Create edit text
         LayoutInflater inflater = (LayoutInflater) builder.getContext()
@@ -1741,9 +1734,6 @@ public class Editor extends Activity
             @Override
             public void onPageFinished(WebView view, String url)
             {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-                    return;
-
                 // Get a PrintManager instance
                 PrintManager printManager = (PrintManager)
                     getSystemService(PRINT_SERVICE);
@@ -2089,8 +2079,7 @@ public class Editor extends Activity
         // Pop up dialog
         openDialog(this, dirList, fileList, (dialog, which) ->
         {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
-                DialogInterface.BUTTON_NEUTRAL == which)
+            if (DialogInterface.BUTTON_NEUTRAL == which)
             {
                 // Use storage
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -2169,8 +2158,7 @@ public class Editor extends Activity
         builder.setAdapter(adapter, listener);
 
         // Add storage button
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            builder.setNeutralButton(R.string.storage, listener);
+        builder.setNeutralButton(R.string.storage, listener);
         // Add cancel button
         builder.setNegativeButton(R.string.cancel, null);
 
