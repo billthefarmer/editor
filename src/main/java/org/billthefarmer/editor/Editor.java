@@ -3410,6 +3410,10 @@ public class Editor extends Activity
         @Override
         public boolean onQueryTextSubmit(String query)
         {
+            // Check matcher
+            if (matcher == null)
+                return false;
+
             // Find next text
             if (matcher.find())
             {
