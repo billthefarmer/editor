@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="appName">Editor</string>
+
+  <string name="newFile">Berria</string>
+  <string name="openFile">Fitxategia ireki</string>
+  <string name="name">Izena</string>
+  <string name="path">Bidea</string>
+  <string name="create">Sortu</string>
+  <string name="edit">Editatu</string>
+  <string name="view">Ikusi</string>
+  <string name="open">Ireki fitxategia…</string>
+  <string name="save">Gorde</string>
+  <string name="storage">Biltegiratzea</string>
+  <string name="openRecent">Ireki azkena</string>
+  <string name="clearList">Garbitu zerrenda</string>
+  <string name="search">Bilatu…</string>
+  <string name="findAll">Aurkitu guztiak…</string>
+  <string name="saveAs">Gorde honela…</string>
+  <string name="detect">Atzeman</string>
+  <string name="goTo">Joan hona…</string>
+  <string name="print">Inprimatu…</string>
+  <string name="viewMarkdown">Ikusi markdown…</string>
+  <string name="options">Aukerak</string>
+  <string name="viewFile">Erakutsi fitxategia</string>
+  <string name="openLast">Ireki azkena</string>
+  <string name="autoSave">Gorde automatikoki</string>
+  <string name="wrap">Lerro-jausia</string>
+  <string name="suggest">Gomendioak</string>
+  <string name="highlight">Markatu sintaxia</string>
+  <string name="theme">Gaia</string>
+  <string name="light">Argia</string>
+  <string name="dark">Iluna</string>
+  <string name="system">Sistema</string>
+  <string name="white">Zuria</string>
+  <string name="black">Beltza</string>
+  <string name="retro">Retroa</string>
+  <string name="size">Testuaren tamaina</string>
+  <string name="small">Txikia</string>
+  <string name="medium">Tartekoa</string>
+  <string name="large">Handia</string>
+  <string name="typeface">Letra-tipoa</string>
+  <string name="mono">Monoespazioa</string>
+  <string name="normal">Proportzionala</string>
+  <string name="about">Honi buruz</string>
+
+  <string name="version" formatted="false"><a
+  href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuild
+  %s\n\nCopyright \u00A9 2019 Bill Farmer\n\nEuskarara itzulia
+  <a href="https://github.com/foxneo">Alexander Gabilondo</a>\n\nLicentzia
+  <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="tooLarge">%s luzeegia</string>
+  <string name="choose">Sartu fitxategiaren izena</string>
+  <string name="loading">Kargatzen…</string>
+
+  <string name="modified">
+    Fitxategiko aldaketak oraindik ez dira gorde. Gorde nahi dituzu?
+  </string>
+
+  <string name="changedReload">
+    Fitxategia aldatu da. Eguneratu nahi duzu?
+  </string>
+
+  <string name="changedOverwrite">
+    Fitxategia aldatu da. Gainidatzi nahi duzu?
+  </string>
+
+  <string name="ok">Ados</string>
+  <string name="reload">Eguneratu</string>
+  <string name="overwrite">Gainidatzi</string>
+  <string name="discard">Baztertu</string>
+  <string name="cancel">Utzi</string>
+
+</resources>
