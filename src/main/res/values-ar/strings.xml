@@ -46,6 +46,8 @@
   <string name="typeface">نوع الخط</string>
   <string name="mono">Monospace</string>
   <string name="normal">Proportional</string>
+  <string name="sans">Sans serif</string>
+  <string name="serif">Serif</string>
   <string name="about">حول</string>
 
   <!--
