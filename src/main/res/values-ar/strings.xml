@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="">
+
+  <string name="appName">Editor</string>
+
+  <string name="newFile">ملف جديد</string>
+  <string name="openFile">فتح ملف</string>
+  <string name="name">الاسم</string>
+  <string name="path">المسار</string>
+  <string name="create">إنشاء</string>
+  <string name="edit">تعديل</string>
+  <string name="view">عرض</string>
+  <string name="open">فتح ملف…</string>
+  <string name="save">حفظ</string>
+  <string name="storage">الذاكرة</string>
+  <string name="openRecent">المفتوحة مؤخرا</string>
+  <string name="clearList">تنظيف القائمة</string>
+  <string name="search">بحث…</string>
+  <string name="findAll">إيجاد الكل…</string>
+  <string name="saveAs">الحفظ ك…</string>
+  <string name="detect">اكتشاف</string>
+  <string name="goTo">الذهاب إلى…</string>
+  <string name="print">طباعة…</string>
+  <string name="viewMarkdown">عرض markdown…</string>
+  <string name="options">الخيارات</string>
+  <string name="viewFile">عرض الملفات</string>
+  <string name="openLast">الفتح على الأخير</string>
+  <string name="autoSave">الحفظ التلقاءي</string>
+  <string name="wrap">تقسيم الأسطر الطويلة</string>
+  <string name="suggest">الاقتراحات</string>
+  <string name="highlight">تمييز بناء الجملة</string>
+  <string name="theme">السمة</string>
+  <string name="light">مضيء</string>
+  <string name="dark">مظلم</string>
+  <string name="system">النظام</string>
+  <string name="white">أبيض</string>
+  <string name="black">أسود</string>
+  <string name="retro">قديم</string>
+  <string name="size">حجم النص</string>
+  <string name="small">صغير</string>
+  <string name="medium">متوسط</string>
+  <string name="large">ضخم</string>
+  <string name="typeface">نوع الخط</string>
+  <string name="mono">Monospace</string>
+  <string name="normal">Proportional</string>
+  <string name="about">حول</string>
+
+  <!--
+      Note for translators: You don't need to translate all these
+      translation credits below. Just the version, copyright, credit
+      for your translation and the licence. Also add your translation
+      credit here.
+  -->
+  <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nBuilt %s\n\nحقوق طبع \u00A9 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nArabic translation by <a href="https://github.com/MuhammedSaleem-Brej">MuhammedSaleem brej</a>,French translation by <a href="https://github.com/milouse">Étienne Deparis</a>, German translation by <a href="https://github.com/Markus00000">Markus Weimar</a> and <a href="https://github.com/AlexanderRitter02">Alexander Ritter</a>, Italian translation by <a href="https://github.com/airon90">Michael Moroni</a>, Polish translation by <a href="https://github.com/evo16">Evo</a>, Greek translation by <a href="https://github.com/nikoss">nikoss</a>, Spanish translation by <a href="https://github.com/foxneo">Miguel Caceres</a>, Simplified Chinese translation by <a href="https://github.com/ludoux">Lu Chang (ludoux)</a>, Dutch translation by <a href="https://github.com/Vistaus">Heimen Stoffels (vistaus)</a>, Russian translation by <a href="https://github.com/bboa">Igor Nedoboy</a>, Latvian translation by <a href="https://github.com/rhssk">Rihards Skuja</a>, Icelandic translation by <a href="">Sveinn í Felli</a>, Portuguese translation by <a href="https://github.com/Andre-Gloria" >André Glória</a>, Chinese (Taiwan) translation by <a href="https://github.com/cges30901">cges30901</a>, Turkish translation by <a href="https://github.com/yasarciv67">Yaşar Çiv</a>, Brazilian Portuguese translation by <a href="https://github.com/aevw">aevw</a>, Sorani Kurdish translation by <a href="https://github.com/rawandsaeed">Rawand Saeed</a>, Persian (Farsi) translation by <a href="https://github.com/eshagh79">Eshagh</a>, Hungarian translation by <a href="https://github.com/urbalazs">Balázs Úr</a>, Japanese translation by <a href="https://gitlab.com/dokutoku">dokutoku</a>, Belarusian translation by <a href="https://github.com/Atrafon">Makar Razin</a>, Basque (eu) translation by <a href="https://github.com/alexgabi">alexgabi</a>\n\nالرخصة <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="tooLarge">ضخم جدا %s</string>
+  <string name="choose"></string>
+  <string name="loading">تتم المعالجة…</string>
+
+  <string name="modified">
+    هناك تعديلات غير محفوظة، هل تريد حفظها؟
+  </string>
+
+  <string name="changedReload">
+    لقد تم تعديل هذا الملف، هل تريد إعادة تحميله؟
+  </string>
+
+  <string name="changedOverwrite">
+    لقد تم تعديل هذا الملف، هل تريد الكتابة فوقه؟
+  </string>
+
+  <string name="ok">حسنا</string>
+  <string name="reload">إعادة التحميل</string> 
+  <string name="overwrite">الكتابة فوق</string>
+  <string name="discard">تجاهل</string>
+  <string name="cancel">إلغاء</string>
+
+</resources>
