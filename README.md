@@ -73,6 +73,8 @@ And on the menu:
 * **Typeface** &ndash; Choose typeface
   * **Monospace**
   * **Proportional**
+  * **Sans serif**
+  * **Serif**
 * **About** &ndash; Show version, copyright and licence
 
 ### Edit

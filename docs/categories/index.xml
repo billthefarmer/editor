@@ -6,6 +6,7 @@
     <description>Recent content in Categories on Editor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <copyright>Copyright &amp;copy; 2006 Bill Farmer</copyright><atom:link href="https://billthefarmer.github.io/editor/categories/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright &amp;copy; 2006 Bill Farmer</copyright>
+    <atom:link href="https://billthefarmer.github.io/editor/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
