@@ -43,6 +43,8 @@
   <string name="typeface">Type de police</string>
   <string name="mono">Chasse fixe</string>
   <string name="normal">Proportionnelle</string>
+  <string name="sans">Sans serif</string>
+  <string name="serif">Serif</string>
   <string name="about">À propos</string>
 
   <!--

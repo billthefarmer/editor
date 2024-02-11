@@ -43,6 +43,8 @@
   <string name="typeface">字体</string>
   <string name="mono">等宽</string>
   <string name="normal">变宽</string>
+  <string name="sans">无衬线</string>
+  <string name="serif">衬线</string>
   <string name="about">关于</string>
 
   <string name="version" formatted="false"><a

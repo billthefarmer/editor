@@ -43,6 +43,8 @@
   <string name="typeface">Шрифт</string>
   <string name="mono">Моноширний</string>
   <string name="normal">Пропорційний</string>
+  <string name="sans">Без засічок</string>
+  <string name="serif">Із засічками</string>
   <string name="about">Про застосунок</string>
 
   <!--

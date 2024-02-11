@@ -43,6 +43,8 @@
   <string name="typeface">Harf karakteri</string>
   <string name="mono">Eş aralıklı</string>
   <string name="normal">Orantılı</string>
+  <string name="sans">Sans serif</string>
+  <string name="serif">Serif</string>
   <string name="about">Hakkında</string>
 
   <!--

@@ -43,6 +43,8 @@
   <string name="typeface">Krój pisma</string>
   <string name="mono">Monospace</string>
   <string name="normal">Proporcjonalny</string>
+  <string name="sans">Bezszeryfowy</string>
+  <string name="serif">Szeryf</string>
   <string name="about">O programie</string>
 
   <string name="version" formatted="false"><a

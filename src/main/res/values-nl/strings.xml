@@ -43,6 +43,8 @@
   <string name="typeface">Lettertype</string>
   <string name="mono">Vaste breedte</string>
   <string name="normal">Proportioneel</string>
+  <string name="sans">Schreefloos</string>
+  <string name="serif">Schreef</string>
   <string name="about">Over</string>
 
   <string name="version" formatted="false"><a

@@ -41,8 +41,10 @@
   <string name="medium">中</string>
   <string name="large">大</string>
   <string name="typeface">書体</string>
-  <string name="mono">Monospace</string>
-  <string name="normal">Proportional</string>
+  <string name="mono">ミニバン</string>
+  <string name="normal">比例</string>
+  <string name="sans">サンセリフ体</string>
+  <string name="serif">セリフ</string>
   <string name="about">このアプリについて</string>
 
   <!--

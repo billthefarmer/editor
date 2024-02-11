@@ -405,6 +405,8 @@ public class Editor extends Activity
 
     private final static int NORMAL = 1;
     private final static int MONO   = 2;
+    private final static int SANS   = 3;
+    private final static int SERIF  = 4;
 
     private final static int NO_SYNTAX   = 0;
     private final static int CC_SYNTAX   = 1;
@@ -964,6 +966,14 @@ public class Editor extends Activity
         case NORMAL:
             menu.findItem(R.id.normal).setChecked(true);
             break;
+
+        case SANS:
+            menu.findItem(R.id.sans).setChecked(true);
+            break;
+
+        case SERIF:
+            menu.findItem(R.id.serif).setChecked(true);
+            break;
         }
 
         // Get the charsets
@@ -1121,6 +1131,12 @@ public class Editor extends Activity
             break;
         case R.id.normal:
             normalClicked(item);
+            break;
+        case R.id.sans:
+            sansClicked(item);
+            break;
+        case R.id.serif:
+            serifClicked(item);
             break;
         case R.id.about:
             aboutClicked();
@@ -1952,6 +1968,24 @@ public class Editor extends Activity
         textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
     }
 
+    // sansClicked
+    private void sansClicked(MenuItem item)
+    {
+        type = SANS;
+        item.setChecked(true);
+
+        textView.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+    }
+
+    // serifClicked
+    private void serifClicked(MenuItem item)
+    {
+        type = SERIF;
+        item.setChecked(true);
+
+        textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+    }
+
     // setSizeAndTypeface
     private void setSizeAndTypeface(int size, int type)
     {
@@ -1967,6 +2001,14 @@ public class Editor extends Activity
 
         case NORMAL:
             textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+            break;
+
+        case SANS:
+            textView.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+            break;
+
+        case SERIF:
+            textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
             break;
         }
     }

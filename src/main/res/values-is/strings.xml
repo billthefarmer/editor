@@ -43,6 +43,8 @@
   <string name="typeface">Leturgerð</string>
   <string name="mono">Jafnbreitt</string>
   <string name="normal">Hlutfallslegt</string>
+  <string name="sans">Sans serif</string>
+  <string name="serif">Kólumbía</string>
   <string name="about">Um hugbúnaðinn</string>
 
   <string name="version" formatted="false"><a

@@ -43,6 +43,8 @@
   <string name="typeface">Γραμματοσειρά</string>
   <string name="mono">Σταθερού πλάτους</string>
   <string name="normal">Αναλογική</string>
+  <string name="sans">Χωρίς σερίφ</string>
+  <string name="serif">Σερίφ</string>
   <string name="about">Σχετικά με…</string>
 
   <string name="version" formatted="false"><a

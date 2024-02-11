@@ -43,6 +43,8 @@
   <string name="typeface">Fuente</string>
   <string name="mono">Monospace</string>
   <string name="normal">Proporciónal</string>
+  <string name="sans">Palo seco</string>
+  <string name="serif">Serifa</string>
   <string name="about">Acerca de</string>
 
   <string name="version" formatted="false"><a

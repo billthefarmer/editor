@@ -43,6 +43,8 @@
   <string name="typeface">Burtveidols</string>
   <string name="mono">Vienplatuma</string>
   <string name="normal">Proporcionāls</string>
+  <string name="sans">Sans serifs</string>
+  <string name="serif">Serif</string>
   <string name="about">Par</string>
 
   <string name="version" formatted="false"><a

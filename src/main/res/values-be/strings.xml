@@ -43,6 +43,8 @@
   <string name="typeface">Тып шрыфта</string>
   <string name="mono">Манашырынны</string>
   <string name="normal">Прапарцыйны</string>
+  <string name="sans">Без засечак</string>
+  <string name="serif">З засечкамі</string>
   <string name="about">Аб праграме</string>
 
   <string name="version" formatted="false"><a

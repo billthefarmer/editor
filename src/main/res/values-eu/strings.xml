@@ -43,6 +43,8 @@
   <string name="typeface">Letra-tipoa</string>
   <string name="mono">Monoespazioa</string>
   <string name="normal">Proportzionala</string>
+  <string name="sans">Makila lehorra</string>
+  <string name="serif">Serifa</string>
   <string name="about">Honi buruz</string>
 
   <string name="version" formatted="false"><a

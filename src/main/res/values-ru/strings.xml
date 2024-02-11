@@ -43,6 +43,8 @@
   <string name="typeface">Тип шрифта</string>
   <string name="mono">Моноширинный</string>
   <string name="normal">Пропорциональный</string>
+  <string name="sans">Без засечек</string>
+  <string name="serif">С засечками</string>
   <string name="about">О программе</string>
 
   <string name="version" formatted="false"><a

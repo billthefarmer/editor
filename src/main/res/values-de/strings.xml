@@ -43,6 +43,8 @@
   <string name="typeface">Schriftart</string>
   <string name="mono">Nichtproportional</string>
   <string name="normal">Proportional</string>
+  <string name="sans">Serifenlos</string>
+  <string name="serif">Serife</string>
   <string name="about">Über</string>
 
   <string name="version" formatted="false"><a

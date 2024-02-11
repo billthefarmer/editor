@@ -43,6 +43,8 @@
   <string name="typeface">Espaçamento</string>
   <string name="mono">Monoespaçado</string>
   <string name="normal">Proporcional</string>
+  <string name="sans">Sem serifa</string>
+  <string name="serif">Serif</string>
   <string name="about">Sobre</string>
 
   <!--

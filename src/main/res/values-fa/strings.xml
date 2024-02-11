@@ -43,6 +43,8 @@
   <string name="typeface">سبک حروف</string>
   <string name="mono">تک فاصله</string>
   <string name="normal">متناسب</string>
+  <string name="sans">بدون سریف</string>
+  <string name="serif">سریف</string>
   <string name="about">درباره</string>
 
   <!--

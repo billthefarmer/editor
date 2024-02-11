@@ -187,6 +187,14 @@
             android:id="@+id/normal"
             android:showAsAction="never"
             android:title="@string/normal" />
+        <item
+            android:id="@+id/sans"
+            android:showAsAction="never"
+            android:title="@string/sans" />
+        <item
+            android:id="@+id/serif"
+            android:showAsAction="never"
+            android:title="@string/serif" />
       </group>
     </menu>
   </item>

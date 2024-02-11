@@ -43,6 +43,8 @@
   <string name="typeface">Betűkészlet</string>
   <string name="mono">Rögzített szélességű</string>
   <string name="normal">Arányos</string>
+  <string name="sans">Groteszk</string>
+  <string name="serif">Betűtalp</string>
   <string name="about">Névjegy</string>
 
   <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nÖsszeállítás: %s\n\nCopyright \u00A9 2017–2022 <a href="https://github.com/billthefarmer">Bill Farmer</a>\n\nMagyar fordítás: <a href="https://github.com/urbalazs">Úr Balázs</a>\n\nLicenc: <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
