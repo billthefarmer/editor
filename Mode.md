@@ -7,7 +7,7 @@ more text or punctuation characters, white space, the text `ed:`
 followed by one or more option patterns separated by white space.
 
 ```
-# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [cs:u] [th:l|d|s|w|b|r] [ts:l|m|s] [tf:m|p]
+# ed: [[no]vw] [[no]ww] [[no]sg] [[no]hs] [cs:u] [th:l|d|s|w|b|r] [ts:l|m|s] [tf:m|p|s]
 ```
 
 The initial text or punctuation characters are intended to be used to
@@ -21,9 +21,11 @@ The option patterns are:
  * **[no]sg** &ndash; Suggestions
  * **[no]hs** &ndash; Syntax highlighting
  * **cs:u** &ndash; Character set &ndash; UTF-8
- * **th:l|d|s|w|b|r** &ndash; Theme &ndash; light, dark, system, white, black or retro
+ * **th:l|d|s|w|b|r** &ndash; Theme &ndash; light, dark, system,
+   white, black or retro
  * **ts:l|m|s** &ndash; Text size &ndash; large, medium or small
- * **tf:m|p** &ndash; Typeface &ndash; monospace or proportional
+ * **tf:m|p|s** &ndash; Typeface &ndash; monospace, proportional or
+   serif
 
 The mode line is read after the file is loaded and will change
 immediately, except in Android 6, Marshmallow due to an obscure

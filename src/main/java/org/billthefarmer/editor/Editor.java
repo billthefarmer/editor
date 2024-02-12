@@ -3297,6 +3297,16 @@ public class Editor extends Activity
                                     (Typeface.DEFAULT, Typeface.NORMAL);
                             }
                         }
+
+                        else if (":s".equals(matcher.group(4)))
+                        {
+                            if (type != SERIF)
+                            {
+                                type = SERIF;
+                                textView.setTypeface
+                                    (Typeface.SERIF, Typeface.NORMAL);
+                            }
+                        }
                     }
 
                     else if ("cs".equals(matcher.group(3)))
