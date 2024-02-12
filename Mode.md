@@ -24,8 +24,8 @@ The option patterns are:
  * **th:l|d|s|w|b|r** &ndash; Theme &ndash; light, dark, system,
    white, black or retro
  * **ts:l|m|s** &ndash; Text size &ndash; large, medium or small
- * **tf:m|p|s** &ndash; Typeface &ndash; monospace, proportional or
-   serif
+ * **tf:m|p|s** &ndash; Typeface &ndash; monospace, proportional
+   (sans) or serif
 
 The mode line is read after the file is loaded and will change
 immediately, except in Android 6, Marshmallow due to an obscure
