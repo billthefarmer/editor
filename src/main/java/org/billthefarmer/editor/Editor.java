@@ -725,17 +725,6 @@ public class Editor extends Activity
                     .setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-                // Change size and typeface temporarily as workaround for yet
-                // another obscure feature of some versions of android
-                textView.setTextSize((size == TINY)? HUGE: TINY);
-                textView.setTextSize(size);
-                textView.setTypeface((type == NORMAL)?
-                                     Typeface.MONOSPACE:
-                                     Typeface.DEFAULT, Typeface.NORMAL);
-                textView.setTypeface((type == NORMAL)?
-                                     Typeface.DEFAULT:
-                                     Typeface.MONOSPACE, Typeface.NORMAL);
                 // Update boolean
                 edit = true;
 
@@ -957,25 +946,6 @@ public class Editor extends Activity
             break;
         }
 
-        switch (type)
-        {
-        case MONO:
-            menu.findItem(R.id.mono).setChecked(true);
-            break;
-
-        case NORMAL:
-            menu.findItem(R.id.normal).setChecked(true);
-            break;
-
-        case SANS:
-            menu.findItem(R.id.sans).setChecked(true);
-            break;
-
-        case SERIF:
-            menu.findItem(R.id.serif).setChecked(true);
-            break;
-        }
-
         // Get the charsets
         Set<String> keySet = Charset.availableCharsets().keySet();
         // Get the submenu
@@ -987,6 +957,17 @@ public class Editor extends Activity
         sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, R.string.detect);
         for (String key: keySet)
             sub.add(Menu.NONE, R.id.charsetItem, Menu.NONE, key);
+
+        // Get the typefaces
+        String typefaces[] = getResources().getStringArray(R.array.typefaces);
+        item = menu.findItem(R.id.typeface);
+        sub = item.getSubMenu();
+        sub.clear();
+        // Add typefaces
+        for (String typeface: typefaces)
+            sub.add(Menu.NONE, R.id.typefaceItem, Menu.NONE, typeface);
+        sub.getItem(type).setCheckable(true);
+        sub.getItem(type).setChecked(true);
 
         // Get a list of recent files
         List<Long> list = new ArrayList<>();
@@ -1126,18 +1107,6 @@ public class Editor extends Activity
         case R.id.large:
             largeClicked(item);
             break;
-        case R.id.mono:
-            monoClicked(item);
-            break;
-        case R.id.normal:
-            normalClicked(item);
-            break;
-        case R.id.sans:
-            sansClicked(item);
-            break;
-        case R.id.serif:
-            serifClicked(item);
-            break;
         case R.id.about:
             aboutClicked();
             break;
@@ -1146,6 +1115,9 @@ public class Editor extends Activity
             break;
         case R.id.charsetItem:
             setCharset(item);
+            break;
+        case R.id.typefaceItem:
+            setTypeface(item);
             break;
         }
 
@@ -1280,17 +1252,6 @@ public class Editor extends Activity
             textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                   InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-        // Change size and typeface temporarily as workaround for yet
-        // another obscure feature of some versions of android
-        textView.setTextSize((size == TINY)? HUGE: TINY);
-        textView.setTextSize(size);
-        textView.setTypeface((type == NORMAL)?
-                             Typeface.MONOSPACE:
-                             Typeface.DEFAULT, Typeface.NORMAL);
-        textView.setTypeface((type == NORMAL)?
-                             Typeface.DEFAULT:
-                             Typeface.MONOSPACE, Typeface.NORMAL);
         // Update boolean
         edit = true;
 
@@ -1427,6 +1388,18 @@ public class Editor extends Activity
     {
         match = item.getTitle().toString();
         getActionBar().setSubtitle(match);
+    }
+
+    // setTypeface
+    private void setTypeface(MenuItem item)
+    {
+        String name = item.getTitle().toString();
+        Typeface typeface = Typeface.create(name, Typeface.NORMAL);
+        textView.setTypeface(typeface);
+        item.setChecked(true);
+        String typefaces[] = getResources().getStringArray(R.array.typefaces);
+        List<String> list = Arrays.asList(typefaces);
+        type = list.indexOf(name);
     }
 
     // alertDialog
@@ -1950,42 +1923,6 @@ public class Editor extends Activity
         textView.setTextSize(size);
     }
 
-    // monoClicked
-    private void monoClicked(MenuItem item)
-    {
-        type = MONO;
-        item.setChecked(true);
-
-        textView.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
-    }
-
-    // normalClicked
-    private void normalClicked(MenuItem item)
-    {
-        type = NORMAL;
-        item.setChecked(true);
-
-        textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-    }
-
-    // sansClicked
-    private void sansClicked(MenuItem item)
-    {
-        type = SANS;
-        item.setChecked(true);
-
-        textView.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-    }
-
-    // serifClicked
-    private void serifClicked(MenuItem item)
-    {
-        type = SERIF;
-        item.setChecked(true);
-
-        textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
-    }
-
     // setSizeAndTypeface
     private void setSizeAndTypeface(int size, int type)
     {
@@ -1993,24 +1930,9 @@ public class Editor extends Activity
         textView.setTextSize(size);
 
         // Set type
-        switch (type)
-        {
-        case MONO:
-            textView.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
-            break;
-
-        case NORMAL:
-            textView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-            break;
-
-        case SANS:
-            textView.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-            break;
-
-        case SERIF:
-            textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
-            break;
-        }
+        String names[] = getResources().getStringArray(R.array.typefaces);
+        Typeface typeface = Typeface.create(names[type], Typeface.NORMAL);
+        textView.setTypeface(typeface);
     }
 
     // aboutClicked
@@ -3283,8 +3205,7 @@ public class Editor extends Activity
                             if (type != MONO)
                             {
                                 type = MONO;
-                                textView.setTypeface
-                                    (Typeface.MONOSPACE, Typeface.NORMAL);
+                                textView.setTypeface(Typeface.MONOSPACE);
                             }
                         }
 
@@ -3293,8 +3214,7 @@ public class Editor extends Activity
                             if (type != NORMAL)
                             {
                                 type = NORMAL;
-                                textView.setTypeface
-                                    (Typeface.DEFAULT, Typeface.NORMAL);
+                                textView.setTypeface(Typeface.DEFAULT);
                             }
                         }
 
@@ -3303,8 +3223,7 @@ public class Editor extends Activity
                             if (type != SERIF)
                             {
                                 type = SERIF;
-                                textView.setTypeface
-                                    (Typeface.SERIF, Typeface.NORMAL);
+                                textView.setTypeface(Typeface.SERIF);
                             }
                         }
                     }
@@ -3369,15 +3288,6 @@ public class Editor extends Activity
                 textView.setInputType(InputType.TYPE_CLASS_TEXT |
                                       InputType.TYPE_TEXT_FLAG_MULTI_LINE |
                                       InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-            // Change typeface temporarily as workaround for yet another
-            // obscure feature of some versions of android
-            textView.setTypeface((type == NORMAL)?
-                                 Typeface.MONOSPACE:
-                                 Typeface.DEFAULT, Typeface.NORMAL);
-            textView.setTypeface((type == NORMAL)?
-                                 Typeface.DEFAULT:
-                                 Typeface.MONOSPACE, Typeface.NORMAL);
             // Update boolean
             edit = true;
         }

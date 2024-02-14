@@ -180,21 +180,9 @@
     <menu>
       <group android:checkableBehavior="single">
         <item
-            android:id="@+id/mono"
+            android:id="@+id/typefaceItem"
             android:showAsAction="never"
-            android:title="@string/mono" />
-        <item
-            android:id="@+id/normal"
-            android:showAsAction="never"
-            android:title="@string/normal" />
-        <item
-            android:id="@+id/sans"
-            android:showAsAction="never"
-            android:title="@string/sans" />
-        <item
-            android:id="@+id/serif"
-            android:showAsAction="never"
-            android:title="@string/serif" />
+            android:title="" />
       </group>
     </menu>
   </item>

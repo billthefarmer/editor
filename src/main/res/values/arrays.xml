@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="typefaces">
+    <item>arial</item>
+    <item>baskerville</item>
+    <item>casual</item>
+    <item>courier</item>
+    <item>courier new</item>
+    <item>cursive</item>
+    <item>fantasy</item>
+    <item>georgia</item>
+    <item>goudy</item>
+    <item>helvetica</item>
+    <item>monaco</item>
+    <item>monospace</item>
+    <item>palatino</item>
+    <item>sans-serif</item>
+    <item>sans-serif-condensed</item>
+    <item>sans-serif-monospace</item>
+    <item>sans-serif-smallcaps</item>
+    <item>serif</item>
+    <item>serif-monospace</item>
+    <item>source-sans-pro</item>
+    <item>tahoma</item>
+    <item>times</item>
+    <item>times new roman</item>
+    <item>verdana</item>
+  </string-array>
+
+</resources>
