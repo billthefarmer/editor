@@ -1200,6 +1200,13 @@ public class Editor extends Activity
                 else
                     editClicked(null);
                 break;
+                // Search
+            case KeyEvent.KEYCODE_F:
+                if (event.isShiftPressed())
+                    searchItem.collapseActionView();
+                else
+                    searchItem.expandActionView();
+                break;
                 // New
             case KeyEvent.KEYCODE_N:
                 newFile();
