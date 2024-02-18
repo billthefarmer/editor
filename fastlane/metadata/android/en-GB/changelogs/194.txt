@@ -1,0 +1,3 @@
+ * Add Arabic translation
+ * Add keyboard shortcut
+ * Add typefaces

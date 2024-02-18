@@ -175,7 +175,7 @@
       <link>https://billthefarmer.github.io/editor/using/keyboard-shortcuts/</link>
       <pubDate>Wed, 21 Jul 2021 19:22:29 +0100</pubDate>
       <guid>https://billthefarmer.github.io/editor/using/keyboard-shortcuts/</guid>
-      <description>When using an external keyboard, some keyboard shortcuts are implemented:&#xA;Ctrl+E – Edit mode Ctrl+Shift+E – View mode Ctrl+N – New file Ctrl+O – Open file Ctrl+S – Save file Ctrl+Shift+S – Save as </description>
+      <description>When using an external keyboard, some keyboard shortcuts are implemented:&#xA;Ctrl+E – Edit mode Ctrl+Shift+E – View mode Ctrl+F – Search Ctrl+Shift+F – Close search Ctrl+N – New file Ctrl+O – Open file Ctrl+S – Save file Ctrl+Shift+S – Save as </description>
     </item>
   </channel>
 </rss>
