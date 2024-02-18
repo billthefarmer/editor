@@ -71,10 +71,6 @@ And on the menu:
   * **Medium**
   * **Large**
 * **Typeface** &ndash; Choose typeface
-  * **Monospace**
-  * **Proportional**
-  * **Sans serif**
-  * **Serif**
 * **About** &ndash; Show version, copyright and licence
 
 ### Edit
@@ -159,6 +155,11 @@ read. It may be changed by selecting the **Charset** item in the menu,
 which shows the current character set. See [Character
 set](Charset.md).
 
+### Typeface
+The **Typeface** menu item shows a choice of common typefaces. These
+are aliases for the fonts commonly provided on android devices. Some
+of them resolve to the same font, depending on the device.
+
 ### Highlight syntax
 If the current open file is a C, C++, Objective C, Go, Java,
 Javascript, Python, Shell script, Swift, CSS, HTML, Org or Markdown
@@ -221,6 +222,8 @@ When using an external keyboard, some keyboard shortcuts are
 implemented:
  * Ctrl+E &ndash; Edit mode
  * Ctrl+Shift+E &ndash; View mode
+ * Ctrl+F &ndash; Search
+ * Ctrl+Shift+F &ndash; Close search
  * Ctrl+N &ndash; New file
  * Ctrl+O &ndash; Open file
  * Ctrl+S &ndash; Save file

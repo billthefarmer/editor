@@ -38,9 +38,8 @@ android {
     }
 
     lintOptions {
-        disable 'IconDensities', 'ContentDescription', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'AndroidGradlePluginVersion',
-            'MediaCapabilities', 'FindViewByIdCast', 'WrongViewCast'
+        disable 'ContentDescription', 'OldTargetApi', 'UnusedResources',
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'AndroidGradlePluginVersion'
         // abortOnError false
     }
 }

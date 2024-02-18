@@ -5,8 +5,8 @@
     <item>arial</item>
     <item>baskerville</item>
     <item>casual</item>
-    <item>courier</item>
     <item>courier new</item>
+    <item>courier</item>
     <item>cursive</item>
     <item>fantasy</item>
     <item>georgia</item>
@@ -15,16 +15,23 @@
     <item>monaco</item>
     <item>monospace</item>
     <item>palatino</item>
-    <item>sans-serif</item>
+    <item>sans-serif-black</item>
+    <item>sans-serif-condensed-light</item>
+    <item>sans-serif-condensed-medium</item>
     <item>sans-serif-condensed</item>
+    <item>sans-serif-light</item>
+    <item>sans-serif-medium</item>
     <item>sans-serif-monospace</item>
     <item>sans-serif-smallcaps</item>
-    <item>serif</item>
+    <item>sans-serif-thin</item>
+    <item>sans-serif</item>
     <item>serif-monospace</item>
+    <item>serif</item>
+    <item>source-sans-pro-semi-bold</item>
     <item>source-sans-pro</item>
     <item>tahoma</item>
-    <item>times</item>
     <item>times new roman</item>
+    <item>times</item>
     <item>verdana</item>
   </string-array>
 

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Copyright &amp;copy; 2006 Bill Farmer</copyright>
-    <lastBuildDate>Sat, 26 Nov 2022 09:54:15 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Feb 2024 10:54:01 +0000</lastBuildDate>
     <atom:link href="https://billthefarmer.github.io/editor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Features</title>
@@ -85,6 +85,13 @@
       <pubDate>Wed, 03 Nov 2021 21:12:12 +0000</pubDate>
       <guid>https://billthefarmer.github.io/editor/using/charset/</guid>
       <description>The current character set is displayed under the current file name. The character set is detected when a new file is read. It may be changed by selecting the Charset item in the menu, which shows the current character set.&#xA;Default The default character set is set to UTF-8 on selecting New from the toolbar. It may be changed in the menu. Android defaults to UTF-8, don&amp;rsquo;t use anything else unless you are sure what you are doing.</description>
+    </item>
+    <item>
+      <title>Typeface</title>
+      <link>https://billthefarmer.github.io/editor/using/typeface/</link>
+      <pubDate>Sun, 18 Feb 2024 10:54:01 +0000</pubDate>
+      <guid>https://billthefarmer.github.io/editor/using/typeface/</guid>
+      <description>The Typeface menu item shows a choice of common typefaces. These are aliases for the fonts commonly provided on android devices. Some of them resolve to the same font, depending on the device.</description>
     </item>
     <item>
       <title>Regular Expressions</title>
