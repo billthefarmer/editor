@@ -431,6 +431,7 @@ public class Editor extends Activity
     private Runnable updateWordCount;
 
     private ScaleGestureDetector scaleDetector;
+    private QueryTextListener queryTextListener;
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
@@ -615,8 +616,8 @@ public class Editor extends Activity
     // setListeners
     private void setListeners()
     {
-        scaleDetector =
-            new ScaleGestureDetector(this, new ScaleListener());
+        scaleDetector = new ScaleGestureDetector(this, new ScaleListener());
+        queryTextListener = new QueryTextListener();
 
         if (textView != null)
         {
@@ -884,7 +885,7 @@ public class Editor extends Activity
         {
             searchView.setSubmitButtonEnabled(true);
             searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
-            searchView.setOnQueryTextListener(new QueryTextListener());
+            searchView.setOnQueryTextListener(queryTextListener);
         }
 
         // Show find all item
@@ -1185,6 +1186,7 @@ public class Editor extends Activity
         return super.dispatchTouchEvent(event);
     }
 
+    // onKeyDown
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
@@ -1207,6 +1209,10 @@ public class Editor extends Activity
                 else
                     searchItem.expandActionView();
                 break;
+                // Goto
+            case KeyEvent.KEYCODE_G:
+                goTo();
+                break;
                 // New
             case KeyEvent.KEYCODE_N:
                 newFile();
@@ -1215,6 +1221,10 @@ public class Editor extends Activity
             case KeyEvent.KEYCODE_O:
                 openFile();
                 break;
+                // Print
+            case KeyEvent.KEYCODE_P:
+                print();
+                break;
                 // Save, Save as
             case KeyEvent.KEYCODE_S:
                 if (event.isShiftPressed())
@@ -1222,12 +1232,40 @@ public class Editor extends Activity
                 else
                     saveCheck();
                 break;
+                // Increase text size
+            case KeyEvent.KEYCODE_PLUS:
+                size += 2;
+                size = Math.max(TINY, Math.min(size, HUGE));
+                textView.setTextSize(size);
+                break;
+                // Decrease text size
+            case KeyEvent.KEYCODE_MINUS:
+                size += 2;
+                size = Math.max(TINY, Math.min(size, HUGE));
+                textView.setTextSize(size);
+                break;
 
             default:
                 return super.onKeyDown(keyCode, event);
             }
 
             return true;
+        }
+
+        else
+        {
+            switch (keyCode)
+            {
+                // Find next
+            case KeyEvent.KEYCODE_F3:
+                if (searchItem.isActionViewExpanded())
+                    queryTextListener.onQueryTextSubmit
+                        (searchView.getQuery().toString());
+                break;
+                // Menu
+            case KeyEvent.KEYCODE_F10:
+                openOptionsMenu();
+            }
         }
 
         return super.onKeyDown(keyCode, event);
