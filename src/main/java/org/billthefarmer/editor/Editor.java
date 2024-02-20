@@ -1234,13 +1234,14 @@ public class Editor extends Activity
                 break;
                 // Increase text size
             case KeyEvent.KEYCODE_PLUS:
+            case KeyEvent.KEYCODE_EQUALS:
                 size += 2;
                 size = Math.max(TINY, Math.min(size, HUGE));
                 textView.setTextSize(size);
                 break;
                 // Decrease text size
             case KeyEvent.KEYCODE_MINUS:
-                size += 2;
+                size -= 2;
                 size = Math.max(TINY, Math.min(size, HUGE));
                 textView.setTextSize(size);
                 break;
@@ -1265,10 +1266,14 @@ public class Editor extends Activity
                 // Menu
             case KeyEvent.KEYCODE_F10:
                 openOptionsMenu();
-            }
-        }
+                break;
 
-        return super.onKeyDown(keyCode, event);
+            default:
+                return super.onKeyDown(keyCode, event);
+            }
+
+            return true;
+        }
     }
 
     // editClicked

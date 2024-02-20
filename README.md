@@ -224,10 +224,15 @@ implemented:
  * Ctrl+Shift+E &ndash; View mode
  * Ctrl+F &ndash; Search
  * Ctrl+Shift+F &ndash; Close search
+ * Ctrl+G &ndash; Go to
  * Ctrl+N &ndash; New file
  * Ctrl+O &ndash; Open file
  * Ctrl+S &ndash; Save file
  * Ctrl+Shift+S &ndash; Save as
+ * Ctrl++ &ndash; Increase text size
+ * Ctrl+- &ndash; Decrease text size
+ * F3 &ndash; Find next
+ * F10 &ndash; Show menu
 
 ### SD cards
 Android allows removable SD cards to be used like a USB stick or as
