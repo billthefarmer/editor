@@ -161,14 +161,14 @@
       <link>https://billthefarmer.github.io/editor/using/shared-file/</link>
       <pubDate>Wed, 04 Mar 2020 17:43:39 +0000</pubDate>
       <guid>https://billthefarmer.github.io/editor/using/shared-file/</guid>
-      <description>Text files opened or shared by another app may be viewed and edited. Some apps may share files or text using a content URI that is not resolvable to a path to a file in storage. In that case the editor will read the file into the default file. The default file in storage will not be overwritten unless the file is saved. Use the Save as menu item to save the file elsewhere.</description>
+      <description>Text files opened or shared by another app may be viewed and edited. Some apps may share files or text using a content URI that is not resolvable to a path to a file in storage. In that case the editor will read the file into a new file. The Save item will save the file in the original location if possible.&#xA;Note – Apps that share files will usually only give another app read permission.</description>
     </item>
     <item>
       <title>Keyboard Shortcuts</title>
       <link>https://billthefarmer.github.io/editor/using/keyboard-shortcuts/</link>
       <pubDate>Wed, 21 Jul 2021 19:22:29 +0100</pubDate>
       <guid>https://billthefarmer.github.io/editor/using/keyboard-shortcuts/</guid>
-      <description>When using an external keyboard, some keyboard shortcuts are implemented:&#xA;Ctrl+E – Edit mode Ctrl+Shift+E – View mode Ctrl+F – Search Ctrl+Shift+F – Close search Ctrl+N – New file Ctrl+O – Open file Ctrl+S – Save file Ctrl+Shift+S – Save as </description>
+      <description>When using an external keyboard, some keyboard shortcuts are implemented:&#xA;Ctrl+E – Edit mode Ctrl+Shift+E – View mode Ctrl+F – Search Ctrl+Shift+F – Close search Ctrl+Alt+F – Find next Ctrl+G – Go to Ctrl+M – Show menu Ctrl+N – New file Ctrl+O – Open file Ctrl+S – Save file Ctrl+Shift+S – Save as Ctrl++ – Increase text size Ctrl+- – Decrease text size F3 – Find next F10 – Show menu Many other shortcuts – Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z are already build in to android.</description>
     </item>
   </channel>
 </rss>
