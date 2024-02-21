@@ -214,8 +214,9 @@ is not resolvable to a path to a file in storage. In that case the
 editor will read the file into a new file. The **Save** item will save
 the file in the original location if possible.
 
-**Note** &ndash; Apps that share files will usually only give another app read
-permission. Use the **Save as** menu item to save the file elsewhere.
+**Note** &ndash; Apps that share files will usually only give another
+app read permission. Use the **Save as** menu item to save the file
+elsewhere.
 
 ### Keyboard shortcuts
 When using an external keyboard, some keyboard shortcuts are
@@ -224,7 +225,9 @@ implemented:
  * Ctrl+Shift+E &ndash; View mode
  * Ctrl+F &ndash; Search
  * Ctrl+Shift+F &ndash; Close search
+ * Ctrl+Alt+F &ndash; Find next
  * Ctrl+G &ndash; Go to
+ * Ctrl+M &ndash; Show menu
  * Ctrl+N &ndash; New file
  * Ctrl+O &ndash; Open file
  * Ctrl+S &ndash; Save file
@@ -233,6 +236,8 @@ implemented:
  * Ctrl+- &ndash; Decrease text size
  * F3 &ndash; Find next
  * F10 &ndash; Show menu
+Many other shortcuts &ndash; Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+are already build in to android.
 
 ### SD cards
 Android allows removable SD cards to be used like a USB stick or as
