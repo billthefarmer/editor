@@ -1208,10 +1208,19 @@ public class Editor extends Activity
                     searchItem.collapseActionView();
                 else
                     searchItem.expandActionView();
+                // Find next
+                if (event.isAltPressed() &&
+                    searchItem.isActionViewExpanded())
+                    queryTextListener.onQueryTextSubmit
+                        (searchView.getQuery().toString());
                 break;
                 // Goto
             case KeyEvent.KEYCODE_G:
                 goTo();
+                break;
+                // Menu
+            case KeyEvent.KEYCODE_M:
+                openOptionsMenu();
                 break;
                 // New
             case KeyEvent.KEYCODE_N:
