@@ -40,12 +40,12 @@
   <string name="small">Малый</string>
   <string name="medium">Средний</string>
   <string name="large">Крупный</string>
-  <string name="typeface">Тип шрифта</string>
+  <string name="typeface">Шрифт</string>
   <string name="mono">Моноширинный</string>
   <string name="normal">Пропорциональный</string>
   <string name="sans">Без засечек</string>
   <string name="serif">С засечками</string>
-  <string name="about">О программе</string>
+  <string name="about">О приложении</string>
 
   <string name="version" formatted="false"><a
   href="https://github.com/billthefarmer/editor/releases/latest">%s</a>\n\nСборка
