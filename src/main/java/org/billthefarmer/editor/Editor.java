@@ -133,6 +133,7 @@ public class Editor extends Activity
     public final static String CHANGED = "changed";
     public final static String CONTENT = "content";
     public final static String MODIFIED = "modified";
+    public final static String MONOSPACE = "monospace";
 
     public final static String PREF_FILE = "pref_file";
     public final static String PREF_HIGH = "pref_high";
@@ -465,6 +466,10 @@ public class Editor extends Activity
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
+        String typefaces[] = getResources().getStringArray(R.array.typefaces);
+        List<String> typeList = Arrays.asList(typefaces);
+        int monospace = typeList.indexOf(MONOSPACE);
+
         save = preferences.getBoolean(PREF_SAVE, false);
         view = preferences.getBoolean(PREF_VIEW, true);
         last = preferences.getBoolean(PREF_LAST, false);
@@ -474,7 +479,7 @@ public class Editor extends Activity
 
         theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
-        type = preferences.getInt(PREF_TYPE, MONO);
+        type = preferences.getInt(PREF_TYPE, monospace);
 
         Set<String> pathSet = preferences.getStringSet(PREF_PATHS, null);
         pathMap = new HashMap<>();
@@ -1371,6 +1376,7 @@ public class Editor extends Activity
         file = getNewFile();
         uri = Uri.fromFile(file);
         path = uri.getPath();
+        content = null;
 
         if (text != null)
             textView.append(text);
@@ -1402,6 +1408,7 @@ public class Editor extends Activity
         file = getDefaultFile();
         uri = Uri.fromFile(file);
         path = uri.getPath();
+        content = null;
 
         if (file.exists())
             readFile(uri);
@@ -1800,8 +1807,6 @@ public class Editor extends Activity
                            .build());
             }
         });
-
-        String ext = FileUtils.getExtension(file.getName());
 
         String htmlDocument = 
             HTML_HEAD + Html.toHtml(textView.getText()) + HTML_TAIL;
@@ -3498,7 +3503,7 @@ public class Editor extends Activity
         @Override
         public boolean onScale(ScaleGestureDetector detector)
         {
-            size *= detector.getScaleFactor();
+            size *= Math.cbrt(detector.getScaleFactor());
             size = Math.max(TINY, Math.min(size, HUGE));
             textView.setTextSize(size);
             invalidateOptionsMenu();
