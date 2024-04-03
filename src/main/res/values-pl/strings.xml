@@ -36,11 +36,11 @@
   <string name="white">Biały</string>
   <string name="black">Czarny</string>
   <string name="retro">Retro</string>
-  <string name="size">Rozmiar tekstu</string>
+  <string name="size">Rozmiar czcionki</string>
   <string name="small">Mały</string>
   <string name="medium">Średni</string>
   <string name="large">Duży</string>
-  <string name="typeface">Krój pisma</string>
+  <string name="typeface">Czcionka</string>
   <string name="mono">Monospace</string>
   <string name="normal">Proporcjonalny</string>
   <string name="sans">Bezszeryfowy</string>

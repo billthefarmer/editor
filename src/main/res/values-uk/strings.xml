@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="appName">Editor</string>
+  <string name="appName">Редактор</string>
 
   <string name="newFile">Новий файл</string>
   <string name="openFile">Відкрити файл</string>
@@ -36,7 +36,7 @@
   <string name="white">Біла</string>
   <string name="black">Чорна</string>
   <string name="retro">Ретро</string>
-  <string name="size">Розмір тексту</string>
+  <string name="size">Розмір шрифту</string>
   <string name="small">Малий</string>
   <string name="medium">Середній</string>
   <string name="large">Великий</string>
