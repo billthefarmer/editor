@@ -1139,6 +1139,13 @@ public class Editor extends Activity
     @Override
     public void onBackPressed()
     {
+        // Close text search
+        if (searchItem != null && searchItem.isActionViewExpanded())
+        {
+            searchItem.collapseActionView();
+            return;
+        }
+
         if (changed)
             alertDialog(this, R.string.appName, R.string.modified,
                         R.string.save, R.string.discard, (dialog, id) ->
