@@ -41,11 +41,11 @@ public class NewEditText extends EditText {
         }
     }
 
-    public void setLineNumbersEnabled(final boolean enable) {
-        if (enable ^ isLineNumbersEnabled) {
+    public void setLineNumbersEnabled(final boolean enabled) {
+        if (enabled ^ isLineNumbersEnabled) {
             post(this::invalidate);
         }
-        isLineNumbersEnabled = enable;
+        isLineNumbersEnabled = enabled;
         if (isLineNumbersEnabled) {
             lineNumbersDrawer.startLineTracking();
         } else {

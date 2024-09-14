@@ -749,6 +749,7 @@ public class Editor extends Activity
             // onScrollChange
             scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
             {
+                if (lineNumbers) textView.invalidate(); // Update line numbers
                 if (updateHighlight != null)
                 {
                     textView.removeCallbacks(updateHighlight);
