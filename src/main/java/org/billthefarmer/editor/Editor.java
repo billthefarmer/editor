@@ -1336,6 +1336,8 @@ public class Editor extends Activity
         textView.setRawInputType(InputType.TYPE_NULL);
         textView.setTextIsSelectable(true);
         textView.clearFocus();
+        if (lineNumbers)
+            textView.setLineNumbersEnabled(true);
 
         // Update boolean
         edit = false;
