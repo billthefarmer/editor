@@ -135,6 +135,7 @@ public class Editor extends Activity
     public final static String PREF_THEME = "pref_theme";
     public final static String PREF_TYPE = "pref_type";
     public final static String PREF_WRAP = "pref_wrap";
+    public final static String PREF_LINE_NUMBERS = "pref_line_numbers";
 
     public final static String DOCUMENTS = "Documents";
     public final static String FOLDER = "Folder";
@@ -433,7 +434,7 @@ public class Editor extends Activity
     private boolean edit = false;
     private boolean view = false;
 
-    private boolean wrap = true;
+    private boolean wrap = false;
     private boolean lineNumbers = false;
     private boolean suggest = true;
 
@@ -464,6 +465,7 @@ public class Editor extends Activity
         view = preferences.getBoolean(PREF_VIEW, true);
         last = preferences.getBoolean(PREF_LAST, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
+        lineNumbers = preferences.getBoolean(PREF_LINE_NUMBERS, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
         highlight = preferences.getBoolean(PREF_HIGH, false);
 
@@ -537,6 +539,8 @@ public class Editor extends Activity
 
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
+
+        textView.setLineNumbersEnabled(lineNumbers);
 
         if (!edit)
         {
@@ -816,6 +820,7 @@ public class Editor extends Activity
         editor.putBoolean(PREF_VIEW, view);
         editor.putBoolean(PREF_LAST, last);
         editor.putBoolean(PREF_WRAP, wrap);
+        editor.putBoolean(PREF_LINE_NUMBERS, lineNumbers);
         editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putBoolean(PREF_HIGH, highlight);
 
