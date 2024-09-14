@@ -17,7 +17,7 @@
       android:fillViewport="true"
       tools:ignore="LabelFor">
 
-    <EditText
+    <org.billthefarmer.editor.NewEditText
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

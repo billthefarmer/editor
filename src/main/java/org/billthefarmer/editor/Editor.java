@@ -423,7 +423,7 @@ public class Editor extends Activity
     private String path;
     private Uri content;
     private String match;
-    private EditText textView;
+    private NewEditText textView;
     private TextView customView;
     private MenuItem searchItem;
     private SearchView searchView;
@@ -444,7 +444,8 @@ public class Editor extends Activity
     private boolean edit = false;
     private boolean view = false;
 
-    private boolean wrap = false;
+    private boolean wrap = true;
+    private boolean lineNumbers = false;
     private boolean suggest = true;
 
     private boolean changed = false;
@@ -907,6 +908,7 @@ public class Editor extends Activity
         menu.findItem(R.id.openLast).setChecked(last);
         menu.findItem(R.id.autoSave).setChecked(save);
         menu.findItem(R.id.wrap).setChecked(wrap);
+        menu.findItem(R.id.lineNumbers).setChecked(lineNumbers);
         menu.findItem(R.id.suggest).setChecked(suggest);
         menu.findItem(R.id.highlight).setChecked(highlight);
 
@@ -1079,6 +1081,9 @@ public class Editor extends Activity
             break;
         case R.id.wrap:
             wrapClicked(item);
+            break;
+        case R.id.lineNumbers:
+            lineNumbersClicked(item);
             break;
         case R.id.suggest:
             suggestClicked(item);
@@ -1815,8 +1820,7 @@ public class Editor extends Activity
             }
         });
 
-        String htmlDocument = 
-            HTML_HEAD + Html.toHtml(textView.getText()) + HTML_TAIL;
+        String htmlDocument = HTML_HEAD + Html.toHtml(textView.getText()) + HTML_TAIL;
         webView.loadData(htmlDocument, TEXT_HTML, UTF_8);
     }
 
@@ -1892,6 +1896,14 @@ public class Editor extends Activity
         wrap = !wrap;
         item.setChecked(wrap);
         recreate(this);
+    }
+
+    // lineNumbersClicked
+    private void lineNumbersClicked(MenuItem item)
+    {
+        lineNumbers = !lineNumbers;
+        item.setChecked(lineNumbers);
+        textView.setLineNumbersEnabled(lineNumbers);
     }
 
     // suggestClicked
@@ -3562,7 +3574,7 @@ public class Editor extends Activity
                 File entry = new File(path);
                 entries.add(entry);
             }
- 
+
             // Check the entries
             for (File file : entries)
             {

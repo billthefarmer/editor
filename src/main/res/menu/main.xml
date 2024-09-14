@@ -106,6 +106,11 @@
           android:showAsAction="never"
           android:title="@string/wrap" />
       <item
+          android:id="@+id/lineNumbers"
+          android:checkable="true"
+          android:showAsAction="never"
+          android:title="@string/lineNumbers" />
+      <item
           android:id="@+id/suggest"
           android:checkable="true"
           android:checked="true"
