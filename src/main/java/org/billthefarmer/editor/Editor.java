@@ -447,6 +447,7 @@ public class Editor extends Activity
     private int type = MONO;
 
     private int syntax;
+    private long lineNumbersRefreshTime = 0;
 
     // onCreate
     @Override
@@ -749,7 +750,14 @@ public class Editor extends Activity
             // onScrollChange
             scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
             {
-                if (lineNumbers) textView.invalidate(); // Update line numbers
+                if (lineNumbers) {
+                    final long time = System.currentTimeMillis();
+                    if (time - lineNumbersRefreshTime > 100) {
+                        lineNumbersRefreshTime = time;
+                        textView.invalidate(); // Update line numbers
+                    }
+                }
+
                 if (updateHighlight != null)
                 {
                     textView.removeCallbacks(updateHighlight);
