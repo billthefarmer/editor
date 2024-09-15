@@ -1398,6 +1398,9 @@ public class Editor extends Activity
         if (text != null)
             textView.append(text);
 
+        if (lineNumbers)
+            textView.setLineNumbersEnabled(true);
+
         setTitle(uri.getLastPathSegment());
         match = UTF_8;
         getActionBar().setSubtitle(match);
