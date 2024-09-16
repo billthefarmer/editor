@@ -36,16 +36,16 @@
     <string name="system">系统</string>
     <string name="white">白色</string>
     <string name="black">黑色</string>
-    <string name="retro">怀旧</string>
+    <string name="retro">复古</string>
     <string name="size">文本大小</string>
     <string name="small">小</string>
     <string name="medium">中</string>
     <string name="large">大</string>
     <string name="typeface">字体</string>
     <string name="mono">等宽</string>
-    <string name="normal">成比例</string>
+    <string name="normal">比例</string>
     <string name="sans">无衬线</string>
-    <string name="serif">有衬线</string>
+    <string name="serif">衬线</string>
     <string name="about">关于</string>
 
     <string name="version" formatted="false">

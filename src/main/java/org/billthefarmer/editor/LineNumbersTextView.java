@@ -9,36 +9,34 @@ import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
+import android.widget.TextView;
 
-public class NewEditText extends EditText {
+public class LineNumbersTextView extends TextView {
     private boolean isLineNumbersEnabled;
-    private final LineNumbersDrawer lineNumbersDrawer = new LineNumbersDrawer(this);
+    private LineNumbersDrawer lineNumbersDrawer;
 
-    public NewEditText(Context context) {
+    public LineNumbersTextView(Context context) {
         super(context);
     }
 
-    public NewEditText(Context context, AttributeSet attrs) {
+    public LineNumbersTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public NewEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LineNumbersTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    public boolean onPreDraw() {
-        lineNumbersDrawer.setTextSize(getTextSize());
-        return super.onPreDraw();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         if (isLineNumbersEnabled) {
             lineNumbersDrawer.draw(canvas);
         }
+    }
+
+    public void setEditText(final EditText editor) {
+        lineNumbersDrawer = new LineNumbersDrawer(editor, this);
     }
 
     public void setLineNumbersEnabled(final boolean enabled) {
@@ -47,33 +45,19 @@ public class NewEditText extends EditText {
         }
         isLineNumbersEnabled = enabled;
         if (isLineNumbersEnabled) {
-            lineNumbersDrawer.startLineTracking();
+            lineNumbersDrawer.prepare();
         } else {
-            lineNumbersDrawer.reset();
-            lineNumbersDrawer.stopLineTracking();
+            lineNumbersDrawer.stop();
         }
-    }
-
-    /**
-     * Count instances of a single char in a char sequence.
-     */
-    public static int countChar(final CharSequence s, int start, int end, final char c) {
-        int count = 0;
-        for (int i = start; i < end; i++) {
-            if (s.charAt(i) == c) {
-                count++;
-            }
-        }
-        return count;
     }
 
     static class LineNumbersDrawer {
 
-        private final EditText _editor;
+        public final EditText _editor;
+        public final LineNumbersTextView _textView;
         private final Paint _paint = new Paint();
 
-        private final int _defaultPaddingLeft;
-        private static final int LINE_NUMBER_PADDING_LEFT = 6;
+        private static final int LINE_NUMBER_PADDING_LEFT = 1;
         private static final int LINE_NUMBER_PADDING_RIGHT = 12;
 
         private final Rect _visibleArea = new Rect();
@@ -89,13 +73,14 @@ public class NewEditText extends EditText {
         private final TextWatcher _lineTrackingWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                _maxNumber -= countChar(s, start, start + count, '\n');
-                _maxNumber -= countChar(s, start, start + count, '\n');
+                _maxNumber -= countLines(s, start, start + count);
+                _textView.setText(" ");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                _maxNumber += countChar(s, start, start + count, '\n');
+                _maxNumber += countLines(s, start, start + count);
+                _textView.setText(" ");
             }
 
             @Override
@@ -104,27 +89,35 @@ public class NewEditText extends EditText {
             }
         };
 
-        public LineNumbersDrawer(final EditText editor) {
+        public LineNumbersDrawer(final EditText editor, final LineNumbersTextView textView) {
             _editor = editor;
+            _textView = textView;
             _paint.setColor(0xFF999999);
             _paint.setTextAlign(Paint.Align.RIGHT);
-            _defaultPaddingLeft = editor.getPaddingLeft();
         }
 
-        public void setTextSize(final float textSize) {
-            _paint.setTextSize(textSize);
+        private int countLines(final CharSequence s, int start, int end) {
+            int count = 0;
+            for (int i = start; i < end; i++) {
+                if (s.charAt(i) == '\n') {
+                    count++;
+                }
+            }
+            return count;
         }
 
-        public boolean isTextSizeChanged() {
-            if (_paint.getTextSize() == _oldTextSize) {
+        private boolean isTextSizeChanged() {
+            final float textSize = _editor.getTextSize();
+            if (textSize == _oldTextSize) {
                 return false;
             } else {
-                _oldTextSize = _paint.getTextSize();
+                _paint.setTextSize(textSize);
+                _oldTextSize = textSize;
                 return true;
             }
         }
 
-        public boolean isMaxNumberDigitsChanged() {
+        private boolean isMaxNumberDigitsChanged() {
             final int oldDigits = _maxNumberDigits;
 
             if (_maxNumber < 10) {
@@ -141,7 +134,7 @@ public class NewEditText extends EditText {
             return _maxNumberDigits != oldDigits;
         }
 
-        public boolean isOutOfLineNumbersArea() {
+        private boolean isOutOfLineNumbersArea() {
             final int margin = (int) (_visibleArea.height() * 0.5f);
             final int top = _visibleArea.top - margin;
             final int bottom = _visibleArea.bottom + margin;
@@ -157,18 +150,32 @@ public class NewEditText extends EditText {
             }
         }
 
-        public void startLineTracking() {
+        private void startLineTracking() {
             _editor.removeTextChangedListener(_lineTrackingWatcher);
             _maxNumber = 1;
             final CharSequence text = _editor.getText();
             if (text != null) {
-                _maxNumber += countChar(text, 0, text.length(), '\n');
+                _maxNumber += countLines(text, 0, text.length());
             }
             _editor.addTextChangedListener(_lineTrackingWatcher);
         }
 
-        public void stopLineTracking() {
+        private void stopLineTracking() {
             _editor.removeTextChangedListener(_lineTrackingWatcher);
+        }
+
+        public void prepare() {
+            startLineTracking();
+            _textView.setVisibility(VISIBLE);
+        }
+
+        public void updateState() {
+            // If text size or the max line number of digits changed, update related variables
+            if (isTextSizeChanged() || isMaxNumberDigitsChanged()) {
+                _numberX = LINE_NUMBER_PADDING_LEFT + (int) _paint.measureText(String.valueOf(_maxNumber));
+                _gutterX = _numberX + LINE_NUMBER_PADDING_RIGHT;
+                _textView.setWidth(_gutterX + 1);
+            }
         }
 
         /**
@@ -187,13 +194,7 @@ public class NewEditText extends EditText {
                 return;
             }
 
-            // If text size or the max line number of digits changed,
-            // update the variables and reset padding
-            if (isTextSizeChanged() || isMaxNumberDigitsChanged()) {
-                _numberX = LINE_NUMBER_PADDING_LEFT + (int) _paint.measureText(String.valueOf(_maxNumber));
-                _gutterX = _numberX + LINE_NUMBER_PADDING_RIGHT;
-                _editor.setPadding(_gutterX + 12, _editor.getPaddingTop(), _editor.getPaddingRight(), _editor.getPaddingBottom());
-            }
+            updateState();
 
             int i = _startLine[0], number = _startLine[1];
             // If current visible area is out of current line numbers area,
@@ -230,10 +231,12 @@ public class NewEditText extends EditText {
         }
 
         /**
-         * Reset to the state without line numbers.
+         * Stop drawing line numbers and reset states.
          */
-        public void reset() {
-            _editor.setPadding(_defaultPaddingLeft, _editor.getPaddingTop(), _editor.getPaddingRight(), _editor.getPaddingBottom());
+        public void stop() {
+            stopLineTracking();
+            _textView.setWidth(0);
+            _textView.setVisibility(GONE);
             _maxNumberDigits = 0;
         }
     }

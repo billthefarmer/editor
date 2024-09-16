@@ -413,11 +413,12 @@ public class Editor extends Activity
     private String path;
     private Uri content;
     private String match;
-    private NewEditText textView;
+    private EditText textView;
     private TextView customView;
     private MenuItem searchItem;
     private SearchView searchView;
     private ScrollView scrollView;
+    private LineNumbersTextView lineNumbersView;
     private Runnable updateHighlight;
     private Runnable updateWordCount;
 
@@ -447,7 +448,7 @@ public class Editor extends Activity
     private int type = MONO;
 
     private int syntax;
-    private long lineNumbersRefreshTime = 0;
+    private long refreshTime = 0; // Line numbers refresh time on scroll changed
 
     // onCreate
     @Override
@@ -541,8 +542,6 @@ public class Editor extends Activity
         if (savedInstanceState != null)
             edit = savedInstanceState.getBoolean(EDIT);
 
-        textView.setLineNumbersEnabled(lineNumbers);
-
         if (!edit)
         {
             textView.setRawInputType(InputType.TYPE_NULL);
@@ -555,6 +554,10 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
+
+        lineNumbersView = findViewById(R.id.lineNumbersView);
+        lineNumbersView.setEditText(textView);
+        lineNumbersView.setLineNumbersEnabled(lineNumbers);
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -752,9 +755,9 @@ public class Editor extends Activity
             {
                 if (lineNumbers) {
                     final long time = System.currentTimeMillis();
-                    if (time - lineNumbersRefreshTime > 100) {
-                        lineNumbersRefreshTime = time;
-                        textView.invalidate(); // Update line numbers
+                    if (time - refreshTime > 125) {
+                        refreshTime = time;
+                        lineNumbersView.setText(""); // To refresh line numbers
                     }
                 }
 
@@ -1345,8 +1348,6 @@ public class Editor extends Activity
         textView.setRawInputType(InputType.TYPE_NULL);
         textView.setTextIsSelectable(true);
         textView.clearFocus();
-        if (lineNumbers)
-            textView.setLineNumbersEnabled(true);
 
         // Update boolean
         edit = false;
@@ -1397,9 +1398,6 @@ public class Editor extends Activity
 
         if (text != null)
             textView.append(text);
-
-        if (lineNumbers)
-            textView.setLineNumbersEnabled(true);
 
         setTitle(uri.getLastPathSegment());
         match = UTF_8;
@@ -1911,7 +1909,7 @@ public class Editor extends Activity
     {
         lineNumbers = !lineNumbers;
         item.setChecked(lineNumbers);
-        textView.setLineNumbersEnabled(lineNumbers);
+        lineNumbersView.setLineNumbersEnabled(lineNumbers);
     }
 
     // suggestClicked
