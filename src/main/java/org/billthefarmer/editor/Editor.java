@@ -1777,6 +1777,10 @@ public class Editor extends Activity
             {
                 if (fromUser)
                     listener.onProgressChanged(seekBar, progress);
+
+                if (lineNumbers) {
+                    lineNumbersView.setText("");
+                }
             }
 
             @Override
@@ -1785,7 +1789,6 @@ public class Editor extends Activity
             @Override
             public void onStopTrackingTouch (SeekBar seekBar) {
                 dialog.dismiss();
-                lineNumbersView.setText("");
             }
         });
     }
