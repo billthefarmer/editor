@@ -448,7 +448,8 @@ public class Editor extends Activity
     private int type = MONO;
 
     private int syntax;
-    private long refreshTime = 0; // Line numbers refresh time on scroll changed
+    private long highlightRefreshTime = 0; // Syntax highlighting refresh time on scroll changed
+    private long lineNumbersRefreshTime = 0; // Line numbers refresh time on scroll changed
 
     // onCreate
     @Override
@@ -753,16 +754,15 @@ public class Editor extends Activity
             // onScrollChange
             scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
             {
-                if (lineNumbers) {
-                    final long time = System.currentTimeMillis();
-                    if (time - refreshTime > 125) {
-                        refreshTime = time;
-                        lineNumbersView.setText(""); // To refresh line numbers
-                    }
+                final long time = System.currentTimeMillis();
+
+                if (lineNumbers && time - lineNumbersRefreshTime > 125) {
+                    lineNumbersRefreshTime = time;
+                    lineNumbersView.setText(""); // Use 'setText("")' to arouse LineNumbersTextView refresh
                 }
 
-                if (updateHighlight != null)
-                {
+                if (updateHighlight != null && time - highlightRefreshTime > 125) {
+                    highlightRefreshTime = time;
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
@@ -1783,9 +1783,9 @@ public class Editor extends Activity
             public void onStartTrackingTouch (SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch (SeekBar seekBar)
-            {
+            public void onStopTrackingTouch (SeekBar seekBar) {
                 dialog.dismiss();
+                lineNumbersView.setText("");
             }
         });
     }
