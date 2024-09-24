@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vscroll"
     android:layout_width="match_parent"
@@ -11,13 +10,27 @@
     android:fillViewport="true"
     tools:ignore="LabelFor">
 
-  <EditText
-      android:id="@+id/text"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="top"
-      android:inputType="text|textMultiLine"
-      android:typeface="monospace"
-      tools:ignore="Autofill" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <org.billthefarmer.editor.LineNumbersTextView
+            android:id="@+id/lineNumbersView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:inputType="text|textMultiLine"
+            android:typeface="monospace"
+            tools:ignore="Autofill" />
+
+    </LinearLayout>
 
 </ScrollView>
