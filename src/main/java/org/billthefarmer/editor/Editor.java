@@ -758,7 +758,7 @@ public class Editor extends Activity
 
                 if (lineNumbers && time - lineNumbersRefreshTime > 125) {
                     lineNumbersRefreshTime = time;
-                    lineNumbersView.setText(""); // Use 'setText("")' to arouse LineNumbersTextView refresh
+                    lineNumbersView.forceRefresh();
                 }
 
                 if (updateHighlight != null && time - highlightRefreshTime > 125) {
@@ -1779,7 +1779,7 @@ public class Editor extends Activity
                     listener.onProgressChanged(seekBar, progress);
 
                 if (lineNumbers) {
-                    lineNumbersView.setText("");
+                    lineNumbersView.forceRefresh();
                 }
             }
 

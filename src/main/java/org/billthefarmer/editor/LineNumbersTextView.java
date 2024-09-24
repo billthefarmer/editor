@@ -11,8 +11,11 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * @author Li Guanglin
+ */
 public class LineNumbersTextView extends TextView {
-    private boolean isLineNumbersEnabled;
+    private boolean lineNumbersEnabled;
     private LineNumbersDrawer lineNumbersDrawer;
 
     public LineNumbersTextView(Context context) {
@@ -30,152 +33,179 @@ public class LineNumbersTextView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isLineNumbersEnabled) {
+        if (lineNumbersEnabled) {
             lineNumbersDrawer.draw(canvas);
         }
     }
 
-    public void setEditText(final EditText editor) {
-        lineNumbersDrawer = new LineNumbersDrawer(editor, this);
+    public void forceRefresh() {
+        setText(""); // Use setText("") to activate LineNumbersTextView refresh
+    }
+
+    public void setEditText(final EditText editText) {
+        lineNumbersDrawer = new LineNumbersDrawer(editText, this);
     }
 
     public void setLineNumbersEnabled(final boolean enabled) {
-        if (enabled ^ isLineNumbersEnabled) {
-            post(this::invalidate);
-        }
-        isLineNumbersEnabled = enabled;
-        if (isLineNumbersEnabled) {
+        lineNumbersEnabled = enabled;
+        if (lineNumbersEnabled) {
             lineNumbersDrawer.prepare();
         } else {
-            lineNumbersDrawer.stop();
+            lineNumbersDrawer.reset();
         }
     }
 
+    // public boolean isLineNumbersEnabled() { return lineNumbersEnabled; }
+
     static class LineNumbersDrawer {
+        public final EditText editText;
+        public final LineNumbersTextView textView;
 
-        public final EditText _editor;
-        public final LineNumbersTextView _textView;
-        private final Paint _paint = new Paint();
+        private final Paint paint = new Paint();
 
-        private static final int LINE_NUMBER_PADDING_LEFT = 1;
-        private static final int LINE_NUMBER_PADDING_RIGHT = 12;
+        private static final int NUMBER_PADDING_LEFT = 1;
+        private static final int NUMBER_PADDING_RIGHT = 12;
 
-        private final Rect _visibleArea = new Rect();
-        private final Rect _lineNumbersArea = new Rect();
+        private final Rect visibleArea = new Rect();
+        private final Rect lineNumbersArea = new Rect();
 
-        private int _numberX;
-        private int _gutterX;
-        private int _maxNumber = 1; // to gauge gutter width
-        private int _maxNumberDigits;
-        private float _oldTextSize;
-        private final int[] _startLine = {0, 1}; // {line index, actual line number}
+        private int fenceX;
+        private int numberX;
+        private int maxNumber = 1; // To gauge the width of line numbers fence
+        private int maxNumberDigits;
+        private int lastMaxNumber;
+        private int lastLayoutLineCount;
+        private float lastTextSize;
 
-        private final TextWatcher _lineTrackingWatcher = new TextWatcher() {
+        private final int[] startLine = {0, 1}; // {line index, actual line number}
+
+        private final TextWatcher lineTrackingWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                _maxNumber -= countLines(s, start, start + count);
-                _textView.setText(" ");
+                maxNumber -= countLines(s, start, start + count);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                _maxNumber += countLines(s, start, start + count);
-                _textView.setText(" ");
+                maxNumber += countLines(s, start, start + count);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if (isLayoutLineCountChanged() || isMaxNumberChanged()) {
+                    textView.forceRefresh();
+                }
             }
         };
 
-        public LineNumbersDrawer(final EditText editor, final LineNumbersTextView textView) {
-            _editor = editor;
-            _textView = textView;
-            _paint.setColor(0xFF999999);
-            _paint.setTextAlign(Paint.Align.RIGHT);
+        public LineNumbersDrawer(final EditText editText, final LineNumbersTextView textView) {
+            this.editText = editText;
+            this.textView = textView;
+            paint.setColor(0xFF999999);
+            paint.setTextAlign(Paint.Align.RIGHT);
+        }
+
+        private boolean isOutOfLineNumbersArea() {
+            final int margin = (int) (visibleArea.height() * 0.5f);
+            final int top = visibleArea.top - margin;
+            final int bottom = visibleArea.bottom + margin;
+
+            if (top < lineNumbersArea.top || bottom > lineNumbersArea.bottom) {
+                // Set line numbers area
+                // height of line numbers area = (1.5 + 1 + 1.5) * height of visible area
+                lineNumbersArea.top = top - visibleArea.height();
+                lineNumbersArea.bottom = bottom + visibleArea.height();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        private boolean isTextSizeChanged() {
+            if (editText.getTextSize() == lastTextSize) {
+                return false;
+            } else {
+                lastTextSize = editText.getTextSize();
+                paint.setTextSize(lastTextSize);
+                return true;
+            }
+        }
+
+        private boolean isMaxNumberChanged() {
+            if (maxNumber == lastMaxNumber) {
+                return false;
+            } else {
+                lastMaxNumber = maxNumber;
+                return true;
+            }
+        }
+
+        private boolean isMaxNumberDigitsChanged() {
+            int digits;
+            if (maxNumber < 10) {
+                digits = 1;
+            } else if (maxNumber < 100) {
+                digits = 2;
+            } else if (maxNumber < 1000) {
+                digits = 3;
+            } else if (maxNumber < 10000) {
+                digits = 4;
+            } else {
+                digits = 5;
+            }
+
+            if (digits == maxNumberDigits) {
+                return false;
+            }
+
+            maxNumberDigits = digits;
+            return true;
+        }
+
+        private boolean isLayoutLineCountChanged() {
+            final Layout layout = editText.getLayout();
+            if (layout == null) {
+                return true;
+            }
+
+            final int lineCount = layout.getLineCount();
+            if (lineCount == lastLayoutLineCount) {
+                return false;
+            } else {
+                lastLayoutLineCount = lineCount;
+                return true;
+            }
         }
 
         private int countLines(final CharSequence s, int start, int end) {
             int count = 0;
-            for (int i = start; i < end; i++) {
-                if (s.charAt(i) == '\n') {
+            for (; start < end; start++) {
+                if (s.charAt(start) == '\n') {
                     count++;
                 }
             }
             return count;
         }
 
-        private boolean isTextSizeChanged() {
-            final float textSize = _editor.getTextSize();
-            if (textSize == _oldTextSize) {
-                return false;
-            } else {
-                _paint.setTextSize(textSize);
-                _oldTextSize = textSize;
-                return true;
+        private void lineTracking(boolean enabled) {
+            editText.removeTextChangedListener(lineTrackingWatcher);
+
+            if (enabled) {
+                maxNumber = 1;
+                final CharSequence text = editText.getText();
+                if (text != null) {
+                    maxNumber += countLines(text, 0, text.length());
+                }
+                editText.addTextChangedListener(lineTrackingWatcher);
             }
         }
 
-        private boolean isMaxNumberDigitsChanged() {
-            final int oldDigits = _maxNumberDigits;
-
-            if (_maxNumber < 10) {
-                _maxNumberDigits = 1;
-            } else if (_maxNumber < 100) {
-                _maxNumberDigits = 2;
-            } else if (_maxNumber < 1000) {
-                _maxNumberDigits = 3;
-            } else if (_maxNumber < 10000) {
-                _maxNumberDigits = 4;
-            } else {
-                _maxNumberDigits = 5;
-            }
-            return _maxNumberDigits != oldDigits;
-        }
-
-        private boolean isOutOfLineNumbersArea() {
-            final int margin = (int) (_visibleArea.height() * 0.5f);
-            final int top = _visibleArea.top - margin;
-            final int bottom = _visibleArea.bottom + margin;
-
-            if (top < _lineNumbersArea.top || bottom > _lineNumbersArea.bottom) {
-                // Reset line numbers area
-                // height of line numbers area = (1.5 + 1 + 1.5) * height of visible area
-                _lineNumbersArea.top = top - _visibleArea.height();
-                _lineNumbersArea.bottom = bottom + _visibleArea.height();
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        private void startLineTracking() {
-            _editor.removeTextChangedListener(_lineTrackingWatcher);
-            _maxNumber = 1;
-            final CharSequence text = _editor.getText();
-            if (text != null) {
-                _maxNumber += countLines(text, 0, text.length());
-            }
-            _editor.addTextChangedListener(_lineTrackingWatcher);
-        }
-
-        private void stopLineTracking() {
-            _editor.removeTextChangedListener(_lineTrackingWatcher);
-        }
-
+        /**
+         * Prepare for drawing line numbers.
+         */
         public void prepare() {
-            startLineTracking();
-            _textView.setVisibility(VISIBLE);
-        }
-
-        public void updateState() {
-            // If text size or the max line number of digits changed, update related variables
-            if (isTextSizeChanged() || isMaxNumberDigitsChanged()) {
-                _numberX = LINE_NUMBER_PADDING_LEFT + (int) _paint.measureText(String.valueOf(_maxNumber));
-                _gutterX = _numberX + LINE_NUMBER_PADDING_RIGHT;
-                _textView.setWidth(_gutterX + 1);
-            }
+            lineTracking(true);
+            textView.setVisibility(VISIBLE);
         }
 
         /**
@@ -184,46 +214,66 @@ public class LineNumbersTextView extends TextView {
          * @param canvas The canvas on which the line numbers will be drawn.
          */
         public void draw(final Canvas canvas) {
-            if (!_editor.getLocalVisibleRect(_visibleArea)) {
+            if (!editText.getLocalVisibleRect(visibleArea)) {
                 return;
             }
 
-            final CharSequence text = _editor.getText();
-            final Layout layout = _editor.getLayout();
+            final CharSequence text = editText.getText();
+            final Layout layout = editText.getLayout();
             if (text == null || layout == null) {
                 return;
             }
 
-            updateState();
-
-            int i = _startLine[0], number = _startLine[1];
-            // If current visible area is out of current line numbers area,
-            // iterate from the first line to recalculate the start line
-            if (isOutOfLineNumbersArea()) {
-                i = 0;
-                number = 1;
-                _startLine[0] = -1;
+            // If text size or the max line number of digits changed, update related variables
+            if (isTextSizeChanged() || isMaxNumberDigitsChanged()) {
+                numberX = NUMBER_PADDING_LEFT + (int) paint.measureText(String.valueOf(maxNumber));
+                fenceX = numberX + NUMBER_PADDING_RIGHT;
+                textView.setWidth(fenceX + 1);
             }
 
-            // Draw border of the gutter
-            canvas.drawLine(_gutterX, _lineNumbersArea.top, _gutterX, _lineNumbersArea.bottom, _paint);
+            // If current visible area is out of current line numbers area,
+            // will recalculate the start line
+            boolean invalid = false;
+            if (isOutOfLineNumbersArea()) {
+                invalid = true;
+                startLine[0] = 0;
+                startLine[1] = 1;
+            }
+
+            // Draw right border of the fence
+            canvas.drawLine(fenceX, lineNumbersArea.top, fenceX, lineNumbersArea.bottom, paint);
 
             // Draw line numbers
+            int i = startLine[0];
+            int number = startLine[1];
+            int y = layout.getLineBaseline(i);
             final int count = layout.getLineCount();
-            final int offsetY = _editor.getPaddingTop();
+            final int offsetY = editText.getPaddingTop();
+
+            if (y > lineNumbersArea.top) {
+                if (invalid) {
+                    invalid = false;
+                    startLine[0] = i;
+                    startLine[1] = number;
+                }
+                canvas.drawText(String.valueOf(number), numberX, layout.getLineBaseline(i) + offsetY, paint);
+            }
+            i++;
+            number++;
+
             for (; i < count; i++) {
-                final int start = layout.getLineStart(i);
-                if (start == 0 || text.charAt(start - 1) == '\n') {
-                    final int y = layout.getLineBaseline(i);
-                    if (y > _lineNumbersArea.bottom) {
-                        break;
-                    }
-                    if (y > _lineNumbersArea.top) {
-                        if (_startLine[0] < 0) {
-                            _startLine[0] = i;
-                            _startLine[1] = number;
+                if (text.charAt(layout.getLineStart(i) - 1) == '\n') {
+                    y = layout.getLineBaseline(i);
+                    if (y > lineNumbersArea.top) {
+                        if (invalid) {
+                            invalid = false;
+                            startLine[0] = i;
+                            startLine[1] = number;
                         }
-                        canvas.drawText(String.valueOf(number), _numberX, y + offsetY, _paint);
+                        canvas.drawText(String.valueOf(number), numberX, y + offsetY, paint);
+                        if (y > lineNumbersArea.bottom) {
+                            break;
+                        }
                     }
                     number++;
                 }
@@ -231,13 +281,13 @@ public class LineNumbersTextView extends TextView {
         }
 
         /**
-         * Stop drawing line numbers and reset states.
+         * Reset states related line numbers.
          */
-        public void stop() {
-            stopLineTracking();
-            _textView.setWidth(0);
-            _textView.setVisibility(GONE);
-            _maxNumberDigits = 0;
+        public void reset() {
+            lineTracking(false);
+            maxNumberDigits = 0;
+            textView.setWidth(0);
+            textView.setVisibility(GONE);
         }
     }
 }
