@@ -44,6 +44,7 @@ import android.preference.PreferenceManager;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.support.v4.content.FileProvider;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
@@ -67,7 +68,6 @@ import android.view.ScaleGestureDetector;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
@@ -81,12 +81,10 @@ import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import android.support.v4.content.FileProvider;
-
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 
-import org.commonmark.node.*;
+import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
@@ -96,30 +94,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-
 import java.lang.ref.WeakReference;
-
 import java.nio.charset.Charset;
-
 import java.text.DateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -146,6 +135,7 @@ public class Editor extends Activity
     public final static String PREF_THEME = "pref_theme";
     public final static String PREF_TYPE = "pref_type";
     public final static String PREF_WRAP = "pref_wrap";
+    public final static String PREF_LINE_NUMBERS = "pref_line_numbers";
 
     public final static String DOCUMENTS = "Documents";
     public final static String FOLDER = "Folder";
@@ -428,6 +418,7 @@ public class Editor extends Activity
     private MenuItem searchItem;
     private SearchView searchView;
     private ScrollView scrollView;
+    private LineNumbersTextView lineNumbersView;
     private Runnable updateHighlight;
     private Runnable updateWordCount;
 
@@ -445,6 +436,7 @@ public class Editor extends Activity
     private boolean view = false;
 
     private boolean wrap = false;
+    private boolean lineNumbers = false;
     private boolean suggest = true;
 
     private boolean changed = false;
@@ -456,6 +448,8 @@ public class Editor extends Activity
     private int type = MONO;
 
     private int syntax;
+    private long highlightRefreshTime = 0; // Syntax highlighting refresh time on scroll changed
+    private long lineNumbersRefreshTime = 0; // Line numbers refresh time on scroll changed
 
     // onCreate
     @Override
@@ -474,6 +468,7 @@ public class Editor extends Activity
         view = preferences.getBoolean(PREF_VIEW, true);
         last = preferences.getBoolean(PREF_LAST, false);
         wrap = preferences.getBoolean(PREF_WRAP, false);
+        lineNumbers = preferences.getBoolean(PREF_LINE_NUMBERS, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
         highlight = preferences.getBoolean(PREF_HIGH, false);
 
@@ -560,6 +555,10 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
+
+        lineNumbersView = findViewById(R.id.lineNumbersView);
+        lineNumbersView.setEditText(textView);
+        lineNumbersView.setLineNumbersEnabled(lineNumbers);
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -755,8 +754,15 @@ public class Editor extends Activity
             // onScrollChange
             scrollView.getViewTreeObserver().addOnScrollChangedListener(() ->
             {
-                if (updateHighlight != null)
-                {
+                final long time = System.currentTimeMillis();
+
+                if (lineNumbers && time - lineNumbersRefreshTime > 125) {
+                    lineNumbersRefreshTime = time;
+                    lineNumbersView.forceRefresh();
+                }
+
+                if (updateHighlight != null && time - highlightRefreshTime > 125) {
+                    highlightRefreshTime = time;
                     textView.removeCallbacks(updateHighlight);
                     textView.postDelayed(updateHighlight, UPDATE_DELAY);
                 }
@@ -826,6 +832,7 @@ public class Editor extends Activity
         editor.putBoolean(PREF_VIEW, view);
         editor.putBoolean(PREF_LAST, last);
         editor.putBoolean(PREF_WRAP, wrap);
+        editor.putBoolean(PREF_LINE_NUMBERS, lineNumbers);
         editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putBoolean(PREF_HIGH, highlight);
 
@@ -907,6 +914,7 @@ public class Editor extends Activity
         menu.findItem(R.id.openLast).setChecked(last);
         menu.findItem(R.id.autoSave).setChecked(save);
         menu.findItem(R.id.wrap).setChecked(wrap);
+        menu.findItem(R.id.lineNumbers).setChecked(lineNumbers);
         menu.findItem(R.id.suggest).setChecked(suggest);
         menu.findItem(R.id.highlight).setChecked(highlight);
 
@@ -1079,6 +1087,9 @@ public class Editor extends Activity
             break;
         case R.id.wrap:
             wrapClicked(item);
+            break;
+        case R.id.lineNumbers:
+            lineNumbersClicked(item);
             break;
         case R.id.suggest:
             suggestClicked(item);
@@ -1766,14 +1777,17 @@ public class Editor extends Activity
             {
                 if (fromUser)
                     listener.onProgressChanged(seekBar, progress);
+
+                if (lineNumbers) {
+                    lineNumbersView.forceRefresh();
+                }
             }
 
             @Override
             public void onStartTrackingTouch (SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch (SeekBar seekBar)
-            {
+            public void onStopTrackingTouch (SeekBar seekBar) {
                 dialog.dismiss();
             }
         });
@@ -1815,8 +1829,7 @@ public class Editor extends Activity
             }
         });
 
-        String htmlDocument = 
-            HTML_HEAD + Html.toHtml(textView.getText()) + HTML_TAIL;
+        String htmlDocument = HTML_HEAD + Html.toHtml(textView.getText()) + HTML_TAIL;
         webView.loadData(htmlDocument, TEXT_HTML, UTF_8);
     }
 
@@ -1892,6 +1905,14 @@ public class Editor extends Activity
         wrap = !wrap;
         item.setChecked(wrap);
         recreate(this);
+    }
+
+    // lineNumbersClicked
+    private void lineNumbersClicked(MenuItem item)
+    {
+        lineNumbers = !lineNumbers;
+        item.setChecked(lineNumbers);
+        lineNumbersView.setLineNumbersEnabled(lineNumbers);
     }
 
     // suggestClicked
@@ -3562,7 +3583,7 @@ public class Editor extends Activity
                 File entry = new File(path);
                 entries.add(entry);
             }
- 
+
             // Check the entries
             for (File file : entries)
             {
