@@ -29,6 +29,7 @@
   <string name="wrap">Zeilenumbruch</string>
   <string name="suggest">Vorschläge</string>
   <string name="highlight">Syntax hervorheben</string>
+  <string name="typewriter">Typewriter sound</string>
   <string name="theme">Thema</string>
   <string name="light">Hell</string>
   <string name="dark">Dunkel</string>

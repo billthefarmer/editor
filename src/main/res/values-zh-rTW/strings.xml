@@ -29,6 +29,7 @@
   <string name="wrap">文字換列</string>
   <string name="suggest">建議</string>
   <string name="highlight">突顯語法</string>
+  <string name="typewriter">Typewriter sound</string>
   <string name="theme">主題</string>
   <string name="light">亮色</string>
   <string name="dark">暗色</string>

@@ -137,6 +137,7 @@ public class Editor extends Activity
 
     public final static String PREF_FILE = "pref_file";
     public final static String PREF_HIGH = "pref_high";
+    public final static String PREF_TYPEWRITER = "pref_typewriter";
     public final static String PREF_PATHS = "pref_paths";
     public final static String PREF_SAVE = "pref_save";
     public final static String PREF_LAST = "pref_last";
@@ -418,6 +419,9 @@ public class Editor extends Activity
     private final static int SH_SYNTAX   = 6;
     private final static int DEF_SYNTAX  = 7;
 
+    // sounds
+    private final static int SOUND_KEY_DOWN = 1;
+
     private Uri uri;
     private File file;
     private String path;
@@ -439,6 +443,8 @@ public class Editor extends Activity
 
     private boolean highlight = false;
 
+    private boolean typewriter = false;
+
     private boolean last = false;
     private boolean save = false;
     private boolean edit = false;
@@ -456,6 +462,8 @@ public class Editor extends Activity
     private int type = MONO;
 
     private int syntax;
+
+    private SoundManager mSoundManager;
 
     // onCreate
     @Override
@@ -476,6 +484,7 @@ public class Editor extends Activity
         wrap = preferences.getBoolean(PREF_WRAP, false);
         suggest = preferences.getBoolean(PREF_SUGGEST, true);
         highlight = preferences.getBoolean(PREF_HIGH, false);
+        typewriter = preferences.getBoolean(PREF_TYPEWRITER, false);
 
         theme = preferences.getInt(PREF_THEME, LIGHT);
         size = preferences.getInt(PREF_SIZE, MEDIUM);
@@ -615,6 +624,10 @@ public class Editor extends Activity
             break;
         }
 
+        mSoundManager = new SoundManager();
+        mSoundManager.initSounds(getBaseContext());
+        mSoundManager.addSound(SOUND_KEY_DOWN, R.raw.typewriter);
+
         setListeners();
     }
 
@@ -680,7 +693,11 @@ public class Editor extends Activity
                 public void onTextChanged(CharSequence s,
                                           int start,
                                           int before,
-                                          int count) {}
+                                          int count) {
+                    if (typewriter) {
+                        mSoundManager.playSound(SOUND_KEY_DOWN);
+                    }
+                }
             });
 
             // onFocusChange
@@ -828,6 +845,7 @@ public class Editor extends Activity
         editor.putBoolean(PREF_WRAP, wrap);
         editor.putBoolean(PREF_SUGGEST, suggest);
         editor.putBoolean(PREF_HIGH, highlight);
+        editor.putBoolean(PREF_TYPEWRITER, typewriter);
 
         editor.putInt(PREF_THEME, theme);
         editor.putInt(PREF_SIZE, size);
@@ -909,6 +927,7 @@ public class Editor extends Activity
         menu.findItem(R.id.wrap).setChecked(wrap);
         menu.findItem(R.id.suggest).setChecked(suggest);
         menu.findItem(R.id.highlight).setChecked(highlight);
+        menu.findItem(R.id.typewriter).setChecked(typewriter);
 
         switch (theme)
         {
@@ -1085,6 +1104,9 @@ public class Editor extends Activity
             break;
         case R.id.highlight:
             highlightClicked(item);
+            break;
+        case R.id.typewriter:
+            typewriterClicked(item);
             break;
         case R.id.light:
             lightClicked(item);
@@ -1917,6 +1939,13 @@ public class Editor extends Activity
         item.setChecked(highlight);
 
         checkHighlight();
+    }
+
+    // highlightClicked
+    private void typewriterClicked(MenuItem item)
+    {
+        typewriter = !typewriter;
+        item.setChecked(typewriter);
     }
 
     // lightClicked

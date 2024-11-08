@@ -29,6 +29,7 @@
   <string name="wrap">Salto de línea</string>
   <string name="suggest">Recomendaciones</string>
   <string name="highlight">Marcar la sintaxis</string>
+  <string name="typewriter">Sonido de máquina de escribir</string>
   <string name="theme">Tema</string>
   <string name="light">Claro</string>
   <string name="dark">Oscuro</string>
