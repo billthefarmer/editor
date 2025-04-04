@@ -29,6 +29,7 @@
   <string name="wrap">画面端で折り返す</string>
   <string name="suggest">提案</string>
   <string name="highlight">シンタックスハイライト</string>
+  <string name="typewriter">Typewriter sound</string>
   <string name="theme">テーマ</string>
   <string name="light">ライト</string>
   <string name="dark">ダーク</string>

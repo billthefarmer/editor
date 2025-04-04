@@ -29,6 +29,7 @@
   <string name="wrap">自动换行</string>
   <string name="suggest">建议</string>
   <string name="highlight">突出显示语法</string>
+  <string name="typewriter">Typewriter sound</string>
   <string name="theme">主题</string>
   <string name="light">亮</string>
   <string name="dark">暗</string>
