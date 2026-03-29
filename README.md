@@ -5,6 +5,7 @@ Android simple generic text editor. The app is available from
 [F-Droid](https://f-droid.org/packages/org.billthefarmer.editor)
 and [here](https://github.com/billthefarmer/editor/releases)
 
+## This app is no longer being maintained. Please feel free to fork or whatever.
 ### Issues
 There have been a number of issues raised on this app where users have
 obviously not read this README, looked at the
@@ -106,6 +107,9 @@ matching item will be highlighted. Use the search button in the
 keyboard for find next. The exact regular expression syntax used is in
 the android documentation for
 [Pattern](https://developer.android.com/reference/java/util/regex/Pattern#sum).
+Odd text patterns unlikely to be found in an ordinary source file can
+hang the regex functionality so the app stops working. There is no way
+to predict or recover from this.
 
 ### Find all
 You may find all recent files that contain the current search

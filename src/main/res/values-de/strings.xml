@@ -7,7 +7,7 @@
   <string name="openFile">Datei öffnen</string>
   <string name="name">Name</string>
   <string name="path">Pfad</string>
-  <string name="create">Schaffen</string>
+  <string name="create">Erstellen</string>
   <string name="edit">Bearbeiten</string>
   <string name="view">Betrachten</string>
   <string name="open">Datei öffnen…</string>
@@ -60,15 +60,15 @@
   <string name="loading">Laden…</string>
 
   <string name="modified">
-    Ihre Änderungen wurden noch nicht gespeichert. Möchten Sie sie speichern?
+    Ihre Änderungen wurden noch nicht gespeichert. Möchten Sie diese speichern?
   </string>
 
   <string name="changedReload">
-    Die Datei wurde geändert. Möchten Sie sie newFile laden?
+    Die Datei wurde geändert. Möchten Sie diese neu laden?
   </string>
 
   <string name="changedOverwrite">
-    Die Datei wurde geändert. Möchten Sie sie überschreiben?
+    Die Datei wurde geändert. Möchten Sie diese überschreiben?
   </string>
 
   <string name="ok">OK</string>
