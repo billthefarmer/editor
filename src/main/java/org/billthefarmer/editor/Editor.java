@@ -556,6 +556,8 @@ public class Editor extends Activity
         setSizeAndTypeface(size, type);
         executor = Executors.newSingleThreadExecutor();
 
+        setListeners();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R &&
             !Environment.isExternalStorageManager())
         {
@@ -660,8 +662,6 @@ public class Editor extends Activity
             }
             break;
         }
-
-        setListeners();
     }
 
     // setListeners
