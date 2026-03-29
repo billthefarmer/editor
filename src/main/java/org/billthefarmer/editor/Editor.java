@@ -36,7 +36,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -104,8 +103,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
-import java.lang.ref.WeakReference;
-
 import java.nio.charset.Charset;
 
 import java.text.DateFormat;
@@ -120,9 +117,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("deprecation")
 public class Editor extends Activity
 {
     public final static String TAG = "Editor";
@@ -172,24 +173,20 @@ public class Editor extends Activity
         "org.billthefarmer.editor.fileprovider";
     public final static String OPEN_NEW =
         "org.billthefarmer.editor.OPEN_NEW";
+    public final static String PACKAGE = "package:";
 
     public final static String CC_EXT =
         "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|kt|m|py|swift)";
 
-    public final static String HTML_EXT =
-        "\\.html?";
+    public final static String HTML_EXT = "\\.html?";
 
-    public final static String CSS_EXT =
-        "\\.css?";
+    public final static String CSS_EXT = "\\.css?";
 
-    public final static String ORG_EXT =
-        "\\.org";
+    public final static String ORG_EXT = "\\.org";
 
-    public final static String MD_EXT =
-        "\\.md";
+    public final static String MD_EXT = "\\.md";
 
-    public final static String SH_EXT =
-        "\\.sh";
+    public final static String SH_EXT = "\\.sh";
 
     // Syntax patterns
     public final static Pattern KEYWORDS = Pattern.compile
@@ -382,11 +379,7 @@ public class Editor extends Activity
     public final static int FIND_DELAY = 128;
     public final static int MAX_PATHS = 10;
 
-    public final static int GET_TEXT = 0;
-
-    public final static int REQUEST_READ = 1;
-    public final static int REQUEST_SAVE = 2;
-    public final static int REQUEST_OPEN = 3;
+    public final static int REQUEST_OPEN = 1;
 
     public final static int OPEN_DOCUMENT   = 1;
     public final static int CREATE_DOCUMENT = 2;
@@ -433,6 +426,7 @@ public class Editor extends Activity
 
     private ScaleGestureDetector scaleDetector;
     private QueryTextListener queryTextListener;
+    private ExecutorService executor;
 
     private Map<String, Integer> pathMap;
     private List<String> removeList;
@@ -560,6 +554,58 @@ public class Editor extends Activity
                                   InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         setSizeAndTypeface(size, type);
+        executor = Executors.newSingleThreadExecutor();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R &&
+            !Environment.isExternalStorageManager())
+        {
+            alertDialog(this, R.string.access, R.string.manageFiles,
+                        R.string.access, R.string.cancel, (dialog, id) ->
+            {
+                switch (id)
+                {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Uri appId = Uri.parse(PACKAGE + BuildConfig.APPLICATION_ID);
+                    Intent intent = new
+                        Intent(android.provider.Settings.
+                               ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                               appId);
+                    startActivity(intent);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+                }
+            });
+
+            newFile();
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R &&
+            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED)
+        {
+            alertDialog(this, R.string.files, R.string.manageFiles,
+                        R.string.files, R.string.cancel, (dialog, id) ->
+            {
+                switch (id)
+                {
+                case DialogInterface.BUTTON_POSITIVE:
+                    requestPermissions(new String[]
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                     Manifest.permission.READ_EXTERNAL_STORAGE},
+                                       REQUEST_OPEN);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+                }
+            });
+
+            newFile();
+            return;
+        }
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -1713,8 +1759,7 @@ public class Editor extends Activity
         // Get search string
         String search = searchView.getQuery().toString();
 
-        FindTask findTask = new FindTask(this);
-        findTask.execute(search);
+        doFind(this, search);
     }
 
     // goTo
@@ -2080,19 +2125,6 @@ public class Editor extends Activity
     // getFile
     private void getFile()
     {
-        // Check permissions
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED)
-            {
-                requestPermissions(new String[]
-                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_OPEN);
-                return;
-            }
-        }
-
         // Open parent folder
         File dir = file.getParentFile();
         getFile(dir);
@@ -2242,24 +2274,6 @@ public class Editor extends Activity
     {
         switch (requestCode)
         {
-        case REQUEST_SAVE:
-            for (int i = 0; i < grantResults.length; i++)
-                if (permissions[i].equals(Manifest.permission
-                                          .WRITE_EXTERNAL_STORAGE) &&
-                    grantResults[i] == PackageManager.PERMISSION_GRANTED)
-                    // Granted, save file
-                    saveFile();
-            break;
-
-        case REQUEST_READ:
-            for (int i = 0; i < grantResults.length; i++)
-                if (permissions[i].equals(Manifest.permission
-                                          .READ_EXTERNAL_STORAGE) &&
-                    grantResults[i] == PackageManager.PERMISSION_GRANTED)
-                    // Granted, read file
-                    readFile(uri);
-            break;
-
         case REQUEST_OPEN:
             for (int i = 0; i < grantResults.length; i++)
                 if (permissions[i].equals(Manifest.permission
@@ -2276,19 +2290,6 @@ public class Editor extends Activity
     {
         if (uri == null)
             return;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED)
-            {
-                requestPermissions(new String[]
-                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ);
-                this.uri = uri;
-                return;
-            }
-        }
 
         long size = 0;
         if (CONTENT.equalsIgnoreCase(uri.getScheme()))
@@ -2353,8 +2354,7 @@ public class Editor extends Activity
 
         textView.setText(R.string.loading);
 
-        ReadTask read = new ReadTask(this);
-        read.execute(uri);
+        doRead(this, uri);
 
         changed = false;
         modified = file.lastModified();
@@ -2392,18 +2392,6 @@ public class Editor extends Activity
     // saveFile
     private void saveFile()
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED)
-            {
-                requestPermissions(new String[]
-                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_SAVE);
-                return;
-            }
-        }
-
         // Stop highlighting
         textView.removeCallbacks(updateHighlight);
         textView.removeCallbacks(updateWordCount);
@@ -3519,157 +3507,116 @@ public class Editor extends Activity
         }
     }
 
-    // FindTask
-    private static class FindTask
-            extends AsyncTask<String, Void, List<File>>
+    private void doFind(Context context, String search)
     {
-        private WeakReference<Editor> editorWeakReference;
-        private Pattern pattern;
-        private String search;
+        List<File> matchList = new ArrayList<>();
+        List<File> entries = new ArrayList<>();
 
-        // FindTask
-        public FindTask(Editor editor)
+        // Get entry list
+        for (String path : pathMap.keySet())
         {
-            editorWeakReference = new WeakReference<>(editor);
+            File entry = new File(path);
+            entries.add(entry);
         }
 
-        // doInBackground
-        @Override
-        protected List<File> doInBackground(String... params)
+        executor.execute(() ->
         {
-            // Create a list of matches
-            List<File> matchList = new ArrayList<>();
-            final Editor editor = editorWeakReference.get();
-            if (editor == null)
-                return matchList;
+            Pattern pattern = null;
 
-            search = params[0];
-            // Check pattern
             try
             {
+                // Compile search pattern
                 pattern = Pattern.compile(search, Pattern.MULTILINE);
             }
 
-            catch (Exception e)
-            {
-                return matchList;
-            }
+            catch (Exception e) {}
 
-            // Get entry list
-            List<File> entries = new ArrayList<>();
-            for (String path : editor.pathMap.keySet())
-            {
-                File entry = new File(path);
-                entries.add(entry);
-            }
- 
             // Check the entries
             for (File file : entries)
             {
-                CharSequence content = editor.readFile(file);
+                CharSequence content = readFile(file);
                 Matcher matcher = pattern.matcher(content);
                 if (matcher.find())
                     matchList.add(file);
             }
 
-            return matchList;
-        }
-
-        // onPostExecute
-        @Override
-        protected void onPostExecute(List<File> matchList)
-        {
-            final Editor editor = editorWeakReference.get();
-            if (editor == null)
-                return;
-
-            // Build dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(editor);
-            builder.setTitle(R.string.findAll);
-
-            // If found populate dialog
-            if (!matchList.isEmpty())
+            runOnUiThread(() ->
             {
-                List<String> choiceList = new ArrayList<>();
-                for (File file : matchList)
-                {
-                    // Remove path prefix
-                    String path = file.getPath();
-                    String name =
-                        path.replaceFirst(Environment
-                                          .getExternalStorageDirectory()
-                                          .getPath() + File.separator, "");
+                // Build dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(R.string.findAll);
 
-                    choiceList.add(name);
+                // If found populate dialog
+                if (!matchList.isEmpty())
+                {
+                    List<String> choiceList = new ArrayList<>();
+                    for (File file : matchList)
+                    {
+                        // Remove path prefix
+                        String path = file.getPath();
+                        String name =
+                            path.replaceFirst(Environment
+                                              .getExternalStorageDirectory()
+                                              .getPath() + File.separator, "");
+
+                        choiceList.add(name);
+                    }
+
+                    String[] choices = choiceList.toArray(new String[0]);
+                    builder.setItems(choices, (dialog, which) ->
+                    {
+                        File file = matchList.get(which);
+                        Uri uri = Uri.fromFile(file);
+                        // Open the entry chosen
+                        readFile(uri);
+
+                        // Put the search text back - why it
+                        // disappears I have no idea or why I have to
+                        // do it after a delay
+                        searchView.postDelayed(() ->
+                            searchView.setQuery(search, false),
+                                               FIND_DELAY);
+                    });
                 }
 
-                String[] choices = choiceList.toArray(new String[0]);
-                builder.setItems(choices, (dialog, which) ->
-                {
-                    File file = matchList.get(which);
-                    Uri uri = Uri.fromFile(file);
-                    // Open the entry chosen
-                    editor.readFile(uri);
-
-                    // Put the search text back - why it
-                    // disappears I have no idea or why I have to
-                    // do it after a delay
-                    editor.searchView.postDelayed(() ->
-                      editor.searchView.setQuery(search, false), FIND_DELAY);
-                });
-            }
-
-            builder.setNegativeButton(android.R.string.cancel, null);
-            builder.show();
-        }
+                builder.setNegativeButton(android.R.string.cancel, null);
+                builder.show();
+            });
+        });
     }
 
-    // ReadTask
-    private static class ReadTask
-        extends AsyncTask<Uri, Void, CharSequence>
+    // doRead
+    private void doRead(Context context, Uri uri)
     {
-        private WeakReference<Editor> editorWeakReference;
+        StringBuilder stringBuilder = new StringBuilder();
 
-        public ReadTask(Editor editor)
+        // Default UTF-8
+        if (match == null)
         {
-            editorWeakReference = new WeakReference<>(editor);
+            match = UTF_8;
+            getActionBar().setSubtitle(match);
         }
 
-        // doInBackground
-        @Override
-        protected CharSequence doInBackground(Uri... uris)
+        executor.execute(() ->
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            final Editor editor = editorWeakReference.get();
-            if (editor == null)
-                return stringBuilder;
-
-            // Default UTF-8
-            if (editor.match == null)
-            {
-                editor.match = UTF_8;
-                editor.runOnUiThread(() ->
-                    editor.getActionBar().setSubtitle(editor.match));
-            }
-
             try (BufferedInputStream in = new BufferedInputStream
-                 (editor.getContentResolver().openInputStream(uris[0])))
+                 (getContentResolver().openInputStream(uri)))
             {
                 // Create reader
                 BufferedReader reader = null;
-                if (editor.match.equals(editor.getString(R.string.detect)))
+                if (match.equals(getString(R.string.detect)))
                 {
                     // Detect charset, using UTF-8 hint
-                    CharsetMatch match = new
+                    CharsetMatch charsetMatch = new
                         CharsetDetector().setDeclaredEncoding(UTF_8)
                         .setText(in).detect();
 
-                    if (match != null)
+                    if (charsetMatch != null)
                     {
-                        editor.match = match.getName();
-                        editor.runOnUiThread(() ->
-                            editor.getActionBar().setSubtitle(editor.match));
-                        reader = new BufferedReader(match.getReader());
+                        match = charsetMatch.getName();
+                        runOnUiThread(() ->
+                            getActionBar().setSubtitle(match));
+                        reader = new BufferedReader(charsetMatch.getReader());
                     }
 
                     else
@@ -3677,12 +3624,12 @@ public class Editor extends Activity
                             (new InputStreamReader(in));
 
                     if (BuildConfig.DEBUG && match != null)
-                        Log.d(TAG, "Charset " + editor.match);
+                        Log.d(TAG, "Charset " + match);
                 }
 
                 else
                      reader = new BufferedReader
-                         (new InputStreamReader(in, editor.match));
+                         (new InputStreamReader(in, match));
 
                 String line;
                 while ((line = reader.readLine()) != null)
@@ -3694,25 +3641,14 @@ public class Editor extends Activity
 
             catch (Exception e)
             {
-                editor.runOnUiThread(() ->
-                    Editor.alertDialog(editor, R.string.appName,
-                                       e.getMessage(),
-                                       R.string.ok));
+                runOnUiThread(() ->
+                    alertDialog(context, R.string.appName,
+                                e.getMessage(),
+                                R.string.ok));
                 e.printStackTrace();
             }
 
-            return stringBuilder;
-        }
-
-        // onPostExecute
-        @Override
-        protected void onPostExecute(CharSequence result)
-        {
-            final Editor editor = editorWeakReference.get();
-            if (editor == null)
-                return;
-
-            editor.loadText(result);
-        }
+            runOnUiThread(() -> loadText(stringBuilder));
+        });
     }
 }

@@ -5,19 +5,23 @@
     android:installLocation="auto"
     tools:ignore="GoogleAppIndexingWarning">
 
+  <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
   <application
       android:allowBackup="true"
       android:icon="@drawable/ic_launcher"
       android:label="@string/appName"
       android:theme="@style/AppDarkTheme"
-      tools:ignore="AllowBackup">
+      android:requestLegacyExternalStorage="true"
+      tools:ignore="AllowBackup,UnusedAttribute">
 
     <activity
 	android:name="Editor"
 	android:exported="true"
-        tools:ignore="UnusedAttribute"
+        tools:ignore=""
         android:documentLaunchMode="always">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

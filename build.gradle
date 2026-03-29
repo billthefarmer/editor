@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.13.2'
     }
 }
 
@@ -14,18 +14,22 @@ allprojects {
         mavenCentral()
         google()
     }
+
+    tasks.withType(JavaCompile) {
+        options.deprecation = true
+    }
 }
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    namespace "org.billthefarmer.editor"
+    compileSdkVersion 35
+    namespace = "org.billthefarmer.editor"
 
     defaultConfig {
         applicationId "org.billthefarmer.editor"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 35
         versionName "1.96"
         versionCode 196
 
@@ -33,17 +37,21 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_9
+        targetCompatibility JavaVersion.VERSION_1_9
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     lintOptions {
-        disable 'ContentDescription', 'OldTargetApi', 'UnusedResources',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'AndroidGradlePluginVersion'
+        disable 'ScopedStorage', 'OldTargetApi', 'NonConstantResourceId', 'UnusedResources',
+		'AndroidGradlePluginVersion', 'GradleDependency', 'DiscouragedApi' 
         // abortOnError false
     }
 }
 
 dependencies {
-    implementation 'org.commonmark:commonmark:0.22.0'
+    implementation 'org.commonmark:commonmark:0.27.1'
 }

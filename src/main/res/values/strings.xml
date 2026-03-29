@@ -2,7 +2,7 @@
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="">
+    tools:ignore="MissingTranslation">
 
   <string name="appName">Editor</string>
 
@@ -74,6 +74,10 @@
   <string name="changedOverwrite">
     This file has changed, do you want to overwrite it?
   </string>
+
+  <string name="manageFiles"><p>In order to have access to the <b>Documents</b> and other folders <b>Editor</b> must use the <b>Files</b> or <b>All files access</b> permission depending upon the version of Android. If this is not allowed the app may still be able to access files using the <b>Storage</b> button in the file chooser.</p></string>
+  <string name="files">Files</string>
+  <string name="access">Access all files</string>
 
   <string name="ok">OK</string>
   <string name="reload">Reload</string>

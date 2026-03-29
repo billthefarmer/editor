@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="NewApi">
 
   <!--
       Base application theme, dependent on API level. This theme is
@@ -12,6 +14,9 @@
         res/values-vXX/styles.xml, while customizations related to
         backward-compatibility can go here.
     -->
+
+    <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+
   </style>
 
   <style name="AppDarkBaseTheme" parent="android:Theme.Material">
@@ -20,6 +25,9 @@
         res/values-vXX/styles.xml, while customizations related to
         backward-compatibility can go here.
     -->
+
+    <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+
   </style>
 
   <style name="AppLightBaseTheme" parent="android:Theme.Material.Light">
@@ -28,6 +36,9 @@
         res/values-vXX/styles.xml, while customizations related to
         backward-compatibility can go here.
     -->
+
+    <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+
   </style>
 
   <!-- Application theme. -->

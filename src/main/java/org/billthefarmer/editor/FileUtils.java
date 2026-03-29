@@ -688,6 +688,7 @@ public class FileUtils
      * @return
      * @author paulburke
      */
+    @SuppressWarnings("deprecation")
     public static Bitmap getThumbnail(Context context, Uri uri,
                                       String mimeType)
     {
