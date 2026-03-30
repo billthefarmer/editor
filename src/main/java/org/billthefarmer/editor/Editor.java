@@ -205,7 +205,7 @@ public class Editor extends Activity
          "namespace|native|new|nil|none|nonmutating|not|null|of|on|" +
          "operator|optional|or|override|package|part|pass|postfix|" +
          "pre(cedence|fix)|print|private|prot(ected|ocol)|pub(lic)?|" +
-         "raise|range|re(f|gister|quired|throw|turn)|right|se(lect|aled|lf|" +
+         "raise|range|re(f|gister|quired|throw|turn)|right|se(lect|aled|lf)|" +
          "set|show|signed|sizeof|static|strictfp|struct|subscript|super|" +
          "switch|sync(hronized)?|template|th(en|is|rows?)|transient|" +
          "true|try|type(alias|def|id|name|of)?|un(ion|owned|safe|signed)|" +
