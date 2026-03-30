@@ -1,0 +1,3 @@
+ * Add Dart and Rust highlighting
+ * Update German translation
+ * Update SDK, build tools

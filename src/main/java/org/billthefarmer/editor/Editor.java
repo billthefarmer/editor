@@ -176,7 +176,7 @@ public class Editor extends Activity
     public final static String PACKAGE = "package:";
 
     public final static String CC_EXT =
-        "\\.(c(c|pp|xx|\\+\\+)?|go|h|java|js|kt|m|py|swift)";
+        "\\.(c(c|pp|xx|\\+\\+)?|dart|go|h|java|js|kt|m|py|swift|rs)";
 
     public final static String HTML_EXT = "\\.html?";
 
