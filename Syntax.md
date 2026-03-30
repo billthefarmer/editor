@@ -19,11 +19,11 @@ Highlighting][1].
 
 ### C type
 Keywords and types are matched from lists of C/C++/Objective
-C/Go/Java/Javascript/Python/Shell/Swift keywords and types. Classes
-are capitalised words. Constants are all caps words. Strings are in
-double quotes. Single quotes are ignored because apostrophes break the
-algorithm. Both `/* */` and `// ` C style comments and `# ` Shell
-script style comments are recognised.
+C/Dart/Go/Java/Javascript/Python/Shell/Swift/Rust keywords and
+types. Classes are capitalised words. Constants are all caps
+words. Strings are in double quotes. Single quotes are ignored because
+apostrophes break the algorithm. Both `/* */` and `// ` C style
+comments and `# ` Shell script style comments are recognised.
 
 ### HTML
 HTML keywords are matched from a list. Double quoted arguments are

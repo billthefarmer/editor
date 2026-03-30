@@ -190,23 +190,27 @@ public class Editor extends Activity
 
     // Syntax patterns
     public final static Pattern KEYWORDS = Pattern.compile
-        ("\\b(abstract|and|arguments|as(m|sert|sociativity)?|auto|break|" +
+        ("\\b(abstract|and|arguments|as(m|sert|sociativity|ync)?|await|auto|" +
+         "base|break|" +
          "case|catch|chan|char|class|con(st|tinue|venience)|continue|" +
-         "de(bugger|f|fault|fer|in|init|l|lete)|didset|do(ne)?|dynamic" +
+         "covariant|crate|" +
+         "de(bugger|f|fault|fer|fered|in|init|l|lete)|didset|do(ne)?|" +
+         "dyn(amic)?" +
          "(type)?|el(if|se)|enum|esac|eval|ex(cept|ec|plicit|port|" +
-         "tends|tension|tern)|fal(lthrough|se)|fi(nal|nally)?|for|" +
-         "friend|from|fun(c(tion)?)?|get|global|go(to)?|if|" +
-         "im(plements|port)|in(fix|it|line|out|stanceof|terface|" +
-         "ternal)?|is|lambda|lazy|left|let|local|map|mut(able|ating)|" +
-         "namespace|native|new|nil|none|nonmutating|not|null|" +
-         "operator|optional|or|override|package|pass|postfix|" +
-         "pre(cedence|fix)|print|private|prot(ected|ocol)|public|" +
-         "raise|range|register|required|return|right|select|self|" +
-         "set|signed|sizeof|static|strictfp|struct|subscript|super|" +
-         "switch|synchronized|template|th(en|is|rows?)|transient|" +
-         "true|try|type(alias|def|id|name|of)?|un(ion|owned|signed)|" +
-         "using|va(l|r)|virtual|void|volatile|weak|wh(en|ere|ile)|willset|" +
-         "with|yield)\\b", Pattern.MULTILINE);
+         "tends|tension|tern)|factory|fal(lthrough|se)|fi(nal|nally)?|fn|for|" +
+         "friend|from|fun(c(tion)?)?|get|global|go(to)?|hide|if|" +
+         "im(pl|plements|port)|in(fix|it|line|out|stanceof|terface|" +
+         "ternal)?|is|la(mbda|te|zy)|left|let|library|lo(cal|oop)|ma(p|" +
+         "tch)|mut(able|ating)|" +
+         "namespace|native|new|nil|none|nonmutating|not|null|of|on|" +
+         "operator|optional|or|override|package|part|pass|postfix|" +
+         "pre(cedence|fix)|print|private|prot(ected|ocol)|pub(lic)?|" +
+         "raise|range|re(f|gister|quired|throw|turn)|right|se(lect|aled|lf|" +
+         "set|show|signed|sizeof|static|strictfp|struct|subscript|super|" +
+         "switch|sync(hronized)?|template|th(en|is|rows?)|transient|" +
+         "true|try|type(alias|def|id|name|of)?|un(ion|owned|safe|signed)|" +
+         "us(e|ing)|va(l|r)|virtual|void|volatile|weak|wh(en|ere|ile)|" +
+         "willset|with|yield)\\b", Pattern.MULTILINE);
 
     public final static Pattern TYPES = Pattern.compile
         ("\\b(j?bool(ean)?|(u|j)?(byte|char|double|float|int(eger)?|" +

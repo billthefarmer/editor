@@ -5,7 +5,6 @@ Android simple generic text editor. The app is available from
 [F-Droid](https://f-droid.org/packages/org.billthefarmer.editor)
 and [here](https://github.com/billthefarmer/editor/releases)
 
-## This app is no longer being maintained. Please feel free to fork or whatever.
 ### Issues
 There have been a number of issues raised on this app where users have
 obviously not read this README, looked at the
@@ -165,9 +164,9 @@ are aliases for the fonts commonly provided on android devices. Some
 of them resolve to the same font, depending on the device.
 
 ### Highlight syntax
-If the current open file is a C, C++, Objective C, Go, Java,
-Javascript, Python, Shell script, Swift, CSS, HTML, Org or Markdown
-file, the keywords, classes comments, strings, etc will be
+If the current open file is a C, C++, Objective C, Go, Dart, Java,
+Javascript, Python, Shell script, Swift, Rust, CSS, HTML, Org or
+Markdown file, the keywords, classes comments, strings, etc will be
 highlighted. See [Syntax Highlighting](Syntax.md).
 
 ### Mode line
