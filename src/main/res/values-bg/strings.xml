@@ -53,15 +53,7 @@
     <string name="theme">Тема</string>
     <string name="tooLarge">Твърде голям %s</string>
     <string name="typeface">Шрифт</string>
-    <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>"
-
-Дата на изграждане %s
-
-Авторско право © 2017 "<a href="https://github.com/billthefarmer">Bill Farmer</a>"
-
-Български превод от <a href="https://github.com/trunars">trunars</a>"
-
-Лиценз "<a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>" "</string>
+    <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a> Дата на изграждане %s Авторско право © 2017 <a href="https://github.com/billthefarmer">Bill Farmer</a> Български превод от <a href="https://github.com/trunars">trunars</a> Лиценз <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
     <string name="view">Преглед</string>
     <string name="viewFile">Преглед на файлове</string>
     <string name="viewMarkdown">Преглед на Markdown…</string>
