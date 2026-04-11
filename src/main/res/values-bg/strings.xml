@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">За нас</string>
+    <string name="access">Достъп до всички файлове</string>
+    <string name="appName">Редактор</string>
+    <string name="autoSave">Автоматично запазване</string>
+    <string name="black">Черно</string>
+    <string name="cancel">Отказ</string>
+    <string name="changedOverwrite">Този файл е променен, искате ли да го презапишете?</string>
+    <string name="changedReload">Този файл е променен, искате ли да го презаредите?</string>
+    <string name="choose">Изберете име на файл</string>
+    <string name="clearList">Изчистване на списъка</string>
+    <string name="create">Създаване</string>
+    <string name="dark">Тъмна</string>
+    <string name="detect">Откриване</string>
+    <string name="discard">Изтриване</string>
+    <string name="edit">Редактиране</string>
+    <string name="files">Файлове</string>
+    <string name="findAll">Намери всички …</string>
+    <string name="goTo">Отиди на…</string>
+    <string name="highlight">Маркиране на синтаксиса</string>
+    <string name="large">Голям</string>
+    <string name="light">Светла</string>
+    <string name="loading">Зареждане…</string>
+    <string name="manageFiles"><p>За да има достъп до <b>Документи</b> и други папки, <b>Редакторът</b> трябва да разполага с разрешение за <b>Файлове</b> или <b>Достъп до всички файлове</b>, в зависимост от версията на Android. Ако това не е разрешено, приложението все пак може да има достъп до файловете чрез бутона <b>Хранилище</b> в прозореца за избор на файлове.</p></string>    
+    <string name="medium">Среден</string>
+    <string name="modified">Имате незапазени промени. Искате ли да запазите промените?</string>
+    <string name="mono">Монопространство</string>
+    <string name="name">Име</string>
+    <string name="newFile">Нов файл</string>
+    <string name="normal">Пропорционално</string>
+    <string name="ok">Добре</string>
+    <string name="open">Отваряне на файл…</string>
+    <string name="openFile">Отваряне на файл</string>
+    <string name="openLast">Отваряне на последния</string>
+    <string name="openRecent">Отваряне на скорошни</string>
+    <string name="options">Опции</string>
+    <string name="overwrite">Заместване</string>
+    <string name="path">Път</string>
+    <string name="print">Печат…</string>
+    <string name="reload">Презареждане</string>
+    <string name="retro">Ретро</string>
+    <string name="sans">Sans serif</string>
+    <string name="save">Запазване</string>
+    <string name="saveAs">Запазване като…</string>
+    <string name="search">Търсене…</string>
+    <string name="serif">Serif</string>
+    <string name="size">Размер на текста</string>
+    <string name="small">Малък</string>
+    <string name="storage">Хранилище</string>
+    <string name="suggest">Предложения</string>
+    <string name="system">Система</string>
+    <string name="theme">Тема</string>
+    <string name="tooLarge">Твърде голям %s</string>
+    <string name="typeface">Шрифт</string>
+    <string name="version" formatted="false"><a href="https://github.com/billthefarmer/editor/releases/latest">%s</a>"
+
+Дата на изграждане %s
+
+Авторско право © 2017 "<a href="https://github.com/billthefarmer">Bill Farmer</a>"
+
+Български превод от <a href="https://github.com/trunars">trunars</a>"
+
+Лиценз "<a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>" "</string>
+    <string name="view">Преглед</string>
+    <string name="viewFile">Преглед на файлове</string>
+    <string name="viewMarkdown">Преглед на Markdown…</string>
+    <string name="white">Бяло</string>
+    <string name="wrap">Пренос на думи</string>
+</resources>
