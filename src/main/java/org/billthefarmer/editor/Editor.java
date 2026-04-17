@@ -116,6 +116,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
@@ -154,7 +155,7 @@ public class Editor extends Activity
 
     public final static String NEW_FILE = "Untitled.txt";
     public final static String EDIT_FILE = "Editor.txt";
-    public final static String HTML_FILE = "Editor.html";
+    public final static String DOT_HTML = ".html";
 
     public final static String TEXT_HTML = "text/html";
     public final static String TEXT_PLAIN = "text/plain";
@@ -1881,8 +1882,8 @@ public class Editor extends Activity
 
         String html = renderer.render(document);
 
-        File file = new File(getCacheDir(), HTML_FILE);
-        file.deleteOnExit();
+        String name = UUID.randomUUID().toString() + DOT_HTML;
+        File file = new File(getCacheDir(), name);
 
         try (FileWriter writer = new FileWriter(file))
         {
